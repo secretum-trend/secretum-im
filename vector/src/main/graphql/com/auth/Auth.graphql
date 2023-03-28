@@ -1,0 +1,19 @@
+query getNonceBy($publicKey: String!) {
+    getNonce(payload: {publicKey: $publicKey}) {
+        nonce
+    }
+}
+
+mutation joinPublicKeyToWhitelist($publicKey: String!) {
+    joinWhitelistFree(address: $publicKey) {
+        joined
+    }
+}
+
+mutation verifySignature($publicKey: String!, $signature: String!) {
+    authenticate(payload:{publicKey: $publicKey, signature: $signature}) {
+        accessToken
+        username
+        password
+    }
+}

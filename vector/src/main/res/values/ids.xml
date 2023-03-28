@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="space_item_home" type="id" />
+
+    <string name="service_url_http">https://messaging.scrtm.cloud</string>
+    <string name="service_url">messaging.scrtm.cloud</string>
+</resources>

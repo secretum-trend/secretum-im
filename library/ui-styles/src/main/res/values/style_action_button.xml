@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Widget.Vector.ActionButton" parent="Widget.AppCompat.ActionButton">
+        <item name="android:paddingStart">5dp</item>
+        <item name="android:paddingEnd">5dp</item>
+        <item name="android:minWidth">0dp</item>
+    </style>
+
+    <style name="WhiteOverflow">
+        <item name="android:backgroundTint">@color/palette_white</item>
+        <item name="android:src">@drawable/quantum_ic_more_vert_white_24</item>
+    </style>
+</resources>

@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <im.vector.app.core.ui.views.KeysBackupBanner
+        android:id="@+id/homeKeysBackupBanner"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:background="?vctr_keys_backup_banner_accent_color"
+        android:minHeight="67dp"
+        android:visibility="gone"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:visibility="gone" />
+
+    <im.vector.app.core.ui.views.CurrentCallsView
+        android:id="@+id/currentCallsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:visibility="gone"
+        android:background="@color/secondary_color"
+        app:layout_constraintTop_toBottomOf="@id/homeKeysBackupBanner"
+        tools:visibility="gone" />
+
+    <im.vector.app.features.sync.widget.SyncStateView
+        android:id="@+id/syncStateView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:background="@color/secondary_color"
+        app:layout_constraintTop_toBottomOf="@id/currentCallsView"
+        tools:visibility="gone" />
+
+    <androidx.coordinatorlayout.widget.CoordinatorLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/syncStateView">
+
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fitsSystemWindows="true"
+            app:layout_constraintTop_toBottomOf="@id/syncStateView">
+
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="175dp"
+                android:layout_height="22dp"
+                android:layout_margin="12dp"
+                android:src="@drawable/secretum_logo" />
+
+            <com.google.android.material.appbar.CollapsingToolbarLayout
+                android:id="@+id/collapsing_toolbar"
+                style="@style/Widget.Vector.Material3.Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_scrollFlags="scroll|exitUntilCollapsed">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <ImageView
+                            android:id="@+id/avatar"
+                            android:layout_width="36dp"
+                            android:layout_height="36dp"
+                            android:contentDescription="@string/a11y_open_settings"
+                            android:padding="4dp"
+                            android:layout_marginStart="15dp"
+                            tools:src="@sample/user_round_avatars" />
+
+                        <ImageView
+                            android:id="@+id/search_button"
+                            android:layout_width="25dp"
+                            android:layout_height="27dp"
+                            android:layout_toStartOf="@id/more_button"
+                            android:importantForAccessibility="no"
+                            android:scaleType="center"
+                            android:layout_marginRight="20dp"
+                            android:src="@drawable/ic_search"
+                            app:tint="?colorPrimary"
+                            tools:ignore="MissingPrefix" />
+
+                        <ImageView
+                            android:id="@+id/more_button"
+                            android:layout_width="25dp"
+                            android:layout_height="27dp"
+                            android:importantForAccessibility="no"
+                            android:scaleType="center"
+                            android:layout_toStartOf="@id/debug_button"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="12dp"
+                            android:src="@drawable/ic_more_vertical"
+                            app:tint="?colorPrimary"
+                            tools:ignore="MissingPrefix" />
+
+                        <ImageView
+                            android:id="@+id/debug_button"
+                            style="@style/VectorDebug"
+                            android:layout_width="48dp"
+                            android:layout_height="48dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_marginEnd="12dp"
+                            android:importantForAccessibility="no"
+                            android:scaleType="center"
+                            android:src="@drawable/ic_settings_x"
+                            app:tint="?colorPrimary"
+                            tools:ignore="MissingPrefix" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom|start"
+                        android:layout_marginStart="15dp"
+                        android:layout_marginBottom="15dp"
+                        android:text="All chats"
+                        android:fontFamily="@string/rich_text_editor_format_bold"
+                        android:textSize="18sp"
+                        />
+
+                </LinearLayout>
+
+            </com.google.android.material.appbar.CollapsingToolbarLayout>
+
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.fragment.app.FragmentContainerView
+            android:id="@+id/roomListContainer"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_behavior="com.google.android.material.appbar.AppBarLayout$ScrollingViewBehavior"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+    </androidx.coordinatorlayout.widget.CoordinatorLayout>
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/newLayoutOpenSpacesButton"
+        style="@style/Widget.Vector.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="20dp"
+        android:accessibilityTraversalAfter="@id/newLayoutCreateChatButton"
+        android:contentDescription="@string/a11y_open_spaces"
+        android:src="@drawable/ic_spaces"
+        android:visibility="gone"
+        app:backgroundTint="?attr/vctr_toolbar_background"
+        app:fabSize="mini"
+        app:layout_constraintBottom_toTopOf="@id/newLayoutCreateChatButton"
+        app:layout_constraintEnd_toEndOf="@id/newLayoutCreateChatButton"
+        app:layout_constraintStart_toStartOf="@id/newLayoutCreateChatButton"
+        app:tint="?attr/colorPrimary"
+        tools:targetApi="lollipop_mr1"
+        tools:visibility="visible" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/newLayoutCreateChatButton"
+        style="@style/Widget.Vector.FloatingActionButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:contentDescription="@string/a11y_create_message"
+        android:src="@drawable/ic_new_chat"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        tools:targetApi="lollipop_mr1"
+        tools:visibility="visible" />
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>
+

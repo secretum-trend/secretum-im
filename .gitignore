@@ -8,3 +8,14 @@
 .externalNativeBuild
 .cxx
 local.properties
+matrix-sdk-android/build/.transforms
+/library
+/matrix
+*.bin
+*.dex
+*.json
+/matrix-sdk-android-flow
+/matrix-sdk-android
+/vector-app
+/vector-config
+/vector

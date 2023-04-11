@@ -23,104 +23,149 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.autofill.HintConstants
 import androidx.core.view.isVisible
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import im.vector.app.R
-import im.vector.app.core.extensions.clearErrorOnChange
-import im.vector.app.core.extensions.content
-import im.vector.app.core.extensions.editText
-import im.vector.app.core.extensions.hideKeyboard
-import im.vector.app.core.extensions.hidePassword
-import im.vector.app.core.extensions.realignPercentagesToParent
-import im.vector.app.core.extensions.setOnFocusLostListener
-import im.vector.app.core.extensions.setOnImeDoneListener
-import im.vector.app.core.extensions.toReducedUrl
+import im.vector.app.core.extensions.*
+import im.vector.app.core.utils.Resource
 import im.vector.app.databinding.FragmentFtueCombinedLoginBinding
 import im.vector.app.features.VectorFeatures
-import im.vector.app.features.login.LoginMode
-import im.vector.app.features.login.SSORedirectRouterActivity
-import im.vector.app.features.login.SocialLoginButtonsView
-import im.vector.app.features.login.SsoState
+import im.vector.app.features.login.*
 import im.vector.app.features.login.qr.QrCodeLoginArgs
 import im.vector.app.features.login.qr.QrCodeLoginType
-import im.vector.app.features.login.render
 import im.vector.app.features.onboarding.OnboardingAction
 import im.vector.app.features.onboarding.OnboardingViewEvents
 import im.vector.app.features.onboarding.OnboardingViewState
+import im.vector.app.features.onboarding.usecase.MobileWalletAdapterUseCase
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.launch
 import reactivecircus.flowbinding.android.widget.textChanges
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class FtueAuthCombinedLoginFragment :
-        AbstractSSOFtueAuthFragment<FragmentFtueCombinedLoginBinding>() {
+    AbstractSSOFtueAuthFragment<FragmentFtueCombinedLoginBinding>() {
 
-    @Inject lateinit var loginFieldsValidation: LoginFieldsValidation
-    @Inject lateinit var loginErrorParser: LoginErrorParser
-    @Inject lateinit var vectorFeatures: VectorFeatures
+    @Inject
+    lateinit var loginFieldsValidation: LoginFieldsValidation
+    @Inject
+    lateinit var loginErrorParser: LoginErrorParser
+    @Inject
+    lateinit var vectorFeatures: VectorFeatures
 
-    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentFtueCombinedLoginBinding {
+    private val mwaLauncher = registerForActivityResult(
+        MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity(lifecycle)
+    ) {
+    }
+
+    override fun getBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentFtueCombinedLoginBinding {
         return FragmentFtueCombinedLoginBinding.inflate(inflater, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setupSubmitButton()
-        views.loginRoot.realignPercentagesToParent()
-        views.editServerButton.debouncedClicks { viewModel.handle(OnboardingAction.PostViewEvent(OnboardingViewEvents.EditServerSelection)) }
-        views.loginPasswordInput.setOnImeDoneListener { submit() }
-        views.loginInput.setOnFocusLostListener(viewLifecycleOwner) {
-            viewModel.handle(OnboardingAction.UserNameEnteredAction.Login(views.loginInput.content()))
-        }
-        views.loginForgotPassword.debouncedClicks { viewModel.handle(OnboardingAction.PostViewEvent(OnboardingViewEvents.OnForgetPasswordClicked)) }
-
-        viewModel.onEach(OnboardingViewState::canLoginWithQrCode) {
-            configureQrCodeLoginButtonVisibility(it)
-        }
+        observingValues()
     }
 
-    private fun configureQrCodeLoginButtonVisibility(canLoginWithQrCode: Boolean) {
-        views.loginWithQrCode.isVisible = canLoginWithQrCode
-        if (canLoginWithQrCode) {
-            views.loginWithQrCode.debouncedClicks {
-                navigator
-                        .openLoginWithQrCode(
-                                requireActivity(),
-                                QrCodeLoginArgs(
-                                        loginType = QrCodeLoginType.LOGIN,
-                                        showQrCodeImmediately = false,
-                                )
-                        )
+    private fun observingValues() {
+        //handle ui state
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                viewModel.uiState.collect { uiState ->
+                    uiState.hasAuthToken.let {
+//                        if (isAuthorized) {
+//                            //update view. not call api
+//                        }
+                    }
+
+                    if (uiState.messages.isNotEmpty()) {
+                        val message = uiState.messages.first()
+                        Snackbar.make(views.root, message, Snackbar.LENGTH_SHORT)
+                            .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                                override fun onDismissed(
+                                    transientBottomBar: Snackbar?,
+                                    event: Int
+                                ) {
+                                    viewModel.messageShown()
+                                }
+                            }).show()
+                    }
+                }
             }
         }
+
+        viewModel.authenticate.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Resource.Status.SUCCESS -> {
+                    if (it.data != null){
+                        cleanupUi()
+                        loginFieldsValidation.validate(
+                            it.data.username.toString(),
+                            it.data.password.toString()
+                        ).onUsernameOrIdError { }
+                            .onPasswordError { }
+                            .onValid { usernameOrId, password ->
+                                val initialDeviceName = getString(R.string.login_default_session_public_name)
+                                viewModel.handle(
+                                    OnboardingAction.AuthenticateAction.Login(
+                                        usernameOrId,
+                                        password,
+                                        initialDeviceName
+                                    )
+                                )
+                            }
+                    }
+                }
+                Resource.Status.ERROR -> {
+                }
+                Resource.Status.LOADING -> {
+                    //loading
+                }
+            }
+        }
+
+        viewModel.signature.observe(viewLifecycleOwner) {
+            if (it != null) {
+                viewModel.authenticate(it)
+            }
+        }
+
+        viewModel.getNonce.observe(viewLifecycleOwner) {
+            when (it.status) {
+                Resource.Status.SUCCESS -> {
+                    it.data?.nonce?.let { nonce ->
+                        viewModel.signNonce(mwaLauncher, nonce)
+                    }
+                }
+                Resource.Status.ERROR -> {
+
+                }
+
+                Resource.Status.LOADING -> {
+
+                }
+            }
+        }
+
     }
 
     private fun setupSubmitButton() {
-        views.loginSubmit.setOnClickListener { submit() }
-        views.loginInput.clearErrorOnChange(viewLifecycleOwner)
-        views.loginPasswordInput.clearErrorOnChange(viewLifecycleOwner)
 
-        combine(views.loginInput.editText().textChanges(), views.loginPasswordInput.editText().textChanges()) { account, password ->
-            views.loginSubmit.isEnabled = account.isNotEmpty() && password.isNotEmpty()
-        }.launchIn(viewLifecycleOwner.lifecycleScope)
-    }
-
-    private fun submit() {
-        cleanupUi()
-        loginFieldsValidation.validate(views.loginInput.content(), views.loginPasswordInput.content())
-                .onUsernameOrIdError { views.loginInput.error = it }
-                .onPasswordError { views.loginPasswordInput.error = it }
-                .onValid { usernameOrId, password ->
-                    val initialDeviceName = getString(R.string.login_default_session_public_name)
-                    viewModel.handle(OnboardingAction.AuthenticateAction.Login(usernameOrId, password, initialDeviceName))
-                }
+        views.cvLogin.debouncedClicks {
+            viewModel.authorize(mwaLauncher)
+        }
     }
 
     private fun cleanupUi() {
-        views.loginSubmit.hideKeyboard()
-        views.loginInput.error = null
-        views.loginPasswordInput.error = null
     }
 
     override fun resetViewModel() {
@@ -128,35 +173,23 @@ class FtueAuthCombinedLoginFragment :
     }
 
     override fun onError(throwable: Throwable) {
-        // Trick to display the error without text.
-        views.loginInput.error = " "
-        loginErrorParser.parse(throwable, views.loginPasswordInput.content())
-                .onUnknown { super.onError(it) }
-                .onUsernameOrIdError { views.loginInput.error = it }
-                .onPasswordError { views.loginPasswordInput.error = it }
+
     }
 
     override fun updateWithState(state: OnboardingViewState) {
         setupUi(state)
         setupAutoFill()
-
-        views.selectedServerName.text = state.selectedHomeserver.userFacingUrl.toReducedUrl()
-
-        if (state.isLoading) {
-            // Ensure password is hidden
-            views.loginPasswordInput.editText().hidePassword()
-        }
     }
 
     private fun setupUi(state: OnboardingViewState) {
         when (state.selectedHomeserver.preferredLoginMode) {
             is LoginMode.SsoAndPassword -> {
                 showUsernamePassword()
-                renderSsoProviders(state.deviceId, state.selectedHomeserver.preferredLoginMode.ssoState)
+                renderSsoProviders()
             }
             is LoginMode.Sso -> {
                 hideUsernamePassword()
-                renderSsoProviders(state.deviceId, state.selectedHomeserver.preferredLoginMode.ssoState)
+                renderSsoProviders()
             }
             else -> {
                 showUsernamePassword()
@@ -165,37 +198,20 @@ class FtueAuthCombinedLoginFragment :
         }
     }
 
-    private fun renderSsoProviders(deviceId: String?, ssoState: SsoState) {
-        views.ssoGroup.isVisible = true
-        views.ssoButtonsHeader.isVisible = isUsernameAndPasswordVisible()
-        views.ssoButtons.render(ssoState, SocialLoginButtonsView.Mode.MODE_CONTINUE) { id ->
-            viewModel.fetchSsoUrl(
-                    redirectUrl = SSORedirectRouterActivity.VECTOR_REDIRECT_URL,
-                    deviceId = deviceId,
-                    provider = id
-            )?.let { openInCustomTab(it) }
-        }
+    private fun renderSsoProviders() {
     }
 
     private fun hideSsoProviders() {
-        views.ssoGroup.isVisible = false
-        views.ssoButtons.ssoIdentityProviders = null
+
     }
 
     private fun hideUsernamePassword() {
-        views.loginEntryGroup.isVisible = false
+
     }
 
     private fun showUsernamePassword() {
-        views.loginEntryGroup.isVisible = true
     }
-
-    private fun isUsernameAndPasswordVisible() = views.loginEntryGroup.isVisible
-
     private fun setupAutoFill() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            views.loginInput.setAutofillHints(HintConstants.AUTOFILL_HINT_NEW_USERNAME)
-            views.loginPasswordInput.setAutofillHints(HintConstants.AUTOFILL_HINT_NEW_PASSWORD)
-        }
+
     }
 }

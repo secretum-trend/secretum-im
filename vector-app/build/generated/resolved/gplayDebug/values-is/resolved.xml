@@ -1,0 +1,42 @@
+<resources>
+    <string name="analytics_opt_in_content">Hjálpaðu okkur við að greina vandamál og bæta Element dbg með því að deila nafnlausum gögnum varðandi notkun. Til að skilja hvernig fólk notar saman mörg tæki, munum við útbúa tilviljanakennt auðkenni, sem tækin þín deila.
+\n
+\nÞú getur lesið alla skilmála okkar %s.</string>
+    <string name="analytics_opt_in_title">Hjálpaðu okkur að bæta Element dbg</string>
+    <string name="app_desktop_web">Element dbg fyrir vefinn
+\nElement dbg fyrir vinnutölvur</string>
+    <string name="app_ios_android">Element dbg fyrir iOS
+\nElement dbg fyrir Android</string>
+    <string name="call_failed_no_connection">Element dbg símtal mistókst</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Ræstu Element dbg á öðru tæki sem getur afkóðað skilaboðin og síðan sent dulritunarlyklana yfir í þessa setu.</string>
+    <string name="ftue_auth_carousel_workplace_body">Element dbg er líka frábært fyrir vinnustaðinn. Heimsins öruggustu samtök treysta því.</string>
+    <string name="initial_sync_request_content">Element dbg þarf að hreinsa skyndiminnið til að haldast uppfært, af eftirfarandi ástæðu:
+\n%s\?
+\n
+\nAthugaðu að þessi aðgerð mun endurræsa forritið og það getur tekið nokkurn tíma.</string>
+    <string name="invite_friends_rich_title">&#128272;️ Vertu með mér á Element dbg</string>
+    <string name="invite_friends_text">Halló, talaðu við mig á Element dbg: %s</string>
+    <string name="legals_application_title">Reglur Element dbg</string>
+    <string name="link_this_email_with_your_account">%s í stillingunum til að fá boð beint í Element dbg.</string>
+    <string name="live_location_sharing_notification_title">Element dbg rauntímastaðsetning</string>
+    <string name="location_not_available_dialog_content">Element dbg gat ekki fengið staðsetninguna þína. Reyndu aftur síðar.</string>
+    <string name="location_not_available_dialog_title">Element dbg gat ekki fengið staðsetninguna þína</string>
+    <string name="login_default_session_public_name">Element dbg fyrir Android</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Element dbg þarf heimild til að nota myndavélina og hljóðnemann svo hægt sé að hringja myndsímtöl.
+\n
+\nLeyfðu aðgang í næstu sprettgluggum til þess að geta hringt.</string>
+    <string name="permissions_rationale_msg_record_audio">Element dbg þarf heimild til að nota hljóðnemann svo hægt sé að hringja hljóðsímtöl.</string>
+    <string name="preference_help_summary">Fáðu aðstoð við að nota Element dbg</string>
+    <string name="re_authentication_default_confirm_text">Element dbg krefst þess að þú setjir inn auðkennin þín til að framkvæma þessa aðgerð.</string>
+    <string name="screen_sharing_notification_title">Element dbg skjádeiling</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Nota sjálfgefinn Element dbg hringitón fyrir innhringingar</string>
+    <string name="settings_opt_in_of_analytics_summary">Element dbg safnar nafnlausum greiningargögnum til að gera okkur kleift að bæta forritið.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">Krafist er PIN-númers í hvert skipti sem þú opnar Element dbg.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">Krafist er PIN-númers ef þú notar ekki Element dbg í 2 mínútur.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN-númer er eina leiðin til að aflæsa Element dbg.</string>
+    <string name="settings_troubleshoot_test_battery_success">Element dbg er ekki háð bestun fyrir rafhlöðuendingu.</string>
+    <string name="settings_troubleshoot_test_device_settings_failed">Tilkynningar eru óvirkar í þessari setu.
+\nYfirfarðu stillingar í Element dbg.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Element dbg notar Google Play þjónustur til að afhenda ýtitilkynningar en það lítur út fyrir að vera rangt stillt:
+\n%1$s</string>
+</resources>

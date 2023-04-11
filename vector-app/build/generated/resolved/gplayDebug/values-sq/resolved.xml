@@ -1,0 +1,76 @@
+<resources>
+    <string name="analytics_opt_in_content">Ndihmonani të identifikojmë probleme dhe të përmirësojmë Element dbg-in, duke ndarë me ne të dhëna anonime përdorimi. Për të kuptuar se si i përdorin njerëzit disa pajisje njëherësh, do të prodhojmë një identifikues kuturu, të përbashkët për pajisjet tuaja.
+\n
+\nMund të lexoni krejt kushtet tona %s.</string>
+    <string name="analytics_opt_in_title">Ndihmoni të përmirësohet Element dbg-in</string>
+    <string name="app_desktop_web">Element dbg Web
+\nElement dbg Desktop</string>
+    <string name="app_ios_android">Element dbg iOS
+\nElement dbg Android</string>
+    <string name="call_failed_no_connection">Thirrja Element dbg Dështoi</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Ju lutemi, niseni Element dbg-in në një tjetër pajisje që mund të shfshehtëzojë mesazhin, që kështu të mund të dërgojë kyçet te ky sesion.</string>
+    <string name="ftue_auth_carousel_workplace_body">Element dbg është gjithashtu i goditur për në punë. Është i besuar nga entet më të sigurta të botës.</string>
+    <string name="home_empty_no_rooms_title">Mirë se vini te Element dbg,
+\n%s.</string>
+    <string name="identity_server_error_bulk_sha256_not_supported">Për privatësinë tuaj, Element dbg-i mbulon vetëm dërgim adresash email dhe numrash telefoni përdoruesi të koduar.</string>
+    <string name="identity_server_error_outdated_identity_server">Ky shërbyes identitetesh është i vjetruar. Element dbg mbulon vetëm API V2.</string>
+    <string name="initial_sync_request_content">Element dbg-it i duhet një fshehtinë e pastër, për të qenë i përditësuar, për arsyen vijuese:
+\n%s
+\n
+\nKini parasysh se ky veprim do të sjellë rinisjen e aplikacionit dhe mund të dojë ca kohë.</string>
+    <string name="invite_friends_rich_title">Takohuni me mua në Element dbg</string>
+    <string name="invite_friends_text">Hej, bisedoni me mua në Element dbg: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Ju lutemi, fshini frazëkalimin, nëse doni që Element dbg-i të prodhojë një kyç rimarrjesh.</string>
+    <string name="legals_application_title">Rregulla për Element dbg</string>
+    <string name="link_this_email_with_your_account">%s te Rregullimet, që të merrni ftesa drejt e në Element dbg.</string>
+    <string name="live_location_sharing_notification_title">Vendndodhje Drejtpërsëdrejti Element dbg</string>
+    <string name="location_not_available_dialog_content">Element dbg s’njohu dot vendndodhjen tuaj. Ju lutemi, riprovoni më vonë.</string>
+    <string name="location_not_available_dialog_title">Element dbg s’mësoi dot vendndodhjen tuaj</string>
+    <string name="login_default_session_public_name">Element dbg Android</string>
+    <string name="onboarding_new_app_layout_welcome_message">Që të thjeshtohet Element dbg juaj, skedat tanimë janë opsionale. Administrojini duke përdorur menunë djathtas në krye.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Për të kryer thirrje video, Element dbg-i lyp leje të përdorë kamerën dhe mikrofonin tuaj.
+\n
+\nJu lutemi, lejoni përdorimin, që nga flluskat pasuese, që të jetë në gjendje të bëjë thirrjen.</string>
+    <string name="permissions_rationale_msg_notification">Element dbg lyp leje të shfaqë njoftime. Njoftimet mund të shfaqin mesazhet tuaja, ftesa tuajat, etj.
+\n
+\nJu lutemi, lejoni përdorimin e tyre te flluska pasuese, që të jeni në gjendje të shihni njoftime.</string>
+    <string name="permissions_rationale_msg_record_audio">Për të kryer thirrje audio, Element dbg-i lyp leje të përdorë mikrofonin tuaj.</string>
+    <string name="preference_help_summary">Merrni ndihmë për përdorimin e Element dbg-it</string>
+    <string name="re_authentication_default_confirm_text">Që të kryejë këtë veprim, Element dbg-i lyp dhënien prej jush të kredencialeve tuaja.</string>
+    <string name="rendering_event_error_exception">Element dbg ndeshi një problem kur vizatohej lëndë e aktit me ID \'%1$s\'</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Element dbg nuk trajton akte të llojit \'%1$s\'</string>
+    <string name="screen_sharing_notification_title">Tregim Ekrani Element dbg</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg-i do të bëjë njëkohësim në prapaskenë, në një mënyrë që kursen burimet e kufizuara të pajisjes (baterinë).
+\nNë varësi të gjendjes së burimeve tuaja, njëkohësimi mund të shtyhet për më vonë nga sistemi operativ.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg0-i do të bëjë njëkohësim në prapaskenë periodikisht në një kohë të caktuar (e formësueshme).
+\nKjo do të ketë ndikim mbi përdorimin e baterisë dhe të transmetimit, do të shfaqet një njoftim i pandërprerë që pohon se Element dbg-i po përgjon për akte.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Për thirrje ardhëse përdor zilen parazgjedhje të Element dbg-it</string>
+    <string name="settings_developer_mode_fail_fast_summary">Element dbg mund të vithiset më shpesh, kur ndodh një gabim i papritur</string>
+    <string name="settings_opt_in_of_analytics_summary">Element dbg-i grumbullon të dhëna analitike anonime që të na lejojë ta përmirësojmë aplikacionin.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">Kodi PIN kërkohet doemos sa herë që hapni Element dbg-in.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">Kodi PIN kërkohet doemos pas 2 minutash mospërdorimi të Element dbg-it.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">Kodi PIN është rruga e vetme për të shkyçur Element dbg-in.</string>
+    <string name="settings_troubleshoot_test_battery_success">Element dbg-i nuk preket nga Optimizime Baterie.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Kufizimet për në prapaskenë janë të aktivizuara për Element dbg-in.
+\nPuna që aplikacioni rreket të bëjë do të kufizohet në mënyrë agresive, teksa gjendet në prapaskenë, dhe kjo mund të prekë njoftimet.
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_bg_restricted_success">Kufizimet për në prapaskenë janë të çaktivizuar për Element dbg-in. Ky test duhet të xhirojë duke përdorur të dhëna rrjeti celular (jo WIFI).
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_device_settings_failed">Nuk janë aktivizuar njoftimet për këtë sesion.
+\nJu lutemi, kontrolloni rregullimet e Element dbg-it.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
+\nKy gabim është jashtë kontrollit të Element dbg-it. S’ka llogari Google te telefoni. Ju lutemi, hapni përgjegjësin e llogarive dhe shtoni një llogari Google.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
+\nKy gabim është jashtë kontrollit të Element dbg-it. Mund të ndodhë për disa arsye. Ndoshta do të funksionojë, nëse riprovoni më vonë, mund të kontrolloni edhe nëse për Google Play Service s’ka kufizime lidhur me përdorimin e të dhënave, te rregullimet e sistemit, ose se ora e pajisjes suaj është e saktë, ose mund të ndodhë në ROM të përshtatur.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
+\nKy gabim është jashtë kontrollit të Element dbg-it dhe, sipas Google-it, ky gabim është shenjë se pajisja ka shumë aplikacione të regjistruar me FCM. Gabimi ndodh vetëm në raste kur ka një numër të skajshëm aplikacionesh, ndaj nuk duhet të prekë përdoruesin mesatar.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Element dbg-i përdor Google Play Services për të dorëzuar mesazhe push, por s’duket të jetë formësuar saktë:
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_service_boot_failed">Shërbimi s’do të niset kur të riniset pajisja, s’do të merrni njoftime derisa Element dbg-i të jetë hapur një herë.</string>
+    <string name="settings_troubleshoot_test_system_settings_permission_failed">Element dbg lyp lejen për shfaqje njoftimesh.
+\nJu lutemi, akordoni lejen.</string>
+    <string name="soft_logout_sso_not_same_user_error">Sesioni i tanishëm është për përdoruesin %1$s dhe ju jepni kredenciale për përdoruesin %2$s. Kjo nuk mbulohet nga Element dbg.
+\nJu lutemi, së pari spastroni të dhëna, mandej hyni sërish në një tjetër llogari.</string>
+    <string name="use_latest_app">Përdorni Element dbg-in më të ri në pajisjet tuaja të tjera:</string>
+    <string name="use_other_session_content_description">Përdorni Element dbg-in më të ri në pajisjet tuaja të tjera, Element dbg Web, Element dbg Desktop, Element dbg iOS, Element dbg për Android, ose një tjetër klient Matrix të aftë për &lt;em&gt;cross-signing&lt;/em</string>
+</resources>

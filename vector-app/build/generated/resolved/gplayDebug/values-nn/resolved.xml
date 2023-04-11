@@ -1,0 +1,12 @@
+<resources>
+    <string name="call_failed_no_connection">Element dbg-samtalen feila</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Start Element dbg på ein annan eining som kan dekryptere meldingen, slik at den kan sende nøkklane til denne sesjonen</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Element dbg treng tilgang til kameraet og mikrofonen din for å utføra videosamtalar.
+\n
+\nGjer vel og gjev tilgang på sprettvindauget som kjem for å utføra samtalen.</string>
+    <string name="permissions_rationale_msg_record_audio">Element dbg treng tilgang til mikrofonen din for å utføra talesamtalar.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Bruk standard Element dbg-ringetone for innkommande samtalar</string>
+    <string name="settings_opt_in_of_analytics_summary">Element dbg samlar anonym statistikk inn for å forbetra applikasjonen.</string>
+    <string name="settings_troubleshoot_test_device_settings_failed">Varslingar er deaktivert for denne sesjonen.
+\nSjekk Element dbg-innstillingane.</string>
+</resources>

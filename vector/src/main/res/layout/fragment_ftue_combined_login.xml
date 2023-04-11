@@ -1,274 +1,128 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    style="@style/LoginFormScrollView"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="?android:colorBackground"
-    android:fillViewport="true"
-    android:paddingTop="0dp"
-    android:paddingBottom="0dp">
+    android:background="@drawable/login_bg">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/loginRoot"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/loginGutterStart"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/ftue_auth_gutter_start_percent" />
-
-        <androidx.constraintlayout.widget.Guideline
-            android:id="@+id/loginGutterEnd"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            app:layout_constraintGuide_percent="@dimen/ftue_auth_gutter_end_percent" />
-
-        <Space
-            android:id="@+id/headerSpacing"
-            android:layout_width="match_parent"
-            android:layout_height="52dp"
-            app:layout_constraintBottom_toTopOf="@id/loginHeaderTitle"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0"
-            app:layout_constraintVertical_chainStyle="packed" />
-
-        <TextView
-            android:id="@+id/loginHeaderTitle"
-            style="@style/Widget.Vector.TextView.Title.Medium"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_top"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:text="@string/ftue_auth_welcome_back_title"
-            android:textColor="?vctr_content_primary"
-            app:layout_constraintBottom_toTopOf="@id/titleContentSpacing"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/headerSpacing" />
+            android:layout_marginTop="60dp"
+            app:srcCompat="@drawable/secretum"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Space
-            android:id="@+id/titleContentSpacing"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/chooseYourServerHeader"
-            app:layout_constraintHeight_percent="0.03"
-            app:layout_constraintTop_toBottomOf="@id/loginHeaderTitle" />
-
-        <TextView
-            android:id="@+id/chooseYourServerHeader"
-            style="@style/Widget.Vector.TextView.Caption"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_middle_ic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:layout_marginTop="4dp"
-            android:text="@string/ftue_auth_sign_in_choose_server_header"
-            android:textColor="?vctr_content_secondary"
-            app:layout_constraintBottom_toTopOf="@id/selectedServerName"
-            app:layout_constraintEnd_toStartOf="@id/editServerButton"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/titleContentSpacing" />
+            android:layout_marginHorizontal="56dp"
+            android:src="@mipmap/login_middle_ic"
+            app:layout_constraintBottom_toTopOf="@+id/cvLogin"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img_top"
+            />
 
-        <TextView
-            android:id="@+id/selectedServerName"
-            style="@style/Widget.Vector.TextView.Subtitle"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/cvLogin"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textColor="?vctr_content_primary"
-            app:layout_constraintBottom_toTopOf="@id/selectedServerDescription"
-            app:layout_constraintEnd_toStartOf="@id/editServerButton"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/chooseYourServerHeader" />
+            android:minHeight="60dp"
+            android:layout_marginBottom="30dp"
+            app:cardBackgroundColor="@color/white"
+            app:cardCornerRadius="15dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/layout_horizontal_margin"
+            >
 
-        <TextView
-            android:id="@+id/selectedServerDescription"
-            style="@style/Widget.Vector.TextView.Micro"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="12dp"
-            android:textColor="?vctr_content_tertiary"
-            app:layout_constraintBottom_toTopOf="@id/serverSelectionSpacing"
-            app:layout_constraintEnd_toStartOf="@id/editServerButton"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/selectedServerName" />
-
-        <Button
-            android:id="@+id/editServerButton"
-            style="@style/Widget.Vector.Button.Outlined"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:minWidth="0dp"
-            android:paddingStart="12dp"
-            android:paddingEnd="12dp"
-            android:text="@string/ftue_auth_create_account_edit_server_selection"
-            android:textAllCaps="true"
-            app:layout_constraintBottom_toBottomOf="@id/selectedServerDescription"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintTop_toTopOf="@id/chooseYourServerHeader" />
-
-        <Space
-            android:id="@+id/serverSelectionSpacing"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/loginInput"
-            app:layout_constraintHeight_percent="0.05"
-            app:layout_constraintTop_toBottomOf="@id/selectedServerDescription" />
-
-        <View
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:background="?vctr_content_quaternary"
-            app:layout_constraintBottom_toBottomOf="@id/serverSelectionSpacing"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toTopOf="@id/serverSelectionSpacing" />
-
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/loginEntryGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="visible"
-            app:constraint_referenced_ids="loginInput,loginPasswordInput,entrySpacing,actionSpacing,loginSubmit" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/loginInput"
-            style="@style/Widget.Vector.TextInputLayout.Username"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/ftue_auth_login_username_entry"
-            app:layout_constraintBottom_toTopOf="@id/entrySpacing"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/serverSelectionSpacing">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/loginEditText"
+            <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:imeOptions="actionNext"
-                android:inputType="textNoSuggestions"
-                android:maxLines="1"
-                android:nextFocusForward="@id/loginPasswordInput" />
+                android:layout_gravity="center"
+                android:layout_height="match_parent">
 
-        </com.google.android.material.textfield.TextInputLayout>
+                <TextView
+                    android:id="@+id/tv_wallet"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/login_title"
+                    android:textColor="@color/text_color"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/manrope_bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <Space
-            android:id="@+id/entrySpacing"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/loginPasswordInput"
-            app:layout_constraintHeight_percent="0.03"
-            app:layout_constraintTop_toBottomOf="@id/loginInput" />
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="0dp"
+                    android:layout_height="25dp"
+                    android:layout_marginStart="5dp"
+                    android:src="@mipmap/login_wallet_ic"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tv_wallet"
+                    app:layout_constraintTop_toTopOf="parent" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/loginPasswordInput"
-            style="@style/Widget.Vector.TextInputLayout.Password"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:hint="@string/login_signup_password_hint"
-            app:layout_constraintBottom_toTopOf="@id/loginForgotPassword"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/entrySpacing">
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </androidx.cardview.widget.CardView>
 
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/loginPasswordEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:imeOptions="actionDone"
-                android:inputType="textPassword"
-                android:maxLines="1" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <Button
-            android:id="@+id/loginForgotPassword"
-            style="@style/Widget.Vector.Button.Text.Login"
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/ftue_auth_forgot_password"
-            android:textAllCaps="true"
-            android:textColor="?colorSecondary"
-            app:layout_constraintBottom_toTopOf="@id/actionSpacing"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintHorizontal_bias="1"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/loginPasswordInput" />
+            android:layout_marginBottom="100dp"
+            android:background="@color/clear"
+            app:layout_constraintBottom_toTopOf="@+id/img_bottom_ic"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-        <Space
-            android:id="@+id/actionSpacing"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/loginSubmit"
-            app:layout_constraintHeight_percent="0.02"
-            app:layout_constraintTop_toBottomOf="@id/loginForgotPassword" />
+            <TextView
+                android:id="@+id/tv_no_wallet"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/no_wallet"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/manrope_regular"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/loginSubmit"
-            style="@style/Widget.Vector.Button.Login"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="@string/login_signup_submit"
-            android:textAllCaps="true"
-            app:layout_constraintBottom_toTopOf="@id/ssoButtonsHeader"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/actionSpacing" />
+            <TextView
+                android:id="@+id/tv_download"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="3dp"
+                android:text="@string/download_wallet"
+                android:textColor="@color/white"
+                android:textSize="14sp"
+                android:fontFamily="@font/manrope_bold"
+                app:layout_constraintBottom_toBottomOf="@+id/tv_no_wallet"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/tv_no_wallet"
+                app:layout_constraintTop_toTopOf="@id/tv_no_wallet" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-        <androidx.constraintlayout.widget.Group
-            android:id="@+id/ssoGroup"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:visibility="gone"
-            app:constraint_referenced_ids="ssoButtonsHeader,ssoButtons"
-            app:layout_constraintBottom_toTopOf="@id/ssoButtonsHeader"
-            app:layout_constraintTop_toBottomOf="@id/loginSubmit"
-            tools:visibility="visible" />
-
-        <TextView
-            android:id="@+id/ssoButtonsHeader"
-            style="@style/Widget.Vector.TextView.Subtitle.Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="16dp"
-            android:text="@string/ftue_auth_create_account_sso_section_header"
-            android:textColor="?vctr_content_secondary"
-            app:layout_constraintBottom_toTopOf="@id/ssoButtons"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/loginSubmit" />
-
-        <Button
-            android:id="@+id/loginWithQrCode"
-            style="@style/Widget.Vector.Button.Outlined.Login"
-            android:layout_width="0dp"
-            android:layout_height="60dp"
-            android:layout_marginTop="12dp"
-            android:text="@string/login_scan_qr_code"
-            android:visibility="gone"
-            app:drawableLeftCompat="@drawable/ic_qr_code"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/ssoButtonsHeader"
-            tools:visibility="visible" />
-
-        <im.vector.app.features.login.SocialLoginButtonsView
-            android:id="@+id/ssoButtons"
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/img_bottom_ic"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
+            android:src="@drawable/powered_by_solana"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="@id/loginGutterEnd"
-            app:layout_constraintStart_toStartOf="@id/loginGutterStart"
-            app:layout_constraintTop_toBottomOf="@id/loginWithQrCode"
-            tools:signMode="signup" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginHorizontal="@dimen/layout_horizontal_margin" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-</androidx.core.widget.NestedScrollView>
+</FrameLayout>

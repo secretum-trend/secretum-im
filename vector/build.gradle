@@ -124,6 +124,7 @@ dependencies {
     implementation project(":library:core-utils")
     implementation project(":library:attachment-viewer")
     implementation project(":library:multipicker")
+    implementation project(":lib-solana:clientlib")
 
     implementation libs.jetbrains.coroutinesCore
     implementation libs.jetbrains.coroutinesAndroid
@@ -351,4 +352,10 @@ dependencies {
     debugImplementation libs.androidx.fragmentTestingManifest
     androidTestImplementation libs.androidx.fragmentTesting
     androidTestImplementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
+
+    //bouncycastle
+    implementation 'org.bouncycastle:bcprov-jdk18on:1.72'
+
+    //graphql
+    implementation("com.apollographql.apollo3:apollo-runtime:3.7.4")
 }

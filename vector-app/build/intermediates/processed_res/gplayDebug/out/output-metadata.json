@@ -1,0 +1,25 @@
+{
+  "version": 3,
+  "artifactType": {
+    "type": "PROCESSED_RES",
+    "kind": "Directory"
+  },
+  "applicationId": "im.vector.app.debug",
+  "variantName": "gplayDebug",
+  "elements": [
+    {
+      "type": "ONE_OF_MANY",
+      "filters": [
+        {
+          "filterType": "ABI",
+          "value": "arm64-v8a"
+        }
+      ],
+      "attributes": [],
+      "versionCode": 214173652,
+      "versionName": "1.5.24-dev",
+      "outputFile": "resources-gplayArm64-v8aDebug.ap_"
+    }
+  ],
+  "elementType": "File"
+}

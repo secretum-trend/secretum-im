@@ -1,0 +1,18 @@
+<resources>
+    <string name="call_failed_no_connection">فشلت مكالمة Element dbg</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">رجاءً أطلِق Element في جهاز آخر يقدر على فك تعمية الرسالة ليُرسل المفاتيح إلى هذا الجهاز.</string>
+    <string name="initial_sync_request_content">Element dbg يحتاج إلى حذف ذاكرة التخزين المؤقت حتى تكون مستحدثة، من أجل هذه الأسباب:
+\n%s
+\n
+\nملاحظة: هذا الإجراء سيؤدي إلى إعادة تشغيل التطبيق ومن الممكن أن يستغرق بعضاً من الوقت.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">يحتاج Element dbg تصريحا منك للوصول إلى الكاميرا والمايكروفون لإجراء المكالمات المرئية.
+\n
+\nرجاءً اسمح بالوصول في النافذة التالية لتتمكن من إجراء المكالمة.</string>
+    <string name="permissions_rationale_msg_record_audio">يحتاج Element تصريحا منك للوصول إلى المِكرفون لإجراء المكالمات الصوتية.</string>
+    <string name="preference_help_summary">احصل على المساعدة باستخدام Element dbg</string>
+    <string name="rendering_event_error_exception">Element dbg واجه مشكلة في تصيير الحدث ذو المعرف \'%1$s\'</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Element dbg لا يستطيع التعامل مع ملفات من نوع \'%1$s\'</string>
+    <string name="settings_call_ringtone_use_app_ringtone">استخدم نغمة Element dbg الافتراضية للمكالمات الواردة</string>
+    <string name="settings_opt_in_of_analytics_summary">يجمع Element التحاليل بشكل مجهّل فيتيح لنا ذلك تحسين التطبيق.</string>
+    <string name="settings_troubleshoot_test_battery_success">يأثر تحسين البطارية على عمل Element dbg.</string>
+</resources>

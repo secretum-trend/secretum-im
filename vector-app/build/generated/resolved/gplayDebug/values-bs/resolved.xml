@@ -1,0 +1,6 @@
+<resources>
+    <string name="permissions_rationale_msg_camera_and_audio">Hepek treba dopuštenje za pristup vašoj kemeri i mikrofonu za obavljanje video poziva.
+
+Omogućite pristup sljedećim skočnim prozorima da biste mogli uspostaviti poziv.</string>
+    <string name="permissions_rationale_msg_record_audio">Hepek traži dopuštenje za pristup mikrofonu za obavljanje audio poziva.</string>
+</resources>

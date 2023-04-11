@@ -1,0 +1,75 @@
+<resources>
+    <string name="analytics_opt_in_content">Pomóż nam znaleźć błędy i ulepszyć Element dbg poprzez udostępnianie anonimowych danych użytkowania. Aby lepiej zrozumieć jak użytkownicy wykorzystują wiele urządzeń wygenerujemy losowy identyfikator dzielony pomiędzy Twoimi urządzeniami.
+\n
+\nWięcej informacji %s.</string>
+    <string name="analytics_opt_in_title">Pomóż usprawnić Element dbg</string>
+    <string name="app_desktop_web">Element dbg Web
+\nElement dbg Desktop</string>
+    <string name="app_ios_android">Element dbg iOS
+\nElement dbg Android</string>
+    <string name="call_failed_no_connection">Połączenie Element dbg nieudane</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Uruchom proszę Element dbg na innym urządzeniu, które może odszyfrować wiadomość, aby wysłać klucze do tej sesji.</string>
+    <string name="ftue_auth_carousel_workplace_body">Element dbg świetnie sprawdza się również w miejscu pracy. Cieszy się zaufaniem najbezpieczniejszych organizacji na świecie.</string>
+    <string name="home_empty_no_rooms_title">Witaj w Element dbg,
+\n%s.</string>
+    <string name="identity_server_error_bulk_sha256_not_supported">W trosce o Twoją prywatność, Element dbg obsługuje jedynie wysłanie skrótów (hash) adresów e-mail oraz numerów telefonu.</string>
+    <string name="identity_server_error_outdated_identity_server">Ten serwer tożsamości jest przestarzały. Element dbg obsługuje jedynie API V2.</string>
+    <string name="initial_sync_request_content">Element dbg musi wykonać czyszczenie pamięci podręcznej, aby była aktualna, z następującego powodu:
+\n%s
+\n
+\nPamiętaj, że ta czynność spowoduje ponowne uruchomienie aplikacji i może to zająć trochę czasu.</string>
+    <string name="invite_friends_rich_title">&#128272;️ Dołącz do mnie na Element dbg</string>
+    <string name="invite_friends_text">Cześć, pogadaj ze mną na Element dbg: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Proszę usunąć hasło, jeżeli chcesz aby Element dbg wygenerował klucz odzyskiwania.</string>
+    <string name="legals_application_title">Polityka Element dbg</string>
+    <string name="link_this_email_with_your_account">%s w Ustawieniach, aby otrzymywać zaproszenia bezpośrednio w Element dbg.</string>
+    <string name="live_location_sharing_notification_title">Lokalizacja na żywo Element dbg</string>
+    <string name="location_not_available_dialog_content">Element dbg nie może uzyskać dostępu do Twojej lokalizacji. Spróbuj ponownie później.</string>
+    <string name="location_not_available_dialog_title">Element dbg nie może uzyskać dostępu do Twojej lokalizacji</string>
+    <string name="login_default_session_public_name">Element dbg Android</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Element dbg wymaga dostępu do kamery i mikrofonu, aby przeprowadzać rozmowy wideo.
+\n
+\nPrzyznaj dostęp w następnym oknie.</string>
+    <string name="permissions_rationale_msg_notification">Element dbg potrzebuje uprawnień by wyświetlić powiadomienia. Będą one pokazywać twoje wiadomości, zaproszenia, itd.
+\n
+\nProszę zezwól na dostęp na następnym pop-upie aby móc zobaczyć powiadomienia.</string>
+    <string name="permissions_rationale_msg_record_audio">Element dbg wymaga uprawnienia, aby przeprowadzić połączenie audio.</string>
+    <string name="preference_help_summary">Uzyskaj pomoc w korzystaniu z Element dbg</string>
+    <string name="re_authentication_default_confirm_text">Element dbg wymaga podania Twoich danych do wykonania tej czynności.</string>
+    <string name="rendering_event_error_exception">Element dbg napotkał problem przy wyświetlaniu zawartości wydarzenia z ID \'%1$s\'</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Element dbg nie obsługuje wydarzeń typu \'%1$s\'</string>
+    <string name="screen_sharing_notification_title">Udostępnianie ekranu Element dbg</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg będzie synchronizował się w tle w sposób który oszczędza limitowane zasoby urządzenia (baterię).
+\nW zależności od stanu zasobów urządzenia, synchronizacja może być opóźniania przez system operacyjny.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg będzie synchornizował się okresowo o ściśle określonym czasie (konfigurowalne).
+\nWpłynie to na użycie baterii i sieci, na panelu powiadomień pozostanie wyświetlone stałe powiadomiene o nasłuchiwaniu zdarzeń.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Użyj domyślnego dzwonka Element dbg dla przychodzących połączeń</string>
+    <string name="settings_developer_mode_fail_fast_summary">Element dbg może zawieszać się częściej gdy napotka na niespodziewany błąd</string>
+    <string name="settings_opt_in_of_analytics_summary">Element dbg zbiera anonimowe informacje które pozwolą ulepszyć aplikację.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">Kod PIN jest wymagany za każdym razem kiedy otwierasz Element dbg.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">Kod PIN jest wymagany po dwóch minutach nieużywania Element dbg.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">Kod PIN jest jedynym sposobem na odblokowanie Element dbg.</string>
+    <string name="settings_troubleshoot_test_battery_success">Na Element dbg nie ma wpływu Optymalizacja Baterii.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Restrykcje dotyczące działania aplikacji w tle są włączone dla Element dbg.
+\nPraca którą aplikacja próbuje wykonać będzie agresywnie ograniczona podczas działania w tle i może wpłynąć na wyświetlanie powiadomień.
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_bg_restricted_success">Restrykcje dotyczące działania aplikacji w tle są wyłączone dla Element dbg. Test powinen zostać uruchomiony używając danych komórkowych (bez WIFI).
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_device_settings_failed">Powiadomienia nie są włączone dla tej sesji.
+\nProszę sprawdź ustawienia Element dbg.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
+\nElement dbg nie ma wpływu na wystąpienie tego problemu. Na tym urządzeniu nie ma konta Google. Otwórz menadżer kont i dodaj konto Google.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
+\nBłąd jest poza kontrolą Element dbg. Może on występować z wielu powodów. Przypuszczalnie aplikacja powróci do normalnego stanu po spróbowaniu ponownie, chociaż można sprawdzić także w ustawieniach systemu uprawnienia Usług Google Play dotyczące dostępu do sieci, sprawdzić prawidłowość zegaru urządzenia lub też, może być to błąd niestandardowego oprogramowania systemowego.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
+\nBłąd jest poza kontrolą Element dbg i nawiązując do Google sygnalizuje on, iż urządzenie posiada zbyt wiele aplikacji zarejestrowanych z FCM. Błąd występuje jedynie w przypadku posiadania skrajnie wielu aplikacji, w związku z czym nie powinno dotknąć to normalnego użytkownika.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Element dbg używa Usług Google Play do dostarczania wiadomości push. Konfiguracja usług nie wydaje się być prawidłowa:
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_service_boot_failed">Usługa nie zostanie uruchomiona przy starcie urządzenia, nie otrzymasz żadnych powiadomień, dopóki Element dbg nie zostanie uruchomiony.</string>
+    <string name="settings_troubleshoot_test_system_settings_permission_failed">Element dbg potrzebuje uprawnień aby wyświetlać powiadomienia.
+\nProszę udziel uprawnień.</string>
+    <string name="soft_logout_sso_not_same_user_error">Aktualna sesja jest dla użytkownika %1$s, podajesz natomiast dane dla użytkownika %2$s. Nie jest to wspierane przez Element dbg.
+\nNa początku usuń dane, następnie zaloguj ponownie na innym koncie.</string>
+    <string name="use_latest_app">Skorzystaj z najnowszych aplikacji Element dbg na innych urządzeniach:</string>
+    <string name="use_other_session_content_description">Użyj najnowszej wersji Element dbg na innych urządzeniach, Element dbg Web, Element dbg Desktop, Element dbg iOS, Element dbg dla Androida, oraz innych wspieranych klientów protokołu Matrix</string>
+</resources>

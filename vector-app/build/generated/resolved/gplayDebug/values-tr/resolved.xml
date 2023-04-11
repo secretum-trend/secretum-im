@@ -1,0 +1,41 @@
+<resources>
+    <string name="analytics_opt_in_content">Anonim kullanım verilerini paylaşarak sorunları belirlememize ve Element dbg\'i iyileştirmemize yardımcı olun. İnsanların birden fazla cihazı nasıl kullandığını anlamak için, cihazlarınız tarafından paylaşılan rastgele bir tanımlayıcı oluşturacağız.
+\n
+\n Tüm şartlarımızı %s okuyabilirsiniz.</string>
+    <string name="analytics_opt_in_title">Öğeyi iyileştirmeye yardımcı olun</string>
+    <string name="call_failed_no_connection">Element dbg Araması Başarısız Oldu</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Element dbg\'i mesajları çözebilen farklı bir cihazda açarsanız ordan anahtarları bu oturuma gönderebilirsiniz.</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Eğer Element dbg\'in kurtarma anahtarı oluşturmasını istiyorsanız lütfen parolayı silin.</string>
+    <string name="legals_application_title">Element dbg politikası</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Element dbg\'in görüntülü arama yapması için kameranıza ve mikrofonunuza erişmeye ihtiyacı var.
+\n
+\nLütfen çıkacak ekranda kamera ve mikrofon erişimine izin verin.</string>
+    <string name="permissions_rationale_msg_record_audio">Element dbg\'in sesli arama yapması için mikrofonunuza erişmeye ihtiyacı var.</string>
+    <string name="preference_help_summary">Element dbg\'i kullanma konusunda yardım alın</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg, cihazın sınırlı kaynaklarını (pil) koruyacak şekilde arka planda senkronize olur.
+\nCihazınızın kaynak durumuna bağlı olarak, senkronizasyon işletim sistemi tarafından ertelenebilir.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg periyodik olarak belirli bir zamanda (ayarlanabilir) arka planda senkronize olur.
+\nBu pil ve radyo kullanımını etkileyecek ve Element dbg\'in olayları dinlediğini belirten kalıcı bir bildirim gösterecektir.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Gelen aramalar için varsayılan Element dbg zil sesini kullan</string>
+    <string name="settings_developer_mode_fail_fast_summary">Element dbg, beklenmeyen bir hata oluştuğunda daha sık çökebilir</string>
+    <string name="settings_opt_in_of_analytics_summary">Element dbg uygulamayı geliştirmemiz için anonim analitik veriler toplar.</string>
+    <string name="settings_troubleshoot_test_battery_success">Element dbg Pil Optimizasyonundan etkilenmedi.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Arka plan kısıtlamaları Element dbg için etkinleştirilmiş.
+\nUygulamanın arka planda iken yapmaya çalıştığı şeyler agresif bir biçimde kısıtlanacak ve bu bildirimleri de etkileyebilir.
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_bg_restricted_success">Arka plan kısıtlamaları Element dbg için devre dışı. Bu test mobil veri kullanacak (WIFI değil).
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_device_settings_failed">Bildirimler bu oturum için etkin değil.
+\nLütfen Element dbg ayarlarını gözden geçirin.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
+\nBu hata Element dbg\'in kontrolü dışında. Telefonda hiç Google hesabı yok. Lütfen hesap yöneticisini açın ve bir tane Google hesabı ekleyin.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
+\nBu hata Element dbg\'in kontrolü dışında ve birçok nedene bağlı olabilir. Belki sonra denediğin zaman çalışır. Ayrıca Google Play Hizmetlerinin veri kullanımı konusunda sistem ayarlarında kısıtlanmamış ya da cihaz saatinin doğru olduğundan emin olun, bu hata özel ROM\'larda meydana gelebiliyor.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
+\nBu hata Element dbg\'in kontrolü dışında Google\'a bağlı ve cihazın çok fazla FCM ile kayıtlı uygulaması olduğunu belirtiyor. Bu hata sadece çok fazla uygulama kullanıldığı zaman olur ve genelde ortalama kullanıcıyı etkilemez.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Element dbg bildirimleri göndermek için Google Play Hizmetleri kullanır, ancak düzgün ayarlanmış görünmüyor:
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_service_boot_failed">Hizmet cihaz yeniden başlatılınca çalıştırılmayacak, Element dbg\'i açana kadar bildirimleri almakyacaksın.</string>
+    <string name="soft_logout_sso_not_same_user_error">Geçerli oturum %1$s kullanıcısı içindir ve %2$s kullanıcısı için kimlik bilgileri sağlarsınız. Bu, Element dbg tarafından desteklenmez.
+\nLütfen önce verileri temizleyin, sonra başka bir hesapta tekrar oturum açın.</string>
+</resources>

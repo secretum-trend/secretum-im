@@ -1,0 +1,75 @@
+<resources>
+    <string name="analytics_opt_in_content">Segíts észrevennünk a hibákat, és jobbá tenni az Element dbg-et a névtelen használati adatok küldése által. Ahhoz, hogy megértsük, hogyan használnak a felhasználók egyszerre több eszközt, egy véletlenszerű azonosítót generálunk, ami az eszközeid között meg lesz osztva.
+\n
+\nElolvashatod a feltételeinket %s.</string>
+    <string name="analytics_opt_in_title">Segíts az Element dbg-et jobbá tenni</string>
+    <string name="app_desktop_web">Element dbg Web
+\nElement dbg Desktop</string>
+    <string name="app_ios_android">Element dbg iOS
+\nElement dbg Android</string>
+    <string name="call_failed_no_connection">Element dbg hívás sikertelen</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Índítsd el a Element dbget egy olyan eszközön, amely vissza tudja fejteni az üzenetet, hogy elküldhesse a kulcsot ennek a munkamenetnek.</string>
+    <string name="ftue_auth_carousel_workplace_body">Element dbg megállja a helyét a munkahelyen is. A világ legbiztonságosabb szervezetei bíznak meg benne.</string>
+    <string name="home_empty_no_rooms_title">Üdv itt: Element dbg!
+\n%s.</string>
+    <string name="identity_server_error_bulk_sha256_not_supported">A biztonságod érdekében Element dbg csak hash-selt e-mail cím és telefonszám küldését támogatja.</string>
+    <string name="identity_server_error_outdated_identity_server">Ez az azonosítási szerver régi. Element dbg csak az API V2-t támogatja.</string>
+    <string name="initial_sync_request_content">Element dbg alkalmazásnak az alábbi okokból törölnie kell a gyorsítótárat:
+\n%s
+\n
+\nFigyelem, ez az alkalmazást újra is indítja, ami eltarthat egy darabig.</string>
+    <string name="invite_friends_rich_title">&#128272;️ Csatlakozz hozzám Element dbg-en</string>
+    <string name="invite_friends_text">Hey, beszélgessünk Element dbg-en: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Ha azt szeretnéd, hogy a Element dbg Visszaállítási Kulcsot generáljon akkor kérlek töröld a jelmondatot.</string>
+    <string name="legals_application_title">Element dbg szabályzat</string>
+    <string name="link_this_email_with_your_account">%s a Beállításokba a közvetlen meghívások fogadásához az Element dbg.</string>
+    <string name="live_location_sharing_notification_title">Element dbg Folyamatos helymeghatározás</string>
+    <string name="location_not_available_dialog_content">Az Element dbg nem fér hozzá a tartózkodási helyedhez. Próbáld újra később.</string>
+    <string name="location_not_available_dialog_title">Az Element dbg nem tudott hozzáférni a tartózkodási helyedhez</string>
+    <string name="login_default_session_public_name">Element dbg Android</string>
+    <string name="onboarding_new_app_layout_welcome_message">Element dbg egyszerűsítéséhez a lapok mostantól választhatók. Beállítani a jobb felső menüből lehet.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">A Element dbgnek engedélyre van szüksége a mikrofonod és kamerád eléréséhez, hogy videohívást tudj indítani.
+\n
+\nEngedélyezd a hozzáférést a következő felugró ablakon, hogy hívást tudj indítani.</string>
+    <string name="permissions_rationale_msg_notification">Element dbg alkalmazásnak szüksége van engedélyre az értesítések megjelenítéséhez. Az értesítés megjelenítheti az üzenetet, meghívót, stb.
+\n
+\nA következő felugró ablakban adj rá engedélyt, hogy az értesítések megjelenhessenek.</string>
+    <string name="permissions_rationale_msg_record_audio">A Element dbgnek engedélyre van szüksége a mikrofon eléréséhez, hogy hanghívás tudjon indítani.</string>
+    <string name="preference_help_summary">Segítség az Element dbg használatában</string>
+    <string name="re_authentication_default_confirm_text">A művelet elvégzéséhez Element dbg kéri, hogy adja meg az azonosításhoz az adatokat.</string>
+    <string name="rendering_event_error_exception">Element dbg problémába ütközött az esemény (azon: %1$s) megjelenítésekor</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Element dbg nem kezeli ezt az eseményt: \'%1$s\'</string>
+    <string name="screen_sharing_notification_title">Element dbg képernyő megosztás</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg a háttérben úgy szinkronizál, hogy a leginkább kímélje az eszköz korlátozott erőforrásait (akkumulátor).
+\nAz eszköz erőforrásainak állapotától függően a szinkronizációt az operációs rendszer elhalaszthatja.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg a háttérben rendszeresen, pontosan a megadott időközönként, szinkronizálni fog (beállítható).
+\nEz befolyásolja a rádió és az akkumulátor használatot, és folyamatosan egy értesítés fog megjelenni arról, hogy a Element dbg figyel a neki küldött eseményekre.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Az alapértelmezett Element dbg csengőhang használata bejövő hívásokhoz</string>
+    <string name="settings_developer_mode_fail_fast_summary">Element dbg a nem várt hibák esetén többször fog összeomlani</string>
+    <string name="settings_opt_in_of_analytics_summary">Element dbg anonim analitikai adatokat gyűjt, hogy javítani tudjuk az alkalmazást.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">Element dbg megnyitásához mindig PIN kód szükséges.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">Ha 2 percnél hosszabb ideig nem használod az Element dbg Element alkalmazást, PIN kódot fog kérni.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">Az Element dbg feloldása csak PIN kóddal lehetséges.</string>
+    <string name="settings_troubleshoot_test_battery_success">Element dbgot nem érinti az akkumulátor optimalizáció.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Háttér korlátozások vannak érvényben a Element dbg-hoz.
+Bármi amit a Element dbg el akar végezni amíg a háttérben fut, agresszívan korlátozva van. Ez érintheti az értesítéseket is.
+%1$s</string>
+    <string name="settings_troubleshoot_test_bg_restricted_success">A háttér korlátozások nincsenek érvényben a Element dbg-hoz. Ezt a tesztet mobil hálózaton kell elvégezni (WiFi nélkül).
+%1$s</string>
+    <string name="settings_troubleshoot_test_device_settings_failed">Az értesítések tiltva vannak ezen a munkameneten. Kérlek ellenőrizd a Element dbg beállításokat.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
+Ez a hiba a Element dbgon kívül van. Nincs Google fiók az eszközön. Kérlek nyisd meg a fiókkezelőt és adj hozzá egy Google fiókot.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
+Ez a hiba a Element dbgon kívül van. Több okból is előjöhet. Lehet, ha később próbálod már működni fog, de megnézheted, hogy a Google Play szolgáltatásnak nincs beállítva adathasználati korlátozás a rendszer beállításokban vagy, hogy az eszközöd órája helyesen jár-e de ezt előfordulhat egyedi ROM esetén is.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
+Ez a hiba a Element dbgon kívül van és a Google szerint ez a hiba azt jelzi, hogy túl sok alkalmazás használja az FCM-et. Ez a hiba akkor szokott előfordulni, ha nagyon sok alkalmazás van ezért egy átlagos felhasználót nem nagyon érinthet.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Element dbg a Google Play Services-t használja  a „push” értesítések fogadásához, de úgy tűnik az nincs megfelelően beállítva:
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_service_boot_failed">A szolgáltatás az eszköz újraindulásakor nem fog elindulni, addig nem kapsz értesítést amíg egyszer el nem indítod a Element dbg-ot.</string>
+    <string name="settings_troubleshoot_test_system_settings_permission_failed">Element dbg alkalmazásnak értesítések megjelenítéséhez engedélyre van szüksége.
+\nKérjük, adj rá engedélyt.</string>
+    <string name="soft_logout_sso_not_same_user_error">A jelenlegi munkamenet %1$s felhasználóhoz tartozik és %2$s azonosítási adatait adtad meg. Ez Element dbg-ben nem támogatott.
+\nElőször töröld az adatokat, utána lépj be a másik fiókba!</string>
+    <string name="use_latest_app">Az Element dbg legújabb kliensét használd a többi eszközödön:</string>
+    <string name="use_other_session_content_description">Használd a legújabb Element dbget a többi eszközödön, azaz az Element dbg Webet, az Element dbg Desktopot, az Element dbg for Androidot vagy más eszközök közötti hitelesítést támogató  Matrix-klienst</string>
+</resources>

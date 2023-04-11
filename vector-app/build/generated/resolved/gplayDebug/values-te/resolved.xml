@@ -1,0 +1,6 @@
+<resources>
+    <string name="permissions_rationale_msg_camera_and_audio">మీ కెమెరాను మరియు మీ శబ్ద ప్రసారిణి సాంగత్యం చేయడానికి రియోట్కు అనుమతి అవసరం.
+\n
+\nదయచేసి   పిలుపు చేయడానికి వీలుగా తదుపరి పాప్-అప్ల్లో ప్రాప్యతను అనుమతించండి.</string>
+    <string name="permissions_rationale_msg_record_audio">ఆడియో కాల్లను చేయడానికి మీ మైక్రోఫోన్ను ప్రాప్యత చేయడానికి Element dbgకు అనుమతి అవసరం.</string>
+</resources>

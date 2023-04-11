@@ -1,0 +1,52 @@
+<resources>
+    <string name="app_desktop_web">Element dbg Web (por TTT)
+\nElement dbg Desktop (por labortablo)</string>
+    <string name="app_ios_android">Element dbg iOS
+\nElement dbg Android</string>
+    <string name="call_failed_no_connection">Malsukcesis voko de Element dbg</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Bonvolu ruli Element dbg sur alia aparato kiu scipovas malĉifri la mesaĝon, por ke ĝi povu sendi la ŝlosilojn al ĉi tiu salutaĵo.</string>
+    <string name="identity_server_error_bulk_sha256_not_supported">Pro via privateco, Element dbg nur subtenas sendadon de haketitaj retpoŝtadresoj kaj telefonnumeroj.</string>
+    <string name="identity_server_error_outdated_identity_server">Ĉi tiu identiga servilo estas eksdata. Element dbg suportas nur version 2 de la API.</string>
+    <string name="invite_friends_rich_title">&#128272;️ Aliĝu al mi per Element dbg</string>
+    <string name="invite_friends_text">Saluton, parolu kun mi per Element dbg: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Bonvolu forigi la pasfrazon se vi volas, ke Element dbg estigu novan rehavan ŝlosilon.</string>
+    <string name="login_default_session_public_name">Element dbg por Android</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Element dbg bezonas premeson aliri viajn filmilon kaj mikrofonon por fari vidvokojn.
+\n 
+\nBonvolu permesi aliron per la sekva ŝprucpeto, por ebligi la vokon.</string>
+    <string name="permissions_rationale_msg_record_audio">Element dbg bezonas permeson aliri vian mikrofonon por fari voĉvokojn.</string>
+    <string name="re_authentication_default_confirm_text">Element dbg postulas enigon de viaj salutiloj por tiu ĉi ago.</string>
+    <string name="rendering_event_error_exception">Element dbg renkontis problemon bildigante enhavon de okazo kun la identigilo «%1$s»</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Element dbg ne traktas okazojn de speco «%1$s»</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg spegulos fone, per maniero konservanta la limigitajn rimedojn de la aparato (ĉefe la baterion).
+\nDepende de la stato de la rimedoj de via aparato, la spegulado povus esti prokrastita de la operaciumo.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg spegulos fone, ripete, je preciza tempo (agordebla).
+\nĈi tio influos uzadon de baterio kaj radiilo, kaj aperigos ĉiaman sciigon pri tio, ke Element dbg aŭskultas okazojn.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Uzi implicitan sonoron de Element dbg por envenaj vokoj</string>
+    <string name="settings_developer_mode_fail_fast_summary">Element dbg povas fiaski pli ofte kiam okazas neatendita eraro</string>
+    <string name="settings_opt_in_of_analytics_summary">Element dbg kolektas sennomajn analizojn por helpi al ni plibonigi la aplikaĵon.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">Persona identiga numero estas postulata je ĉiu malfermo de Element dbg.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">Persona identiga numero estas postulata post 2 minutoj de neuzado de Element dbg.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">La persona identiga numero estas la sola maniero malŝlosi Element dbg.</string>
+    <string name="settings_troubleshoot_test_battery_success">Optimumigo de baterio ne influas sur Element dbg.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Fonaj limigoj estas ŝaltitaj por Element dbg.
+\nAgado de la aplikaĵo estos akre limigita dum ĝi estas fone, kaj tio povus influi sciigojn.
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_bg_restricted_success">Fonaj limigoj estas malŝaltitaj por Element dbg. Ĉi tiu testo devus esti rulata kun telefonaj datumoj (ne kun Vifio).
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_device_settings_failed">Sciigoj ne estas ŝaltitaj por ĉi tiu salutaĵo.
+\nBonvolu kontroli la agordojn de Element dbg.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
+\nTiu ĉi eraro ne dependas de Element dbg. La telefono ne havas konton de Google. Bonvolu malfermi la administrilon de kontoj kaj aldoni konton de Google.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
+\nTiu ĉi eraro ne dependas de Element dbg. Ĝi povas okazi pro kelkaj kialoj. Eble ĝi funkcios se vi reprovos poste. Vi ankaŭ povas kontroli, ĉu la servo de Google Play ne estas datume limigita en la sistemaj agordoj, aŭ ĉu la horloĝo de via aparato ĝuste funkcias, aŭ ĉu ĝi ne okazas sur propra ROM.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
+\nTiu ĉi eraro ne dependas de Element dbg, kaj laŭ Google ĝi indikas, ke la aparato havas tro multajn aplikaĵojn registritajn je FCM. La eraro nur okazas kiam multegaj aplikaĵoj estas samtempe instalitaj, kaj ne devus koncerni ordinaran uzanton.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Element dbg uzas la servojn de Google Play por liveri pasivajn mesaĝojn, sed ili ne ŝajnas ĝuste agorditaj:
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_service_boot_failed">La servo ne ekos kiam la aparato reekos, kaj vi ne ricevos sciigojn ĝis vi mem Element dbg malfermos.</string>
+    <string name="soft_logout_sso_not_same_user_error">Ĉi tiu salutaĵo estas por uzanto %1$s kaj vi donas salutilojn por uzanto %2$s. Element dbg ne subtenas tion.
+\nBonvolu unue vakigi datumojn, kaj poste saluti alian konton.</string>
+    <string name="use_latest_app">Uzu la plej freŝan version de Element dbg per aliaj viaj aparatoj:</string>
+    <string name="use_other_session_content_description">Uzu la plej freŝan Element dbg per aliaj viaj aparatoj: Element dbg Web, Element dbg Desktop, Element dbg iOS, Element dbg por Android, aŭ alian klienton de Matrix kapablan je delegaj subskriboj</string>
+</resources>

@@ -2203,6 +2203,12 @@
     <string name="login_signin_matrix_id_error_invalid_matrix_id">This is not a valid user identifier. Expected format: \'@user:homeserver.org\'</string>
     <string name="autodiscover_well_known_error">Unable to find a valid homeserver. Please check your identifier</string>
     <string name="login_scan_qr_code">Scan QR code</string>
+    <string name="login_phantom_wallet">Login with Phantom wallet</string>
+    <string name="msg_request_succeeded">Wallet request successful</string>
+    <string name="msg_no_wallet_found">Please install a wallet app which supports Mobile Wallet Adapter</string>
+    <string name="msg_association_failed">Error connecting to wallet; check logcat for details</string>
+    <string name="msg_request_failed">Wallet request failed</string>
+
 
     <string name="seen_by">Seen by</string>
 
@@ -3525,4 +3531,11 @@
 
     <string name="settings_access_token">Access Token</string>
     <string name="settings_access_token_summary">Your access token gives full access to your account. Do not share it with anyone.</string>
+
+    <!-- login fragment -->
+    <string name="app_name">Secretum</string>
+    <string name="login_title">Login with Phantom wallet</string>
+    <string name="no_wallet">I don\'t have a wallet, </string>
+    <string name="download_wallet">Download here</string>
+
 </resources>

@@ -234,6 +234,7 @@ android {
             if (project.hasProperty("coverage")) {
                 testCoverageEnabled = coverage == "true"
             }
+            buildConfigField "String", "API_URL", "\"https://api.scrtm.cloud/v1/graphql\""
         }
 
         release {
@@ -248,6 +249,8 @@ android {
                 proguardFiles 'proguard-rules.pro'
             }
             // signingConfig signingConfigs.release
+            buildConfigField "String", "API_URL", "\"https://api.scrtm.cloud/v1/graphql\""
+
         }
 
         nightly {
@@ -406,5 +409,6 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
     debugImplementation libs.androidx.fragmentTestingManifest
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
 }
 

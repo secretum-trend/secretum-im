@@ -1,0 +1,7 @@
+<resources>
+    <string name="initial_sync_request_content">Element dbg aşağıdakı səbəbə görə:
+\n%s 
+\n
+\nGüncəl olmaq üçün təmiz keşi yerinə yetirməlidir.
+\nNəzərə alın ki, bu əməliyyat tətbiqi yenidən işə salacaq və bir az vaxt apara bilər.</string>
+</resources>

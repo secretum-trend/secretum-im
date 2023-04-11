@@ -1,0 +1,76 @@
+<resources>
+    <string name="analytics_opt_in_content">Помогите нам выявить проблемы и улучшить Element dbg, поделившись анонимными данными об использовании. Чтобы понять, как люди используют несколько устройств, мы сгенерируем случайный идентификатор, общий для всех ваших устройств.
+\n
+\nВы можете ознакомиться со всеми нашими условиями %s.</string>
+    <string name="analytics_opt_in_title">Помогите улучшить Element dbg</string>
+    <string name="app_desktop_web">Веб-Element dbg
+\nElement dbg для ПК</string>
+    <string name="app_ios_android">Element dbg для iOS
+\nElement dbg для Android</string>
+    <string name="call_failed_no_connection">Звонок не состоялся</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Запустите Element dbg на другом устройстве, которое может расшифровать сообщение, для отправки ключа на эту сессию.</string>
+    <string name="ftue_auth_carousel_workplace_body">Element dbg также отлично подходит для работы. Ему доверяют самые надёжные организации в мире.</string>
+    <string name="home_empty_no_rooms_title">Добро пожаловать в Element dbg,
+\n%s.</string>
+    <string name="identity_server_error_bulk_sha256_not_supported">Для вашей приватности, Element dbg поддерживает отправку адреса электронной почты и номеров телефонов только в хэшированном виде.</string>
+    <string name="identity_server_error_outdated_identity_server">Этот сервер идентификации устарел. Element dbg поддерживает только API V2.</string>
+    <string name="initial_sync_request_content">Element dbg нуждается в очистке кэша для обновления по следующей причине:
+\n%s
+\n
+\nОбратите внимание, что это действие приведёт к перезапуску приложения и может занять некоторое время.</string>
+    <string name="invite_friends_rich_title">&#128272;️ Присоединяйтесь ко мне в Element dbg</string>
+    <string name="invite_friends_text">Привет, поговори со мной в Element dbg: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Пожалуйста, удалите мнемоническую фразу, если хотите, чтобы Element dbg сгенерировал бумажный ключ.</string>
+    <string name="legals_application_title">Политика Element dbg</string>
+    <string name="link_this_email_with_your_account">%s в настройках, чтобы получать приглашения непосредственно в Element dbg.</string>
+    <string name="live_location_sharing_notification_title">Element dbg Трансляция местоположения</string>
+    <string name="location_not_available_dialog_content">Element dbg не смог получить доступ к вашему местоположению. Пожалуйста, повторите попытку позже.</string>
+    <string name="location_not_available_dialog_title">Element dbg не смог получить доступ к вашему местоположению</string>
+    <string name="login_default_session_public_name">Element dbg для Android</string>
+    <string name="onboarding_new_app_layout_welcome_message">Чтобы упростить Element dbg, вкладки теперь опциональные. Управляйте ими при помощи меню справа сверху.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Element dbg необходимы разрешения на доступ к камере и микрофону для видеовызовов.
+\n
+\nПожалуйста дайте разрешение в следующем окне для звонка.</string>
+    <string name="permissions_rationale_msg_notification">Element dbg нуждается в резрешении для отображения оповещений. Оповещения могут показывать ваши сообщения, приглашения и тому подобное.
+\n
+\nПожалуйста разрешите доступ при следующем всплывающем сообщении, чтобы иметь возможность видеть оповещения.</string>
+    <string name="permissions_rationale_msg_record_audio">Element dbg необходимы разрешения на доступ к микрофону, чтобы выполнять звонки.</string>
+    <string name="preference_help_summary">Получите помощь в использовании Element dbg</string>
+    <string name="re_authentication_default_confirm_text">Element dbg требует от вас ввести свои учетные данные для выполнения этого действия.</string>
+    <string name="rendering_event_error_exception">Element dbg столкнулся с проблемой при отображении содержимого события с идентификатором \'%1$s\'</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Element dbg не обрабатывает события типа \'%1$s\'</string>
+    <string name="screen_sharing_notification_title">Element dbg Демонстрация экрана</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg будет синхронизироваться в фоновом режиме таким образом, чтобы сохранить ограниченные ресурсы устройства (батарея).
+\nВ зависимости от состояния ресурса вашего устройства, синхронизация может быть отложена операционной системой.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg будет синхронизироваться в фоновом режиме периодически в точное время (настраивается).
+\nЭто повлияет на использование радио и батареи, появится постоянное уведомление о том, что Element dbg прислушивается к событиям.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Использовать стандартную мелодию Element dbg для входящих звонков</string>
+    <string name="settings_developer_mode_fail_fast_summary">Element dbg может падать чаще, когда происходит непредвиденная ошибка</string>
+    <string name="settings_opt_in_of_analytics_summary">Element dbg собирает анонимную аналитику для улучшения приложения.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">ПИН-код потребуется каждый раз, когда вы откроете Element dbg.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">ПИН-код потребуется через 2 минуты неиспользования Element dbg.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN-код - единственный способ разблокировать Element dbg.</string>
+    <string name="settings_troubleshoot_test_battery_success">Оптимизация батареи не влияет на Element dbg.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Фоновые ограничения включены для Element dbg.
+\nРабота приложения будет жестко ограничена, пока оно находится в фоновом режиме, и это может повлиять на уведомления. 
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_bg_restricted_success">Фоновые ограничения отключены для Element dbg. Этот тест должен быть запущен с использованием мобильных данных (без WIFI).
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_device_settings_failed">Уведомления не включены для этого сеанса.
+\nПожалуйста, проверьте настройки Element dbg.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
+\nЭта ошибка вне контроля Element dbg. На телефоне нет учетной записи Google. Пожалуйста, добавьте аккаунт Google.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
+\nЭта ошибка вне контроля Element dbg. Причины могут быть разными. Возможно, это будет работать, если вы повторите попытку позже, вы также можете проверить, что службы Google Play не ограничены в использовании данных в настройках системы, или что часы вашего устройства установлены правильно, или это может произойти на модифицированных прошивках.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
+\nЭта ошибка вне контроля Element dbg, и, по словам Google, эта ошибка означает, что на устройстве слишком много приложений, зарегистрированных в FCM. Ошибка возникает только в тех случаях, когда существует огромное количество приложений, поэтому она не должна влиять на обычного пользователя.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Element dbg использует сервисы Google Play для доставки push-сообщений, но не похоже что он настроен правильно:
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_service_boot_failed">При перезагрузке устройства служба не будет запущена , вы не будете получать уведомления, пока Element dbg не будет открыт один раз.</string>
+    <string name="settings_troubleshoot_test_system_settings_permission_failed">Element dbg нуждается в разрешении для отображения оповещений.
+\nПожалуйста, дайте разрешение.</string>
+    <string name="soft_logout_sso_not_same_user_error">Текущая сессия предназначена для пользователя %1$s, а вы предоставляете учётные данные для пользователя %2$s. Это не поддерживается в Element dbg.
+\nПожалуйста, сначала очистите данные, а затем снова войдите под другим аккаунтом.</string>
+    <string name="use_latest_app">Используйте последнюю версию Element dbg на других ваших устройствах:</string>
+    <string name="use_other_session_content_description">Используйте последнюю версию Element dbg на других ваших устройствах, веб-клиент Element dbg, Element dbg для ПК, Element dbg для iOS, Element dbg для Android или другой клиент Matrix, поддерживающий перекрестную подпись</string>
+</resources>

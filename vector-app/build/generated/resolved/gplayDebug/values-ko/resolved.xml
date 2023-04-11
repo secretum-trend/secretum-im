@@ -1,0 +1,32 @@
+<resources>
+    <string name="e2e_re_request_encryption_key_dialog_content">다른 기기에서 Element dbg을 설치해서 메시지를 암호화하고 이 기기로 키를 보내도록 합니다.</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Element dbg으로 복구 키를 생성하려면 암호를 지워주세요.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">영상 통화를 하려면 Element dbg은 카메라와 마이크에 접근하는 권한이 필요합니다.
+\n
+\n전화를 하려면 다음 팝업에서 접근을 허용해주세요.</string>
+    <string name="permissions_rationale_msg_record_audio">음성 통화를 하려면 Element dbg은 마이크에 접근하는 권한이 필요합니다.</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg은 기기의 제한된 자원 (배터리)을 유지하기 위해 백그라운드에서 동기화합니다.
+\n기기 자원 상태에 따라 운영체제에 의해 동기화는 지연될 수 있습니다.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg은 (설정할 수 있는) 특정 시간에 주기적으로 백그라운드에거 동기화됩니다.
+\n이는 라디오와 배터리 사용에 영향을 주며 Element dbg이 이벤트를 수신하고 있는 상태라는 알림이 영구적으로 표시됩니다.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">수신 전화에 Element dbg 기본 벨소리를 사용합니다</string>
+    <string name="settings_opt_in_of_analytics_summary">Element dbg은 애플리케이션을 개선할 수 있도록 익명의 분석을 수집합니다.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">Element dbg을 2분 동안 사용하지 않으면 PIN을 사용하도록 설정합니다.</string>
+    <string name="settings_troubleshoot_test_battery_success">Element dbg은 배터리 최적화의 영향을 받지 않습니다.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Element dbg에 대한 백그라운드 제한 사항이 활성화됩니다.
+\n앱이 백그라운드에서 작업하는 동안 앱이 시도하는 작업은 적극적으로 제한되며, 이는 알림에 영향을 줄 수 있습니다.
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_bg_restricted_success">Element dbg에 대한 백그라운드 제한 사항을 비활성화합니다. 이 테스트는 모바일 데이터를 사용해야 합니다 (WIFI 없음).
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_device_settings_failed">알림이 이 기기에서 허용되지 않습니다.
+\nElement dbg 설정을 확인해주세요.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
+\n이 오류는 Element dbg의 통제 밖에 있습니다. 휴대 전화에 Google 계정이 없습니다. 계정 관리자를 열어 Google 계정을 추가하세요.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
+\n이 오류는 Element dbg의 통제 밖입니다. 여러 이유로 발생할 수 있습니다. 나중에 다시 시도하면 작동할 지도 모릅니다, 시스템 설정에서 Google Play 서비스의 데이터 사용이 제한되었는지, 기기의 시간은 맞는 지 확인해보세요, 혹은 커스텀 롬 환경에서 발생할 수 있습니다.</string>
+    <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
+\n이 오류는 Element dbg의 통제 밖에 있으며 Google과 관련이 있습니다, 이 오류는 기기가 FCM에 등록된 앱이 너무 많다는 것을 나타냅니다. 오류는 수 많은 앱이 있는 경우에만 발생하고, 일반 사용자에게 영향을 미치지 않아야 합니다.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Element dbg은 Google Play 서비스를 사용해 푸시 메시지를 보내지만 올바르게 설정되지 않은 모양입니다:
+\n%1$s</string>
+    <string name="settings_troubleshoot_test_service_boot_failed">기기가 다시 시작될 때 서비스가 시작되지 않습니다, 다시 시작한 후 Element dbg을 한 번이라도 열지 않으면 알림을 받을 수 없습니다.</string>
+</resources>

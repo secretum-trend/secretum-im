@@ -30,10 +30,7 @@ import androidx.fragment.app.FragmentTransaction
 import com.airbnb.mvrx.withState
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import im.vector.app.R
-import im.vector.app.core.extensions.addFragment
-import im.vector.app.core.extensions.addFragmentToBackstack
-import im.vector.app.core.extensions.popBackstack
-import im.vector.app.core.extensions.replaceFragment
+import im.vector.app.core.extensions.*
 import im.vector.app.core.platform.ScreenOrientationLocker
 import im.vector.app.core.platform.VectorBaseActivity
 import im.vector.app.databinding.ActivityLoginBinding
@@ -116,7 +113,8 @@ class FtueAuthVariant(
 
     private fun addFirstFragment() {
         val splashFragment = when (vectorFeatures.isOnboardingSplashCarouselEnabled()) {
-            true -> FtueAuthSplashCarouselFragment::class.java
+//            true -> FtueAuthSplashCarouselFragment::class.java
+            true -> FtueAuthCombinedLoginFragment::class.java
             else -> FtueAuthSplashFragment::class.java
         }
         activity.addFragment(views.loginFragmentContainer, splashFragment)
@@ -155,13 +153,12 @@ class FtueAuthVariant(
                             }
                         })
             is OnboardingViewEvents.OnServerSelectionDone -> onServerSelectionDone(viewEvents)
-            is OnboardingViewEvents.OnSignModeSelected -> onSignModeSelected(viewEvents)
-            is OnboardingViewEvents.OnLoginFlowRetrieved ->
-                activity.addFragmentToBackstack(
-                        views.loginFragmentContainer,
-                        FtueAuthSignUpSignInSelectionFragment::class.java,
-                        option = commonOption
-                )
+//            is OnboardingViewEvents.OnSignModeSelected -> onSignModeSelected(viewEvents)
+//            is OnboardingViewEvents.OnLoginFlowRetrieved -> activity.addFragmentToBackstack(
+//                        views.loginFragmentContainer,
+//                        FtueAuthSignUpSignInSelectionFragment::class.java,
+//                        option = commonOption
+//                )
             is OnboardingViewEvents.OnWebLoginError -> onWebLoginError(viewEvents)
             is OnboardingViewEvents.OnForgetPasswordClicked ->
                 when {
@@ -238,13 +235,14 @@ class FtueAuthVariant(
                 )
                 ensureEditServerBackstack()
             }
-            OnboardingViewEvents.OpenCombinedLogin -> onStartCombinedLogin()
+//            OnboardingViewEvents.OpenCombinedLogin -> onStartCombinedLogin()
             OnboardingViewEvents.DisplayRegistrationFallback -> displayFallbackWebDialog()
             is OnboardingViewEvents.DisplayRegistrationStage -> doStage(viewEvents.stage)
             OnboardingViewEvents.DisplayStartRegistration -> when {
                 vectorFeatures.isOnboardingCombinedRegisterEnabled() -> onStartCombinedRegister()
                 else -> openAuthLoginFragmentWithTag(FRAGMENT_REGISTRATION_STAGE_TAG)
             }
+            else -> {}
         }
     }
 
@@ -274,6 +272,7 @@ class FtueAuthVariant(
     private fun onStartCombinedRegister() {
         addRegistrationStageFragmentToBackstack(FtueAuthCombinedRegisterFragment::class.java, allowStateLoss = true)
     }
+
 
     private fun displayFallbackWebDialog() {
         MaterialAlertDialogBuilder(activity)

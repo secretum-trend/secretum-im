@@ -12,4 +12,5 @@ local.properties
 /matrix-sdk-android
 /matrix-sdk-android-flow
 vector/build/
-
+vector-app/build/
+vector-config/build/

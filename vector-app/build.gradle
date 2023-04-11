@@ -135,10 +135,12 @@ android {
 
         // `develop` branch will have version code from timestamp, to ensure each build from CI has a incremented versionCode.
         // Other branches (main, features, etc.) will have version code based on application version.
-        versionCode project.getVersionCode()
+//        versionCode project.getVersionCode()
+        versionCode 1
 
         // Required for sonar analysis
-        versionName "${versionMajor}.${versionMinor}.${versionPatch}-sonar"
+//        versionName "${versionMajor}.${versionMinor}.${versionPatch}-sonar"
+        versionName "1.0.0"
 
         // Generate a random app task affinity
         manifestPlaceholders = [appTaskAffinitySuffix: "H_${gitRevision()}"]
@@ -192,6 +194,7 @@ android {
         // "pm clear" command after each test invocation. This command ensures
         // that the app's state is completely cleared between tests.
         testInstrumentationRunnerArguments clearPackageData: 'true'
+        setProperty("archivesBaseName", "Secretum-v${versionName}(${versionCode})")
     }
 
     testOptions {
@@ -228,7 +231,7 @@ android {
         debug {
             applicationIdSuffix ".debug"
             signingConfig signingConfigs.debug
-            resValue "string", "app_name", "Element dbg"
+            resValue "string", "app_name", "Secretum dbg"
             resValue "color", "launcher_background", "#0DBD8B"
 
             if (project.hasProperty("coverage")) {
@@ -238,7 +241,7 @@ android {
         }
 
         release {
-            resValue "string", "app_name", "Element"
+            resValue "string", "app_name", "Secretum"
             resValue "color", "launcher_background", "#0DBD8B"
             postprocessing {
                 removeUnusedCode true

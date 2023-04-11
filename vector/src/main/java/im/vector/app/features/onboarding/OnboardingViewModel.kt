@@ -569,7 +569,7 @@ class OnboardingViewModel @AssistedInject constructor(
         }
     }
 
-    private fun deeplinkOrDefaultHomeserverUrl() =
+    fun deeplinkOrDefaultHomeserverUrl() =
         loginConfig?.homeServerUrl?.ensureProtocol() ?: defaultHomeserverUrl
 
     private fun resetUseCase() {
@@ -1149,7 +1149,13 @@ class OnboardingViewModel @AssistedInject constructor(
                 doAuthorize(client, IDENTITY, CLUSTER_NAME)
                 delay(1000)
                 joinWhitelistFree().collect {
-                    getNonce()
+                    when (it.status) {
+                        Resource.Status.SUCCESS -> {
+                            getNonce()
+                        }
+                        Resource.Status.ERROR -> {}
+                        Resource.Status.LOADING -> {}
+                    }
                 }
             }.also {
                 showMessage(R.string.msg_request_succeeded)
@@ -1220,9 +1226,9 @@ class OnboardingViewModel @AssistedInject constructor(
                         Base58EncodeUseCase.invoke(_uiState.value.publicKey!!),
                         signature
                     )
-                if (authenticateResult != null  ){
+                if (authenticateResult != null) {
                     _authenticate.value = Resource.success(authenticateResult)
-                }else {
+                } else {
                     _authenticate.value = Resource.error("error")
                 }
             } catch (e: Throwable) {

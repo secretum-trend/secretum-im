@@ -109,26 +109,26 @@ class OnboardingRobot {
 
     fun login(userId: String, password: String = "password", homeServerUrl: String = "http://10.0.2.2:8080") {
         if (defaultVectorFeatures.isOnboardingCombinedLoginEnabled()) {
-            loginViaCombinedLogin(homeServerUrl, userId, password)
+            loginViaCombinedLogin()
         } else {
             initSession(false, userId, password, homeServerUrl)
         }
     }
 
-    private fun loginViaCombinedLogin(homeServerUrl: String, userId: String, password: String) {
+    private fun loginViaCombinedLogin() {
         waitUntilViewVisible(withId(R.id.loginSplashSubmit))
         assertDisplayed(R.id.loginSplashSubmit, R.string.login_splash_create_account)
         clickOn(R.id.loginSplashAlreadyHaveAccount)
 
-        waitUntilViewVisible(withId(R.id.loginRoot))
-        clickOn(R.id.editServerButton)
-        writeTo(R.id.chooseServerInput, homeServerUrl)
-        closeSoftKeyboard()
-        clickOn(R.id.chooseServerSubmit)
-        waitUntilViewVisible(withId(R.id.loginRoot))
-
-        writeTo(R.id.loginInput, userId)
-        writeTo(R.id.loginPasswordInput, password)
+//        waitUntilViewVisible(withId(R.id.loginRoot))
+//        clickOn(R.id.editServerButton)
+//        writeTo(R.id.chooseServerInput, homeServerUrl)
+//        closeSoftKeyboard()
+//        clickOn(R.id.chooseServerSubmit)
+//        waitUntilViewVisible(withId(R.id.loginRoot))
+//
+//        writeTo(R.id.loginInput, userId)
+//        writeTo(R.id.loginPasswordInput, password)
         clickOn(R.id.loginSubmit)
     }
 

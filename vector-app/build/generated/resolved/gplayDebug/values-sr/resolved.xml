@@ -1,4 +1,4 @@
 <resources>
-    <string name="call_failed_no_connection">Element dbg Позив није успео</string>
-    <string name="settings_call_ringtone_use_app_ringtone">Користити звоно од Element dbg за долазне позиве</string>
+    <string name="call_failed_no_connection">Secretum dbg Позив није успео</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Користити звоно од Secretum dbg за долазне позиве</string>
 </resources>

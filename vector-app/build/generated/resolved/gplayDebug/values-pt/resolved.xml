@@ -1,14 +1,14 @@
 <resources>
-    <string name="e2e_re_request_encryption_key_dialog_content">Por favor abra o Element dbg num dispositivo que consiga decifrar a mensagem, para que esse dispositivo possa enviar as chaves para este dispositivo.</string>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg necessita de permissão para aceder à sua câmara e ao seu microfone para realizar chamadas de vídeo.
+    <string name="e2e_re_request_encryption_key_dialog_content">Por favor abra o Secretum dbg num dispositivo que consiga decifrar a mensagem, para que esse dispositivo possa enviar as chaves para este dispositivo.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Secretum dbg necessita de permissão para aceder à sua câmara e ao seu microfone para realizar chamadas de vídeo.
 
 Por favor, permita o acesso na próxima janela para poder efetuar a chamada.</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg necessita de permissão para aceder ao seu microfone para realizar chamadas de áudio.</string>
-    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg irá sincronizar em fundo periodicamente em tempo preciso (configurável).
-\nIsto terá impacto na utilização do rádio e da bateria, será exibida uma notificação permanente declarando que Element dbg está à escuta dos eventos.</string>
+    <string name="permissions_rationale_msg_record_audio">Secretum dbg necessita de permissão para aceder ao seu microfone para realizar chamadas de áudio.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Secretum dbg irá sincronizar em fundo periodicamente em tempo preciso (configurável).
+\nIsto terá impacto na utilização do rádio e da bateria, será exibida uma notificação permanente declarando que Secretum dbg está à escuta dos eventos.</string>
     <string name="settings_call_ringtone_use_app_ringtone">Usar toque padrão para chamadas recebidas</string>
-    <string name="settings_opt_in_of_analytics_summary">O Element dbg recolhe dados anónimos de análise de estatísticas para ajudar a melhorar a aplicação.</string>
-    <string name="settings_troubleshoot_test_battery_success">Element dbg não é afectado por Optimização de bateria</string>
+    <string name="settings_opt_in_of_analytics_summary">O Secretum dbg recolhe dados anónimos de análise de estatísticas para ajudar a melhorar a aplicação.</string>
+    <string name="settings_troubleshoot_test_battery_success">Secretum dbg não é afectado por Optimização de bateria</string>
     <string name="settings_troubleshoot_test_device_settings_failed">Notificações estão desactivadas para este aparelho
 Por favor, verifique configurações de aplicação</string>
 </resources>

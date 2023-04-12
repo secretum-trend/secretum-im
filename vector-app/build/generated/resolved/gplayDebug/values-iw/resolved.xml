@@ -1,8 +1,8 @@
 <resources>
-    <string name="analytics_opt_in_content">עזרו לנו לזהות ולשפר את Element dbg על ידי שיתוף השימוש בצורה אנונימי. להבנת השימוש של אנשים במכשירים שונים , אנחנו נחולל מזהה אקראי , אשר ישותף על ידי המכשירים שלך .
+    <string name="analytics_opt_in_content">עזרו לנו לזהות ולשפר את Secretum dbg על ידי שיתוף השימוש בצורה אנונימי. להבנת השימוש של אנשים במכשירים שונים , אנחנו נחולל מזהה אקראי , אשר ישותף על ידי המכשירים שלך .
 \n
 \n ניתן לקרוא את כל התנאים %s.</string>
-    <string name="analytics_opt_in_title">עזור לשפר את Element dbg</string>
+    <string name="analytics_opt_in_title">עזור לשפר את Secretum dbg</string>
     <string name="app_desktop_web">רשת האינטרנט
 \nשולחן העבודה של אלמנט</string>
     <string name="app_ios_android">אלמנט iOS
@@ -14,19 +14,19 @@
     <string name="invite_friends_rich_title">&#128272;️ הצטרפו אלי באלמנט</string>
     <string name="invite_friends_text">היי, דבר איתי באלמנט:%s</string>
     <string name="keys_backup_passphrase_not_empty_error_message">אנא מחק את משפט הסיסמה אם ברצונך ש- Element ייצור מפתח שחזור.</string>
-    <string name="legals_application_title">מדיניות Element dbg</string>
-    <string name="link_this_email_with_your_account">%s בהגדרות כדי לקבל הזמנות ישירות ב-Element dbg.</string>
-    <string name="location_not_available_dialog_content">Element dbg לא הצליח לגשת למיקום שלך. אנא נסה שוב מאוחר יותר.</string>
-    <string name="location_not_available_dialog_title">Element dbg לא הצליח לגשת למיקום שלך</string>
+    <string name="legals_application_title">מדיניות Secretum dbg</string>
+    <string name="link_this_email_with_your_account">%s בהגדרות כדי לקבל הזמנות ישירות ב-Secretum dbg.</string>
+    <string name="location_not_available_dialog_content">Secretum dbg לא הצליח לגשת למיקום שלך. אנא נסה שוב מאוחר יותר.</string>
+    <string name="location_not_available_dialog_title">Secretum dbg לא הצליח לגשת למיקום שלך</string>
     <string name="login_default_session_public_name">אלמנט אנדרואיד</string>
     <string name="permissions_rationale_msg_camera_and_audio">אלמנט זקוק להרשאה כדי לגשת למצלמה ולמיקרופון שלך כדי לבצע שיחות וידאו.
 \n
 \nאנא אפשר גישה בחלונות הקופצים הבאים כדי להיות מסוגל לבצע את השיחה.</string>
     <string name="permissions_rationale_msg_record_audio">אלמנט זקוק להרשאה כדי לגשת למיקרופון שלך כדי לבצע שיחות שמע.</string>
-    <string name="preference_help_summary">קבלת עזרה בשימוש Element dbg</string>
-    <string name="re_authentication_default_confirm_text">Element dbg כדי לבצע פעולה זו נדורש להזין את פרטי התחברות שלך.</string>
+    <string name="preference_help_summary">קבלת עזרה בשימוש Secretum dbg</string>
+    <string name="re_authentication_default_confirm_text">Secretum dbg כדי לבצע פעולה זו נדורש להזין את פרטי התחברות שלך.</string>
     <string name="rendering_event_error_exception">אלמנט נתקל בבעיה בעת הצגת תוכן האירוע עם המזהה \'%1$s\'</string>
-    <string name="screen_sharing_notification_title">שיתוף מסך של Element dbg</string>
+    <string name="screen_sharing_notification_title">שיתוף מסך של Secretum dbg</string>
     <string name="settings_background_fdroid_sync_mode_battery_description">אלמנט יסונכרן ברקע באופן שישמור על המשאבים המוגבלים של המכשיר (סוללה).
 \nבהתאם למצב משאבי המכשיר שלך, ייתכן שהסנכרון יידחה על ידי מערכת ההפעלה.</string>
     <string name="settings_background_fdroid_sync_mode_real_time_description">אלמנט יסונכרן ברקע מעת לעת בזמן מדויק (ניתן להגדרה).

@@ -9215,8 +9215,8 @@ public final class DaggerVectorApplication_HiltComponents_SingletonC {
     }
 
     @Override
-    public void injectVectorApplication(VectorApplication vectorApplication) {
-      injectVectorApplication2(vectorApplication);
+    public void injectVectorApplication(VectorApplication arg0) {
+      injectVectorApplication2(arg0);
     }
 
     @Override

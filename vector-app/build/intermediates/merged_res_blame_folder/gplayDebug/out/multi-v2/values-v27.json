@@ -4,7 +4,7 @@
             "outputFile": "im.vector.application.vector-app-mergeGplayDebugResources-111:/values-v27/values-v27.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Linh\\Desktop\\Project\\secretum-im\\library\\ui-styles\\build\\intermediates\\packaged_res\\debug\\values-v27\\values-v27.xml",
+                    "source": "/Users/paco/trend/secretum-im/library/ui-styles/build/intermediates/packaged_res/debug/values-v27/values-v27.xml",
                     "from": {
                         "startLines": "2,3,6,7,10,11",
                         "startColumns": "4,4,4,4,4,4",

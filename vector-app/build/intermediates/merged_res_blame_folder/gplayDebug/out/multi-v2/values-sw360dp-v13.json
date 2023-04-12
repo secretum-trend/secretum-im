@@ -4,7 +4,7 @@
             "outputFile": "im.vector.application.vector-app-mergeGplayDebugResources-111:/values-sw360dp-v13/values-sw360dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Linh\\.gradle\\caches\\transforms-3\\debda4c19ba2b7987800f4ac51c21157\\transformed\\preference-1.2.0\\res\\values-sw360dp-v13\\values-sw360dp-v13.xml",
+                    "source": "/Users/paco/.gradle/caches/transforms-3/debda4c19ba2b7987800f4ac51c21157/transformed/preference-1.2.0/res/values-sw360dp-v13/values-sw360dp-v13.xml",
                     "from": {
                         "startLines": "2",
                         "startColumns": "4",

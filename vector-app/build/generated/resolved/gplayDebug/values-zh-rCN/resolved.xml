@@ -1,76 +1,76 @@
 <resources>
-    <string name="analytics_opt_in_content">通过共享匿名使用数据，帮助我们识别问题并改进 Element dbg。为了理解人们如何使用多台设备，我们将生成一个随机标识符，由你的设备共享。
+    <string name="analytics_opt_in_content">通过共享匿名使用数据，帮助我们识别问题并改进 Secretum dbg。为了理解人们如何使用多台设备，我们将生成一个随机标识符，由你的设备共享。
 \n
 \n你可以阅读我们所有的条款 %s。</string>
-    <string name="analytics_opt_in_title">帮助改进 Element dbg</string>
-    <string name="app_desktop_web">Element dbg Web
-\nElement dbg Desktop</string>
-    <string name="app_ios_android">Element dbg iOS
-\nElement dbg Android</string>
-    <string name="call_failed_no_connection">Element dbg 呼叫失败</string>
-    <string name="e2e_re_request_encryption_key_dialog_content">请在其它可解密此消息的设备上启动 Element dbg，以便其将密钥发送至当前会话。</string>
-    <string name="ftue_auth_carousel_workplace_body">Element dbg也非常适合工作场所。受到世界上最安全的组织信任。</string>
-    <string name="home_empty_no_rooms_title">欢迎来到 Element dbg，
+    <string name="analytics_opt_in_title">帮助改进 Secretum dbg</string>
+    <string name="app_desktop_web">Secretum dbg Web
+\nSecretum dbg Desktop</string>
+    <string name="app_ios_android">Secretum dbg iOS
+\nSecretum dbg Android</string>
+    <string name="call_failed_no_connection">Secretum dbg 呼叫失败</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">请在其它可解密此消息的设备上启动 Secretum dbg，以便其将密钥发送至当前会话。</string>
+    <string name="ftue_auth_carousel_workplace_body">Secretum dbg也非常适合工作场所。受到世界上最安全的组织信任。</string>
+    <string name="home_empty_no_rooms_title">欢迎来到 Secretum dbg，
 \n%s。</string>
-    <string name="identity_server_error_bulk_sha256_not_supported">为了你的隐私，Element dbg仅支持发送经过哈希处理的用户电子邮件的和电话号码。</string>
-    <string name="identity_server_error_outdated_identity_server">身份服务器已过期。Element dbg 仅支持 API V2。</string>
-    <string name="initial_sync_request_content">Element dbg needs to perform a clear cache to be up to date, 原因如下：
+    <string name="identity_server_error_bulk_sha256_not_supported">为了你的隐私，Secretum dbg仅支持发送经过哈希处理的用户电子邮件的和电话号码。</string>
+    <string name="identity_server_error_outdated_identity_server">身份服务器已过期。Secretum dbg 仅支持 API V2。</string>
+    <string name="initial_sync_request_content">Secretum dbg needs to perform a clear cache to be up to date, 原因如下：
 \n%s
 \n
 \n注意，此操作会重启应用并可能需要一些时间。</string>
-    <string name="invite_friends_rich_title">&#128272;️ 在 Element dbg 上加入我的行列</string>
-    <string name="invite_friends_text">嗨，和我在 Element dbg 上聊天吧：%s</string>
-    <string name="keys_backup_passphrase_not_empty_error_message">如果你想要 Element dbg 生成一个恢复密钥，请删除口令词组。</string>
-    <string name="legals_application_title">Element dbg 政策</string>
-    <string name="link_this_email_with_your_account">在 Element dbg 中直接接收邀请的设置 %s。</string>
-    <string name="live_location_sharing_notification_title">Element dbg 实时位置</string>
-    <string name="location_not_available_dialog_content">Element dbg 无法访问你的位置。请稍后再试。</string>
-    <string name="location_not_available_dialog_title">Element dbg 无法访问你的位置</string>
-    <string name="login_default_session_public_name">Element dbg Android</string>
-    <string name="onboarding_new_app_layout_welcome_message">为了简化你的 Element dbg，选项卡现在是可选的。 使用右上角的菜单管理它们。</string>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg 需要权限以访问你的摄像机和麦克风来进行视频通话。
+    <string name="invite_friends_rich_title">&#128272;️ 在 Secretum dbg 上加入我的行列</string>
+    <string name="invite_friends_text">嗨，和我在 Secretum dbg 上聊天吧：%s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">如果你想要 Secretum dbg 生成一个恢复密钥，请删除口令词组。</string>
+    <string name="legals_application_title">Secretum dbg 政策</string>
+    <string name="link_this_email_with_your_account">在 Secretum dbg 中直接接收邀请的设置 %s。</string>
+    <string name="live_location_sharing_notification_title">Secretum dbg 实时位置</string>
+    <string name="location_not_available_dialog_content">Secretum dbg 无法访问你的位置。请稍后再试。</string>
+    <string name="location_not_available_dialog_title">Secretum dbg 无法访问你的位置</string>
+    <string name="login_default_session_public_name">Secretum dbg Android</string>
+    <string name="onboarding_new_app_layout_welcome_message">为了简化你的 Secretum dbg，选项卡现在是可选的。 使用右上角的菜单管理它们。</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Secretum dbg 需要权限以访问你的摄像机和麦克风来进行视频通话。
 \n
 \n请在接下来的弹出窗口中授权允许访问，以便进行通话。</string>
-    <string name="permissions_rationale_msg_notification">Element dbg需要权限来显示通知。通知可以显示消息、邀请等。
+    <string name="permissions_rationale_msg_notification">Secretum dbg需要权限来显示通知。通知可以显示消息、邀请等。
 \n
 \n请在下个弹窗允许访问以便查看通知。</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg 需要权限以访问你的麦克风来进行语音通话。</string>
-    <string name="preference_help_summary">获取使用 Element dbg 的帮助</string>
-    <string name="re_authentication_default_confirm_text">Element dbg 需要你输入凭据才能执行此操作。</string>
-    <string name="rendering_event_error_exception">Element dbg 在呈现 ID 为“%1$s”的事件内容时遇到问题</string>
-    <string name="rendering_event_error_type_of_event_not_handled">Element dbg 无法处理类型为 \'%1$s\' 的事件</string>
-    <string name="screen_sharing_notification_title">Element dbg 屏幕共享</string>
-    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg 将在后台以保留设备有限资源（电池）的方式同步。
+    <string name="permissions_rationale_msg_record_audio">Secretum dbg 需要权限以访问你的麦克风来进行语音通话。</string>
+    <string name="preference_help_summary">获取使用 Secretum dbg 的帮助</string>
+    <string name="re_authentication_default_confirm_text">Secretum dbg 需要你输入凭据才能执行此操作。</string>
+    <string name="rendering_event_error_exception">Secretum dbg 在呈现 ID 为“%1$s”的事件内容时遇到问题</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Secretum dbg 无法处理类型为 \'%1$s\' 的事件</string>
+    <string name="screen_sharing_notification_title">Secretum dbg 屏幕共享</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Secretum dbg 将在后台以保留设备有限资源（电池）的方式同步。
 \n取决于你的设备资源状态，同步可能被操作系统推迟。</string>
-    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg 将在后台定期准时同步（可配置）。
-\n这将影响网络和电池的使用，将显示一个永久通知表明 Element dbg 正在监听事件。</string>
-    <string name="settings_call_ringtone_use_app_ringtone">为来电使用 Element dbg 的默认铃声</string>
-    <string name="settings_developer_mode_fail_fast_summary">发生意外错误时，Element dbg 可能更经常崩溃</string>
-    <string name="settings_opt_in_of_analytics_summary">Element dbg收集匿名数据分析以允许我们改进应用。</string>
-    <string name="settings_security_pin_code_grace_period_summary_off">每次打开 Element dbg 时都需要 PIN 码。</string>
-    <string name="settings_security_pin_code_grace_period_summary_on">未使用 Element dbg 2 分钟后需要 PIN 码。</string>
-    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN 码是解锁 Element dbg 的唯一方式。</string>
-    <string name="settings_troubleshoot_test_battery_success">Element dbg 未被电池优化影响。</string>
-    <string name="settings_troubleshoot_test_bg_restricted_failed">已启用对 Element dbg 的后台限制。
-\nElement dbg 在后台时的工作将被显著地限制，这可能会影响消息通知。
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Secretum dbg 将在后台定期准时同步（可配置）。
+\n这将影响网络和电池的使用，将显示一个永久通知表明 Secretum dbg 正在监听事件。</string>
+    <string name="settings_call_ringtone_use_app_ringtone">为来电使用 Secretum dbg 的默认铃声</string>
+    <string name="settings_developer_mode_fail_fast_summary">发生意外错误时，Secretum dbg 可能更经常崩溃</string>
+    <string name="settings_opt_in_of_analytics_summary">Secretum dbg收集匿名数据分析以允许我们改进应用。</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">每次打开 Secretum dbg 时都需要 PIN 码。</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">未使用 Secretum dbg 2 分钟后需要 PIN 码。</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN 码是解锁 Secretum dbg 的唯一方式。</string>
+    <string name="settings_troubleshoot_test_battery_success">Secretum dbg 未被电池优化影响。</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">已启用对 Secretum dbg 的后台限制。
+\nSecretum dbg 在后台时的工作将被显著地限制，这可能会影响消息通知。
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_bg_restricted_success">已禁用对 Element dbg 的后台限制。此测试应使用移动数据（非Wi-Fi）进行。
+    <string name="settings_troubleshoot_test_bg_restricted_success">已禁用对 Secretum dbg 的后台限制。此测试应使用移动数据（非Wi-Fi）进行。
 \n%1$s</string>
     <string name="settings_troubleshoot_test_device_settings_failed">此会话未启用通知。
-\n请检查 Element dbg 设置。</string>
+\n请检查 Secretum dbg 设置。</string>
     <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
-\n此错误不受 Element dbg 控制。此设备上没有登录 Google 账户。请打开账户管理器并添加一个 Google 账户。</string>
+\n此错误不受 Secretum dbg 控制。此设备上没有登录 Google 账户。请打开账户管理器并添加一个 Google 账户。</string>
     <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
-\n此错误不受 Element dbg 控制。它的发生可能有几个原因。也许你稍后重试就有效了，你也可以检查一下 Google Play 服务是否被系统设置限制了数据使用，或者你的设备时钟是否正确，或者可能发生在自定义的 ROM 中。</string>
+\n此错误不受 Secretum dbg 控制。它的发生可能有几个原因。也许你稍后重试就有效了，你也可以检查一下 Google Play 服务是否被系统设置限制了数据使用，或者你的设备时钟是否正确，或者可能发生在自定义的 ROM 中。</string>
     <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
-\n此错误不受 Element dbg 控制，根据 Google 的说法，此错误表示该设备在 FCM 中注册了太多应用。该错误仅在应用程序数量极多的情况下发生，因此不应影响普通用户。</string>
-    <string name="settings_troubleshoot_test_play_services_failed">Element dbg 使用 Google Play 服务来推送通知，但它似乎并未正确设置：
+\n此错误不受 Secretum dbg 控制，根据 Google 的说法，此错误表示该设备在 FCM 中注册了太多应用。该错误仅在应用程序数量极多的情况下发生，因此不应影响普通用户。</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Secretum dbg 使用 Google Play 服务来推送通知，但它似乎并未正确设置：
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_service_boot_failed">服务不会在设备重启后启动，在你打开 Element dbg 一次之前你将不会收到消息通知。</string>
-    <string name="settings_troubleshoot_test_system_settings_permission_failed">Element dbg 需要显示通知的权限。
+    <string name="settings_troubleshoot_test_service_boot_failed">服务不会在设备重启后启动，在你打开 Secretum dbg 一次之前你将不会收到消息通知。</string>
+    <string name="settings_troubleshoot_test_system_settings_permission_failed">Secretum dbg 需要显示通知的权限。
 \n请授予权限。</string>
-    <string name="soft_logout_sso_not_same_user_error">当前会话用于用户 %1$s 而你提供了用户 %2$s 的凭证。Element dbg 不支持此功能。
+    <string name="soft_logout_sso_not_same_user_error">当前会话用于用户 %1$s 而你提供了用户 %2$s 的凭证。Secretum dbg 不支持此功能。
 \n请先清除数据，然后重新登录另一个账户。</string>
-    <string name="use_latest_app">在你的其它设备上使用最新的 Element dbg：</string>
-    <string name="use_other_session_content_description">在你的其它设备上使用最新的 Element dbg、Element dbg Web、Element dbg Desktop、Element dbg iOS、Element dbg for Android 或其他支持交叉签名的 Matrix 客户端</string>
+    <string name="use_latest_app">在你的其它设备上使用最新的 Secretum dbg：</string>
+    <string name="use_other_session_content_description">在你的其它设备上使用最新的 Secretum dbg、Secretum dbg Web、Secretum dbg Desktop、Secretum dbg iOS、Secretum dbg for Android 或其他支持交叉签名的 Matrix 客户端</string>
 </resources>

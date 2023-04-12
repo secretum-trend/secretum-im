@@ -4,7 +4,7 @@
             "outputFile": "im.vector.application.vector-app-mergeGplayDebugResources-111:/values-xxhdpi-v4/values-xxhdpi-v4.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Linh\\.gradle\\caches\\transforms-3\\46c56ac01dda1927776919cbce8b43a5\\transformed\\jetified-core-1.9.13\\res\\values-xxhdpi-v4\\values-xxhdpi-v4.xml",
+                    "source": "/Users/paco/.gradle/caches/transforms-3/46c56ac01dda1927776919cbce8b43a5/transformed/jetified-core-1.9.13/res/values-xxhdpi-v4/values-xxhdpi-v4.xml",
                     "from": {
                         "startLines": "2,3",
                         "startColumns": "4,4",

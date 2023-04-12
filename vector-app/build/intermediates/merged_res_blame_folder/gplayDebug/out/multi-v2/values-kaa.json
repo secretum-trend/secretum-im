@@ -4,7 +4,7 @@
             "outputFile": "im.vector.application.vector-app-mergeGplayDebugResources-111:/values-kaa/values-kaa.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Linh\\Desktop\\Project\\secretum-im\\library\\ui-strings\\build\\intermediates\\packaged_res\\debug\\values-kaa\\values-kaa.xml",
+                    "source": "/Users/paco/trend/secretum-im/library/ui-strings/build/intermediates/packaged_res/debug/values-kaa/values-kaa.xml",
                     "from": {
                         "startLines": "2,3,4,5,6",
                         "startColumns": "4,4,4,4,4",

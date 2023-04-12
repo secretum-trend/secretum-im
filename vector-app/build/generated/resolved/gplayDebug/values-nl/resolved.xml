@@ -1,76 +1,76 @@
 <resources>
-    <string name="analytics_opt_in_content">Help ons problemen te identificeren en Element dbg te verbeteren door anonieme gebruiksgegevens te delen. Om inzicht te krijgen in hoe mensen meerdere apparaten gebruiken, genereren we een willekeurige identificatie die door jouw apparaten wordt gedeeld.
+    <string name="analytics_opt_in_content">Help ons problemen te identificeren en Secretum dbg te verbeteren door anonieme gebruiksgegevens te delen. Om inzicht te krijgen in hoe mensen meerdere apparaten gebruiken, genereren we een willekeurige identificatie die door jouw apparaten wordt gedeeld.
 \n
 \nJe kan al onze voorwaarden %s lezen.</string>
-    <string name="analytics_opt_in_title">Help Element dbg verbeteren</string>
-    <string name="app_desktop_web">Element dbg Web
-\nElement dbg Desktop</string>
-    <string name="app_ios_android">Element dbg iOS
-\nElement dbg Android</string>
-    <string name="call_failed_no_connection">Element dbg Oproep Mislukt</string>
-    <string name="e2e_re_request_encryption_key_dialog_content">Start Element dbg op een ander apparaat dat het bericht kan ontsleutelen, zodat het de sleutels naar deze sessie kan sturen.</string>
-    <string name="ftue_auth_carousel_workplace_body">Element dbg is ook geweldig voor op de werkplek. Het wordt vertrouwd door \'s werelds veiligste organisaties.</string>
-    <string name="home_empty_no_rooms_title">Welkom bij Element dbg,
+    <string name="analytics_opt_in_title">Help Secretum dbg verbeteren</string>
+    <string name="app_desktop_web">Secretum dbg Web
+\nSecretum dbg Desktop</string>
+    <string name="app_ios_android">Secretum dbg iOS
+\nSecretum dbg Android</string>
+    <string name="call_failed_no_connection">Secretum dbg Oproep Mislukt</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Start Secretum dbg op een ander apparaat dat het bericht kan ontsleutelen, zodat het de sleutels naar deze sessie kan sturen.</string>
+    <string name="ftue_auth_carousel_workplace_body">Secretum dbg is ook geweldig voor op de werkplek. Het wordt vertrouwd door \'s werelds veiligste organisaties.</string>
+    <string name="home_empty_no_rooms_title">Welkom bij Secretum dbg,
 \n%s.</string>
-    <string name="identity_server_error_bulk_sha256_not_supported">Voor je privacy ondersteunt Element dbg alleen het versturen van gehashte e-mailadressen en telefoonnummers van personen.</string>
-    <string name="identity_server_error_outdated_identity_server">Deze identiteitsserver is verouderd. Element dbg ondersteunt alleen API V2.</string>
-    <string name="initial_sync_request_content">Element dbg moet de cache wissen om up-to-date te zijn om volgende reden een:
+    <string name="identity_server_error_bulk_sha256_not_supported">Voor je privacy ondersteunt Secretum dbg alleen het versturen van gehashte e-mailadressen en telefoonnummers van personen.</string>
+    <string name="identity_server_error_outdated_identity_server">Deze identiteitsserver is verouderd. Secretum dbg ondersteunt alleen API V2.</string>
+    <string name="initial_sync_request_content">Secretum dbg moet de cache wissen om up-to-date te zijn om volgende reden een:
 \n%s
 \n
 \nHoud er rekening mee dat deze actie de app opnieuw zal starten en dat dit enige tijd kan duren.</string>
-    <string name="invite_friends_rich_title">&#128272;️ Doe mee met Element dbg</string>
-    <string name="invite_friends_text">Hé, praat met me op Element dbg: %s</string>
-    <string name="keys_backup_passphrase_not_empty_error_message">Verwijder het wachtwoord als je wil dat Element dbg een herstelsleutel genereert.</string>
-    <string name="legals_application_title">Element dbg-beleid</string>
-    <string name="link_this_email_with_your_account">%s in Instellingen om uitnodigingen rechtstreeks in Element dbg te ontvangen.</string>
-    <string name="live_location_sharing_notification_title">Element dbg Live locatie</string>
-    <string name="location_not_available_dialog_content">Element dbg kan geen toegang krijgen tot jouw locatie. Probeer het later opnieuw.</string>
-    <string name="location_not_available_dialog_title">Element dbg heeft geen toegang tot jouw locatie</string>
-    <string name="login_default_session_public_name">Element dbg Android</string>
-    <string name="onboarding_new_app_layout_welcome_message">Om Element dbg te versimpelen zijn tabbladen nu optioneel. Je kan ze beheren in het menu rechtsboven.</string>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg heeft toegang nodig tot je camera en microfoon om video-oproepen te maken.
+    <string name="invite_friends_rich_title">&#128272;️ Doe mee met Secretum dbg</string>
+    <string name="invite_friends_text">Hé, praat met me op Secretum dbg: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Verwijder het wachtwoord als je wil dat Secretum dbg een herstelsleutel genereert.</string>
+    <string name="legals_application_title">Secretum dbg-beleid</string>
+    <string name="link_this_email_with_your_account">%s in Instellingen om uitnodigingen rechtstreeks in Secretum dbg te ontvangen.</string>
+    <string name="live_location_sharing_notification_title">Secretum dbg Live locatie</string>
+    <string name="location_not_available_dialog_content">Secretum dbg kan geen toegang krijgen tot jouw locatie. Probeer het later opnieuw.</string>
+    <string name="location_not_available_dialog_title">Secretum dbg heeft geen toegang tot jouw locatie</string>
+    <string name="login_default_session_public_name">Secretum dbg Android</string>
+    <string name="onboarding_new_app_layout_welcome_message">Om Secretum dbg te versimpelen zijn tabbladen nu optioneel. Je kan ze beheren in het menu rechtsboven.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Secretum dbg heeft toegang nodig tot je camera en microfoon om video-oproepen te maken.
 \n
 \nVerleen toegang op de volgende pop-ups om de oproep te maken.</string>
-    <string name="permissions_rationale_msg_notification">Element dbg heeft toestemming nodig om notificaties te laten zien. Notificaties kunnen je berichten, uitnodigen, etc. tonen. 
+    <string name="permissions_rationale_msg_notification">Secretum dbg heeft toestemming nodig om notificaties te laten zien. Notificaties kunnen je berichten, uitnodigen, etc. tonen. 
 \n
 \nGeeft toestemming bij de volgende pop-ups om notificaties te kunnen zien.</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg heeft toegang nodig tot je microfoon om spraakoproepen te maken.</string>
-    <string name="preference_help_summary">Hulp bij het gebruik van Element dbg</string>
-    <string name="re_authentication_default_confirm_text">Element dbg vereist dat je jouw inloggegevens invoert om deze actie uit te voeren.</string>
-    <string name="rendering_event_error_exception">Element dbg heeft een probleem ondervonden bij het weergeven van de inhoud van het gebeurtenis met id \'%1$s\'</string>
-    <string name="rendering_event_error_type_of_event_not_handled">Element dbg verwerkt geen gebeurtenissen van het type \'%1$s\'</string>
-    <string name="screen_sharing_notification_title">Element dbg Scherm delen</string>
-    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg zal op een batterijzuinige manier synchroniseren op de achtergrond.
+    <string name="permissions_rationale_msg_record_audio">Secretum dbg heeft toegang nodig tot je microfoon om spraakoproepen te maken.</string>
+    <string name="preference_help_summary">Hulp bij het gebruik van Secretum dbg</string>
+    <string name="re_authentication_default_confirm_text">Secretum dbg vereist dat je jouw inloggegevens invoert om deze actie uit te voeren.</string>
+    <string name="rendering_event_error_exception">Secretum dbg heeft een probleem ondervonden bij het weergeven van de inhoud van het gebeurtenis met id \'%1$s\'</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Secretum dbg verwerkt geen gebeurtenissen van het type \'%1$s\'</string>
+    <string name="screen_sharing_notification_title">Secretum dbg Scherm delen</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Secretum dbg zal op een batterijzuinige manier synchroniseren op de achtergrond.
 \nAfhankelijk van de staat van je apparaat kan het besturingssysteem de synchronisatie uitstellen.</string>
-    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg zal periodiek op de achtergrond synchroniseren (configureerbaar).
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Secretum dbg zal periodiek op de achtergrond synchroniseren (configureerbaar).
 \nDit heeft een negatieve impact op je batterij- en datagebruik. Er zal een melding getoond worden ter informatie.</string>
-    <string name="settings_call_ringtone_use_app_ringtone">Standaardbeltoon van Element dbg gebruiken voor inkomende oproepen</string>
-    <string name="settings_developer_mode_fail_fast_summary">Element dbg kan vaker crashen als er een onverwachte fout optreedt</string>
-    <string name="settings_opt_in_of_analytics_summary">Element dbg verzamelt anonieme statistische gegevens (analytics) om het voor ons mogelijk te maken om de app te verbeteren.</string>
-    <string name="settings_security_pin_code_grace_period_summary_off">Elke keer dat je Element dbg opent, is een pincode vereist.</string>
-    <string name="settings_security_pin_code_grace_period_summary_on">Pincode is vereist na 2 minuten Element dbg niet te hebben gebruikt.</string>
-    <string name="settings_security_pin_code_use_biometrics_summary_off">Pincode is de enige manier om Element dbg te ontgrendelen.</string>
-    <string name="settings_troubleshoot_test_battery_success">Element dbg wordt niet beperkt door accuoptimalisatie.</string>
-    <string name="settings_troubleshoot_test_bg_restricted_failed">Achtergrondbeperkingen zijn ingeschakeld voor Element dbg.
+    <string name="settings_call_ringtone_use_app_ringtone">Standaardbeltoon van Secretum dbg gebruiken voor inkomende oproepen</string>
+    <string name="settings_developer_mode_fail_fast_summary">Secretum dbg kan vaker crashen als er een onverwachte fout optreedt</string>
+    <string name="settings_opt_in_of_analytics_summary">Secretum dbg verzamelt anonieme statistische gegevens (analytics) om het voor ons mogelijk te maken om de app te verbeteren.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">Elke keer dat je Secretum dbg opent, is een pincode vereist.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">Pincode is vereist na 2 minuten Secretum dbg niet te hebben gebruikt.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">Pincode is de enige manier om Secretum dbg te ontgrendelen.</string>
+    <string name="settings_troubleshoot_test_battery_success">Secretum dbg wordt niet beperkt door accuoptimalisatie.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Achtergrondbeperkingen zijn ingeschakeld voor Secretum dbg.
 \nAlles wat de app probeert te doen zal in de achtergrond hevig beperkt worden; dit kan het correct functioneren van meldingen beïnvloeden.
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_bg_restricted_success">Achtergrondbeperkingen zijn uitgeschakeld voor Element dbg. Deze test dient uitgevoerd te worden met een mobiele verbinding (geen wifi).
+    <string name="settings_troubleshoot_test_bg_restricted_success">Achtergrondbeperkingen zijn uitgeschakeld voor Secretum dbg. Deze test dient uitgevoerd te worden met een mobiele verbinding (geen wifi).
 \n%1$s</string>
     <string name="settings_troubleshoot_test_device_settings_failed">Meldingen zijn niet ingeschakeld voor deze sessie.
-\nGelieve de Element dbg-instellingen te controleren.</string>
+\nGelieve de Secretum dbg-instellingen te controleren.</string>
     <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
-\nDeze fout is onafhankelijk van Element dbg. Er is geen Google-account verbonden met de telefoon. Open het accountbeheer en voeg er een Google-account toe.</string>
+\nDeze fout is onafhankelijk van Secretum dbg. Er is geen Google-account verbonden met de telefoon. Open het accountbeheer en voeg er een Google-account toe.</string>
     <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
-\nDeze fout is onafhankelijk van Element dbg. Ze kan verschillende oorzaken hebben. Misschien werkt het als je het later opnieuw probeert. Je kan ook controleren of het gegevensverbruik van Google Play Services niet wordt beperkt in de systeeminstellingen, of dat de klok van je apparaat wel juist staat, of dat het misschien aan een aangepaste ROM ligt.</string>
+\nDeze fout is onafhankelijk van Secretum dbg. Ze kan verschillende oorzaken hebben. Misschien werkt het als je het later opnieuw probeert. Je kan ook controleren of het gegevensverbruik van Google Play Services niet wordt beperkt in de systeeminstellingen, of dat de klok van je apparaat wel juist staat, of dat het misschien aan een aangepaste ROM ligt.</string>
     <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
-\nDeze fout is onafhankelijk van Element dbg. Volgens Google betekent deze fout dat het apparaat te veel apps heeft geregistreerd met FCM. De fout treedt enkel op ingeval er een enorm aantal apps is, dus zou dit de gemiddelde persoon niet mogen hinderen.</string>
-    <string name="settings_troubleshoot_test_play_services_failed">Element dbg maakt gebruikt van Google Play Services om pushberichten af te leveren, maar dit lijkt niet juist geconfigureerd te zijn:
+\nDeze fout is onafhankelijk van Secretum dbg. Volgens Google betekent deze fout dat het apparaat te veel apps heeft geregistreerd met FCM. De fout treedt enkel op ingeval er een enorm aantal apps is, dus zou dit de gemiddelde persoon niet mogen hinderen.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Secretum dbg maakt gebruikt van Google Play Services om pushberichten af te leveren, maar dit lijkt niet juist geconfigureerd te zijn:
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_service_boot_failed">De dienst zal niet starten wanneer het apparaat wordt herstart en je zal geen meldingen ontvangen tot je Element dbg hebt geopend.</string>
-    <string name="settings_troubleshoot_test_system_settings_permission_failed">Element dbg heeft toestemming nodig om notificaties te laten zien.
+    <string name="settings_troubleshoot_test_service_boot_failed">De dienst zal niet starten wanneer het apparaat wordt herstart en je zal geen meldingen ontvangen tot je Secretum dbg hebt geopend.</string>
+    <string name="settings_troubleshoot_test_system_settings_permission_failed">Secretum dbg heeft toestemming nodig om notificaties te laten zien.
 \nGeef alsjeblieft toestemming.</string>
-    <string name="soft_logout_sso_not_same_user_error">De huidige sessie is voor gebruiker %1$s en je geeft inloggegevens op voor persoon %2$s. Dit wordt niet ondersteund door Element dbg.
+    <string name="soft_logout_sso_not_same_user_error">De huidige sessie is voor gebruiker %1$s en je geeft inloggegevens op voor persoon %2$s. Dit wordt niet ondersteund door Secretum dbg.
 \nWis eerst de gegevens en meld je vervolgens opnieuw aan met een ander account.</string>
-    <string name="use_latest_app">Gebruik de nieuwste Element dbg op je andere apparaten:</string>
-    <string name="use_other_session_content_description">Gebruik de nieuwste Element dbg op je andere apparaten, Element dbg Web, Element dbg Desktop, Element dbg iOS, Element dbg voor Android of een andere Matrix-client die geschikt is voor kruislings ondertekenen</string>
+    <string name="use_latest_app">Gebruik de nieuwste Secretum dbg op je andere apparaten:</string>
+    <string name="use_other_session_content_description">Gebruik de nieuwste Secretum dbg op je andere apparaten, Secretum dbg Web, Secretum dbg Desktop, Secretum dbg iOS, Secretum dbg voor Android of een andere Matrix-client die geschikt is voor kruislings ondertekenen</string>
 </resources>

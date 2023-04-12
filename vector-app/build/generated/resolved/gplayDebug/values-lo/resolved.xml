@@ -1,68 +1,68 @@
 <resources>
-    <string name="analytics_opt_in_content">ຊ່ວຍພວກເຮົາລະບຸບັນຫາ ແລະປັບປຸງ Element dbg ໂດຍການແບ່ງປັນຂໍ້ມູນການນຳໃຊ້ທີ່ບໍ່ເປີດເຜີຍຊື່. ເພື່ອເຂົ້າໃຈວິທີໃຊ້ຫຼາຍອຸປະກອນ, ພວກເຮົາຈະສ້າງຕົວກຳນົດແບບສຸ່ມ, ແບ່ງປັນໂດຍອຸປະກອນຂອງທ່ານ.
+    <string name="analytics_opt_in_content">ຊ່ວຍພວກເຮົາລະບຸບັນຫາ ແລະປັບປຸງ Secretum dbg ໂດຍການແບ່ງປັນຂໍ້ມູນການນຳໃຊ້ທີ່ບໍ່ເປີດເຜີຍຊື່. ເພື່ອເຂົ້າໃຈວິທີໃຊ້ຫຼາຍອຸປະກອນ, ພວກເຮົາຈະສ້າງຕົວກຳນົດແບບສຸ່ມ, ແບ່ງປັນໂດຍອຸປະກອນຂອງທ່ານ.
 \n
 \nທ່ານສາມາດອ່ານເງື່ອນໄຂທັງໝົດຂອງພວກເຮົາໄດ້ %s.</string>
-    <string name="analytics_opt_in_title">ຊ່ວຍປັບປຸງ Element dbg</string>
-    <string name="app_desktop_web">Element dbg Web
-\nElement dbg Desktop</string>
-    <string name="app_ios_android">Element dbg iOS
-\nElement dbg Android</string>
-    <string name="call_failed_no_connection">Element dbg ໂທລົ້ມເຫລວ</string>
-    <string name="e2e_re_request_encryption_key_dialog_content">ກະລຸນາເປີດ Element dbg ໃນອຸປະກອນອື່ນທີ່ສາມາດຖອດລະຫັດຂໍ້ຄວາມໄດ້ເພື່ອໃຫ້ສາມາດສົ່ງລະຫັດໄປຫາລະບົບນີ້.</string>
-    <string name="ftue_auth_carousel_workplace_body">Element dbg ແມ່ນດີຫຼາຍສຳລັບບ່ອນເຮັດວຽກ. ໄດ້ຮັບຄວາມໄວ້ວາງໃຈໂດຍອົງການຈັດຕັ້ງທີ່ປອດໄພທີ່ສຸດຂອງໂລກ.</string>
-    <string name="identity_server_error_bulk_sha256_not_supported">ເພື່ອຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, Element dbg ຮອງຮັບແຕ່ການສົ່ງອີເມວ ແລະ ເບີໂທລະສັບຜູ້ໃຊ້ເທົ່ານັ້ນ.</string>
-    <string name="identity_server_error_outdated_identity_server">ເຊີບເວີນີ້ລ້າສະໄໝແລ້ວ. Element dbg ຮອງຮັບ API V2 ເທົ່ານັ້ນ.</string>
-    <string name="initial_sync_request_content">Element dbg ຕ້ອງດໍາເນີນການ cache ທີ່ຊັດເຈນເພື່ອໃຫ້ທັນສະໄຫມ, ສໍາລັບເຫດຜົນດັ່ງຕໍ່ໄປນີ້:
+    <string name="analytics_opt_in_title">ຊ່ວຍປັບປຸງ Secretum dbg</string>
+    <string name="app_desktop_web">Secretum dbg Web
+\nSecretum dbg Desktop</string>
+    <string name="app_ios_android">Secretum dbg iOS
+\nSecretum dbg Android</string>
+    <string name="call_failed_no_connection">Secretum dbg ໂທລົ້ມເຫລວ</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">ກະລຸນາເປີດ Secretum dbg ໃນອຸປະກອນອື່ນທີ່ສາມາດຖອດລະຫັດຂໍ້ຄວາມໄດ້ເພື່ອໃຫ້ສາມາດສົ່ງລະຫັດໄປຫາລະບົບນີ້.</string>
+    <string name="ftue_auth_carousel_workplace_body">Secretum dbg ແມ່ນດີຫຼາຍສຳລັບບ່ອນເຮັດວຽກ. ໄດ້ຮັບຄວາມໄວ້ວາງໃຈໂດຍອົງການຈັດຕັ້ງທີ່ປອດໄພທີ່ສຸດຂອງໂລກ.</string>
+    <string name="identity_server_error_bulk_sha256_not_supported">ເພື່ອຄວາມເປັນສ່ວນຕົວຂອງທ່ານ, Secretum dbg ຮອງຮັບແຕ່ການສົ່ງອີເມວ ແລະ ເບີໂທລະສັບຜູ້ໃຊ້ເທົ່ານັ້ນ.</string>
+    <string name="identity_server_error_outdated_identity_server">ເຊີບເວີນີ້ລ້າສະໄໝແລ້ວ. Secretum dbg ຮອງຮັບ API V2 ເທົ່ານັ້ນ.</string>
+    <string name="initial_sync_request_content">Secretum dbg ຕ້ອງດໍາເນີນການ cache ທີ່ຊັດເຈນເພື່ອໃຫ້ທັນສະໄຫມ, ສໍາລັບເຫດຜົນດັ່ງຕໍ່ໄປນີ້:
 \n%s
 \n
 \nກະລຸນາຮັບຊາບວ່າຄຳສັ່ງນີ້ຈະປິດເປີດແອັບຄືນໃໝ່ ແລະ ມັນອາດຈະໃຊ້ເວລາຄາວໜຶ່ງ.</string>
-    <string name="invite_friends_rich_title">&#128272;️ ເຂົ້າຮ່ວມກັບຂ້ອຍໃນ Element dbg</string>
-    <string name="invite_friends_text">ສະບາຍດີ, ລົມກັບຂ້ອຍຢູ່ Element dbg: %s</string>
-    <string name="keys_backup_passphrase_not_empty_error_message">ກະລຸນາລຶບລະຫັດຜ່ານຖ້າທ່ານຕ້ອງການ Element dbg ເພື່ອສ້າງລະຫັດການກູ້ຂໍ້ມູນ.</string>
-    <string name="legals_application_title">ນະໂຍບາຍ Element dbg</string>
-    <string name="link_this_email_with_your_account">%s ໃນການຕັ້ງຄ່າເພື່ອຮັບຄຳເຊີນໂດຍກົງໃນ Element dbg.</string>
-    <string name="live_location_sharing_notification_title">Element dbg ສະຖານທີ່ປັດຈຸບັນ</string>
-    <string name="location_not_available_dialog_content">Element dbg ບໍ່ສາມາດເຂົ້າເຖິງສະຖານທີ່ຂອງທ່ານໄດ້. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ.</string>
-    <string name="location_not_available_dialog_title">Element dbg ບໍ່ສາມາດເຂົ້າເຖິງສະຖານທີ່ຂອງທ່ານໄດ້</string>
-    <string name="login_default_session_public_name">Element dbg Android</string>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg ຕ້ອງການການອະນຸຍາດເພື່ອເຂົ້າເຖິງກ້ອງຖ່າຍຮູບ ແລະໄມໂຄຣໂຟນຂອງທ່ານເພື່ອໂທວິດີໂອ.
+    <string name="invite_friends_rich_title">&#128272;️ ເຂົ້າຮ່ວມກັບຂ້ອຍໃນ Secretum dbg</string>
+    <string name="invite_friends_text">ສະບາຍດີ, ລົມກັບຂ້ອຍຢູ່ Secretum dbg: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">ກະລຸນາລຶບລະຫັດຜ່ານຖ້າທ່ານຕ້ອງການ Secretum dbg ເພື່ອສ້າງລະຫັດການກູ້ຂໍ້ມູນ.</string>
+    <string name="legals_application_title">ນະໂຍບາຍ Secretum dbg</string>
+    <string name="link_this_email_with_your_account">%s ໃນການຕັ້ງຄ່າເພື່ອຮັບຄຳເຊີນໂດຍກົງໃນ Secretum dbg.</string>
+    <string name="live_location_sharing_notification_title">Secretum dbg ສະຖານທີ່ປັດຈຸບັນ</string>
+    <string name="location_not_available_dialog_content">Secretum dbg ບໍ່ສາມາດເຂົ້າເຖິງສະຖານທີ່ຂອງທ່ານໄດ້. ກະລຸນາລອງໃໝ່ໃນພາຍຫຼັງ.</string>
+    <string name="location_not_available_dialog_title">Secretum dbg ບໍ່ສາມາດເຂົ້າເຖິງສະຖານທີ່ຂອງທ່ານໄດ້</string>
+    <string name="login_default_session_public_name">Secretum dbg Android</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Secretum dbg ຕ້ອງການການອະນຸຍາດເພື່ອເຂົ້າເຖິງກ້ອງຖ່າຍຮູບ ແລະໄມໂຄຣໂຟນຂອງທ່ານເພື່ອໂທວິດີໂອ.
 \n
 \nກະລຸນາອະນຸຍາດໃຫ້ເຂົ້າເຖິງໃນpop-ups ຖັດໄປເພື່ອໃຫ້ສາມາດໂທອອກໄດ້.</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg ຕ້ອງການການອະນຸຍາດເພື່ອເຂົ້າເຖິງໄມໂຄຣໂຟນຂອງທ່ານເພື່ອປະຕິບັດການໂທສຽງ.</string>
-    <string name="preference_help_summary">ຂໍຄວາມຊ່ວຍເຫຼືອໃນການນຳໃຊ້ Element dbg</string>
-    <string name="re_authentication_default_confirm_text">Element dbg ຮ້ອງຂໍໃຫ້ທ່ານໃສ່ຂໍ້ມູນປະຈໍາຕົວຂອງທ່ານເພື່ອດໍາເນີນການນີ້.</string>
-    <string name="rendering_event_error_exception">Element dbg ປະສົບບັນຫາໃນເວລາສະແດງເນື້ອຫາຂອງເຫດການດ້ວຍ id \'%1$s\'</string>
-    <string name="rendering_event_error_type_of_event_not_handled">Element dbg ບໍ່ໄດ້ຈັດການ ເຫດການຂອງປະເພດ \'%1$s\'</string>
-    <string name="screen_sharing_notification_title">Element dbg ການແບ່ງປັນໜ້າຈໍ</string>
-    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg ຈະຊິ້ງຂໍ້ມູນໃນພື້ນຫຼັງເພື່ອຮັກສາຊັບພະຍາກອນທີ່ຈຳກັດຂອງອຸປະກອນ (ແບັດເຕີຣີ).
+    <string name="permissions_rationale_msg_record_audio">Secretum dbg ຕ້ອງການການອະນຸຍາດເພື່ອເຂົ້າເຖິງໄມໂຄຣໂຟນຂອງທ່ານເພື່ອປະຕິບັດການໂທສຽງ.</string>
+    <string name="preference_help_summary">ຂໍຄວາມຊ່ວຍເຫຼືອໃນການນຳໃຊ້ Secretum dbg</string>
+    <string name="re_authentication_default_confirm_text">Secretum dbg ຮ້ອງຂໍໃຫ້ທ່ານໃສ່ຂໍ້ມູນປະຈໍາຕົວຂອງທ່ານເພື່ອດໍາເນີນການນີ້.</string>
+    <string name="rendering_event_error_exception">Secretum dbg ປະສົບບັນຫາໃນເວລາສະແດງເນື້ອຫາຂອງເຫດການດ້ວຍ id \'%1$s\'</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Secretum dbg ບໍ່ໄດ້ຈັດການ ເຫດການຂອງປະເພດ \'%1$s\'</string>
+    <string name="screen_sharing_notification_title">Secretum dbg ການແບ່ງປັນໜ້າຈໍ</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Secretum dbg ຈະຊິ້ງຂໍ້ມູນໃນພື້ນຫຼັງເພື່ອຮັກສາຊັບພະຍາກອນທີ່ຈຳກັດຂອງອຸປະກອນ (ແບັດເຕີຣີ).
 \nອີງຕາມສະຖານະຊັບພະຍາກອນອຸປະກອນຂອງທ່ານ, ການຊິງຄ໌ອາດຈະຖືກເລື່ອນໂດຍລະບົບປະຕິບັດການ.</string>
-    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg ຈະຊິງຄ໌ໃນພື້ນຫຼັງເປັນໄລຍະໆຕາມເວລາທີ່ຊັດເຈນ (ກຳນົດໄດ້).
-\nນີ້ຈະສົ່ງຜົນກະທົບຕໍ່ການໃຊ້ວິທະຍຸ ແລະແບັດເຕີຣີ, ຈະມີການແຈ້ງເຕືອນແບບຖາວອນທີ່ສະແດງວ່າ Element dbg ກຳລັງຟັງເຫດການ.</string>
-    <string name="settings_call_ringtone_use_app_ringtone">ໃຊ້ສຽງເອີ້ນເຂົ້າ Element dbg ເລີ່ມຕົ້ນສຳລັບສາຍໂທເຂົ້າ</string>
-    <string name="settings_developer_mode_fail_fast_summary">Element dbg ອາດຈະຂັດຂ້ອງເລື້ອຍໆເມື່ອມີຄວາມຜິດພາດທີ່ບໍ່ຄາດຄິດເກີດຂຶ້ນ</string>
-    <string name="settings_opt_in_of_analytics_summary">Element dbg ລວບລວມການວິເຄາະທີ່ບໍ່ເປີດເຜີຍຊື່ເພື່ອໃຫ້ພວກເຮົາປັບປຸງແອັບພລິເຄຊັນ.</string>
-    <string name="settings_security_pin_code_grace_period_summary_off">ຕ້ອງໃຊ້ລະຫັດ PIN ທຸກໆຄັ້ງທີ່ທ່ານເປີດ Element dbg.</string>
-    <string name="settings_security_pin_code_grace_period_summary_on">ຕ້ອງໃຊ້ລະຫັດ PIN ຫຼັງຈາກບໍ່ໄດ້ໃຊ້ Element dbgເປັນເວລາ 2 ນາທີ.</string>
-    <string name="settings_security_pin_code_use_biometrics_summary_off">ລະຫັດ PIN ເປັນວິທີດຽວທີ່ຈະປົດລັອກ Element dbg.</string>
-    <string name="settings_troubleshoot_test_battery_success">Element dbg ບໍ່ໄດ້ຮັບຜົນກະທົບຈາກການເພີ່ມປະສິດທິພາບແບັດເຕີລີ.</string>
-    <string name="settings_troubleshoot_test_bg_restricted_failed">ຂໍ້ຈຳກັດໃນພື້ນຫຼັງຖືກເປີດໃຊ້ສຳລັບ Element dbg.
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Secretum dbg ຈະຊິງຄ໌ໃນພື້ນຫຼັງເປັນໄລຍະໆຕາມເວລາທີ່ຊັດເຈນ (ກຳນົດໄດ້).
+\nນີ້ຈະສົ່ງຜົນກະທົບຕໍ່ການໃຊ້ວິທະຍຸ ແລະແບັດເຕີຣີ, ຈະມີການແຈ້ງເຕືອນແບບຖາວອນທີ່ສະແດງວ່າ Secretum dbg ກຳລັງຟັງເຫດການ.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">ໃຊ້ສຽງເອີ້ນເຂົ້າ Secretum dbg ເລີ່ມຕົ້ນສຳລັບສາຍໂທເຂົ້າ</string>
+    <string name="settings_developer_mode_fail_fast_summary">Secretum dbg ອາດຈະຂັດຂ້ອງເລື້ອຍໆເມື່ອມີຄວາມຜິດພາດທີ່ບໍ່ຄາດຄິດເກີດຂຶ້ນ</string>
+    <string name="settings_opt_in_of_analytics_summary">Secretum dbg ລວບລວມການວິເຄາະທີ່ບໍ່ເປີດເຜີຍຊື່ເພື່ອໃຫ້ພວກເຮົາປັບປຸງແອັບພລິເຄຊັນ.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">ຕ້ອງໃຊ້ລະຫັດ PIN ທຸກໆຄັ້ງທີ່ທ່ານເປີດ Secretum dbg.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">ຕ້ອງໃຊ້ລະຫັດ PIN ຫຼັງຈາກບໍ່ໄດ້ໃຊ້ Secretum dbgເປັນເວລາ 2 ນາທີ.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">ລະຫັດ PIN ເປັນວິທີດຽວທີ່ຈະປົດລັອກ Secretum dbg.</string>
+    <string name="settings_troubleshoot_test_battery_success">Secretum dbg ບໍ່ໄດ້ຮັບຜົນກະທົບຈາກການເພີ່ມປະສິດທິພາບແບັດເຕີລີ.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">ຂໍ້ຈຳກັດໃນພື້ນຫຼັງຖືກເປີດໃຊ້ສຳລັບ Secretum dbg.
 \nວຽກທີ່ແອັບພະຍາຍາມເຮັດຈະຖືກຈຳກັດຢ່າງແຮງໃນຂະນະທີ່ມັນຢູ່ໃນພື້ນຫຼັງ, ແລະ ອັນນີ້ອາດຈະສົ່ງຜົນກະທົບຕໍ່ການແຈ້ງເຕືອນ.
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_bg_restricted_success">ການຈຳກັດພື້ນຫຼັງຖືກປິດການນຳໃຊ້ສຳລັບ Element dbg. ການທົດສອບນີ້ຄວນຈະດໍາເນີນການໂດຍໃຊ້ອິນເຕີເນັດມືຖື (ບໍ່ມີ WIFI).
+    <string name="settings_troubleshoot_test_bg_restricted_success">ການຈຳກັດພື້ນຫຼັງຖືກປິດການນຳໃຊ້ສຳລັບ Secretum dbg. ການທົດສອບນີ້ຄວນຈະດໍາເນີນການໂດຍໃຊ້ອິນເຕີເນັດມືຖື (ບໍ່ມີ WIFI).
 \n%1$s</string>
     <string name="settings_troubleshoot_test_device_settings_failed">ບໍ່ໄດ້ເປີດໃຊ້ການແຈ້ງເຕືອນສຳລັບລະບົບນີ້.
-\nກະລຸນາກວດເບິ່ງການຕັ້ງຄ່າ Element dbg.</string>
+\nກະລຸນາກວດເບິ່ງການຕັ້ງຄ່າ Secretum dbg.</string>
     <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
-\nຂໍ້ຜິດພາດນີ້ບໍ່ສາມາດຄວບຄຸມໄດ້ຂອງ Element dbg. ບໍ່ມີບັນຊີ Google ຢູ່ໃນໂທລະສັບ. ກະລຸນາເປີດຕົວຈັດການບັນຊີ ແລະເພີ່ມບັນຊີ Google.</string>
+\nຂໍ້ຜິດພາດນີ້ບໍ່ສາມາດຄວບຄຸມໄດ້ຂອງ Secretum dbg. ບໍ່ມີບັນຊີ Google ຢູ່ໃນໂທລະສັບ. ກະລຸນາເປີດຕົວຈັດການບັນຊີ ແລະເພີ່ມບັນຊີ Google.</string>
     <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
-\nຂໍ້ຜິດພາດນີ້ບໍ່ສາມາດຄວບຄຸມໄດ້ Element dbg. ມັນສາມາດເກີດຂຶ້ນຍ້ອນເຫດຜົນຫຼາຍຢ່າງ. ບາງທີມັນອາດຈະໃຊ້ໄດ້ຖ້າຫາກທ່ານລອງໃຫມ່ໃນພາຍຫຼັງ, ທ່ານຍັງສາມາດກວດເບິ່ງວ່າບໍລິການ Google Play ບໍ່ໄດ້ຖືກຈໍາກັດໃນການນໍາໃຊ້ຂໍ້ມູນໃນການຕັ້ງຄ່າລະບົບ, ຫຼື ວ່າໂມງອຸປະກອນຂອງທ່ານແມ່ນຖືກຕ້ອງ, ຫຼືສາມາດເກີດຂື້ນໃນ ROM ແບບກໍານົດເອງ.</string>
+\nຂໍ້ຜິດພາດນີ້ບໍ່ສາມາດຄວບຄຸມໄດ້ Secretum dbg. ມັນສາມາດເກີດຂຶ້ນຍ້ອນເຫດຜົນຫຼາຍຢ່າງ. ບາງທີມັນອາດຈະໃຊ້ໄດ້ຖ້າຫາກທ່ານລອງໃຫມ່ໃນພາຍຫຼັງ, ທ່ານຍັງສາມາດກວດເບິ່ງວ່າບໍລິການ Google Play ບໍ່ໄດ້ຖືກຈໍາກັດໃນການນໍາໃຊ້ຂໍ້ມູນໃນການຕັ້ງຄ່າລະບົບ, ຫຼື ວ່າໂມງອຸປະກອນຂອງທ່ານແມ່ນຖືກຕ້ອງ, ຫຼືສາມາດເກີດຂື້ນໃນ ROM ແບບກໍານົດເອງ.</string>
     <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
-\nຂໍ້ຜິດພາດນີ້ບໍ່ສາມາດຄວບຄຸມໄດ້ Element dbg ແລະອີງຕາມ Google, ຂໍ້ຜິດພາດນີ້ຊີ້ໃຫ້ເຫັນວ່າອຸປະກອນມີຫຼາຍເເອັບທີ່ລົງທະບຽນກັບ FCM ຫຼາຍເກີນໄປ. ຂໍ້ຜິດພາດເກີດຂື້ນພຽງແຕ່ໃນກໍລະນີທີ່ມີແອັບຈພນວນຫຼາຍ, ດັ່ງນັ້ນຈຶ່ງບໍ່ສົ່ງຜົນກະທົບຕໍ່ຜູ້ໃຊ້ໂດຍສະເລ່ຍ.</string>
-    <string name="settings_troubleshoot_test_play_services_failed">Element dbg ໃຊ້ Google Play Services ເພື່ອສົ່ງຂໍ້ຄວາມ ແຕ່ເບິ່ງຄືວ່າບໍ່ໄດ້ຖືກຕັ້ງຄ່າຢ່າງຖືກຕ້ອງ:
+\nຂໍ້ຜິດພາດນີ້ບໍ່ສາມາດຄວບຄຸມໄດ້ Secretum dbg ແລະອີງຕາມ Google, ຂໍ້ຜິດພາດນີ້ຊີ້ໃຫ້ເຫັນວ່າອຸປະກອນມີຫຼາຍເເອັບທີ່ລົງທະບຽນກັບ FCM ຫຼາຍເກີນໄປ. ຂໍ້ຜິດພາດເກີດຂື້ນພຽງແຕ່ໃນກໍລະນີທີ່ມີແອັບຈພນວນຫຼາຍ, ດັ່ງນັ້ນຈຶ່ງບໍ່ສົ່ງຜົນກະທົບຕໍ່ຜູ້ໃຊ້ໂດຍສະເລ່ຍ.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Secretum dbg ໃຊ້ Google Play Services ເພື່ອສົ່ງຂໍ້ຄວາມ ແຕ່ເບິ່ງຄືວ່າບໍ່ໄດ້ຖືກຕັ້ງຄ່າຢ່າງຖືກຕ້ອງ:
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_service_boot_failed">ການບໍລິການຈະບໍ່ເລີ່ມຕົ້ນເມື່ອອຸປະກອນຖືກເລີ່ມຕົ້ນໃຫມ່, ທ່ານຈະບໍ່ໄດ້ຮັບການແຈ້ງເຕືອນຈົນກວ່າ Element dbg ຈະເປີດຄັ້ງດຽວ.</string>
-    <string name="soft_logout_sso_not_same_user_error">ລະບົບປັດຈຸບັນແມ່ນສໍາລັບຜູ້ໃຊ້ %1$s ແລະ ທ່ານໃຫ້ຂໍ້ມູນປະຈໍາຕົວສໍາລັບຜູ້ໃຊ້ %2$s. ອັນນີ້ບໍ່ຮອງຮັບໂດຍ Element dbg.
+    <string name="settings_troubleshoot_test_service_boot_failed">ການບໍລິການຈະບໍ່ເລີ່ມຕົ້ນເມື່ອອຸປະກອນຖືກເລີ່ມຕົ້ນໃຫມ່, ທ່ານຈະບໍ່ໄດ້ຮັບການແຈ້ງເຕືອນຈົນກວ່າ Secretum dbg ຈະເປີດຄັ້ງດຽວ.</string>
+    <string name="soft_logout_sso_not_same_user_error">ລະບົບປັດຈຸບັນແມ່ນສໍາລັບຜູ້ໃຊ້ %1$s ແລະ ທ່ານໃຫ້ຂໍ້ມູນປະຈໍາຕົວສໍາລັບຜູ້ໃຊ້ %2$s. ອັນນີ້ບໍ່ຮອງຮັບໂດຍ Secretum dbg.
 \nກະລຸນາລຶບຂໍ້ມູນກ່ອນ, ຈາກນັ້ນເຂົ້າສູ່ລະບົບອີກຄັ້ງໃນບັນຊີອື່ນ.</string>
-    <string name="use_latest_app">ໃຊ້ Element dbg ລ່າສຸດໃນອຸປະກອນອື່ນຂອງທ່ານ:</string>
-    <string name="use_other_session_content_description">ໃຊ້ Element dbg ລ່າສຸດໃນອຸປະກອນອື່ນຂອງທ່ານ, Element dbg Web, Element dbg Desktop, Element dbg iOS, Element dbg ສໍາລັບ Android, ຫຼື ລູກຄ້າ Matrix ອື່ນທີ່ສາມາດ cross-signing ໄດ້</string>
+    <string name="use_latest_app">ໃຊ້ Secretum dbg ລ່າສຸດໃນອຸປະກອນອື່ນຂອງທ່ານ:</string>
+    <string name="use_other_session_content_description">ໃຊ້ Secretum dbg ລ່າສຸດໃນອຸປະກອນອື່ນຂອງທ່ານ, Secretum dbg Web, Secretum dbg Desktop, Secretum dbg iOS, Secretum dbg ສໍາລັບ Android, ຫຼື ລູກຄ້າ Matrix ອື່ນທີ່ສາມາດ cross-signing ໄດ້</string>
 </resources>

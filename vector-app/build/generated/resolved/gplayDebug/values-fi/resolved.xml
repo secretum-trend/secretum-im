@@ -1,61 +1,61 @@
 <resources>
-    <string name="analytics_opt_in_content">Auta meitä tunnistamaan mahdollisia ongelmia ja parantamaan Element dbgiä jakamalla anonyymia käyttödataa. Ymmärtääksemme miten ihmiset käyttävät useita laitteita, luomme satunnaisen tunnisteen, joka jaetaan kaikkien laitteidesi kesken.
+    <string name="analytics_opt_in_content">Auta meitä tunnistamaan mahdollisia ongelmia ja parantamaan Secretum dbgiä jakamalla anonyymia käyttödataa. Ymmärtääksemme miten ihmiset käyttävät useita laitteita, luomme satunnaisen tunnisteen, joka jaetaan kaikkien laitteidesi kesken.
 \n
 \nLue käyttöehdot %s.</string>
-    <string name="analytics_opt_in_title">Auta parantamaan Element dbgiä</string>
-    <string name="app_ios_android">Element dbg iOS
-\nElement dbg Android</string>
-    <string name="call_failed_no_connection">Element dbg-puhelu epäonnistui</string>
-    <string name="e2e_re_request_encryption_key_dialog_content">Käynnistä Element dbg toisella laitteella, joka voi purkaa viestin, jotta se voi lähettää avaimet tähän istuntoon.</string>
-    <string name="ftue_auth_carousel_workplace_body">Element dbg toimii mainiosti työpaikallakin. Siihen luottavat maailman turvallisimmat organisaatiot.</string>
-    <string name="identity_server_error_outdated_identity_server">Tämä identiteettipalvelin on vanhentunut. Element dbg tukee vain API V2:ta.</string>
-    <string name="invite_friends_rich_title">&#128272;️ Liity seuraani Element dbg-sovelluksessa</string>
-    <string name="invite_friends_text">Hei, juttele minulle Element dbg-sovelluksessa: %s</string>
-    <string name="keys_backup_passphrase_not_empty_error_message">Poista salalause, jos haluat Element dbg generoivan palautusavaimen.</string>
-    <string name="legals_application_title">Element dbg-käytäntö</string>
-    <string name="location_not_available_dialog_content">Element dbg ei voinut käyttää sijaintiasi. Yritä myöhemmin uudelleen.</string>
-    <string name="location_not_available_dialog_title">Element dbg ei voinut käyttää sijaintiasi</string>
-    <string name="login_default_session_public_name">Element dbg Android</string>
-    <string name="onboarding_new_app_layout_welcome_message">Element dbgin yksinkertaistaminen asetti välilehdet valinnaiseksi. Hallitse välilehtiä oikean yläkulman valikosta.</string>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg tarvitsee käyttöluvan kameraan ja mikrofoniin suorittakseen videopuheluita.
+    <string name="analytics_opt_in_title">Auta parantamaan Secretum dbgiä</string>
+    <string name="app_ios_android">Secretum dbg iOS
+\nSecretum dbg Android</string>
+    <string name="call_failed_no_connection">Secretum dbg-puhelu epäonnistui</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Käynnistä Secretum dbg toisella laitteella, joka voi purkaa viestin, jotta se voi lähettää avaimet tähän istuntoon.</string>
+    <string name="ftue_auth_carousel_workplace_body">Secretum dbg toimii mainiosti työpaikallakin. Siihen luottavat maailman turvallisimmat organisaatiot.</string>
+    <string name="identity_server_error_outdated_identity_server">Tämä identiteettipalvelin on vanhentunut. Secretum dbg tukee vain API V2:ta.</string>
+    <string name="invite_friends_rich_title">&#128272;️ Liity seuraani Secretum dbg-sovelluksessa</string>
+    <string name="invite_friends_text">Hei, juttele minulle Secretum dbg-sovelluksessa: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Poista salalause, jos haluat Secretum dbg generoivan palautusavaimen.</string>
+    <string name="legals_application_title">Secretum dbg-käytäntö</string>
+    <string name="location_not_available_dialog_content">Secretum dbg ei voinut käyttää sijaintiasi. Yritä myöhemmin uudelleen.</string>
+    <string name="location_not_available_dialog_title">Secretum dbg ei voinut käyttää sijaintiasi</string>
+    <string name="login_default_session_public_name">Secretum dbg Android</string>
+    <string name="onboarding_new_app_layout_welcome_message">Secretum dbgin yksinkertaistaminen asetti välilehdet valinnaiseksi. Hallitse välilehtiä oikean yläkulman valikosta.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Secretum dbg tarvitsee käyttöluvan kameraan ja mikrofoniin suorittakseen videopuheluita.
 \n
 \nSalli mikrofonin ja kameran käyttö seuraavilla näytöillä aloittaaksesi tämän puhelun.</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg tarvitsee käyttöluvan mikrofoniin suorittakseen puheluita.</string>
-    <string name="preference_help_summary">Apua Element dbgin käyttöön</string>
-    <string name="re_authentication_default_confirm_text">Element dbg vaatii tämän toimenpiteen suorittamiseksi, että annat kirjautumistietosi.</string>
-    <string name="rendering_event_error_exception">Element dbg ei osannut piirtää tapahtuman jonka tunniste on \'%1$s\' sisältöä</string>
-    <string name="rendering_event_error_type_of_event_not_handled">Element dbg ei osaa käsitellä tapahtumia joiden tyyppi on \'%1$s\'</string>
-    <string name="screen_sharing_notification_title">Element dbg-näytönjako</string>
-    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg synkronoi taustalla laitteen rajallisia resursseja (akkua) säästäen.
+    <string name="permissions_rationale_msg_record_audio">Secretum dbg tarvitsee käyttöluvan mikrofoniin suorittakseen puheluita.</string>
+    <string name="preference_help_summary">Apua Secretum dbgin käyttöön</string>
+    <string name="re_authentication_default_confirm_text">Secretum dbg vaatii tämän toimenpiteen suorittamiseksi, että annat kirjautumistietosi.</string>
+    <string name="rendering_event_error_exception">Secretum dbg ei osannut piirtää tapahtuman jonka tunniste on \'%1$s\' sisältöä</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Secretum dbg ei osaa käsitellä tapahtumia joiden tyyppi on \'%1$s\'</string>
+    <string name="screen_sharing_notification_title">Secretum dbg-näytönjako</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Secretum dbg synkronoi taustalla laitteen rajallisia resursseja (akkua) säästäen.
 \nLaitteesi resurssien tilasta riippuen käyttöjärjestelmä saattaa lykätä synkronointia.</string>
-    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg synkronoi taustalla täsmällisin aikavälein (säädettävä).
-\nTämä vaikuttaa radion ja akun käyttöön. Näet pysyvän ilmoituksen, joka kertoo, että Element dbg kuuntelee tapahtumia.</string>
-    <string name="settings_call_ringtone_use_app_ringtone">Käytä Element dbgin oletussoittoääntä saapuville puheluille</string>
-    <string name="settings_developer_mode_fail_fast_summary">Element dbg voi kaatuilla tavallista useammin odottamattomien virheiden vuoksi</string>
-    <string name="settings_opt_in_of_analytics_summary">Element dbg kerää anonyymiä analytiikkaa sovelluksen parantamiseksi.</string>
-    <string name="settings_security_pin_code_grace_period_summary_off">PIN-koodi vaaditaan joka kerta, kun avaat sovelluksen Element dbg.</string>
-    <string name="settings_security_pin_code_grace_period_summary_on">PIN-koodi vaaditaan, kun sovellusta Element dbg ei ole käytetty 2 minuuttiin.</string>
-    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN-koodi on ainoa tapa avata sovelluksen Element dbg lukitus.</string>
-    <string name="settings_troubleshoot_test_battery_success">Akunkäytön optimointi ei vaikuta Element dbgin toimintaan.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Secretum dbg synkronoi taustalla täsmällisin aikavälein (säädettävä).
+\nTämä vaikuttaa radion ja akun käyttöön. Näet pysyvän ilmoituksen, joka kertoo, että Secretum dbg kuuntelee tapahtumia.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Käytä Secretum dbgin oletussoittoääntä saapuville puheluille</string>
+    <string name="settings_developer_mode_fail_fast_summary">Secretum dbg voi kaatuilla tavallista useammin odottamattomien virheiden vuoksi</string>
+    <string name="settings_opt_in_of_analytics_summary">Secretum dbg kerää anonyymiä analytiikkaa sovelluksen parantamiseksi.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">PIN-koodi vaaditaan joka kerta, kun avaat sovelluksen Secretum dbg.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">PIN-koodi vaaditaan, kun sovellusta Secretum dbg ei ole käytetty 2 minuuttiin.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN-koodi on ainoa tapa avata sovelluksen Secretum dbg lukitus.</string>
+    <string name="settings_troubleshoot_test_battery_success">Akunkäytön optimointi ei vaikuta Secretum dbgin toimintaan.</string>
     <string name="settings_troubleshoot_test_bg_restricted_failed">Taustapalveluiden rajoitukset ovat käytössä.
-\nTyötä, jota Element dbg yrittää tehdä, rajoitetaan aggressiivisesti, kun se on taustalla, mikä saattaa vaikuttaa ilmoituksiin.
+\nTyötä, jota Secretum dbg yrittää tehdä, rajoitetaan aggressiivisesti, kun se on taustalla, mikä saattaa vaikuttaa ilmoituksiin.
 \n%1$s</string>
     <string name="settings_troubleshoot_test_bg_restricted_success">Taustapalveluiden rajoitukset ovat pois käytöstä. Tämä testi tulee ajaa mobiilidatayhteydellä (ilman wlania).
 \n%1$s</string>
     <string name="settings_troubleshoot_test_device_settings_failed">Ilmoitukset eivät ole käytössä tässä istunnossa.
-\nTarkista Element dbgin asetukset.</string>
+\nTarkista Secretum dbgin asetukset.</string>
     <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
-\nTämä virhe ei ole Element dbgin ratkaistavissa. Tässä puhelimessa ei ole Google-tiliä. Lisää laitteeseesi Google-tili tätä toimintoa varten.</string>
+\nTämä virhe ei ole Secretum dbgin ratkaistavissa. Tässä puhelimessa ei ole Google-tiliä. Lisää laitteeseesi Google-tili tätä toimintoa varten.</string>
     <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
-\nTämä virhe ei ole Element dbgin ratkaistavissa. Se voi johtua useasta eri syystä. Ehkä tämä toimii, jos yrität myöhemmin. Voit myös tarkistaa, että Google Play Services -palvelu ei ole rajoitettuna järjestelmäasetuksissa, ja että laitteesi kello on oikein. Tämä voi tapahtua myös mukautetun käyttöjärjestelmän kanssa.</string>
+\nTämä virhe ei ole Secretum dbgin ratkaistavissa. Se voi johtua useasta eri syystä. Ehkä tämä toimii, jos yrität myöhemmin. Voit myös tarkistaa, että Google Play Services -palvelu ei ole rajoitettuna järjestelmäasetuksissa, ja että laitteesi kello on oikein. Tämä voi tapahtua myös mukautetun käyttöjärjestelmän kanssa.</string>
     <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
-\nElement dbg ei voi vaikuttaa tähän virheeseen, ja Googlen mukaan tämä virhe tarkoittaa, että tällä laitteella on liikaa FCM:ään rekisteröityjä sovelluksia. Tämä virhe ilmenee vain tapauksissa, joissa on erittäin paljon FCM:ään rekisteröityjä sovelluksia asennettuna, joten tätä ei pitäisi tapahtua normaalisti.</string>
-    <string name="settings_troubleshoot_test_play_services_failed">Element dbg käyttää Google Play Services -palvelua ilmoitusten välittämiseen, mutta se ei näytä olevan määritetty oikein:
+\nSecretum dbg ei voi vaikuttaa tähän virheeseen, ja Googlen mukaan tämä virhe tarkoittaa, että tällä laitteella on liikaa FCM:ään rekisteröityjä sovelluksia. Tämä virhe ilmenee vain tapauksissa, joissa on erittäin paljon FCM:ään rekisteröityjä sovelluksia asennettuna, joten tätä ei pitäisi tapahtua normaalisti.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Secretum dbg käyttää Google Play Services -palvelua ilmoitusten välittämiseen, mutta se ei näytä olevan määritetty oikein:
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_service_boot_failed">Palvelua ei käynnistetä laitteen uudelleenkäynnistyksen yhteydessä. Et tule saamaan ilmoituksia ennen kuin Element dbg on käynnistetty uudelleen.</string>
-    <string name="settings_troubleshoot_test_system_settings_permission_failed">Element dbg tarvitsee luvan ilmoitusten näyttämiseen.
+    <string name="settings_troubleshoot_test_service_boot_failed">Palvelua ei käynnistetä laitteen uudelleenkäynnistyksen yhteydessä. Et tule saamaan ilmoituksia ennen kuin Secretum dbg on käynnistetty uudelleen.</string>
+    <string name="settings_troubleshoot_test_system_settings_permission_failed">Secretum dbg tarvitsee luvan ilmoitusten näyttämiseen.
 \nAnna lupa.</string>
-    <string name="soft_logout_sso_not_same_user_error">Nykyinen istunto on käyttäjälle %1$s, ja yritit kirjautuas isään käyttäjälle %2$s. Element dbg ei tue tätä.
-\nPoista ensin tietosi ja kirjaudu sen jälkeen toisella tunnuksella. Voit vaihtoehtoisesti käyttää Element dbgin selainversiota.</string>
-    <string name="use_latest_app">Käytä Element dbgin uusinta versiota muilla laitteillasi:</string>
+    <string name="soft_logout_sso_not_same_user_error">Nykyinen istunto on käyttäjälle %1$s, ja yritit kirjautuas isään käyttäjälle %2$s. Secretum dbg ei tue tätä.
+\nPoista ensin tietosi ja kirjaudu sen jälkeen toisella tunnuksella. Voit vaihtoehtoisesti käyttää Secretum dbgin selainversiota.</string>
+    <string name="use_latest_app">Käytä Secretum dbgin uusinta versiota muilla laitteillasi:</string>
 </resources>

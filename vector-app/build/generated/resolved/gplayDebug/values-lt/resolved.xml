@@ -1,48 +1,48 @@
 <resources>
-    <string name="analytics_opt_in_content">Padėkite mums nustatyti problemas ir tobulinti Element dbg dalydamiesi anoniminiais naudojimo duomenimis. Kad suprastume, kaip žmonės naudojasi keliais įrenginiais, sugeneruosime atsitiktinį identifikatorių, kuriuo dalijasi jūsų įrenginiai.
+    <string name="analytics_opt_in_content">Padėkite mums nustatyti problemas ir tobulinti Secretum dbg dalydamiesi anoniminiais naudojimo duomenimis. Kad suprastume, kaip žmonės naudojasi keliais įrenginiais, sugeneruosime atsitiktinį identifikatorių, kuriuo dalijasi jūsų įrenginiai.
 \n
 \nGalite perskaityti visas mūsų sąlygas %s.</string>
-    <string name="analytics_opt_in_title">Padėkite tobulinti Element dbg</string>
-    <string name="call_failed_no_connection">Element dbg Skambutis nepavyko</string>
-    <string name="e2e_re_request_encryption_key_dialog_content">Prašome paleisti Element dbg kitame įrenginyje, kuris gali iššifruoti žinutę, kad galėtų išsiųsti raktus į šią sesiją.</string>
-    <string name="ftue_auth_carousel_workplace_body">Element dbg taip pat puikiai tinka darbo vietoje. Ja pasitiki saugiausios pasaulio organizacijos.</string>
-    <string name="home_empty_no_rooms_title">Sveiki atvykę į Element dbg,
+    <string name="analytics_opt_in_title">Padėkite tobulinti Secretum dbg</string>
+    <string name="call_failed_no_connection">Secretum dbg Skambutis nepavyko</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Prašome paleisti Secretum dbg kitame įrenginyje, kuris gali iššifruoti žinutę, kad galėtų išsiųsti raktus į šią sesiją.</string>
+    <string name="ftue_auth_carousel_workplace_body">Secretum dbg taip pat puikiai tinka darbo vietoje. Ja pasitiki saugiausios pasaulio organizacijos.</string>
+    <string name="home_empty_no_rooms_title">Sveiki atvykę į Secretum dbg,
 \n%s.</string>
-    <string name="initial_sync_request_content">Element dbg turi išvalyti talpyklą, kad ji būtų atnaujinta dėl šios priežasties:
+    <string name="initial_sync_request_content">Secretum dbg turi išvalyti talpyklą, kad ji būtų atnaujinta dėl šios priežasties:
 \n%s
 \n
 \nAtkreipkite dėmesį, kad atlikus šį veiksmą programa bus paleista iš naujo ir tai gali šiek tiek užtrukti.</string>
-    <string name="keys_backup_passphrase_not_empty_error_message">Ištrinkite slaptafrazę, jei norite, kad Element dbg sugeneruotų atkūrimo raktą.</string>
-    <string name="legals_application_title">Element dbg politika</string>
-    <string name="link_this_email_with_your_account">%s nustatymuose, kad gautumėte kvietimus tiesiogiai į Element dbg.</string>
-    <string name="live_location_sharing_notification_title">Element dbg tiesioginė buvimo vieta</string>
-    <string name="location_not_available_dialog_content">Element dbg negalėjo pasiekti jūsų vietos. Prašome pabandyti vėliau.</string>
-    <string name="location_not_available_dialog_title">Element dbg negalėjo pasiekti jūsų vietos</string>
-    <string name="onboarding_new_app_layout_welcome_message">Siekiant supaprastinti jūsų Element dbg, skirtukai dabar yra neprivalomi. Tvarkykite juos naudodami viršutinį dešinės pusės meniu.</string>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg reikia leidimo prieiti prie jūsų kameros ir mikrofono, kad galėtumėte atlikti vaizdo skambučius.
+    <string name="keys_backup_passphrase_not_empty_error_message">Ištrinkite slaptafrazę, jei norite, kad Secretum dbg sugeneruotų atkūrimo raktą.</string>
+    <string name="legals_application_title">Secretum dbg politika</string>
+    <string name="link_this_email_with_your_account">%s nustatymuose, kad gautumėte kvietimus tiesiogiai į Secretum dbg.</string>
+    <string name="live_location_sharing_notification_title">Secretum dbg tiesioginė buvimo vieta</string>
+    <string name="location_not_available_dialog_content">Secretum dbg negalėjo pasiekti jūsų vietos. Prašome pabandyti vėliau.</string>
+    <string name="location_not_available_dialog_title">Secretum dbg negalėjo pasiekti jūsų vietos</string>
+    <string name="onboarding_new_app_layout_welcome_message">Siekiant supaprastinti jūsų Secretum dbg, skirtukai dabar yra neprivalomi. Tvarkykite juos naudodami viršutinį dešinės pusės meniu.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Secretum dbg reikia leidimo prieiti prie jūsų kameros ir mikrofono, kad galėtumėte atlikti vaizdo skambučius.
 \n
 \nKad galėtumėte skambinti, kituose iškylančiuose languose leiskite prieigą.</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg reikia leidimo prieiti prie jūsų mikrofono, kad galėtumėte atlikti garso skambučius.</string>
-    <string name="preference_help_summary">Gaukite pagalbos naudojant Element dbg</string>
-    <string name="screen_sharing_notification_title">Element dbg Ekrano bendrinimas</string>
-    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg bus sinchronizuojama fone taip, kad būtų tausojami riboti įrenginio ištekliai (akumuliatorius).
+    <string name="permissions_rationale_msg_record_audio">Secretum dbg reikia leidimo prieiti prie jūsų mikrofono, kad galėtumėte atlikti garso skambučius.</string>
+    <string name="preference_help_summary">Gaukite pagalbos naudojant Secretum dbg</string>
+    <string name="screen_sharing_notification_title">Secretum dbg Ekrano bendrinimas</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Secretum dbg bus sinchronizuojama fone taip, kad būtų tausojami riboti įrenginio ištekliai (akumuliatorius).
 \nPriklausomai nuo įrenginio išteklių būklės, operacinė sistema gali atidėti sinchronizavimą.</string>
-    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg sinchronizuosis fone periodiškai tiksliai nustatytu laiku (galima konfigūruoti).
-\nTai turės įtakos radijo ryšio ir baterijos naudojimui, bus rodomas nuolatinis pranešimas, kad Element dbg klausosi įvykių.</string>
-    <string name="settings_call_ringtone_use_app_ringtone">Įeinantiems skambučiams naudoti numatytąją Element dbg melodiją</string>
-    <string name="settings_opt_in_of_analytics_summary">Element dbg renka anoniminę analizę, kad galėtume tobulinti programą.</string>
-    <string name="settings_security_pin_code_grace_period_summary_off">PIN kodas reikalingas kiekvieną kartą, atidarant Element dbg.</string>
-    <string name="settings_security_pin_code_grace_period_summary_on">PIN kodas reikalingas po 2 minučių Element dbg nenaudojimo.</string>
-    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN kodas yra vienintelis būdas atrakinti Element dbg.</string>
-    <string name="settings_troubleshoot_test_battery_success">Akumuliatoriaus optimizavimas neįtakoja Element dbg.</string>
-    <string name="settings_troubleshoot_test_bg_restricted_failed">Įjungti foniniai apribojimai Element dbg.
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Secretum dbg sinchronizuosis fone periodiškai tiksliai nustatytu laiku (galima konfigūruoti).
+\nTai turės įtakos radijo ryšio ir baterijos naudojimui, bus rodomas nuolatinis pranešimas, kad Secretum dbg klausosi įvykių.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Įeinantiems skambučiams naudoti numatytąją Secretum dbg melodiją</string>
+    <string name="settings_opt_in_of_analytics_summary">Secretum dbg renka anoniminę analizę, kad galėtume tobulinti programą.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">PIN kodas reikalingas kiekvieną kartą, atidarant Secretum dbg.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">PIN kodas reikalingas po 2 minučių Secretum dbg nenaudojimo.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN kodas yra vienintelis būdas atrakinti Secretum dbg.</string>
+    <string name="settings_troubleshoot_test_battery_success">Akumuliatoriaus optimizavimas neįtakoja Secretum dbg.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Įjungti foniniai apribojimai Secretum dbg.
 \nDarbas, kurį programa bando atlikti, bus agresyviai ribojamas, kol ji yra fone, ir tai gali turėti įtakos pranešimams.
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_bg_restricted_success">Fono apribojimai išjungti Element dbg. Šis testas turėtų būti atliekamas naudojant mobiliuosius duomenis (be WIFI).
+    <string name="settings_troubleshoot_test_bg_restricted_success">Fono apribojimai išjungti Secretum dbg. Šis testas turėtų būti atliekamas naudojant mobiliuosius duomenis (be WIFI).
 \n%1$s</string>
     <string name="settings_troubleshoot_test_device_settings_failed">Šioje sesijoje pranešimai neįjungti.
-\nPatikrinkite Element dbg nustatymus.</string>
+\nPatikrinkite Secretum dbg nustatymus.</string>
     <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
-\nŠi klaida yra nekontroliuojama Element dbg. Telefone nėra Google paskyros. Atidarykite paskyrų tvarkytuvę ir pridėkite Google paskyrą.</string>
-    <string name="settings_troubleshoot_test_service_boot_failed">Paslauga nebus paleista iš naujo paleidus įrenginį, pranešimų negausite, kol vieną kartą nebus atidaryta Element dbg.</string>
+\nŠi klaida yra nekontroliuojama Secretum dbg. Telefone nėra Google paskyros. Atidarykite paskyrų tvarkytuvę ir pridėkite Google paskyrą.</string>
+    <string name="settings_troubleshoot_test_service_boot_failed">Paslauga nebus paleista iš naujo paleidus įrenginį, pranešimų negausite, kol vieną kartą nebus atidaryta Secretum dbg.</string>
 </resources>

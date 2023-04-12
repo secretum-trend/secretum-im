@@ -16,7 +16,7 @@
         }
       ],
       "attributes": [],
-      "versionCode": 214173652,
+      "versionCode": 12,
       "versionName": "1.5.24-dev",
       "outputFile": "arm64-v8a/AndroidManifest.xml"
     }

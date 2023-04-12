@@ -1,32 +1,32 @@
 <resources>
-    <string name="call_failed_no_connection">Element dbg samtale feilet</string>
-    <string name="e2e_re_request_encryption_key_dialog_content">Start Element dbg på en annen enhet som kan dekryptere meldingen, slik at den kan sende nøklene til denne økten.</string>
-    <string name="identity_server_error_bulk_sha256_not_supported">For ditt privatliv støtter Element dbg bare sending av hash-bruker-e-post og telefonnummer.</string>
-    <string name="invite_friends_rich_title">&#128272;️ Bli med meg på Element dbg</string>
-    <string name="login_default_session_public_name">Element dbg Android</string>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg trenger tillatelse for å få tilgang til kameraet og mikrofonen for å utføre videosamtaler.
+    <string name="call_failed_no_connection">Secretum dbg samtale feilet</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Start Secretum dbg på en annen enhet som kan dekryptere meldingen, slik at den kan sende nøklene til denne økten.</string>
+    <string name="identity_server_error_bulk_sha256_not_supported">For ditt privatliv støtter Secretum dbg bare sending av hash-bruker-e-post og telefonnummer.</string>
+    <string name="invite_friends_rich_title">&#128272;️ Bli med meg på Secretum dbg</string>
+    <string name="login_default_session_public_name">Secretum dbg Android</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Secretum dbg trenger tillatelse for å få tilgang til kameraet og mikrofonen for å utføre videosamtaler.
 \n
 \nTillat tilgang til de neste popup-vinduene for å kunne ringe.</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg trenger tillatelse for å få tilgang til mikrofonen din for å utføre lydanrop.</string>
-    <string name="re_authentication_default_confirm_text">Element dbg krever at du oppgir legitimasjonen din for å utføre denne handlingen.</string>
-    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg synkroniseres i bakgrunnen på en måte som bevarer enhetens begrensede ressurser (batteri).
+    <string name="permissions_rationale_msg_record_audio">Secretum dbg trenger tillatelse for å få tilgang til mikrofonen din for å utføre lydanrop.</string>
+    <string name="re_authentication_default_confirm_text">Secretum dbg krever at du oppgir legitimasjonen din for å utføre denne handlingen.</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Secretum dbg synkroniseres i bakgrunnen på en måte som bevarer enhetens begrensede ressurser (batteri).
 \nAvhengig av enhetens ressurstilstand, kan synkroniseringen bli utsatt av operativsystemet.</string>
-    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg vil synkroniseres i bakgrunnen med jevne mellomrom på presis tid (konfigurerbar).
-\nDette vil påvirke radio og batteribruk, det vises en permanent melding om at Element dbg lytter etter hendelser.</string>
-    <string name="settings_call_ringtone_use_app_ringtone">Bruk standard Element dbg-ringetone for innkommende anrop</string>
-    <string name="settings_developer_mode_fail_fast_summary">Element dbg kan krasje oftere når en uventet feil oppstår</string>
-    <string name="settings_opt_in_of_analytics_summary">Element dbg samler inn anonyme statistikker for å hjelpe oss med å forbedre programmet.</string>
-    <string name="settings_security_pin_code_grace_period_summary_off">PIN-kode kreves hver gang du åpner Element dbg.</string>
-    <string name="settings_security_pin_code_grace_period_summary_on">PIN-kode kreves etter 2 minutter uten bruk av Element dbg.</string>
-    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN-kode er den eneste måten å låse opp Element dbg.</string>
-    <string name="settings_troubleshoot_test_battery_success">Element dbg påvirkes ikke av batterioptimalisering.</string>
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Secretum dbg vil synkroniseres i bakgrunnen med jevne mellomrom på presis tid (konfigurerbar).
+\nDette vil påvirke radio og batteribruk, det vises en permanent melding om at Secretum dbg lytter etter hendelser.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Bruk standard Secretum dbg-ringetone for innkommende anrop</string>
+    <string name="settings_developer_mode_fail_fast_summary">Secretum dbg kan krasje oftere når en uventet feil oppstår</string>
+    <string name="settings_opt_in_of_analytics_summary">Secretum dbg samler inn anonyme statistikker for å hjelpe oss med å forbedre programmet.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">PIN-kode kreves hver gang du åpner Secretum dbg.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">PIN-kode kreves etter 2 minutter uten bruk av Secretum dbg.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">PIN-kode er den eneste måten å låse opp Secretum dbg.</string>
+    <string name="settings_troubleshoot_test_battery_success">Secretum dbg påvirkes ikke av batterioptimalisering.</string>
     <string name="settings_troubleshoot_test_device_settings_failed">Varsler er ikke aktivert for denne økten.
-\nKontroller Element dbginnstillingene.</string>
+\nKontroller Secretum dbginnstillingene.</string>
     <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
-\nDenne feilen er utenfor kontroll av Element dbg. Det er ingen Google-konto på telefonen. Åpne kontoadministratoren og legg til en Google-konto.</string>
+\nDenne feilen er utenfor kontroll av Secretum dbg. Det er ingen Google-konto på telefonen. Åpne kontoadministratoren og legg til en Google-konto.</string>
     <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
-\nDenne feilen er utenfor kontroll av Element dbg, og ifølge Google indikerer denne feilen at enheten har for mange apper registrert hos FCM. Feilen oppstår bare i tilfeller der det er ekstremt mange apper, så det bør ikke påvirke gjennomsnittsbrukeren.</string>
-    <string name="settings_troubleshoot_test_play_services_failed">Element dbg bruker Google Play Services for å levere push-meldinger, men det ser ikke ut til å være konfigurert riktig:
+\nDenne feilen er utenfor kontroll av Secretum dbg, og ifølge Google indikerer denne feilen at enheten har for mange apper registrert hos FCM. Feilen oppstår bare i tilfeller der det er ekstremt mange apper, så det bør ikke påvirke gjennomsnittsbrukeren.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Secretum dbg bruker Google Play Services for å levere push-meldinger, men det ser ikke ut til å være konfigurert riktig:
 \n%1$s</string>
-    <string name="use_latest_app">Bruk det nyeste Element dbg på de andre enhetene dine:</string>
+    <string name="use_latest_app">Bruk det nyeste Secretum dbg på de andre enhetene dine:</string>
 </resources>

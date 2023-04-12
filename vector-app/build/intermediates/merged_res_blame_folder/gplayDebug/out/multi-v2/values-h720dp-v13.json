@@ -4,17 +4,7 @@
             "outputFile": "im.vector.application.vector-app-mergeGplayDebugResources-111:/values-h720dp-v13/values-h720dp-v13.xml",
             "map": [
                 {
-                    "source": "C:\\Users\\Linh\\.gradle\\caches\\transforms-3\\403792b0b6c56366d463b2b9572d7c17\\transformed\\appcompat-1.6.1\\res\\values-h720dp-v13\\values-h720dp-v13.xml",
-                    "from": {
-                        "startLines": "2",
-                        "startColumns": "4",
-                        "startOffsets": "55",
-                        "endColumns": "66",
-                        "endOffsets": "117"
-                    }
-                },
-                {
-                    "source": "C:\\Users\\Linh\\Desktop\\Project\\secretum-im\\library\\ui-styles\\build\\intermediates\\packaged_res\\debug\\values-h720dp-v13\\values-h720dp-v13.xml",
+                    "source": "/Users/paco/trend/secretum-im/library/ui-styles/build/intermediates/packaged_res/debug/values-h720dp-v13/values-h720dp-v13.xml",
                     "from": {
                         "startLines": "2,3,4,5,6",
                         "startColumns": "4,4,4,4,4",
@@ -28,6 +18,16 @@
                         "startOffsets": "122,216,305,366,433",
                         "endColumns": "93,88,60,66,66",
                         "endOffsets": "211,300,361,428,495"
+                    }
+                },
+                {
+                    "source": "/Users/paco/.gradle/caches/transforms-3/403792b0b6c56366d463b2b9572d7c17/transformed/appcompat-1.6.1/res/values-h720dp-v13/values-h720dp-v13.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "66",
+                        "endOffsets": "117"
                     }
                 }
             ]

@@ -1,43 +1,43 @@
 <resources>
-    <string name="call_failed_no_connection">Element dbg Zvans Neizdevās</string>
-    <string name="e2e_re_request_encryption_key_dialog_content">Lūdzu palaidiet Element dbg citā ierīcē, kas var atšifrēt ziņu, lai tā varētu nosūtīt šīs sesijas atslēgas.</string>
-    <string name="identity_server_error_bulk_sha256_not_supported">Jūsu privātuma dēļ Element dbg atbalsta tikai šifrētu lietotāja e-pasta vēstules un tālruņa numura nosūtīšanu.</string>
-    <string name="invite_friends_rich_title">&#128272;️ Pievienojies Element dbg</string>
-    <string name="invite_friends_text">Sazinieties ar mani izmantojot Element dbg: %s</string>
-    <string name="keys_backup_passphrase_not_empty_error_message">Lūdzu, dzēsiet parolesfrāzi, ja vēlaties, lai Element dbg ģenerētu atkopšanas atslēgu.</string>
-    <string name="login_default_session_public_name">Element dbg Android</string>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg nepieciešama atļauja piekļūt kamerai un mikrofonam, lai veiktu videozvanus.
+    <string name="call_failed_no_connection">Secretum dbg Zvans Neizdevās</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Lūdzu palaidiet Secretum dbg citā ierīcē, kas var atšifrēt ziņu, lai tā varētu nosūtīt šīs sesijas atslēgas.</string>
+    <string name="identity_server_error_bulk_sha256_not_supported">Jūsu privātuma dēļ Secretum dbg atbalsta tikai šifrētu lietotāja e-pasta vēstules un tālruņa numura nosūtīšanu.</string>
+    <string name="invite_friends_rich_title">&#128272;️ Pievienojies Secretum dbg</string>
+    <string name="invite_friends_text">Sazinieties ar mani izmantojot Secretum dbg: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Lūdzu, dzēsiet parolesfrāzi, ja vēlaties, lai Secretum dbg ģenerētu atkopšanas atslēgu.</string>
+    <string name="login_default_session_public_name">Secretum dbg Android</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Secretum dbg nepieciešama atļauja piekļūt kamerai un mikrofonam, lai veiktu videozvanus.
 \n
 \nLūdzu, dodiet piekļuves atļauju nākamajā uznirstošajā logā, lai būtu iespēja veikt zvanus.</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg-am nepieciešama atļauja piekļūt mikrofonam, lai nodrošinātu audio zvanus.</string>
-    <string name="rendering_event_error_exception">Element dbg saskārās ar problēmu, atveidojot notikuma ar id \'%1$s\' saturu</string>
-    <string name="rendering_event_error_type_of_event_not_handled">Element dbg neapstrādā \'%1$s\' tipa notikumus</string>
-    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg sinhronizēsies fonā, tā lai ietaupītu telefona bateriju.
+    <string name="permissions_rationale_msg_record_audio">Secretum dbg-am nepieciešama atļauja piekļūt mikrofonam, lai nodrošinātu audio zvanus.</string>
+    <string name="rendering_event_error_exception">Secretum dbg saskārās ar problēmu, atveidojot notikuma ar id \'%1$s\' saturu</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Secretum dbg neapstrādā \'%1$s\' tipa notikumus</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Secretum dbg sinhronizēsies fonā, tā lai ietaupītu telefona bateriju.
 \nAtkarībā no ierīces baterijas stāvokļa, sinhronizāciju var atcelt operētājsistēma.</string>
-    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg sinhronizēsies fonā periodiski, precīzi, noteiktā laikā (konfigurējams).
-\nTas ietekmēs radio un akumulatora izmantošanu, tiks parādīts pastāvīgs paziņojums par to, ka Element dbg klausās notikumus.</string>
-    <string name="settings_call_ringtone_use_app_ringtone">Izmantot noklusējuma Element dbg zvana signālu ienākošajiem zvaniem</string>
-    <string name="settings_developer_mode_fail_fast_summary">Element dbg var biežāk avarēt, ja rodas neparedzēta kļūda</string>
-    <string name="settings_opt_in_of_analytics_summary">Element dbg apkopo anonīmu analītiku, lai ļautu mums uzlabot aplikāciju.</string>
-    <string name="settings_troubleshoot_test_battery_success">Element dbg neietekmē akumulatora optimizācija.</string>
-    <string name="settings_troubleshoot_test_bg_restricted_failed">Fona ierobežojumi ir ieslēgti lietotnei Element dbg.
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Secretum dbg sinhronizēsies fonā periodiski, precīzi, noteiktā laikā (konfigurējams).
+\nTas ietekmēs radio un akumulatora izmantošanu, tiks parādīts pastāvīgs paziņojums par to, ka Secretum dbg klausās notikumus.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Izmantot noklusējuma Secretum dbg zvana signālu ienākošajiem zvaniem</string>
+    <string name="settings_developer_mode_fail_fast_summary">Secretum dbg var biežāk avarēt, ja rodas neparedzēta kļūda</string>
+    <string name="settings_opt_in_of_analytics_summary">Secretum dbg apkopo anonīmu analītiku, lai ļautu mums uzlabot aplikāciju.</string>
+    <string name="settings_troubleshoot_test_battery_success">Secretum dbg neietekmē akumulatora optimizācija.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Fona ierobežojumi ir ieslēgti lietotnei Secretum dbg.
 \nDarbs, ko lietotne mēģina veikt, tiks agresīvi ierobežots, kamēr tā atrodas fonā, un tas var ietekmēt paziņojumus.
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_bg_restricted_success">Fona ierobežojumi ir izslēgti priekš Element dbg. Šis tests jāveic, izmantojot mobilos datus (bez WIFI).
+    <string name="settings_troubleshoot_test_bg_restricted_success">Fona ierobežojumi ir izslēgti priekš Secretum dbg. Šis tests jāveic, izmantojot mobilos datus (bez WIFI).
 \n%1$s</string>
     <string name="settings_troubleshoot_test_device_settings_failed">Paziņojumi nav ieslēgti šai sesijai.
-\nLūdzu, pārbaudiet Element dbg iestatījumus.</string>
+\nLūdzu, pārbaudiet Secretum dbg iestatījumus.</string>
     <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
-\nŠī kļūda ir ārpus Element dbg kontroles. Tālrunī nav Google konta. Lūdzu, atveriet kontu pārvaldnieku un pievienojiet Google kontu.</string>
+\nŠī kļūda ir ārpus Secretum dbg kontroles. Tālrunī nav Google konta. Lūdzu, atveriet kontu pārvaldnieku un pievienojiet Google kontu.</string>
     <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
-\nŠī kļūda ir ārpus Element dbg kontroles. Tā var rasties vairāku iemeslu dēļ. Iespējams, tā darbosies, ja vēlāk mēģināsiet vēlreiz, varat arī pārbaudīt, vai sistēmas iestatījumos nav ierobežota Google Play pakalpojuma datu izmantošana, vai ierīces pulkstenis ir pareizs, vai arī tā var notikt uz atsevišķām sistēmām.</string>
+\nŠī kļūda ir ārpus Secretum dbg kontroles. Tā var rasties vairāku iemeslu dēļ. Iespējams, tā darbosies, ja vēlāk mēģināsiet vēlreiz, varat arī pārbaudīt, vai sistēmas iestatījumos nav ierobežota Google Play pakalpojuma datu izmantošana, vai ierīces pulkstenis ir pareizs, vai arī tā var notikt uz atsevišķām sistēmām.</string>
     <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
-\nŠī kļūda nav kontrolējama ar Element dbg, un saskaņā ar Google datiem šī kļūda norāda, ka ierīcē ir pārāk daudz lietotņu, kas reģistrētas FCM. Kļūda rodas tikai gadījumos, kad ir ārkārtīgi liels lietotņu skaits, tāpēc šim nevajadzētu ietekmēt parastu lietotāju.</string>
-    <string name="settings_troubleshoot_test_play_services_failed">Element dbg izmanto Google Play pakalpojumus, lai nodrošinātu ziņu pakalpojumu, bet tas nešķiet pareizi konfigurēts:
+\nŠī kļūda nav kontrolējama ar Secretum dbg, un saskaņā ar Google datiem šī kļūda norāda, ka ierīcē ir pārāk daudz lietotņu, kas reģistrētas FCM. Kļūda rodas tikai gadījumos, kad ir ārkārtīgi liels lietotņu skaits, tāpēc šim nevajadzētu ietekmēt parastu lietotāju.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Secretum dbg izmanto Google Play pakalpojumus, lai nodrošinātu ziņu pakalpojumu, bet tas nešķiet pareizi konfigurēts:
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_service_boot_failed">Pakalpojums nesāksies, kad ierīce tiks restartēta, jūs nesaņemsiet paziņojumus, kamēr vismaz vienreiz nebūsiet atvēris Element dbg.</string>
-    <string name="soft_logout_sso_not_same_user_error">Pašreizējā sesija ir lietotājam %1$s, un jūs sniedzat lietotāja %2$s akreditācijas datus. To neatbalsta Element dbg.
+    <string name="settings_troubleshoot_test_service_boot_failed">Pakalpojums nesāksies, kad ierīce tiks restartēta, jūs nesaņemsiet paziņojumus, kamēr vismaz vienreiz nebūsiet atvēris Secretum dbg.</string>
+    <string name="soft_logout_sso_not_same_user_error">Pašreizējā sesija ir lietotājam %1$s, un jūs sniedzat lietotāja %2$s akreditācijas datus. To neatbalsta Secretum dbg.
 \nLūdzu, vispirms notīriet datus un pēc tam pierakstieties vēlreiz, izmantojot citu kontu.</string>
-    <string name="use_latest_app">Izmantojiet jaunāko Element dbg citās savās ierīcēs:</string>
-    <string name="use_other_session_content_description">Izmantojiet jaunāko Element dbg citās savās ierīcēs, Element dbg Web, Element dbg Desktop, Element dbg iOS, Element dbg Android, vai kādu citu Matrix lietotni ar cross-signing atbalstu</string>
+    <string name="use_latest_app">Izmantojiet jaunāko Secretum dbg citās savās ierīcēs:</string>
+    <string name="use_other_session_content_description">Izmantojiet jaunāko Secretum dbg citās savās ierīcēs, Secretum dbg Web, Secretum dbg Desktop, Secretum dbg iOS, Secretum dbg Android, vai kādu citu Matrix lietotni ar cross-signing atbalstu</string>
 </resources>

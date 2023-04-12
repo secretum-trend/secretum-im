@@ -1,76 +1,76 @@
 <resources>
-    <string name="analytics_opt_in_content">Bantu kami mengidentifikasi masalah-masalah dan membuat Element dbg lebih baik dengan membagikan data penggunaan anonim. Untuk memahami bagaimana orang-orang menggunakan beberapa perangkat-perangkat, kami akan membuat pengenal acak, yang dibagikan oleh perangkat Anda.
+    <string name="analytics_opt_in_content">Bantu kami mengidentifikasi masalah-masalah dan membuat Secretum dbg lebih baik dengan membagikan data penggunaan anonim. Untuk memahami bagaimana orang-orang menggunakan beberapa perangkat-perangkat, kami akan membuat pengenal acak, yang dibagikan oleh perangkat Anda.
 \n
 \nAnda dapat membaca semua kebijakan kami %s.</string>
-    <string name="analytics_opt_in_title">Bantu buat Element dbg lebih baik</string>
-    <string name="app_desktop_web">Element dbg Web
-\nElement dbg Desktop</string>
-    <string name="app_ios_android">Element dbg iOS
-\nElement dbg Android</string>
-    <string name="call_failed_no_connection">Element dbg Panggilan Gagal</string>
-    <string name="e2e_re_request_encryption_key_dialog_content">Jalankan Element dbg di perangkat yang dapat mendekripsi pesan tersebut agar kunci dapat dikirim ke perangkat ini.</string>
-    <string name="ftue_auth_carousel_workplace_body">Element dbg juga baik untuk tempat kerja. Dipercayai oleh organisasi yang paling aman di dunia.</string>
-    <string name="home_empty_no_rooms_title">Selamat datang di Element dbg,
+    <string name="analytics_opt_in_title">Bantu buat Secretum dbg lebih baik</string>
+    <string name="app_desktop_web">Secretum dbg Web
+\nSecretum dbg Desktop</string>
+    <string name="app_ios_android">Secretum dbg iOS
+\nSecretum dbg Android</string>
+    <string name="call_failed_no_connection">Secretum dbg Panggilan Gagal</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Jalankan Secretum dbg di perangkat yang dapat mendekripsi pesan tersebut agar kunci dapat dikirim ke perangkat ini.</string>
+    <string name="ftue_auth_carousel_workplace_body">Secretum dbg juga baik untuk tempat kerja. Dipercayai oleh organisasi yang paling aman di dunia.</string>
+    <string name="home_empty_no_rooms_title">Selamat datang di Secretum dbg,
 \n%s.</string>
-    <string name="identity_server_error_bulk_sha256_not_supported">Demi privasi Anda, Element dbg hanya mendukung pengiriman email pengguna dan nomor telepon yang telah di-hash.</string>
-    <string name="identity_server_error_outdated_identity_server">Server identitas ini telah usang. Element dbg hanya mendukung API V2.</string>
-    <string name="initial_sync_request_content">Element dbg membutuhkan sebuah penghapusan cache supaya bisa diperbarui, untuk alasan berikut:
+    <string name="identity_server_error_bulk_sha256_not_supported">Demi privasi Anda, Secretum dbg hanya mendukung pengiriman email pengguna dan nomor telepon yang telah di-hash.</string>
+    <string name="identity_server_error_outdated_identity_server">Server identitas ini telah usang. Secretum dbg hanya mendukung API V2.</string>
+    <string name="initial_sync_request_content">Secretum dbg membutuhkan sebuah penghapusan cache supaya bisa diperbarui, untuk alasan berikut:
 \n%s
 \n
 \nDicatat bahwa tindakan ini akan memulai ulang aplikasinya dan mungkin membutuhkan beberapa waktu.</string>
-    <string name="invite_friends_rich_title">&#128272;️ Bergabung dengan saya di Element dbg</string>
-    <string name="invite_friends_text">Halo, bicara dengan saya di Element dbg: %s</string>
-    <string name="keys_backup_passphrase_not_empty_error_message">Mohon hapus frasa sandinya jika Anda ingin Element dbg untuk membuat kunci pemulihan.</string>
-    <string name="legals_application_title">Kebijakan Element dbg</string>
-    <string name="link_this_email_with_your_account">%s di Pengaturan untuk menerima undangan secara langsung di Element dbg.</string>
-    <string name="live_location_sharing_notification_title">Element dbg Lokasi langsung</string>
-    <string name="location_not_available_dialog_content">Element dbg tidak dapat mengakses lokasi Anda. Silakan coba lagi nanti.</string>
-    <string name="location_not_available_dialog_title">Element dbg tidak dapat mengakses lokasi Anda</string>
-    <string name="login_default_session_public_name">Element dbg Android</string>
-    <string name="onboarding_new_app_layout_welcome_message">Untuk membuat Element dbg Anda lebih sederhana, fitur tab sekarang opsional. Kelola menggunakan menu kanan atas.</string>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg membutuhkan izin untuk mengakses kamera dan mikrofon Anda untuk melakukan panggilan video.
+    <string name="invite_friends_rich_title">&#128272;️ Bergabung dengan saya di Secretum dbg</string>
+    <string name="invite_friends_text">Halo, bicara dengan saya di Secretum dbg: %s</string>
+    <string name="keys_backup_passphrase_not_empty_error_message">Mohon hapus frasa sandinya jika Anda ingin Secretum dbg untuk membuat kunci pemulihan.</string>
+    <string name="legals_application_title">Kebijakan Secretum dbg</string>
+    <string name="link_this_email_with_your_account">%s di Pengaturan untuk menerima undangan secara langsung di Secretum dbg.</string>
+    <string name="live_location_sharing_notification_title">Secretum dbg Lokasi langsung</string>
+    <string name="location_not_available_dialog_content">Secretum dbg tidak dapat mengakses lokasi Anda. Silakan coba lagi nanti.</string>
+    <string name="location_not_available_dialog_title">Secretum dbg tidak dapat mengakses lokasi Anda</string>
+    <string name="login_default_session_public_name">Secretum dbg Android</string>
+    <string name="onboarding_new_app_layout_welcome_message">Untuk membuat Secretum dbg Anda lebih sederhana, fitur tab sekarang opsional. Kelola menggunakan menu kanan atas.</string>
+    <string name="permissions_rationale_msg_camera_and_audio">Secretum dbg membutuhkan izin untuk mengakses kamera dan mikrofon Anda untuk melakukan panggilan video.
 \n
 \nHarap berikan akses pada halaman berikut ini untuk melakukan panggilan.</string>
-    <string name="permissions_rationale_msg_notification">Element dbg membutuhkan izin untuk menampilkan notifikasi. Notifikasi dapat menampilkan pesan Anda, undangan Anda, dll.
+    <string name="permissions_rationale_msg_notification">Secretum dbg membutuhkan izin untuk menampilkan notifikasi. Notifikasi dapat menampilkan pesan Anda, undangan Anda, dll.
 \n
 \nMohon perbolehkan akses di munculan berikutnya untuk dapat melihat notifikasi.</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg membutuhkan permisi atas akses mikrofon Anda untuk melakukan panggilan audio.</string>
-    <string name="preference_help_summary">Dapatkan bantuan dalam menggunakan Element dbg</string>
-    <string name="re_authentication_default_confirm_text">Element dbg meminta Anda untuk memasukkan kredensial untuk melakukan tindakan ini.</string>
-    <string name="rendering_event_error_exception">Element dbg menemukan sebuah masalah ketika rendering konten dengan id \'%1$s\'</string>
-    <string name="rendering_event_error_type_of_event_not_handled">Element dbg tidak mendukung peristiwa dengan tipe \'%1$s\'</string>
-    <string name="screen_sharing_notification_title">Pembagian Layar Element dbg</string>
-    <string name="settings_background_fdroid_sync_mode_battery_description">Element dbg akan mengsinkron di latar belakang dengan cara yang akan mempertahankan sumber daya (baterai) yang terbatas.
+    <string name="permissions_rationale_msg_record_audio">Secretum dbg membutuhkan permisi atas akses mikrofon Anda untuk melakukan panggilan audio.</string>
+    <string name="preference_help_summary">Dapatkan bantuan dalam menggunakan Secretum dbg</string>
+    <string name="re_authentication_default_confirm_text">Secretum dbg meminta Anda untuk memasukkan kredensial untuk melakukan tindakan ini.</string>
+    <string name="rendering_event_error_exception">Secretum dbg menemukan sebuah masalah ketika rendering konten dengan id \'%1$s\'</string>
+    <string name="rendering_event_error_type_of_event_not_handled">Secretum dbg tidak mendukung peristiwa dengan tipe \'%1$s\'</string>
+    <string name="screen_sharing_notification_title">Pembagian Layar Secretum dbg</string>
+    <string name="settings_background_fdroid_sync_mode_battery_description">Secretum dbg akan mengsinkron di latar belakang dengan cara yang akan mempertahankan sumber daya (baterai) yang terbatas.
 \nTergantung pada keadaan sumber daya perangkat Anda, sinkronisasi dapat ditangguhkan oleh operasi sistem.</string>
-    <string name="settings_background_fdroid_sync_mode_real_time_description">Element dbg akan disinkronkan di latar belakang secara berkala pada waktu yang tepat (dapat dikonfigurasi).
-\nIni akan memengaruhi penggunaan radio dan baterai, dan ada juga pemberitahuan yang ditampilkan permanen menyatakan bahwa Element dbg sedang mendengarkan peristiwa.</string>
-    <string name="settings_call_ringtone_use_app_ringtone">Gunakan nada dering bawaan Element dbg untuk panggilan masuk</string>
-    <string name="settings_developer_mode_fail_fast_summary">Element dbg mungkin sering crash ketika ada kesalahan yang tidak terduga</string>
-    <string name="settings_opt_in_of_analytics_summary">Element dbg mengumpulkan data analitik anonim dalam upaya kami meningkatkan aplikasi.</string>
-    <string name="settings_security_pin_code_grace_period_summary_off">Kode PIN dibutuhkan setiap kali Anda buka Element dbg.</string>
-    <string name="settings_security_pin_code_grace_period_summary_on">Kode PIN dibutuhkan setelah 2 menit tidak menggunakan Element dbg.</string>
-    <string name="settings_security_pin_code_use_biometrics_summary_off">Kode PIN hanya cara satu-satunya untuk membuka Element dbg.</string>
-    <string name="settings_troubleshoot_test_battery_success">Element dbg tidak terpengaruh oleh Optimisasi Baterai.</string>
-    <string name="settings_troubleshoot_test_bg_restricted_failed">Larangan background dinonaktifkan untuk Element dbg.
+    <string name="settings_background_fdroid_sync_mode_real_time_description">Secretum dbg akan disinkronkan di latar belakang secara berkala pada waktu yang tepat (dapat dikonfigurasi).
+\nIni akan memengaruhi penggunaan radio dan baterai, dan ada juga pemberitahuan yang ditampilkan permanen menyatakan bahwa Secretum dbg sedang mendengarkan peristiwa.</string>
+    <string name="settings_call_ringtone_use_app_ringtone">Gunakan nada dering bawaan Secretum dbg untuk panggilan masuk</string>
+    <string name="settings_developer_mode_fail_fast_summary">Secretum dbg mungkin sering crash ketika ada kesalahan yang tidak terduga</string>
+    <string name="settings_opt_in_of_analytics_summary">Secretum dbg mengumpulkan data analitik anonim dalam upaya kami meningkatkan aplikasi.</string>
+    <string name="settings_security_pin_code_grace_period_summary_off">Kode PIN dibutuhkan setiap kali Anda buka Secretum dbg.</string>
+    <string name="settings_security_pin_code_grace_period_summary_on">Kode PIN dibutuhkan setelah 2 menit tidak menggunakan Secretum dbg.</string>
+    <string name="settings_security_pin_code_use_biometrics_summary_off">Kode PIN hanya cara satu-satunya untuk membuka Secretum dbg.</string>
+    <string name="settings_troubleshoot_test_battery_success">Secretum dbg tidak terpengaruh oleh Optimisasi Baterai.</string>
+    <string name="settings_troubleshoot_test_bg_restricted_failed">Larangan background dinonaktifkan untuk Secretum dbg.
 \nAktivitas yang dilakukan aplikasi ini akan terhalang ketika beroperasi di balik layar, dan ini dapat mempengaruhi pemunculan notifikasi.
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_bg_restricted_success">Larangan latar belakang dinonaktifkan untuk Element dbg. Percobaan ini sebaiknya dijalankan menggunakan jaringan data ponsel (bukan WiFi).
+    <string name="settings_troubleshoot_test_bg_restricted_success">Larangan latar belakang dinonaktifkan untuk Secretum dbg. Percobaan ini sebaiknya dijalankan menggunakan jaringan data ponsel (bukan WiFi).
 \n%1$s</string>
     <string name="settings_troubleshoot_test_device_settings_failed">Notifikasi tidak diaktifkan pada sesi ini.
-\nMohon periksa pengaturan Element dbg.</string>
+\nMohon periksa pengaturan Secretum dbg.</string>
     <string name="settings_troubleshoot_test_fcm_failed_account_missing">[%1$s]
-\nError ini di luar kendali Element dbg. Tidak terdapat akun Google pada perangkat. Mohon buka pengelola akun dan tambahkan akun Google.</string>
+\nError ini di luar kendali Secretum dbg. Tidak terdapat akun Google pada perangkat. Mohon buka pengelola akun dan tambahkan akun Google.</string>
     <string name="settings_troubleshoot_test_fcm_failed_service_not_available">[%1$s]
-\nKesalahan ini di luar kendali Element dbg, dan dapat muncul karena berbagai alasan. Coba lagi nanti, atau Anda juga dapat memeriksa apabila penggunaan jaringan data Layanan Google Play tidak terhalang oleh sistem, atau waktu pada perangkat sudah benar, atau ini dapat terjadi pada ROM tidak resmi.</string>
+\nKesalahan ini di luar kendali Secretum dbg, dan dapat muncul karena berbagai alasan. Coba lagi nanti, atau Anda juga dapat memeriksa apabila penggunaan jaringan data Layanan Google Play tidak terhalang oleh sistem, atau waktu pada perangkat sudah benar, atau ini dapat terjadi pada ROM tidak resmi.</string>
     <string name="settings_troubleshoot_test_fcm_failed_too_many_registration">[%1$s]
-\nError ini di luar kendali Element dbg dan menurut Google, error ini muncul ketika terlalu banyak aplikasi terdaftar dengan FCM pada perangkat tersebut. Error ini tidak seharusnya mempengaruhi pengguna biasa.</string>
-    <string name="settings_troubleshoot_test_play_services_failed">Element dbg menggunakan Layanan Google Play untuk mendorong pesan tapi tampaknya tidak diatur sebagaimana harusnya:
+\nError ini di luar kendali Secretum dbg dan menurut Google, error ini muncul ketika terlalu banyak aplikasi terdaftar dengan FCM pada perangkat tersebut. Error ini tidak seharusnya mempengaruhi pengguna biasa.</string>
+    <string name="settings_troubleshoot_test_play_services_failed">Secretum dbg menggunakan Layanan Google Play untuk mendorong pesan tapi tampaknya tidak diatur sebagaimana harusnya:
 \n%1$s</string>
-    <string name="settings_troubleshoot_test_service_boot_failed">Layanan tidak akan mulai ketika perangkat dinyalakan kembali, Anda tidak akan menerima pemberitahuan sampai Anda membuka Element dbg.</string>
-    <string name="settings_troubleshoot_test_system_settings_permission_failed">Element dbg membutuhkan izin untuk menampilkan notifikasi.
+    <string name="settings_troubleshoot_test_service_boot_failed">Layanan tidak akan mulai ketika perangkat dinyalakan kembali, Anda tidak akan menerima pemberitahuan sampai Anda membuka Secretum dbg.</string>
+    <string name="settings_troubleshoot_test_system_settings_permission_failed">Secretum dbg membutuhkan izin untuk menampilkan notifikasi.
 \nMohon berikan izin itu.</string>
-    <string name="soft_logout_sso_not_same_user_error">Sesi saat ini hanya untuk pengguna %1$s dan Anda memberikan kredensial untuk pengguna %2$s. Ini tidak didukung oleh Element dbg.
+    <string name="soft_logout_sso_not_same_user_error">Sesi saat ini hanya untuk pengguna %1$s dan Anda memberikan kredensial untuk pengguna %2$s. Ini tidak didukung oleh Secretum dbg.
 \nMohon bersihkan data, terus masuk lagi ke akun lainnya.</string>
-    <string name="use_latest_app">Gunakan Element dbg di perangkat Anda yang lain:</string>
-    <string name="use_other_session_content_description">Gunakan Element dbg di perangkat Anda yang lain, Element dbg Web, Element dbg Desktop, Element dbg iOS, Element dbg untuk Android, atau client Matrix lainnya yang mendukung tanda tangan silang</string>
+    <string name="use_latest_app">Gunakan Secretum dbg di perangkat Anda yang lain:</string>
+    <string name="use_other_session_content_description">Gunakan Secretum dbg di perangkat Anda yang lain, Secretum dbg Web, Secretum dbg Desktop, Secretum dbg iOS, Secretum dbg untuk Android, atau client Matrix lainnya yang mendukung tanda tangan silang</string>
 </resources>

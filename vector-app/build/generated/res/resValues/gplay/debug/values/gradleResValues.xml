@@ -6,6 +6,6 @@
     <!-- Value from build type: debug -->
     <color name="launcher_background">#0DBD8B</color>
     <!-- Value from build type: debug -->
-    <string name="app_name" translatable="false">Element dbg</string>
+    <string name="app_name" translatable="false">Secretum dbg</string>
 
 </resources>

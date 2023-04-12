@@ -1,4 +1,4 @@
 <resources>
-    <string name="e2e_re_request_encryption_key_dialog_content">Inicie Element dbg noutro dispositivo que poida descifrar esta mensaxe e que despois desde alí lle poida enviar as chaves a este dispositivo.</string>
-    <string name="settings_opt_in_of_analytics_summary">Element dbg recolle información analítica anónima para permitirnos mellorar o aplicativo.</string>
+    <string name="e2e_re_request_encryption_key_dialog_content">Inicie Secretum dbg noutro dispositivo que poida descifrar esta mensaxe e que despois desde alí lle poida enviar as chaves a este dispositivo.</string>
+    <string name="settings_opt_in_of_analytics_summary">Secretum dbg recolle información analítica anónima para permitirnos mellorar o aplicativo.</string>
 </resources>

@@ -1,5 +1,0 @@
-<resources>
-    <string name="permissions_rationale_msg_camera_and_audio">Element dbg necesita tu permiso para usar su cámara y micrófono para hacer llamadas de video.\n\nPor favor permite el acceso en el siguiente mensaje para poder hacer la llamada.</string>
-    <string name="permissions_rationale_msg_record_audio">Element dbg necesita tu permiso para usar tu micrófono para hacer llamadas de voz.</string>
-    <string name="settings_call_ringtone_use_app_ringtone">Usar el tono de llamada normal de Element dbg para llamadas entrantes</string>
-</resources>

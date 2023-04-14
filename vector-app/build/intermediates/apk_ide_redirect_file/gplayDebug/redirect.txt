@@ -1,2 +1,0 @@
-#- File Locator -
-listingFile=../../apk/gplay/debug/output-metadata.json

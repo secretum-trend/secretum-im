@@ -62,38 +62,38 @@ class UserListController @Inject constructor(
         val host = this
 
         // Build generic items
-        if (currentState.searchTerm.isBlank()) {
-            if (currentState.showInviteActions()) {
-                actionItem {
-                    id(R.drawable.ic_share)
-                    title(host.stringProvider.getString(R.string.invite_friends))
-                    actionIconRes(R.drawable.ic_share)
-                    clickAction {
-                        host.callback?.onInviteFriendClick()
-                    }
-                }
-            }
-            if (currentState.showContactBookAction) {
-                actionItem {
-                    id(R.drawable.ic_baseline_perm_contact_calendar_24)
-                    title(host.stringProvider.getString(R.string.contacts_book_title))
-                    actionIconRes(R.drawable.ic_baseline_perm_contact_calendar_24)
-                    clickAction {
-                        host.callback?.onContactBookClick()
-                    }
-                }
-            }
-            if (currentState.showInviteActions()) {
-                actionItem {
-                    id(R.drawable.ic_qr_code_add)
-                    title(host.stringProvider.getString(R.string.qr_code))
-                    actionIconRes(R.drawable.ic_qr_code_add)
-                    clickAction {
-                        host.callback?.onUseQRCode()
-                    }
-                }
-            }
-        }
+//        if (currentState.searchTerm.isBlank()) {
+//            if (currentState.showInviteActions()) {
+//                actionItem {
+//                    id(R.drawable.ic_share)
+//                    title(host.stringProvider.getString(R.string.invite_friends))
+//                    actionIconRes(R.drawable.ic_share)
+//                    clickAction {
+//                        host.callback?.onInviteFriendClick()
+//                    }
+//                }
+//            }
+//            if (currentState.showContactBookAction) {
+//                actionItem {
+//                    id(R.drawable.ic_baseline_perm_contact_calendar_24)
+//                    title(host.stringProvider.getString(R.string.contacts_book_title))
+//                    actionIconRes(R.drawable.ic_baseline_perm_contact_calendar_24)
+//                    clickAction {
+//                        host.callback?.onContactBookClick()
+//                    }
+//                }
+//            }
+//            if (currentState.showInviteActions()) {
+//                actionItem {
+//                    id(R.drawable.ic_qr_code_add)
+//                    title(host.stringProvider.getString(R.string.qr_code))
+//                    actionIconRes(R.drawable.ic_qr_code_add)
+//                    clickAction {
+//                        host.callback?.onUseQRCode()
+//                    }
+//                }
+//            }
+//        }
 
         when (val matchingEmail = currentState.matchingEmail) {
             is Success -> {

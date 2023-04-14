@@ -91,7 +91,7 @@
                             android:scaleType="center"
                             android:layout_marginRight="20dp"
                             android:src="@drawable/ic_search"
-                            app:tint="?colorPrimary"
+                            app:tint="@color/element_system_light"
                             tools:ignore="MissingPrefix" />
 
                         <ImageView
@@ -104,7 +104,7 @@
                             android:layout_alignParentRight="true"
                             android:layout_marginEnd="12dp"
                             android:src="@drawable/ic_more_vertical"
-                            app:tint="?colorPrimary"
+                            app:tint="@color/element_system_light"
                             tools:ignore="MissingPrefix" />
 
                         <ImageView
@@ -164,7 +164,7 @@
         app:layout_constraintBottom_toTopOf="@id/newLayoutCreateChatButton"
         app:layout_constraintEnd_toEndOf="@id/newLayoutCreateChatButton"
         app:layout_constraintStart_toStartOf="@id/newLayoutCreateChatButton"
-        app:tint="?attr/colorPrimary"
+        app:tint="@color/palette_blue"
         tools:targetApi="lollipop_mr1"
         tools:visibility="visible" />
 
@@ -178,6 +178,7 @@
         android:contentDescription="@string/a11y_create_message"
         android:src="@drawable/ic_new_chat"
         android:visibility="gone"
+        android:backgroundTint="@color/palette_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         tools:targetApi="lollipop_mr1"

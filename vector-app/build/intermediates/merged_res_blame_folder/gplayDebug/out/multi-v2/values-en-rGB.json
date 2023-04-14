@@ -13,11 +13,70 @@
                         "endOffsets": "332"
                     },
                     "to": {
+<<<<<<< Updated upstream
                         "startLines": "71",
                         "startColumns": "4",
                         "startOffsets": "5755",
                         "endColumns": "137",
                         "endOffsets": "5888"
+=======
+                        "startLines": "50,51,52,61,62,91,159,161,162,215,216,217,218,219,221,222,223,224,225,227,230",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "3580,3674,3774,4565,4667,7840,13279,13415,13534,17645,17699,17749,17799,17882,18056,18151,18250,18330,18431,18648,19008",
+                        "endColumns": "93,99,91,101,105,101,76,118,85,53,49,49,82,90,94,98,79,100,91,89,73",
+                        "endOffsets": "3669,3769,3861,4662,4768,7937,13351,13529,13615,17694,17744,17794,17877,17968,18146,18245,18325,18426,18518,18733,19077"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Linh\\Desktop\\Project\\secretum-im\\library\\external\\dialpad\\build\\intermediates\\packaged_res\\debug\\values-en-rGB\\values-en-rGB.xml",
+                    "from": {
+                        "startLines": "2,3,4,5,6",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "55,149,246,346,439",
+                        "endColumns": "93,96,99,92,96",
+                        "endOffsets": "144,241,341,434,531"
+                    },
+                    "to": {
+                        "startLines": "85,86,87,88,89",
+                        "startColumns": "4,4,4,4,4",
+                        "startOffsets": "7294,7388,7485,7585,7678",
+                        "endColumns": "93,96,99,92,96",
+                        "endOffsets": "7383,7480,7580,7673,7770"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Linh\\.gradle\\caches\\transforms-3\\015e15eea99be181239016e62fb7594a\\transformed\\jetified-play-services-base-18.1.0\\res\\values-en-rGB\\values.xml",
+                    "from": {
+                        "startLines": "4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20",
+                        "startColumns": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+                        "startOffsets": "197,298,446,567,670,817,936,1048,1147,1302,1403,1551,1672,1814,1958,2017,2075",
+                        "endColumns": "100,147,120,102,146,118,111,98,154,100,147,120,141,143,58,57,74",
+                        "endOffsets": "297,445,566,669,816,935,1047,1146,1301,1402,1550,1671,1813,1957,2016,2074,2149"
+                    },
+                    "to": {
+                        "startLines": "63,64,65,66,67,68,69,70,72,73,74,75,76,77,78,79,80",
+                        "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4,4",
+                        "startOffsets": "4773,4878,5030,5155,5262,5413,5536,5652,5893,6052,6157,6309,6434,6580,6728,6791,6853",
+                        "endColumns": "104,151,124,106,150,122,115,102,158,104,151,124,145,147,62,61,78",
+                        "endOffsets": "4873,5025,5150,5257,5408,5531,5647,5750,6047,6152,6304,6429,6575,6723,6786,6848,6927"
+                    }
+                },
+                {
+                    "source": "C:\\Users\\Linh\\.gradle\\caches\\transforms-3\\5420f087fa6595a37beba9b895e46c77\\transformed\\core-1.9.0\\res\\values-en-rGB\\values-en-rGB.xml",
+                    "from": {
+                        "startLines": "2",
+                        "startColumns": "4",
+                        "startOffsets": "55",
+                        "endColumns": "100",
+                        "endOffsets": "151"
+                    },
+                    "to": {
+                        "startLines": "228",
+                        "startColumns": "4",
+                        "startOffsets": "18738",
+                        "endColumns": "100",
+                        "endOffsets": "18834"
+>>>>>>> Stashed changes
                     }
                 },
                 {
@@ -163,6 +222,7 @@
                 {
                     "source": "/Users/paco/.gradle/caches/transforms-3/b32eedbeacdf4bce47ec45aa287ce881/transformed/biometric-1.1.0/res/values-en-rGB/values-en-rGB.xml",
                     "from": {
+<<<<<<< Updated upstream
                         "startLines": "2,3,4,5,6,7,8,9,10,11,12,13",
                         "startColumns": "4,4,4,4,4,4,4,4,4,4,4,4",
                         "startOffsets": "55,161,251,370,499,637,764,882,1013,1113,1239,1378",
@@ -175,6 +235,20 @@
                         "startOffsets": "6932,7204,11965,12084,12213,12351,12478,12596,12727,12827,12953,13092",
                         "endColumns": "105,89,118,128,137,126,117,130,99,125,138,119",
                         "endOffsets": "7033,7289,12079,12208,12346,12473,12591,12722,12822,12948,13087,13207"
+=======
+                        "startLines": "1",
+                        "startColumns": "4",
+                        "startOffsets": "17",
+                        "endColumns": "124",
+                        "endOffsets": "137"
+                    },
+                    "to": {
+                        "startLines": "226",
+                        "startColumns": "4",
+                        "startOffsets": "18523",
+                        "endColumns": "124",
+                        "endOffsets": "18643"
+>>>>>>> Stashed changes
                     }
                 },
                 {

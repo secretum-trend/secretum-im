@@ -38,6 +38,7 @@ import im.vector.app.features.login.*
 import im.vector.app.features.login.qr.QrCodeLoginArgs
 import im.vector.app.features.login.qr.QrCodeLoginType
 import im.vector.app.features.onboarding.OnboardingAction
+import im.vector.app.features.onboarding.OnboardingFlow
 import im.vector.app.features.onboarding.OnboardingViewEvents
 import im.vector.app.features.onboarding.OnboardingViewState
 import im.vector.app.features.onboarding.usecase.MobileWalletAdapterUseCase
@@ -63,6 +64,10 @@ class FtueAuthCombinedLoginFragment :
     ) {
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+    }
+
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -74,6 +79,7 @@ class FtueAuthCombinedLoginFragment :
         super.onViewCreated(view, savedInstanceState)
         setupSubmitButton()
         observingValues()
+        viewModel.handle(OnboardingAction.HomeServerChange.SelectHomeServer(viewModel.getDefaultHomeserverUrl()))
     }
 
     private fun observingValues() {
@@ -157,7 +163,9 @@ class FtueAuthCombinedLoginFragment :
         }
 
     }
-
+    private fun alreadyHaveAnAccount() {
+        viewModel.handle(OnboardingAction.SplashAction.OnIAlreadyHaveAnAccount(onboardingFlow = OnboardingFlow.SignIn))
+    }
     private fun setupSubmitButton() {
 
         views.cvLogin.debouncedClicks {

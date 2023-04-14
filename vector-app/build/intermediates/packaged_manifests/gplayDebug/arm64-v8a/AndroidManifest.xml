@@ -1,7 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="im.vector.app.debug"
+<<<<<<< Updated upstream
     android:versionCode="12"
+=======
+    android:versionCode="214265902"
+>>>>>>> Stashed changes
     android:versionName="1.5.24-dev" >
 
     <uses-sdk
@@ -117,7 +121,11 @@
         android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+<<<<<<< Updated upstream
         android:taskAffinity="im.vector.app.debug.H_d1f79699"
+=======
+        android:taskAffinity="im.vector.app.debug.H_e7971e7e"
+>>>>>>> Stashed changes
         android:testOnly="true"
         android:theme="@style/Theme.Vector.Light" >
         <activity android:name="im.vector.app.features.debug.TestLinkifyActivity" />
@@ -359,7 +367,11 @@
             android:excludeFromRecents="true"
             android:launchMode="singleTask"
             android:supportsPictureInPicture="true"
+<<<<<<< Updated upstream
             android:taskAffinity=".features.call.VectorCallActivity.H_d1f79699" /> <!-- PIP Support https://developer.android.com/guide/topics/ui/picture-in-picture -->
+=======
+            android:taskAffinity=".features.call.VectorCallActivity.H_e7971e7e" /> <!-- PIP Support https://developer.android.com/guide/topics/ui/picture-in-picture -->
+>>>>>>> Stashed changes
         <activity
             android:name="im.vector.app.features.call.conference.VectorJitsiActivity"
             android:configChanges="orientation|smallestScreenSize|screenLayout|screenSize"

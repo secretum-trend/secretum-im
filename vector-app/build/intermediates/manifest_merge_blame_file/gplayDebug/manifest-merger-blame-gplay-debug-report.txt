@@ -1,7 +1,11 @@
 1<?xml version="1.0" encoding="utf-8"?>
 2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
 3    package="im.vector.app.debug"
+<<<<<<< Updated upstream
 4    android:versionCode="10"
+=======
+4    android:versionCode="214265900"
+>>>>>>> Stashed changes
 5    android:versionName="1.5.24-dev" >
 6
 7    <uses-sdk
@@ -224,9 +228,15 @@
 118        android:roundIcon="@mipmap/ic_launcher_round"
 118-->/Users/paco/trend/secretum-im/vector-app/src/main/AndroidManifest.xml:16:9-54
 119        android:supportsRtl="true"
+<<<<<<< Updated upstream
 119-->/Users/paco/trend/secretum-im/vector-app/src/main/AndroidManifest.xml:17:9-35
 120        android:taskAffinity="im.vector.app.debug.H_d1f79699"
 120-->/Users/paco/trend/secretum-im/vector-app/src/main/AndroidManifest.xml:18:9-73
+=======
+119-->C:\Users\Linh\Desktop\Project\secretum-im\vector-app\src\main\AndroidManifest.xml:17:9-35
+120        android:taskAffinity="im.vector.app.debug.H_e7971e7e"
+120-->C:\Users\Linh\Desktop\Project\secretum-im\vector-app\src\main\AndroidManifest.xml:18:9-73
+>>>>>>> Stashed changes
 121        android:testOnly="true"
 122        android:theme="@style/Theme.Vector.Light" >
 122-->/Users/paco/trend/secretum-im/vector-app/src/main/AndroidManifest.xml:19:9-50
@@ -693,9 +703,15 @@
 359            android:launchMode="singleTask"
 359-->[:vector] /Users/paco/trend/secretum-im/vector/build/intermediates/merged_manifest/debug/AndroidManifest.xml:269:13-44
 360            android:supportsPictureInPicture="true"
+<<<<<<< Updated upstream
 360-->[:vector] /Users/paco/trend/secretum-im/vector/build/intermediates/merged_manifest/debug/AndroidManifest.xml:270:13-52
 361            android:taskAffinity=".features.call.VectorCallActivity.H_d1f79699" /> <!-- PIP Support https://developer.android.com/guide/topics/ui/picture-in-picture -->
 361-->[:vector] /Users/paco/trend/secretum-im/vector/build/intermediates/merged_manifest/debug/AndroidManifest.xml:271:13-80
+=======
+360-->[:vector] C:\Users\Linh\Desktop\Project\secretum-im\vector\build\intermediates\merged_manifest\debug\AndroidManifest.xml:270:13-52
+361            android:taskAffinity=".features.call.VectorCallActivity.H_e7971e7e" /> <!-- PIP Support https://developer.android.com/guide/topics/ui/picture-in-picture -->
+361-->[:vector] C:\Users\Linh\Desktop\Project\secretum-im\vector\build\intermediates\merged_manifest\debug\AndroidManifest.xml:271:13-80
+>>>>>>> Stashed changes
 362        <activity
 362-->[:vector] /Users/paco/trend/secretum-im/vector/build/intermediates/merged_manifest/debug/AndroidManifest.xml:273:9-277:55
 363            android:name="im.vector.app.features.call.conference.VectorJitsiActivity"

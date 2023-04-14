@@ -3,6 +3,6 @@
 3    package="im.vector.app.config" >
 4
 5    <uses-sdk android:minSdkVersion="21" />
-5-->/Users/paco/trend/secretum-im/vector-config/src/main/AndroidManifest.xml
+5-->C:\Users\Linh\Desktop\Project\secretum-im\vector-config\src\main\AndroidManifest.xml
 6
 7</manifest>

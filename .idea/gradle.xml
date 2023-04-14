@@ -7,9 +7,16 @@
         <option name="testRunner" value="GRADLE" />
         <option name="distributionType" value="DEFAULT_WRAPPED" />
         <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleHome" value="$PROJECT_DIR$/../../../../../gradle" />
+        <option name="gradleJvm" value="corretto-11" />
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/lib-solana" />
+            <option value="$PROJECT_DIR$/lib-solana/clientlib" />
+            <option value="$PROJECT_DIR$/lib-solana/clientlib-ktx" />
+            <option value="$PROJECT_DIR$/lib-solana/clientlib-rxjava" />
+            <option value="$PROJECT_DIR$/lib-solana/common" />
             <option value="$PROJECT_DIR$/library" />
             <option value="$PROJECT_DIR$/library/attachment-viewer" />
             <option value="$PROJECT_DIR$/library/core-utils" />

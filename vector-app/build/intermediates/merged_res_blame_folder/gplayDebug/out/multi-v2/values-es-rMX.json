@@ -27,9 +27,15 @@
                     "from": {
                         "startLines": "1,2,3",
                         "startColumns": "4,4,4",
+<<<<<<< Updated upstream
                         "startOffsets": "16,266,417",
                         "endColumns": "249,150,138",
                         "endOffsets": "261,412,551"
+=======
+                        "startOffsets": "17,268,420",
+                        "endColumns": "249,150,138",
+                        "endOffsets": "262,414,554"
+>>>>>>> Stashed changes
                     },
                     "to": {
                         "startLines": "164,165,235",

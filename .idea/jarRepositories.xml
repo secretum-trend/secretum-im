@@ -51,5 +51,120 @@
       <option name="name" value="Google" />
       <option name="url" value="https://dl.google.com/dl/android/maven2/" />
     </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="https://github.com/vector-im/jitsi_libre_maven/raw/main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/lib-solana/clientlib/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/multipicker/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/lib-solana/common/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/vector-app/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/external/diff-match-patch/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/lib-solana/clientlib-ktx/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/matrix-sdk-android/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/matrix-sdk-android-flow/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/vector-config/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/external/jsonviewer/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/lib-solana/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/ui-strings/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/external/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/core-utils/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/external/dialpad/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/lib-solana/clientlib-rxjava/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/vector/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/attachment-viewer/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:/$PROJECT_DIR$/library/ui-styles/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
+    <remote-repository>
+      <option name="id" value="maven4" />
+      <option name="name" value="maven4" />
+      <option name="url" value="file:////Users/paco/secretum-im/jitsi_libre_maven-main/android-sdk-6.2.2" />
+    </remote-repository>
   </component>
 </project>

@@ -74,6 +74,7 @@ class FtueAuthCombinedLoginFragment :
         super.onViewCreated(view, savedInstanceState)
         setupSubmitButton()
         observingValues()
+        viewModel.handle(OnboardingAction.HomeServerChange.SelectHomeServer(viewModel.getDefaultHomeserverUrl()))
     }
 
     private fun observingValues() {

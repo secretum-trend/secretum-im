@@ -43,7 +43,7 @@
 <!--        app:iconTint="?vctr_content_secondary"-->
 <!--        app:title="@string/invite_by_email" />-->
 
-    <im.vector.app.features.spaces.create.WizardButtonView
+    <com.messaging.scrtm.features.spaces.create.WizardButtonView
         android:id="@+id/inviteByMxidButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,7 +52,7 @@
         app:iconTint="?vctr_content_secondary"
         app:title="@string/invite_by_username_or_mail" />
 
-    <im.vector.app.features.spaces.create.WizardButtonView
+    <com.messaging.scrtm.features.spaces.create.WizardButtonView
         android:id="@+id/inviteByLinkButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

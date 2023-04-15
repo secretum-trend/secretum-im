@@ -21,7 +21,7 @@
 
     </com.google.android.material.appbar.AppBarLayout>
 
-    <im.vector.app.core.platform.StateView
+    <com.messaging.scrtm.core.platform.StateView
         android:id="@+id/invites_state_view"
         android:layout_width="0dp"
         android:layout_height="0dp"
@@ -38,7 +38,7 @@
             android:overScrollMode="always"
             android:scrollbars="vertical" />
 
-    </im.vector.app.core.platform.StateView>
+    </com.messaging.scrtm.core.platform.StateView>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

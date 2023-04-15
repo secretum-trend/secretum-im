@@ -62,7 +62,7 @@
         tools:ignore="MissingConstraints" />
 
     <!-- Note: this is always gone now -->
-    <im.vector.app.core.ui.views.ShieldImageView
+    <com.messaging.scrtm.core.ui.views.ShieldImageView
         android:id="@+id/roomAvatarDecorationImageView"
         android:layout_width="24dp"
         android:layout_height="24dp"
@@ -88,7 +88,7 @@
         tools:visibility="visible"
         app:tint="@color/palette_white" />
 
-    <im.vector.app.core.ui.views.PresenceStateImageView
+    <com.messaging.scrtm.core.ui.views.PresenceStateImageView
         android:id="@+id/roomAvatarPresenceImageView"
         android:layout_width="16dp"
         android:layout_height="16dp"
@@ -151,7 +151,7 @@
         tools:ignore="MissingPrefix"
         tools:visibility="visible" />
 
-    <im.vector.app.features.home.room.list.UnreadCounterBadgeView
+    <com.messaging.scrtm.features.home.room.list.UnreadCounterBadgeView
         android:id="@+id/roomUnreadCounterBadgeView"
         style="@style/Widget.Vector.TextView.Micro"
         android:layout_width="wrap_content"

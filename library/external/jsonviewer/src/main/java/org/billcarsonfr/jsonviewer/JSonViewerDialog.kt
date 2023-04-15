@@ -23,7 +23,7 @@ import android.view.ViewGroup
 import android.view.WindowManager
 import androidx.fragment.app.DialogFragment
 import com.airbnb.mvrx.Mavericks
-import im.vector.lib.core.utils.compat.getParcelableCompat
+import com.messaging.lib.core.utils.compat.getParcelableCompat
 
 class JSonViewerDialog : DialogFragment() {
 

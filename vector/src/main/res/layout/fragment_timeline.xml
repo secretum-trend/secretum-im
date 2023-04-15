@@ -12,7 +12,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintTop_toTopOf="parent">
 
-        <im.vector.app.core.ui.views.CurrentCallsView
+        <com.messaging.scrtm.core.ui.views.CurrentCallsView
             android:id="@+id/currentCallsView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -45,7 +45,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <im.vector.app.features.sync.widget.SyncStateView
+        <com.messaging.scrtm.features.sync.widget.SyncStateView
             android:id="@+id/syncStateView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <im.vector.app.features.location.live.LiveLocationStatusView
+        <com.messaging.scrtm.features.location.live.LiveLocationStatusView
             android:id="@+id/liveLocationStatusIndicator"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -63,7 +63,7 @@
             app:layout_constraintTop_toBottomOf="@id/syncStateView"
             tools:visibility="visible" />
 
-        <im.vector.app.features.call.conference.RemoveJitsiWidgetView
+        <com.messaging.scrtm.features.call.conference.RemoveJitsiWidgetView
             android:id="@+id/removeJitsiWidgetView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -112,7 +112,7 @@
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_height="300dp" />
 
-        <im.vector.app.core.ui.views.NotificationAreaView
+        <com.messaging.scrtm.core.ui.views.NotificationAreaView
             android:id="@+id/notificationAreaView"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -133,7 +133,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <im.vector.app.core.platform.BadgeFloatingActionButton
+        <com.messaging.scrtm.core.platform.BadgeFloatingActionButton
             android:id="@+id/jumpToBottomView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -150,7 +150,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:tint="@android:color/black" />
 
-        <im.vector.app.core.ui.views.CompatKonfetti
+        <com.messaging.scrtm.core.ui.views.CompatKonfetti
             android:id="@+id/viewKonfetti"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -214,7 +214,7 @@
         android:layout_height="match_parent"
         android:background="@android:color/transparent"
         android:translationZ="10dp"
-        app:layout_behavior="im.vector.app.core.utils.ExpandingBottomSheetBehavior" />
+        app:layout_behavior="com.messaging.scrtm.core.utils.ExpandingBottomSheetBehavior" />
 
     <FrameLayout
         android:id="@+id/voiceMessageRecorderContainer"

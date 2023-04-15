@@ -21,7 +21,7 @@ plugins {
 
 android {
 
-    namespace "im.vector.lib.ui.styles"
+    namespace "com.messaging.lib.ui.styles"
 
     compileSdk versions.compileSdk
     defaultConfig {

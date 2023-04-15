@@ -28,7 +28,7 @@ import com.airbnb.mvrx.Mavericks
 import com.airbnb.mvrx.MavericksView
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
-import im.vector.lib.core.utils.compat.getParcelableCompat
+import com.messaging.lib.core.utils.compat.getParcelableCompat
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

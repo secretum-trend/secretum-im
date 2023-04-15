@@ -1,0 +1,100 @@
+/*
+ * Copyright (c) 2022 New Vector Ltd
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
+
+package com.messaging.scrtm.features.start
+
+import com.airbnb.mvrx.MavericksViewModelFactory
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
+import com.messaging.scrtm.core.di.ActiveSessionHolder
+import com.messaging.scrtm.core.di.MavericksAssistedViewModelFactory
+import com.messaging.scrtm.core.di.hiltMavericksViewModelFactory
+import com.messaging.scrtm.core.dispatchers.CoroutineDispatchers
+import com.messaging.scrtm.core.platform.VectorViewModel
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import org.matrix.android.sdk.api.auth.AuthenticationService
+import org.matrix.android.sdk.api.auth.login.LoginWizard
+import kotlin.time.Duration.Companion.seconds
+
+class StartAppViewModel @AssistedInject constructor(
+    @Assisted val initialState: StartAppViewState,
+    private val authenticationService: AuthenticationService,
+    private val sessionHolder: ActiveSessionHolder,
+    private val dispatchers: CoroutineDispatchers,
+) : VectorViewModel<StartAppViewState, StartAppAction, StartAppViewEvent>(initialState) {
+
+    @AssistedFactory
+    interface Factory : MavericksAssistedViewModelFactory<StartAppViewModel, StartAppViewState> {
+        override fun create(initialState: StartAppViewState): StartAppViewModel
+    }
+
+    private val loginWizard: LoginWizard
+        get() = authenticationService.getLoginWizard()
+
+    companion object : MavericksViewModelFactory<StartAppViewModel, StartAppViewState> by hiltMavericksViewModelFactory()
+
+    fun shouldStartApp(): Boolean {
+        return sessionHolder.isWaitingForSessionInitialization()
+    }
+
+    override fun handle(action: StartAppAction) {
+        when (action) {
+            StartAppAction.StartApp -> handleStartApp()
+        }
+    }
+
+    private fun handleStartApp() {
+        handleLongProcessing()
+        viewModelScope.launch(dispatchers.io) {
+            // This can take time because of DB migration(s), so do it in a background task.
+            eagerlyInitializeSession()
+            _viewEvents.post(StartAppViewEvent.AppStarted)
+        }
+    }
+
+    private suspend fun eagerlyInitializeSession() {
+        sessionHolder.getOrInitializeSession()
+    }
+
+    private fun handleLongProcessing() {
+        viewModelScope.launch(Dispatchers.Default) {
+            delay(1.seconds.inWholeMilliseconds)
+            setState { copy(mayBeLongToProcess = true) }
+            _viewEvents.post(StartAppViewEvent.StartForegroundService)
+        }
+    }
+
+
+//    private fun handleLogin() {
+//        val safeLoginWizard = loginWizard
+//        currentJob = viewModelScope.launch {
+//            try {
+//                val result = safeLoginWizard.login(
+//                    action.username,
+//                    action.password,
+//                    action.initialDeviceName
+//                )
+//                reAuthHelper.data = action.password
+//                onSessionCreated(result, authenticationDescription = AuthenticationDescription.Login)
+//            } catch (failure: Throwable) {
+//                Log.e(failure.message)
+//            }
+//        }
+//    }
+}

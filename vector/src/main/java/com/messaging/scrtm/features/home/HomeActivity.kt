@@ -252,7 +252,7 @@ class HomeActivity :
 //                is HomeActivityViewEvents.CurrentSessionNotVerified -> handleOnNewSession(it)
 //                is HomeActivityViewEvents.CurrentSessionCannotBeVerified -> handleCantVerify(it)
                 HomeActivityViewEvents.PromptToEnableSessionPush -> handlePromptToEnablePush()
-                HomeActivityViewEvents.StartRecoverySetupFlow -> handleStartRecoverySetup()
+//                HomeActivityViewEvents.StartRecoverySetupFlow -> handleStartRecoverySetup()
 //                is HomeActivityViewEvents.ForceVerification -> {
 //                    if (it.sendRequest) {
 //                        navigator.requestSelfSessionVerification(this)

@@ -20,10 +20,10 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import com.messaging.scrtm.features.DefaultVectorFeatures
-import com.messaging.scrtm.DefaultVectorOverrides
-import com.messaging.scrtm.VectorFeatures
-import com.messaging.scrtm.features.VectorOverrides
+import im.vector.app.features.DefaultVectorFeatures
+import im.vector.app.core.DefaultVectorOverrides
+import im.vector.app.core.VectorFeatures
+import im.vector.app.core.features.VectorOverrides
 
 @InstallIn(SingletonComponent::class)
 @Module

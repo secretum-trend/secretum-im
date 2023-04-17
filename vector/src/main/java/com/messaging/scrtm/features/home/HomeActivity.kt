@@ -248,25 +248,26 @@ class HomeActivity :
 
         homeActivityViewModel.observeViewEvents {
             when (it) {
-                is HomeActivityViewEvents.AskPasswordToInitCrossSigning -> handleAskPasswordToInitCrossSigning(it)
-                is HomeActivityViewEvents.CurrentSessionNotVerified -> handleOnNewSession(it)
-                is HomeActivityViewEvents.CurrentSessionCannotBeVerified -> handleCantVerify(it)
+//                is HomeActivityViewEvents.AskPasswordToInitCrossSigning -> handleAskPasswordToInitCrossSigning(it)
+//                is HomeActivityViewEvents.CurrentSessionNotVerified -> handleOnNewSession(it)
+//                is HomeActivityViewEvents.CurrentSessionCannotBeVerified -> handleCantVerify(it)
                 HomeActivityViewEvents.PromptToEnableSessionPush -> handlePromptToEnablePush()
                 HomeActivityViewEvents.StartRecoverySetupFlow -> handleStartRecoverySetup()
-                is HomeActivityViewEvents.ForceVerification -> {
-                    if (it.sendRequest) {
-                        navigator.requestSelfSessionVerification(this)
-                    } else {
-                        navigator.waitSessionVerification(this)
-                    }
-                }
-                is HomeActivityViewEvents.OnCrossSignedInvalidated -> handleCrossSigningInvalidated(it)
+//                is HomeActivityViewEvents.ForceVerification -> {
+//                    if (it.sendRequest) {
+//                        navigator.requestSelfSessionVerification(this)
+//                    } else {
+//                        navigator.waitSessionVerification(this)
+//                    }
+//                }
+//                is HomeActivityViewEvents.OnCrossSignedInvalidated -> handleCrossSigningInvalidated(it)
                 HomeActivityViewEvents.ShowAnalyticsOptIn -> handleShowAnalyticsOptIn()
                 HomeActivityViewEvents.ShowNotificationDialog -> handleShowNotificationDialog()
                 HomeActivityViewEvents.ShowReleaseNotes -> handleShowReleaseNotes()
                 HomeActivityViewEvents.NotifyUserForThreadsMigration -> handleNotifyUserForThreadsMigration()
                 is HomeActivityViewEvents.MigrateThreads -> migrateThreadsIfNeeded(it.checkSession)
                 is HomeActivityViewEvents.AskUserForPushDistributor -> askUserToSelectPushDistributor()
+                else -> {}
             }
         }
         homeActivityViewModel.onEach { renderState(it) }

@@ -50,4 +50,8 @@
 
     <color name="palette_blue">#5267E3</color>
 
+    <!-- new color -->
+    <color name="background">#141C35</color>
+    <color name="navigation">#1E2744</color>
+
 </resources>

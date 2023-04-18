@@ -439,7 +439,7 @@
     <string name="bottom_action_notification">Notifications</string>
     <string name="bottom_action_favourites">Favorites</string>
     <string name="bottom_action_people">People</string>
-    <string name="bottom_action_rooms">Rooms</string>
+    <string name="bottom_action_rooms">Channels</string>
 
     <!-- Home screen -->
     <string name="home_filter_placeholder_home">Filter channel names</string>
@@ -485,9 +485,9 @@
     <string name="no_more_results">No more results</string>
 
     <!-- Channels fragment -->
-    <string name="rooms_header">Rooms</string>
+    <string name="rooms_header">Channels</string>
 
-    <string name="settings_category_room_directory">Room directory</string>
+    <string name="settings_category_room_directory">Channel directory</string>
     <string name="settings_room_directory_show_all_rooms">Show channels with explicit content</string>
     <string name="settings_room_directory_show_all_rooms_summary">Show all channels in the channel directory, including channels with explicit content.</string>
 
@@ -742,7 +742,7 @@
     <string name="ssl_only_accept">Only accept the certificate if the server administrator has published a fingerprint that matches the one above.</string>
 
     <!-- Channel Permissions -->
-    <string name="room_settings_permissions_title">Room permissions</string>
+    <string name="room_settings_permissions_title">Channel permissions</string>
     <string name="space_settings_permissions_title">Space permissions</string>
     <string name="room_settings_permissions_subtitle">View and update the roles required to change various parts of the channel.</string>
     <string name="space_settings_permissions_subtitle">View and update the roles required to change various parts of the space.</string>
@@ -972,10 +972,10 @@
     <string name="settings_encrypted_group_messages">Encrypted group messages</string>
     <string name="settings_mentions_at_room">\@room</string>
     <string name="settings_messages_containing_keywords">Keywords</string>
-    <string name="settings_room_invitations">Room invitations</string>
+    <string name="settings_room_invitations">Channel invitations</string>
     <string name="settings_call_invitations">Call invitations</string>
     <string name="settings_messages_by_bot">Messages by bot</string>
-    <string name="settings_room_upgrades">Room upgrades</string>
+    <string name="settings_room_upgrades">Channel upgrades</string>
     <string name="settings_mentions_and_keywords_encryption_notice">You won’t get notifications for mentions &amp; keywords in encrypted channels on mobile.</string>
 
     <string name="settings_background_sync">Background synchronization</string>
@@ -1150,16 +1150,16 @@
     <string name="room_settings_room_notifications_encryption_notice">Please note that mentions &amp; keyword notifications are not available in encrypted channels on mobile.</string>
     <string name="room_settings_room_notifications_manage_notifications">You can manage notifications in %1$s.</string>
     <string name="room_settings_room_notifications_account_settings">Account settings</string>
-    <string name="room_settings_room_read_history_rules_pref_title">Room History Readability</string>
+    <string name="room_settings_room_read_history_rules_pref_title">Channel History Readability</string>
     <string name="room_settings_room_read_history_rules_pref_dialog_title">Who can read history?</string>
     <string name="room_settings_room_read_history_dialog_subtitle">Changes to who can read history will only apply to future messages in this channel. The visibility of existing history will be unchanged.</string>
     <string name="room_settings_access_rules_pref_dialog_title">Who can access?</string>
-    <string name="room_settings_room_access_title">Room access</string>
+    <string name="room_settings_room_access_title">Channel access</string>
     <string name="room_settings_space_access_title">Space access</string>
     <string name="room_settings_guest_access_title">Allow guests to join</string>
 
     <!-- channel settings : alias -->
-    <string name="room_settings_alias_title">Room addresses</string>
+    <string name="room_settings_alias_title">Channel addresses</string>
     <string name="room_settings_alias_subtitle">See and managed addresses of this channel, and its visibility in the channel directory.</string>
     <string name="space_settings_alias_title">Space addresses</string>
     <string name="space_settings_alias_subtitle">See and managed addresses of this space.</string>
@@ -1227,7 +1227,7 @@
     <!-- advanced -->
     <string name="room_settings_category_advanced_title">Advanced</string>
     <string name="room_settings_room_internal_id">This channel’s internal ID</string>
-    <string name="room_settings_room_version_title">Room version</string>
+    <string name="room_settings_room_version_title">Channel version</string>
     <string name="room_settings_labs_pref_title">Labs</string>
     <string name="room_settings_labs_warning_message">These are experimental features that may break in unexpected ways. Use with caution.</string>
 
@@ -1313,7 +1313,7 @@
     <string name="notification_unread_notified_messages_in_room_and_invitation">%1$s in %2$s and %3$s"</string>
     <string name="notification_unread_notified_messages_and_invitation">%1$s and %2$s"</string>
     <string name="notification_unknown_new_event">New Event</string>
-    <string name="notification_unknown_room_name">Room</string>
+    <string name="notification_unknown_room_name">Channel</string>
     <string name="notification_new_messages">New Messages</string>
     <string name="notification_new_invitation">New Invitation</string>
     <string name="notification_sender_me">Me</string>
@@ -1359,7 +1359,7 @@
     <string name="room_widget_permission_user_id">Your user ID</string>
     <string name="room_widget_permission_theme">Your theme</string>
     <string name="room_widget_permission_widget_id">Widget ID</string>
-    <string name="room_widget_permission_room_id">Room ID</string>
+    <string name="room_widget_permission_room_id">Channel ID</string>
 
 
     <string name="error_jitsi_not_supported_on_old_device">Sorry, conference calls with Jitsi are not supported on old devices (devices with Android OS below 6.0)</string>
@@ -1382,7 +1382,7 @@
     <string name="widget_integration_no_permission_in_room">You do not have permission to do that in this channel.</string>
     <string name="widget_integration_missing_room_id">Missing channel_id in request.</string>
     <string name="widget_integration_missing_user_id">Missing user_id in request.</string>
-    <string name="widget_integration_room_not_visible">Room %s is not visible.</string>
+    <string name="widget_integration_room_not_visible">Channel %s is not visible.</string>
     <string name="widget_integration_missing_parameter">A required parameter is missing.</string>
     <string name="room_add_matrix_apps">Add Matrix apps</string>
     <string name="room_manage_integrations">Manage Integrations</string>
@@ -1450,7 +1450,7 @@
     <!-- group details -->
     <string name="group_details_home">Home</string>
 
-    <string name="rooms">Rooms</string>
+    <string name="rooms">Channels</string>
     <string name="invited">Invited</string>
 
     <string name="has_been_removed">You have been removed from %1$s by %2$s</string>
@@ -1665,7 +1665,7 @@
     <string name="room_list_people_empty_title">Conversations</string>
     <!-- Note to translators: for RTL languages, the + will be at the bottom left. Please translate "bottom left" instead of "bottom right". Thanks! -->
     <string name="room_list_people_empty_body">Your direct message conversations will be displayed here. Tap the + at the bottom right to start some.</string>
-    <string name="room_list_rooms_empty_title">Rooms</string>
+    <string name="room_list_rooms_empty_title">Channels</string>
     <!-- Note to translators: for RTL languages, the + will be at the bottom left. Please translate "bottom left" instead of "bottom right". Thanks! -->
     <string name="room_list_rooms_empty_body">Your channels will be displayed here. Tap the + at the bottom right to find existing ones or start some of your own.</string>
 
@@ -1696,17 +1696,17 @@
     <string name="room_preview_no_preview">"This channel can't be previewed"</string>
     <string name="room_preview_not_found">This channel is not accessible at this time.\nTry again later, or ask a channel admin to check if you have access.</string>
     <string name="room_preview_no_preview_join">"This channel can't be previewed. Do you want to join it?"</string>
-    <string name="fab_menu_create_room">"Rooms"</string>
+    <string name="fab_menu_create_room">"Channels"</string>
     <string name="fab_menu_create_chat">"Direct Messages"</string>
 
     <!-- Create channel screen -->
     <string name="create_room_action_create">"CREATE"</string>
     <string name="create_room_action_go">Go</string>
-    <string name="create_room_name_section">"Room name"</string>
+    <string name="create_room_name_section">"Channel name"</string>
     <string name="create_room_name_hint">"Name"</string>
-    <string name="create_room_topic_section">"Room topic (optional)"</string>
+    <string name="create_room_topic_section">"Channel topic (optional)"</string>
     <string name="create_room_topic_hint">"Topic"</string>
-    <string name="create_room_settings_section">"Room settings"</string>
+    <string name="create_room_settings_section">"Channel settings"</string>
     <string name="create_room_public_title">"Public"</string>
     <string name="create_room_public_description">"Anyone will be able to join this channel"</string>
     <string name="create_room_federation_error">"The channel has been created, but some invitations have not been sent for the following reason:\n\n%s"</string>
@@ -1944,7 +1944,7 @@
     <string name="room_list_quick_actions_low_priority_add">"Add to low priority"</string>
     <string name="room_list_quick_actions_low_priority_remove">"Remove from low priority"</string>
     <string name="room_list_quick_actions_leave">"Leave the channel"</string>
-    <string name="room_list_quick_actions_room_settings">"Room settings"</string>
+    <string name="room_list_quick_actions_room_settings">"Channel settings"</string>
 
     <string name="notice_member_no_changes">"%1$s made no changes"</string>
     <string name="notice_member_no_changes_by_you">"You made no changes"</string>
@@ -2335,7 +2335,7 @@
     <string name="room_profile_section_security_learn_more">Learn more</string>
     <string name="room_profile_section_more">More</string>
     <string name="room_profile_section_admin">Admin Actions</string>
-    <string name="room_profile_section_more_settings">Room settings</string>
+    <string name="room_profile_section_more_settings">Channel settings</string>
     <string name="direct_room_profile_section_more_settings">Settings</string>
     <string name="room_profile_section_more_notifications">Notifications</string>
     <plurals name="room_profile_section_more_member_list">
@@ -2415,7 +2415,7 @@
     <string name="settings_server_upload_size_content">Your homeserver accepts attachments (files, media, etc.) with a size up to %s.</string>
     <string name="settings_server_upload_size_unknown">The limit is unknown.</string>
     <!-- Please use the same emoji in the translations -->
-    <string name="settings_server_room_versions">Room Versions 👓</string>
+    <string name="settings_server_room_versions">Channel Versions 👓</string>
     <string name="settings_server_default_room_version">Default Version</string>
     <string name="settings_server_room_version_stable">stable</string>
     <string name="settings_server_room_version_unstable">unstable</string>
@@ -2756,7 +2756,7 @@
     <string name="set_a_security_phrase_again_notice">Enter your Security Phrase again to confirm it.</string>
 
     <!-- Channel Settings -->
-    <string name="room_settings_name_hint">Room Name</string>
+    <string name="room_settings_name_hint">Channel Name</string>
     <string name="room_settings_topic_hint">Topic</string>
     <string name="room_settings_save_success">You changed channel settings successfully</string>
     <string name="room_settings_set_avatar">Set avatar</string>
@@ -3284,7 +3284,7 @@
 
     <string name="room_message_notify_everyone">Notify the whole channel</string>
     <string name="room_message_autocomplete_users">Users</string>
-    <string name="room_message_autocomplete_notification">Room notification</string>
+    <string name="room_message_autocomplete_notification">Channel notification</string>
 
     <!-- Screen sharing -->
     <string name="screen_sharing_notification_title">${app_name} Screen Sharing</string>

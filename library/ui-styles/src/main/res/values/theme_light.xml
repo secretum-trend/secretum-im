@@ -57,17 +57,18 @@
 
         <!-- Material color -->
         <item name="colorPrimary">@color/palette_white</item>
-        <item name="colorPrimaryVariant">@color/element_accent_light</item>
+        <item name="colorPrimaryVariant">@color/navigation</item>
         <item name="colorOnPrimary">@android:color/white</item>
-        <item name="colorSecondary">@color/element_accent_light</item>
-        <item name="colorSecondaryVariant">@color/element_accent_light</item>
+        <item name="colorSecondary">@color/palette_blue</item>
+        <item name="colorSecondaryVariant">@color/navigation</item>
         <item name="colorOnSecondary">@android:color/white</item>
         <item name="colorError">@color/element_alert_light</item>
         <item name="colorOnError">@color/palette_white</item>
-        <item name="colorSurface">@color/element_background_light</item>
+        <item name="colorSurface">@color/navigation</item>
         <item name="colorOnSurface">?vctr_content_primary</item>
-        <item name="android:colorBackground">@color/element_background_light</item>
+        <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">?vctr_content_primary</item>
+
 
         <!--Material type attributes-->
         <item name="textAppearanceButton">@style/TextAppearance.Vector.Button</item>
@@ -123,7 +124,7 @@
         <!-- Use dark color, to have enough contrast with icons color. windowLightStatusBar is only available in API 23+ -->
         <item name="android:statusBarColor">@color/android_status_bar_background_dark</item>
         <!-- Use dark color, to have enough contrast with icons color. windowLightNavigationBar is only available in API 27+ -->
-        <item name="android:navigationBarColor">@color/android_navigation_bar_background_dark</item>
+        <item name="android:navigationBarColor">@color/navigation</item>
 
         <!-- enable window content transitions -->
         <item name="android:windowContentTransitions">true</item>

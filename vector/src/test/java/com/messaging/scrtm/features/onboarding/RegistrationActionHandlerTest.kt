@@ -136,7 +136,7 @@ class RegistrationActionHandlerTest {
         val orderedStages = listOf(Stage.ReCaptcha(mandatory = true, "ignored-key"), expectedFirstItem, Stage.Msisdn(mandatory = true))
         givenFlowResult(orderedStages)
 
-        val result = registrationActionHandler.processAction(state = aSelectedHomeserverState("https://dapp.secretum.io/"), RegisterAction.StartRegistration)
+        val result = registrationActionHandler.processAction(state = aSelectedHomeserverState("https://messaging.scrtm.cloud/"), RegisterAction.StartRegistration)
 
         result shouldBeEqualTo RegistrationActionHandler.Result.NextStage(expectedFirstItem)
     }

@@ -49,9 +49,11 @@
     <color name="palette_black_950">#21262C</color>
 
     <color name="palette_blue">#5267E3</color>
+    <color name="palette_blue_2">#213093</color>
 
     <!-- new color -->
     <color name="background">#141C35</color>
     <color name="navigation">#1E2744</color>
+    <color name="bg_item">#1D1F25</color>
 
 </resources>

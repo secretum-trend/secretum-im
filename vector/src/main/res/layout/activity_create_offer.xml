@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@color/background"
+            app:navigationIcon="@drawable/ic_back_24dp"
+            app:title="@string/creating_an_offer"
+            app:titleTextColor="@color/white" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/appBarLayout"
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="0dp">
+
+        <androidx.appcompat.widget.LinearLayoutCompat
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/bg_fill_coner_16"
+                android:paddingVertical="@dimen/alerter_padding_default"
+                app:layout_constraintTop_toBottomOf="@id/appBarLayout"
+                tools:layout_editor_absoluteX="0dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/appCompatImageView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/alerter_padding_default"
+                    android:tint="@color/white"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView"
+                    app:srcCompat="@drawable/ic_info" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/appCompatTextView"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/alerter_padding_default"
+                    android:fontFamily="@font/manrope_bold"
+                    android:text="@string/attention"
+                    android:textSize="16sp"
+                    app:layout_constraintEnd_toStartOf="@id/icArrow"
+                    app:layout_constraintStart_toEndOf="@+id/appCompatImageView"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/icArrow"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/alerter_padding_default"
+                    app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/appCompatTextView"
+                    app:srcCompat="@drawable/ic_arrow_bottom" />
+
+                <TextView
+                    android:id="@+id/msgAttention"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                    android:layout_marginTop="10dp"
+                    android:fontFamily="@font/manrope_medium"
+                    android:text="@string/attention_message"
+                    android:textSize="11sp"
+                    app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/bg_stroke_15"
+                android:paddingVertical="@dimen/alerter_padding_default">
+
+                <TextView
+                    android:id="@+id/textView2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:text="5.12345 SOL"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="27dp"
+                    android:fontFamily="@font/manrope_semi_bold"
+                    android:text="Solana"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="27dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/ic_solana" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/alerter_padding_default"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/manrope_bold"
+                android:text="@string/your_address"
+                android:textSize="14sp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_fill_coner_16"
+                android:backgroundTint="#16267D"
+                android:ellipsize="end"
+                android:fontFamily="@font/manrope_regular"
+                android:gravity="center_vertical"
+                android:minHeight="40dp"
+                android:paddingHorizontal="@dimen/alerter_padding_default"
+                android:singleLine="true"
+                tools:text="Fm52y4r5V9gEcu5PkZfNri8dMZbJnffXcVeGNkvDasdfasdfadsfasdf" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:layout_marginTop="12dp"
+                android:text="@string/what_are_u_sending" />
+
+            <include
+                android:id="@+id/selectSending"
+                layout="@layout/view_select_sending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
+            <include
+                layout="@layout/view_nft_or_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_marginTop="30dp"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:background="@color/white"
+                android:layout_height="2dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:textSize="14sp"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:layout_marginTop="23dp"
+                android:text="@string/what_you_want_receiver"
+                android:layout_height="wrap_content"/>
+
+            <include
+                android:id="@+id/selectSending2"
+                layout="@layout/view_select_sending"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:fontFamily="@font/manrope_semi_bold"
+                android:textSize="14sp"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:layout_marginTop="23dp"
+                android:text="@string/recipient_address"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:layout_marginTop="5dp"
+                android:background="@drawable/bg_fill_coner_16"
+                android:backgroundTint="#16267D"
+                android:ellipsize="end"
+                android:fontFamily="@font/manrope_regular"
+                android:gravity="center_vertical"
+                android:minHeight="40dp"
+                android:paddingHorizontal="@dimen/alerter_padding_default"
+                android:singleLine="true"
+                tools:text="Fm52y4r5V9gEcu5PkZfNri8dMZbJnffXcVeGNkvDasdfasdfadsfasdf" />
+
+            <include
+                layout="@layout/view_nft_or_token"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+
+                />
+            <Button
+                android:id="@+id/form_submit_button"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical|end"
+                android:text="@string/preview_your_trade"
+                android:minHeight="58dp"
+                android:layout_marginEnd="@dimen/alerter_activity_vertical_margin"
+                android:layout_marginStart="@dimen/alerter_activity_vertical_margin"
+                android:backgroundTint="@color/palette_blue"
+                />
+
+
+
+        </androidx.appcompat.widget.LinearLayoutCompat>
+
+    </androidx.core.widget.NestedScrollView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

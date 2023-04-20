@@ -1446,7 +1446,7 @@
 
     <!-- groups creation -->
     <string name="create">Create</string>
-    <string name="create_offer">Create an offer</string>
+    <string name="create_channel">Create channel</string>
 
     <!-- group details -->
     <string name="group_details_home">Home</string>
@@ -3538,5 +3538,18 @@
     <string name="login_title">Login with Phantom wallet</string>
     <string name="no_wallet">I don\'t have a wallet, </string>
     <string name="download_wallet">Download here</string>
+
+
+    <!-- -trade -->
+    <string name="creating_an_offer">Creating an offer</string>
+    <string name="attention">Attention</string>
+    <string name="attention_message">If the recipient approves the pool, you will pay for fee of one transaction. In case if the recipient rejects the pool, you will pay for fees of two transactions.</string>
+    <string name="your_address">Your address</string>
+    <string name="what_are_u_sending">What are you sending?</string>
+    <string name="choose_nft">Choose NFT</string>
+    <string name="what_you_want_receiver">What do you want to receive?</string>
+    <string name="recipient_address">Recipient address</string>
+    <string name="preview_your_trade">Preview your trade</string>
+    <string name="how_much_u_want">How much do you expect to get?</string>
 
 </resources>

@@ -1446,6 +1446,7 @@
 
     <!-- groups creation -->
     <string name="create">Create</string>
+    <string name="create_offer">Create an offer</string>
 
     <!-- group details -->
     <string name="group_details_home">Home</string>

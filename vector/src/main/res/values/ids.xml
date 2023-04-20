@@ -2,6 +2,6 @@
 <resources>
     <item name="space_item_home" type="id" />
 
-    <string name="service_url_http">https://messaging.scrtm.cloud</string>
-    <string name="service_url">messaging.scrtm.cloud</string>
+    <string name="service_url_http">https://dapp.secretum.io</string>
+    <string name="service_url">dapp.secretum.io</string>
 </resources>

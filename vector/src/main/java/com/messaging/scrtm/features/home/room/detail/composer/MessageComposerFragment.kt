@@ -358,7 +358,8 @@ class MessageComposerFragment : VectorBaseFragment<FragmentComposerBinding>(), A
                         attachmentTypeSelector = AttachmentTypeSelectorView(vectorBaseActivity, vectorBaseActivity.layoutInflater, this@MessageComposerFragment)
                         attachmentTypeSelector.setAttachmentVisibility(
                                 AttachmentType.LOCATION,
-                                vectorFeatures.isLocationSharingEnabled(),
+//                                vectorFeatures.isLocationSharingEnabled(),
+                                false,
                         )
                         attachmentTypeSelector.setAttachmentVisibility(
                                 AttachmentType.POLL, !isThreadTimeLine()

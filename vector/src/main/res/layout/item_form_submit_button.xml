@@ -9,11 +9,12 @@
 
     <Button
         android:id="@+id/form_submit_button"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="center_vertical|end"
         android:layout_marginEnd="@dimen/alerter_activity_vertical_margin"
-        android:backgroundTint="@color/element_content_secondary_light"
+        android:layout_marginStart="@dimen/alerter_activity_vertical_margin"
+        android:backgroundTint="@color/palette_blue"
         tools:text="@string/auth_submit" />
 
 </FrameLayout>

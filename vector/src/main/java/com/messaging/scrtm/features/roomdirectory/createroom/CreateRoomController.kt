@@ -201,7 +201,7 @@ class CreateRoomController @Inject constructor(
         formSubmitButtonItem {
             id("submit")
             enabled(enableFormElement)
-            buttonTitleId(R.string.create_room_action_create)
+            buttonTitleId(R.string.create_offer)
             buttonClickListener { host.listener?.submit() }
         }
     }

@@ -5,7 +5,7 @@
 
     <!-- server urls -->
 <!--    <string name="matrix_org_server_url" translatable="false">https://matrix.org</string>-->
-    <string name="matrix_org_server_url" translatable="false">https://messaging.scrtm.cloud/</string>
+    <string name="matrix_org_server_url" translatable="false">https://dapp.secretum.io/</string>
 
     <!-- Rageshake configuration -->
     <string name="bug_report_url" translatable="false">https://riot.im/bugreports/submit</string>

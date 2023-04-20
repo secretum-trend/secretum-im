@@ -90,6 +90,7 @@
                 android:layout_marginStart="2dp"
                 android:background="?android:attr/selectableItemBackground"
                 android:contentDescription="@string/attachment_type_location"
+                android:visibility="gone"
                 android:src="@drawable/ic_attachment_location"
                 app:tint="?colorPrimary" />
 

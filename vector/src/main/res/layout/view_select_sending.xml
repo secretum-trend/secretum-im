@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RadioGroup xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:paddingHorizontal="16dp">
 
     <LinearLayout
+        android:id="@+id/layoutToken"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_weight="1"
@@ -13,18 +14,19 @@
         android:orientation="horizontal">
 
         <RadioButton
-            android:layout_width="0dp"
+            android:id="@+id/radioToken"
+            android:layout_width="match_parent"
+            android:clickable="false"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
             android:minHeight="50dp"
             android:text="Token"
             android:textColor="@color/white" />
-
 
     </LinearLayout>
 
 
     <LinearLayout
+        android:id="@+id/layoutNft"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
@@ -32,15 +34,14 @@
         android:background="@drawable/selector_radio_button_trade">
 
         <RadioButton
-            style="@null"
-            android:layout_width="0dp"
+            android:id="@+id/radioNft"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:checked="true"
+            android:clickable="false"
             android:minHeight="50dp"
             android:text="NFT"
             android:textColor="@color/white" />
     </LinearLayout>
 
 
-</RadioGroup>
+</LinearLayout>

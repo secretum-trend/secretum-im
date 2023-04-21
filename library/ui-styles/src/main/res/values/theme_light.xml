@@ -122,7 +122,7 @@
         <item name="lockscreen_next_theme">@style/PinCodeNextButtonStyle</item>
 
         <!-- Use dark color, to have enough contrast with icons color. windowLightStatusBar is only available in API 23+ -->
-        <item name="android:statusBarColor">@color/android_status_bar_background_dark</item>
+        <item name="android:statusBarColor">@color/navigation</item>
         <!-- Use dark color, to have enough contrast with icons color. windowLightNavigationBar is only available in API 27+ -->
         <item name="android:navigationBarColor">@color/navigation</item>
 
@@ -159,9 +159,15 @@
 
         <!-- WYSIWYG Editor -->
         <item name="vctr_rich_text_editor_menu_button_background">@color/vctr_rich_text_editor_menu_button_background_light</item>
+
     </style>
 
     <style name="Theme.Vector.Light" parent="Base.Theme.Vector.Light" />
+
+
+    <style name="CustomBottomSheetDialogTheme" parent="Theme.Design.BottomSheetDialog">
+        <item name="android:background">@drawable/bg_bottom_sheet</item>
+    </style>
 
 </resources>
 

@@ -57,6 +57,12 @@
         app:showAsAction="always" />
 
     <item
+        android:id="@+id/trade"
+        android:title="@string/trade"
+        android:icon="@drawable/ic_trade"
+        app:showAsAction="always" />
+
+    <item
         android:id="@+id/open_matrix_apps"
         android:title="@string/room_add_matrix_apps"
         app:actionLayout="@layout/custom_action_item_layout_badge"

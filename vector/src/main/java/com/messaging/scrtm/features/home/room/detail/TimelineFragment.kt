@@ -100,6 +100,7 @@ import com.messaging.scrtm.core.utils.shareMedia
 import com.messaging.scrtm.core.utils.shareText
 import com.messaging.scrtm.core.utils.startInstallFromSourceIntent
 import com.messaging.scrtm.core.utils.toast
+import com.messaging.scrtm.databinding.ActivityCreateOfferBinding
 import com.messaging.scrtm.databinding.DialogReportContentBinding
 import com.messaging.scrtm.databinding.FragmentTimelineBinding
 import com.messaging.scrtm.features.VectorFeatures
@@ -173,6 +174,7 @@ import com.messaging.scrtm.features.widgets.WidgetActivity
 import com.messaging.scrtm.features.widgets.WidgetArgs
 import com.messaging.scrtm.features.widgets.WidgetKind
 import com.messaging.scrtm.features.widgets.permissions.RoomWidgetPermissionBottomSheet
+import com.messaging.scrtm.trade.creatingoffer.CreateOfferActivity
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -870,6 +872,11 @@ class TimelineFragment :
             }
             R.id.video_call -> {
                 callActionsHandler.onVideoCallClicked()
+                true
+            }
+            R.id.trade -> {
+                val intent = Intent(requireActivity(), CreateOfferActivity::class.java)
+                startActivity(intent)
                 true
             }
             R.id.menu_timeline_thread_list -> {

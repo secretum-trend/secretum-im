@@ -3551,5 +3551,10 @@
     <string name="recipient_address">Recipient address</string>
     <string name="preview_your_trade">Preview your trade</string>
     <string name="how_much_u_want">How much do you expect to get?</string>
+    <string name="trade">Trade</string>
+    <string name="from">From</string>
+    <string name="to">To</string>
+    <string name="price">Price</string>
+    <string name="enable_accept_partialy">Enable accept partialy</string>
 
 </resources>

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:background="@drawable/login_bg"
     android:layout_height="match_parent">
@@ -18,6 +17,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="@color/navigation"
@@ -225,6 +225,7 @@
                     android:text="Fm52y4r5V9gEcu5PkZfNri8dMZbJnffXcVeGNkvDasdfasdfadsfasdf" />
 
                 <include
+                    android:id="@+id/tokenOrNft2"
                     layout="@layout/view_nft_or_token"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

@@ -7,7 +7,7 @@ import com.messaging.scrtm.trade.custom.GridSpacingItemDecoration
 
 class ChooseNFTActivity : AppCompatActivity() {
     val binding by lazy { ActivityChooseNftBinding.inflate(layoutInflater) }
-    val chooseNFTAdapter  by lazy { ChooseNFTAdapter() }
+    private val chooseNFTAdapter  by lazy { ChooseNFTAdapter() }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

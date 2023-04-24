@@ -12,18 +12,34 @@ class ViewSelectSending@JvmOverloads constructor(
     defStyleAttr: Int = 0
 ) : FrameLayout(context, attrs, defStyleAttr) {
     val binding by lazy { ViewSelectSendingBinding.inflate(LayoutInflater.from(context), this, true) }
+    var onClickListener : ((TypeSending) -> Unit)? = null
 
-    init {
-        binding.layoutToken.setOnClickListener {
+    private var typeSending = TypeSending.Token
+    set(value) {
+        field = value
+        if (typeSending == TypeSending.Token){
             binding.layoutToken.isSelected = true
             binding.radioToken.isChecked = true
 
             binding.layoutNft.isSelected = false
             binding.radioNft.isChecked = false
+        }else {
+            binding.layoutToken.isSelected = false
+            binding.radioToken.isChecked = false
 
+            binding.layoutNft.isSelected = true
+            binding.radioNft.isChecked = true
         }
+    }
 
-        binding.layoutNft.setOnClickListener {
+    init {
+        if (typeSending == TypeSending.Token){
+            binding.layoutToken.isSelected = true
+            binding.radioToken.isChecked = true
+
+            binding.layoutNft.isSelected = false
+            binding.radioNft.isChecked = false
+        }else {
             binding.layoutToken.isSelected = false
             binding.radioToken.isChecked = false
 
@@ -31,6 +47,20 @@ class ViewSelectSending@JvmOverloads constructor(
             binding.radioNft.isChecked = true
         }
 
+        binding.layoutToken.setOnClickListener {
+            typeSending = TypeSending.Token
+            onClickListener?.invoke(typeSending)
+        }
+
+        binding.layoutNft.setOnClickListener {
+            typeSending = TypeSending.Nft
+            onClickListener?.invoke(typeSending)
+        }
+
     }
 
+    enum class TypeSending {
+        Token ,
+        Nft
+    }
 }

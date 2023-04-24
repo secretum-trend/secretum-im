@@ -85,6 +85,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                        android:visibility="gone"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/manrope_medium"
                         android:text="@string/attention_message"

@@ -56,17 +56,17 @@
         <item name="vctr_unread_background">?vctr_notice_secondary</item>
 
         <!-- Material color -->
-        <item name="colorPrimary">@color/element_accent_dark</item>
-        <item name="colorPrimaryVariant">@color/element_accent_dark</item>
+        <item name="colorPrimary">@color/palette_white</item>
+        <item name="colorPrimaryVariant">@color/navigation</item>
         <item name="colorOnPrimary">@android:color/white</item>
-        <item name="colorSecondary">@color/element_accent_dark</item>
-        <item name="colorSecondaryVariant">@color/element_accent_dark</item>
+        <item name="colorSecondary">@color/palette_blue</item>
+        <item name="colorSecondaryVariant">@color/navigation</item>
         <item name="colorOnSecondary">@android:color/white</item>
-        <item name="colorError">@color/element_alert_dark</item>
+        <item name="colorError">@color/element_alert_light</item>
         <item name="colorOnError">@color/palette_white</item>
-        <item name="colorSurface">@color/element_system_dark</item>
+        <item name="colorSurface">@color/navigation</item>
         <item name="colorOnSurface">?vctr_content_primary</item>
-        <item name="android:colorBackground">@color/element_background_dark</item>
+        <item name="android:colorBackground">@color/background</item>
         <item name="colorOnBackground">?vctr_content_primary</item>
 
         <!--Material type attributes-->

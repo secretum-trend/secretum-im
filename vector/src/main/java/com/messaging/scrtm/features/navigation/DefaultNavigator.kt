@@ -410,7 +410,8 @@ class DefaultNavigator @Inject constructor(
     }
 
     override fun openAnalyticsOptIn(context: Context) {
-        context.startActivity(Intent(context, AnalyticsOptInActivity::class.java))
+        //hide analyticActivity
+//        context.startActivity(Intent(context, AnalyticsOptInActivity::class.java))
     }
 
     override fun openTerms(

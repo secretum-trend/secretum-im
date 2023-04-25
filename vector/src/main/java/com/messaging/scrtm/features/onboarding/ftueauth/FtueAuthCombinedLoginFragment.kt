@@ -29,6 +29,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.extensions.*
 import com.messaging.scrtm.core.utils.Resource
+import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.databinding.FragmentFtueCombinedLoginBinding
 import com.messaging.scrtm.features.VectorFeatures
 import com.messaging.scrtm.features.login.*
@@ -48,6 +49,8 @@ class FtueAuthCombinedLoginFragment :
     lateinit var loginErrorParser: LoginErrorParser
     @Inject
     lateinit var vectorFeatures: VectorFeatures
+    @Inject
+    lateinit var sessionPref: SessionPref
 
     private val mwaLauncher = registerForActivityResult(
         MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity(lifecycle)

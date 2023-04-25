@@ -17,6 +17,7 @@
 package com.messaging.scrtm.core.epoxy.profiles
 
 import android.widget.TextView
+import androidx.core.content.ContextCompat
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.messaging.scrtm.R
@@ -28,6 +29,7 @@ abstract class ProfileSectionItem : VectorEpoxyModel<ProfileSectionItem.Holder>(
 
     @EpoxyAttribute
     lateinit var title: String
+
 
     override fun bind(holder: Holder) {
         super.bind(holder)

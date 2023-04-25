@@ -18,17 +18,13 @@ package com.messaging.scrtm.features.onboarding
 
 import android.content.Context
 import android.net.Uri
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.auth.GetNonceByQuery
 import com.auth.VerifySignatureMutation
-import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
-import com.solana.mobilewalletadapter.common.ProtocolContract
-import dagger.assisted.Assisted
-import dagger.assisted.AssistedFactory
-import dagger.assisted.AssistedInject
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.di.ActiveSessionHolder
 import com.messaging.scrtm.core.di.MavericksAssistedViewModelFactory
@@ -41,6 +37,7 @@ import com.messaging.scrtm.core.session.ConfigureAndStartSessionUseCase
 import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.core.utils.ensureProtocol
 import com.messaging.scrtm.core.utils.ensureTrailingSlash
+import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.features.VectorFeatures
 import com.messaging.scrtm.features.VectorOverrides
 import com.messaging.scrtm.features.analytics.AnalyticsTracker
@@ -53,6 +50,12 @@ import com.messaging.scrtm.features.onboarding.usecase.Base58EncodeUseCase
 import com.messaging.scrtm.features.onboarding.usecase.MemoTransactionVersion
 import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
 import com.messaging.scrtm.features.onboarding.usecase.OffChainMessageSigningUseCase
+import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
+import com.solana.mobilewalletadapter.clientlib.scenario.LocalAssociationScenario
+import com.solana.mobilewalletadapter.common.ProtocolContract
+import dagger.assisted.Assisted
+import dagger.assisted.AssistedFactory
+import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
@@ -98,7 +101,8 @@ class OnboardingViewModel @AssistedInject constructor(
     private val registrationActionHandler: RegistrationActionHandler,
     private val sdkIntProvider: BuildVersionSdkIntProvider,
     private val configureAndStartSessionUseCase: ConfigureAndStartSessionUseCase,
-    private val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
+    private var sessionPref: SessionPref
 ) : VectorViewModel<OnboardingViewState, OnboardingAction, OnboardingViewEvents>(initialState) {
 
     @AssistedFactory
@@ -1228,6 +1232,9 @@ class OnboardingViewModel @AssistedInject constructor(
                     )
                 if (authenticateResult != null) {
                     _authenticate.value = Resource.success(authenticateResult)
+                    sessionPref.address = Base58EncodeUseCase.invoke(_uiState.value.publicKey!!)
+                    Timber.tag("address").d(Base58EncodeUseCase.invoke(_uiState.value.publicKey!!))
+
                 } else {
                     _authenticate.value = Resource.error("error")
                 }

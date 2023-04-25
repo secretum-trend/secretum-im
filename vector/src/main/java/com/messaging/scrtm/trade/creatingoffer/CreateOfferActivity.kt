@@ -9,26 +9,37 @@ import androidx.appcompat.app.AppCompatActivity
 import com.messaging.lib.core.utils.view.hide
 import com.messaging.lib.core.utils.view.show
 import com.messaging.scrtm.R
+import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.databinding.ActivityCreateOfferBinding
 import com.messaging.scrtm.trade.choosenft.ChooseNFTActivity
 import com.messaging.scrtm.trade.custom.ViewSelectSending
 import com.messaging.scrtm.trade.previewtrade.PreviewTradeBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
+
 
 @AndroidEntryPoint
 class CreateOfferActivity : AppCompatActivity() {
     val binding by lazy { ActivityCreateOfferBinding.inflate(layoutInflater) }
     val viewModel by viewModels<CreateOfferViewModel>()
-    val chooseNftResultContracts = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    private val chooseNftResultContracts = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
 
     }
+
+    @Inject
+    lateinit var sessionPref : SessionPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
+        initViews()
         initActions()
         observingValue()
+    }
+
+    private fun initViews() {
+        binding.tvYourAddress.text = sessionPref.address
+
     }
 
     private fun observingValue() {

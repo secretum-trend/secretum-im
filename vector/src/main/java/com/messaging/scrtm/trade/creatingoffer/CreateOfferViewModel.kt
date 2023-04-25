@@ -14,4 +14,6 @@ class CreateOfferViewModel @Inject constructor() : ViewModel() {
     val sendingType = MutableLiveData(ViewSelectSending.TypeSending.Token)
     val receiveType = MutableLiveData(ViewSelectSending.TypeSending.Token)
 
+
+
 }

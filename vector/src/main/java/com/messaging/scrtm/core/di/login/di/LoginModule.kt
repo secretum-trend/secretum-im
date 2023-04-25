@@ -1,5 +1,6 @@
 package com.messaging.scrtm.core.di.login.di
 
+import android.content.Context
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.network.okHttpClient
 import dagger.Module
@@ -11,6 +12,8 @@ import com.messaging.scrtm.core.di.login.domain.ApolloLoginClient
 import com.messaging.scrtm.core.di.login.repository.LoginRepository
 import com.messaging.scrtm.core.di.login.repository.LoginRepositoryImp
 import com.messaging.scrtm.core.utils.Constants
+import com.messaging.scrtm.data.SessionPref
+import dagger.hilt.android.qualifiers.ApplicationContext
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import javax.inject.Singleton
@@ -46,5 +49,11 @@ class LoginModule {
     @Provides
     @Singleton
     fun provideLoginRepository(apolloLoginClient : ApolloLoginClient) : LoginRepository = LoginRepositoryImp(apolloLoginClient)
+
+    @Provides
+    @Singleton
+    fun provideSessionPref(@ApplicationContext appContext: Context) : SessionPref = SessionPref(appContext)
+
+
 
 }

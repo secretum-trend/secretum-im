@@ -9,6 +9,7 @@ class AuthorizationInterceptor() : Interceptor {
     override fun intercept(chain: Interceptor.Chain): Response {
         val request = chain.request()
             .newBuilder()
+            .addHeader("x-hasura-admin-secret","l4NsKP3fan1E3j41")
             .build()
         return chain.proceed(request)
     }

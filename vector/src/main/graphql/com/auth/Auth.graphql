@@ -17,3 +17,9 @@ mutation verifySignature($publicKey: String!, $signature: String!) {
         password
     }
 }
+
+query getPartnerAddressBy($userId: Int!) {
+    wallets(where: {user_id: {_eq: $userId}}) {
+        address
+    }
+}

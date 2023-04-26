@@ -356,6 +356,8 @@ dependencies {
     //bouncycastle
     implementation 'org.bouncycastle:bcprov-jdk18on:1.72'
 
-    //graphql
-    implementation("com.apollographql.apollo3:apollo-runtime:3.7.4")
+    //retrofit
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+
 }

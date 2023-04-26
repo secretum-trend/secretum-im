@@ -11,6 +11,7 @@ type FailTradeOutput {
 input FailTradePayload {
   message: String
 
+
   tradeId: Int!
 }
 
@@ -75,6 +76,19 @@ type LoginRes {
   password: String
 
   username: String
+}
+
+input WalletInput {
+  where : wallets_bool_exp
+}
+
+input wallets_bool_exp {
+  user_id: Int_comparison_exp!
+}
+
+
+type WalletsRes {
+  address: String!
 }
 
 """
@@ -226,6 +240,9 @@ enum order_by {
 }
 
 type query_root {
+
+  wallets(where : wallets_bool_exp) : [WalletsRes]
+
   cronjobUserHold: CronjobUnsubscribeUserRes
 
   cronjobUserSubscribe: CronjobUnsubscribeUserRes

@@ -15,6 +15,7 @@ import com.messaging.scrtm.trade.choosenft.ChooseNFTActivity
 import com.messaging.scrtm.trade.custom.ViewSelectSending
 import com.messaging.scrtm.trade.previewtrade.PreviewTradeBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -22,12 +23,13 @@ import javax.inject.Inject
 class CreateOfferActivity : AppCompatActivity() {
     val binding by lazy { ActivityCreateOfferBinding.inflate(layoutInflater) }
     val viewModel by viewModels<CreateOfferViewModel>()
-    private val chooseNftResultContracts = registerForActivityResult(ActivityResultContracts.StartActivityForResult()){
+    private val chooseNftResultContracts =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
 
-    }
+        }
 
     @Inject
-    lateinit var sessionPref : SessionPref
+    lateinit var sessionPref: SessionPref
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +41,10 @@ class CreateOfferActivity : AppCompatActivity() {
 
     private fun initViews() {
         binding.tvYourAddress.text = sessionPref.address
+//        viewModel.getTokensList(sessionPref.address)
 
+        val data = intent.getStringExtra("userId")
+        data?.toInt()?.let { viewModel.getPartnerAddress(it) }
     }
 
     private fun observingValue() {
@@ -80,14 +85,29 @@ class CreateOfferActivity : AppCompatActivity() {
                     else -> {}
                 }
             }
+            partner.observe(this@CreateOfferActivity) {
+                it?.let {
+                    try {
+                        val address = it.wallets?.first()?.address.toString()
+                        binding.tvRecipientAddress.text = address
+                    } catch (_: Throwable) {
+                    }
+                }
+            }
+
+            tokenAccount.observe(this@CreateOfferActivity) {
+                Timber.tag("ttoken").d(it.body()?.result?.size.toString())
+            }
         }
     }
 
     private fun initActions() {
+
         binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         binding.tokenOrNft.layoutNft.setOnClickListener {
-            val intent = Intent(this, ChooseNFTActivity::class.java)
+            val intent = Intent(this, ChooseNFTActivity::class.java).apply {
+            }
             chooseNftResultContracts.launch(intent)
         }
 
@@ -103,5 +123,6 @@ class CreateOfferActivity : AppCompatActivity() {
             viewModel.sendingType.value = it
         }
     }
+
 
 }

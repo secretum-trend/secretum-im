@@ -198,4 +198,8 @@ object MatrixPatterns {
         }
         return substringAfter(":")
     }
+
+    fun String.getUserId() : String {
+        return this.replace("scrtm_", "")
+    }
 }

@@ -2,6 +2,7 @@
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
     android:background="@drawable/login_bg"
     android:layout_height="match_parent">
 
@@ -211,6 +212,7 @@
                     android:layout_height="wrap_content"/>
 
                 <TextView
+                    android:id="@+id/tvRecipientAddress"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/alerter_padding_default"
@@ -223,7 +225,7 @@
                     android:minHeight="40dp"
                     android:paddingHorizontal="@dimen/alerter_padding_default"
                     android:singleLine="true"
-                    android:text="Fm52y4r5V9gEcu5PkZfNri8dMZbJnffXcVeGNkvDasdfasdfadsfasdf" />
+                    tools:text="Fm52y4r5V9gEcu5PkZfNri8dMZbJnffXcVeGNkvDasdfasdfadsfasdf" />
 
                 <include
                     android:id="@+id/tokenOrNft2"
@@ -238,8 +240,8 @@
                     android:layout_marginHorizontal="@dimen/alerter_padding_default"
                     android:layout_height="wrap_content"
                     android:gravity="center"
-
                     />
+
                 <Button
                     android:id="@+id/form_submit_button"
                     android:layout_width="match_parent"

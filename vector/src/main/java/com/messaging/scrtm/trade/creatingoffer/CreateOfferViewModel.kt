@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.auth.GetPartnerAddressByQuery
 import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.data.solana.entity.ResponseSolana
+import com.messaging.scrtm.data.solana.entity.Value
 import com.messaging.scrtm.data.solana.repository.SolanaRepository
 import com.messaging.scrtm.data.trade.repository.TradeRepository
 import com.messaging.scrtm.trade.custom.ViewSelectSending
@@ -25,6 +26,9 @@ class CreateOfferViewModel @Inject constructor(
     val attentionExpands = MutableLiveData(false)
     val sendingType = MutableLiveData(ViewSelectSending.TypeSending.Token)
     val receiveType = MutableLiveData(ViewSelectSending.TypeSending.Token)
+
+    var tokenSending  : Value? = null
+    var tokenRecipient  : Value? = null
 
     private val _partner = MutableLiveData<Resource<GetPartnerAddressByQuery.Data?>>()
     val partner: MutableLiveData<Resource<GetPartnerAddressByQuery.Data?>> = _partner

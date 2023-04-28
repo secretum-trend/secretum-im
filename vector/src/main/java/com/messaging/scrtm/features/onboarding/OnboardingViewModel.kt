@@ -114,7 +114,7 @@ class OnboardingViewModel @AssistedInject constructor(
     companion object :
         MavericksViewModelFactory<OnboardingViewModel, OnboardingViewState> by hiltMavericksViewModelFactory() {
         private const val CLUSTER_NAME = ProtocolContract.CLUSTER_MAINNET_BETA
-        private val IDENTITY = MobileWalletAdapterUseCase.DappIdentity(
+        val IDENTITY = MobileWalletAdapterUseCase.DappIdentity(
             uri = Uri.parse("https://solanamobile.com"),
             iconRelativeUri = Uri.parse("favicon.ico"),
             name = "Secretum"
@@ -1233,7 +1233,7 @@ class OnboardingViewModel @AssistedInject constructor(
                 if (authenticateResult != null) {
                     _authenticate.value = Resource.success(authenticateResult)
                     sessionPref.address = Base58EncodeUseCase.invoke(_uiState.value.publicKey!!)
-                    Timber.tag("address").d(Base58EncodeUseCase.invoke(_uiState.value.publicKey!!))
+                    sessionPref.authToken = _uiState.value.authToken!!
 
                 } else {
                     _authenticate.value = Resource.error("error")

@@ -7,12 +7,16 @@ import android.widget.AdapterView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.doAfterTextChanged
+import com.auth.type.Trade
 import com.messaging.lib.core.utils.view.hide
 import com.messaging.lib.core.utils.view.show
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.solana.entity.Value
+import com.messaging.scrtm.data.trade.entity.CreateOfferPayloadModel
+import com.messaging.scrtm.data.trade.entity.TradeModel
 import com.messaging.scrtm.databinding.ActivityCreateOfferBinding
 import com.messaging.scrtm.trade.choosenft.ChooseNFTActivity
 import com.messaging.scrtm.trade.creatingoffer.adapter.SpinnerTokens
@@ -25,6 +29,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CreateOfferActivity : AppCompatActivity() {
     val binding by lazy { ActivityCreateOfferBinding.inflate(layoutInflater) }
+    private val recipientUserId by lazy { intent.getStringExtra("userId") }
     val viewModel by viewModels<CreateOfferViewModel>()
     private val chooseNftResultContracts =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -45,9 +50,7 @@ class CreateOfferActivity : AppCompatActivity() {
     private fun initViews() {
         binding.tvYourAddress.text = sessionPref.address
         viewModel.getTokensList(sessionPref.address)
-
-        val data = intent.getStringExtra("userId")
-        data?.toInt()?.let { viewModel.getPartnerAddress(it) }
+        recipientUserId?.toInt()?.let { viewModel.getPartnerAddress(it) }
     }
 
     private fun observingValue() {
@@ -119,7 +122,7 @@ class CreateOfferActivity : AppCompatActivity() {
                             }
                     }
                     Resource.Status.ERROR -> {}
-                    Resource.Status.LOADING ->    binding.loading.show()
+                    Resource.Status.LOADING -> binding.loading.show()
                 }
 
             }
@@ -128,12 +131,13 @@ class CreateOfferActivity : AppCompatActivity() {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
                         binding.loading.hide()
-                        binding.tokenOrNft2.spinerToken.adapter = it.data?.result?.value?.let { value ->
-                            SpinnerTokens(
-                                this@CreateOfferActivity,
-                                value
-                            )
-                        }
+                        binding.tokenOrNft2.spinerToken.adapter =
+                            it.data?.result?.value?.let { value ->
+                                SpinnerTokens(
+                                    this@CreateOfferActivity,
+                                    value
+                                )
+                            }
                     }
                     Resource.Status.ERROR -> {
                         binding.loading.hide()
@@ -167,7 +171,6 @@ class CreateOfferActivity : AppCompatActivity() {
             viewModel.sendingType.value = it
         }
 
-
         binding.tokenOrNft.spinerToken.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -177,13 +180,22 @@ class CreateOfferActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     val selectedObject = parent.getItemAtPosition(position) as Value
-                    binding.tokenOrNft.tvBalances.text = getString(R.string.unknown_token,selectedObject.account.data.parsed.info.tokenAmount.uiAmountString )
+                    viewModel.tokenSending = selectedObject
+                    binding.tokenOrNft.tvBalances.text = selectedObject.account.data.parsed.info.tokenAmount.uiAmountString
+                    if ((binding.tokenOrNft.tvNumber.text.toString().toDoubleOrNull()
+                            ?: 0.0) > (binding.tokenOrNft.tvBalances.text.toString()
+                            .toDoubleOrNull() ?: 0.0)
+                    ){
+                        binding.tokenOrNft.tvNumber.setText(binding.tokenOrNft.tvBalances.text.toString())
+                    }
+
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
 
                 }
             }
+
         binding.tokenOrNft2.spinerToken.onItemSelectedListener =
             object : AdapterView.OnItemSelectedListener {
                 override fun onItemSelected(
@@ -193,14 +205,52 @@ class CreateOfferActivity : AppCompatActivity() {
                     id: Long
                 ) {
                     val selectedObject = parent.getItemAtPosition(position) as Value
-                    binding.tokenOrNft2.tvBalances.text = getString(R.string.unknown_token,selectedObject.account.data.parsed.info.tokenAmount.uiAmountString )
-
+                    viewModel.tokenRecipient = selectedObject
+                    binding.tokenOrNft2.tvBalances.text =
+                        selectedObject.account.data.parsed.info.tokenAmount.uiAmountString
+                    if ((binding.tokenOrNft2.tvNumber.text.toString().toDoubleOrNull()
+                            ?: 0.0) > (binding.tokenOrNft2.tvBalances.text.toString()
+                            .toDoubleOrNull() ?: 0.0)){
+                        binding.tokenOrNft2.tvNumber.setText(binding.tokenOrNft2.tvBalances.text.toString())
+                    }
                 }
 
                 override fun onNothingSelected(parent: AdapterView<*>) {
 
                 }
             }
+
+        binding.tokenOrNft.tvNumber.doAfterTextChanged { text ->
+            if ((text.toString().toDoubleOrNull()
+                    ?: 0.0) > (binding.tokenOrNft.tvBalances.text.toString()
+                    .toDoubleOrNull() ?: 0.0) ){
+                binding.tokenOrNft.tvNumber.setText(binding.tokenOrNft.tvBalances.text.toString())
+            }
+        }
+
+        binding.tokenOrNft2.tvNumber.doAfterTextChanged { text ->
+            if ((text.toString().toDoubleOrNull()
+                    ?: 0.0) > (binding.tokenOrNft2.tvBalances.text.toString()
+                    .toDoubleOrNull() ?: 0.0) ){
+                binding.tokenOrNft2.tvNumber.setText(binding.tokenOrNft2.tvBalances.text.toString())
+            }
+        }
+
+        binding.formSubmitButton.setOnClickListener {
+            val createOfferPayloadModel = CreateOfferPayloadModel(
+                TradeModel(
+                    recipient_address = viewModel.partner.value?.data?.wallets?.first()?.address.toString(),
+                    recipient_token_address = viewModel.tokenRecipient?.account?.data?.parsed?.info?.mint.toString(),
+                    recipient_token_amount = binding.tokenOrNft2.tvNumber.text.toString(),
+                    recipient_user_id = recipientUserId!!.toInt(),
+                    sending_token_address = sessionPref.address,
+                    sending_token_amount = binding.tokenOrNft.tvNumber.text.toString(),
+                ),
+                publicKey = sessionPref.address,
+                signature = ""
+            )
+            PreviewTradeBottomSheet.newInstance(createOfferPayloadModel, recipientUserId!!.toInt()).show(supportFragmentManager, null)
+        }
 
     }
 

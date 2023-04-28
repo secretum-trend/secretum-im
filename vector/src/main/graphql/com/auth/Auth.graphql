@@ -4,6 +4,12 @@ query getNonceBy($publicKey: String!) {
     }
 }
 
+query getNonceByUserId($userId: Int!){
+    users_by_pk(id: $userId){
+        nonce
+    }
+}
+
 mutation joinPublicKeyToWhitelist($publicKey: String!) {
     joinWhitelistFree(address: $publicKey) {
         joined
@@ -23,3 +29,11 @@ query getPartnerAddressBy($userId: Int!) {
         address
     }
 }
+
+mutation createOfferBy($payLoad:CreateOfferPayload!) {
+    createOffer(payload: $payLoad){
+        trade_id
+    }
+}
+
+

@@ -3556,5 +3556,6 @@
     <string name="to">To</string>
     <string name="price">Price</string>
     <string name="enable_accept_partialy">Enable accept partialy</string>
+    <string name="unknown_token">%s Unknown Token</string>
 
 </resources>

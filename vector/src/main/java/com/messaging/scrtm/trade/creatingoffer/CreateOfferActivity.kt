@@ -3,19 +3,22 @@ package com.messaging.scrtm.trade.creatingoffer
 import android.content.Intent
 import android.os.Bundle
 import android.view.View
+import android.widget.AdapterView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.messaging.lib.core.utils.view.hide
 import com.messaging.lib.core.utils.view.show
 import com.messaging.scrtm.R
+import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.data.SessionPref
+import com.messaging.scrtm.data.solana.entity.Value
 import com.messaging.scrtm.databinding.ActivityCreateOfferBinding
 import com.messaging.scrtm.trade.choosenft.ChooseNFTActivity
+import com.messaging.scrtm.trade.creatingoffer.adapter.SpinnerTokens
 import com.messaging.scrtm.trade.custom.ViewSelectSending
 import com.messaging.scrtm.trade.previewtrade.PreviewTradeBottomSheet
 import dagger.hilt.android.AndroidEntryPoint
-import timber.log.Timber
 import javax.inject.Inject
 
 
@@ -41,7 +44,7 @@ class CreateOfferActivity : AppCompatActivity() {
 
     private fun initViews() {
         binding.tvYourAddress.text = sessionPref.address
-//        viewModel.getTokensList(sessionPref.address)
+        viewModel.getTokensList(sessionPref.address)
 
         val data = intent.getStringExtra("userId")
         data?.toInt()?.let { viewModel.getPartnerAddress(it) }
@@ -86,23 +89,64 @@ class CreateOfferActivity : AppCompatActivity() {
                 }
             }
             partner.observe(this@CreateOfferActivity) {
-                it?.let {
-                    try {
-                        val address = it.wallets?.first()?.address.toString()
-                        binding.tvRecipientAddress.text = address
-                    } catch (_: Throwable) {
+                when (it.status) {
+                    Resource.Status.SUCCESS -> {
+                        binding.loading.hide()
+                        try {
+                            val address = it.data?.wallets?.first()?.address.toString()
+                            binding.tvRecipientAddress.text = address
+                            viewModel.getRecipientTokensList(address)
+                        } catch (_: Throwable) {
+                        }
                     }
+                    Resource.Status.ERROR -> {
+                        binding.loading.hide()
+                    }
+                    Resource.Status.LOADING -> binding.loading.show()
                 }
             }
 
-            tokenAccount.observe(this@CreateOfferActivity) {
-                Timber.tag("ttoken").d(it.body()?.result?.size.toString())
+            yourToken.observe(this@CreateOfferActivity) {
+                when (it.status) {
+                    Resource.Status.SUCCESS -> {
+                        binding.loading.hide()
+                        binding.tokenOrNft.spinerToken.adapter =
+                            it.data?.result?.value?.let { value ->
+                                SpinnerTokens(
+                                    this@CreateOfferActivity,
+                                    value
+                                )
+                            }
+                    }
+                    Resource.Status.ERROR -> {}
+                    Resource.Status.LOADING ->    binding.loading.show()
+                }
+
+            }
+
+            recipientToken.observe(this@CreateOfferActivity) {
+                when (it.status) {
+                    Resource.Status.SUCCESS -> {
+                        binding.loading.hide()
+                        binding.tokenOrNft2.spinerToken.adapter = it.data?.result?.value?.let { value ->
+                            SpinnerTokens(
+                                this@CreateOfferActivity,
+                                value
+                            )
+                        }
+                    }
+                    Resource.Status.ERROR -> {
+                        binding.loading.hide()
+                    }
+                    Resource.Status.LOADING -> binding.loading.show()
+                }
+
+
             }
         }
     }
 
     private fun initActions() {
-
         binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
 
         binding.tokenOrNft.layoutNft.setOnClickListener {
@@ -122,6 +166,42 @@ class CreateOfferActivity : AppCompatActivity() {
         binding.selectSending.onClickListener = {
             viewModel.sendingType.value = it
         }
+
+
+        binding.tokenOrNft.spinerToken.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedObject = parent.getItemAtPosition(position) as Value
+                    binding.tokenOrNft.tvBalances.text = getString(R.string.unknown_token,selectedObject.account.data.parsed.info.tokenAmount.uiAmountString )
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+
+                }
+            }
+        binding.tokenOrNft2.spinerToken.onItemSelectedListener =
+            object : AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val selectedObject = parent.getItemAtPosition(position) as Value
+                    binding.tokenOrNft2.tvBalances.text = getString(R.string.unknown_token,selectedObject.account.data.parsed.info.tokenAmount.uiAmountString )
+
+                }
+
+                override fun onNothingSelected(parent: AdapterView<*>) {
+
+                }
+            }
+
     }
 
 

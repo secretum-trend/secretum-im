@@ -1,15 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
     xmlns:tools="http://schemas.android.com/tools"
-    android:background="@drawable/login_bg"
-    android:layout_height="match_parent">
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_create_offer">
+
+    <FrameLayout
+        android:id="@+id/loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:elevation="2dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+    </FrameLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:fitsSystemWindows="true"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
 
         <com.google.android.material.appbar.AppBarLayout
             android:id="@+id/appBarLayout"
@@ -86,11 +104,11 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginHorizontal="@dimen/alerter_padding_default"
-                        android:visibility="gone"
                         android:layout_marginTop="10dp"
                         android:fontFamily="@font/manrope_medium"
                         android:text="@string/attention_message"
                         android:textSize="11sp"
+                        android:visibility="gone"
                         app:layout_constraintTop_toBottomOf="@+id/appCompatTextView" />
 
                 </androidx.constraintlayout.widget.ConstraintLayout>
@@ -98,11 +116,11 @@
                 <androidx.constraintlayout.widget.ConstraintLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:visibility="gone"
                     android:layout_marginHorizontal="@dimen/alerter_padding_default"
                     android:layout_marginTop="12dp"
                     android:background="@drawable/bg_stroke_15"
-                    android:paddingVertical="10dp"
-                    >
+                    android:paddingVertical="10dp">
 
                     <TextView
                         android:id="@+id/textView2"
@@ -157,7 +175,7 @@
                     android:minHeight="40dp"
                     android:paddingHorizontal="@dimen/alerter_padding_default"
                     android:singleLine="true"
-                    android:text="Fm52y4r5V9gEcu5PkZfNri8dMZbJnffXcVeGNkvDasdfasdfadsfasdf" />
+                    tools:text="Fm52y4r5V9gEcu5PkZfNri8dMZbJnffXcVeGNkvDasdfasdfadsfasdf" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -181,19 +199,19 @@
 
                 <View
                     android:layout_width="match_parent"
-                    android:layout_marginTop="30dp"
+                    android:layout_height="2dp"
                     android:layout_marginHorizontal="@dimen/alerter_padding_default"
-                    android:background="@color/white"
-                    android:layout_height="2dp"/>
+                    android:layout_marginTop="30dp"
+                    android:background="@color/white" />
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:fontFamily="@font/manrope_semi_bold"
-                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/alerter_padding_default"
                     android:layout_marginTop="23dp"
+                    android:fontFamily="@font/manrope_semi_bold"
                     android:text="@string/what_you_want_receiver"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="14sp" />
 
                 <com.messaging.scrtm.trade.custom.ViewSelectSending
                     android:id="@+id/selectSending2"
@@ -204,12 +222,12 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:fontFamily="@font/manrope_semi_bold"
-                    android:textSize="14sp"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/alerter_padding_default"
                     android:layout_marginTop="23dp"
+                    android:fontFamily="@font/manrope_semi_bold"
                     android:text="@string/recipient_address"
-                    android:layout_height="wrap_content"/>
+                    android:textSize="14sp" />
 
                 <TextView
                     android:id="@+id/tvRecipientAddress"
@@ -218,7 +236,7 @@
                     android:layout_marginHorizontal="@dimen/alerter_padding_default"
                     android:layout_marginTop="5dp"
                     android:background="@drawable/bg_fill_coner_16"
-                    android:backgroundTint="#16267D"
+                    android:backgroundTint="#9916267D"
                     android:ellipsize="end"
                     android:fontFamily="@font/manrope_regular"
                     android:gravity="center_vertical"
@@ -236,23 +254,21 @@
 
                 <TextView
                     android:layout_width="match_parent"
-                    android:layout_marginTop="12dp"
-                    android:layout_marginHorizontal="@dimen/alerter_padding_default"
                     android:layout_height="wrap_content"
-                    android:gravity="center"
-                    />
+                    android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                    android:layout_marginTop="12dp"
+                    android:gravity="center" />
 
                 <Button
                     android:id="@+id/form_submit_button"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center_vertical|end"
-                    android:text="@string/preview_your_trade"
-                    android:minHeight="58dp"
-                    android:layout_marginEnd="@dimen/alerter_activity_vertical_margin"
                     android:layout_marginStart="@dimen/alerter_activity_vertical_margin"
+                    android:layout_marginEnd="@dimen/alerter_activity_vertical_margin"
                     android:backgroundTint="@color/palette_blue"
-                    />
+                    android:minHeight="58dp"
+                    android:text="@string/preview_your_trade" />
 
             </androidx.appcompat.widget.LinearLayoutCompat>
         </androidx.core.widget.NestedScrollView>

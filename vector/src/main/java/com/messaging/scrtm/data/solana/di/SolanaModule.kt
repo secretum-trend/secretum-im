@@ -1,6 +1,8 @@
 package com.messaging.scrtm.data.solana.di
 
+import com.messaging.scrtm.BuildConfig
 import com.messaging.scrtm.core.di.login.di.AuthorizationInterceptor
+import com.messaging.scrtm.core.di.login.di.InterceptorSolana
 import com.messaging.scrtm.data.ApiClient
 import com.messaging.scrtm.data.solana.remote.SolanaRemoteDataSource
 import com.messaging.scrtm.data.solana.remote.SolanaRemoteDataSourceImp
@@ -26,9 +28,10 @@ class SolanaModule {
     fun provideApiClient(): ApiClient {
         val loggingInterceptor =
             HttpLoggingInterceptor().apply {
+                setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE)
             }
         return Retrofit.Builder()
-            .baseUrl("https://explorer.solana.com/")
+            .baseUrl("https://api.testnet.solana.com/")
             .client(
                 OkHttpClient.Builder()
                     // A zero value means no timeout at all.
@@ -36,7 +39,7 @@ class SolanaModule {
                     // This guarantees that whatever the size of the image being uploaded is, it won't get `SocketTimeoutException` unless the server itself has issues.
                     .writeTimeout(0, TimeUnit.SECONDS)
                     .readTimeout(0, TimeUnit.SECONDS)
-                    .addInterceptor(AuthorizationInterceptor())
+                    .addInterceptor(InterceptorSolana())
                     .addInterceptor(loggingInterceptor)
                     .build()
             )
@@ -52,7 +55,6 @@ class SolanaModule {
      @Provides
     @Singleton
     fun provideSolanaRepository(solanaRemoteDataSource: SolanaRemoteDataSource) : SolanaRepository = SolanaRepositoryImp(solanaRemoteDataSource)
-
 
 
 }

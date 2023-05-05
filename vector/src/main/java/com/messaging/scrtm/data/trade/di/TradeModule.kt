@@ -16,6 +16,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class TradeModule {
 
+
     @Provides
     @Singleton
     fun provideApolloTradeClient (apolloClient: ApolloClient) : ApolloTradeClient = ApolloTradeClientImp(apolloClient)

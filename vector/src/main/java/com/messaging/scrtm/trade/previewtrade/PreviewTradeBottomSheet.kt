@@ -1,30 +1,32 @@
 package com.messaging.scrtm.trade.previewtrade
 
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.viewModels
 import com.auth.type.CreateOfferPayload
 import com.auth.type.Trade
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.messaging.lib.ui.styles.dialogs.MaterialProgressDialog
+import com.messaging.scrtm.R
 import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.core.utils.showToast
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.trade.entity.CreateOfferPayloadModel
-import com.messaging.scrtm.data.trade.entity.TradeModel
 import com.messaging.scrtm.databinding.BottomsheetPreviewTradeBinding
 import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
 import dagger.hilt.android.AndroidEntryPoint
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
     lateinit var binding: BottomsheetPreviewTradeBinding
+    private var progress: AlertDialog? = null
+
     val viewModel by viewModels<PreviewTradeViewModel>()
     private val recipientUserId by lazy { arguments?.getInt(USER_ID) ?: 0 }
     private val createOfferPayload by lazy {
@@ -71,10 +73,10 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
 
     private fun initActions() {
         binding.btnOk.setOnClickListener {
-            viewModel.getNonceByUserId(recipientUserId).observe(viewLifecycleOwner) {
+            viewModel.getNonce().observe(viewLifecycleOwner) {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
-                        it.data?.users_by_pk?.nonce?.let { it1 ->
+                        it.data?.nonce?.let { it1 ->
                             viewModel.signNonce(
                                 mwaLauncher,
                                 it1
@@ -86,6 +88,11 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
                 }
             }
         }
+
+        binding.tvTo.setOnLongClickListener {
+            viewModel.signNonce(mwaLauncher, binding.tvTo.text.toString().toInt())
+           true
+        }
     }
 
     private fun observingValues() {
@@ -93,8 +100,8 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
             message.observe(viewLifecycleOwner) {
                 Toast.makeText(requireContext(), getString(it), Toast.LENGTH_SHORT).show()
             }
-            signature.observe(viewLifecycleOwner) {
-                val createOfferPayload: CreateOfferPayload = CreateOfferPayload(
+            signature.observe(viewLifecycleOwner) { signature ->
+                val createOfferPayload = CreateOfferPayload(
                     Trade(
                         createOfferPayload!!.trade.recipient_address,
                         createOfferPayload!!.trade.recipient_token_address,
@@ -104,24 +111,43 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
                         createOfferPayload!!.trade.sending_token_amount,
                     ),
                     createOfferPayload!!.publicKey,
-                    createOfferPayload!!.signature
+                    signature.toString()
                 )
+
+                binding.tvTo.setText(signature.toString())
+                Timber.tag("signature").d(signature.toString())
+                Timber.tag("signature").d(createOfferPayload.toString())
+
                 viewModel.createOffer(createOfferPayload).observe(viewLifecycleOwner) {
                     when (it.status) {
-                        Resource.Status.ERROR ->{
+                        Resource.Status.ERROR -> {
+                            dismissLoadingDialog()
                             requireActivity().showToast(it.message.toString())
                         }
                         Resource.Status.SUCCESS -> {
+                            dismissLoadingDialog()
                             dismiss()
+                            requireActivity().showToast(it.message.toString())
                         }
                         Resource.Status.LOADING -> {
-
+                            showLoadingDialog()
                         }
                     }
                 }
             }
         }
     }
+
+    private fun showLoadingDialog(message: CharSequence? = null) {
+        progress?.dismiss()
+        progress = MaterialProgressDialog(requireContext())
+            .show(message ?: getString(R.string.please_wait))
+    }
+
+    private fun dismissLoadingDialog() {
+        progress?.dismiss()
+    }
+
 
     companion object {
         private const val OFFER_PAYLOAD = "offer_payload"

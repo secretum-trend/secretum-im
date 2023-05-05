@@ -16,7 +16,7 @@ class SpinnerTokens(context: Context, objects: List<Value>) :
         val view = super.getView(position, convertView, parent)
         val item = getItem(position)
         if (item != null) {
-            (view.findViewById<TextView>(android.R.id.text1)).text = item.pubkey
+            (view.findViewById<TextView>(android.R.id.text1)).text = item.account.data.parsed.info.mint
         }
         return view
     }
@@ -25,7 +25,7 @@ class SpinnerTokens(context: Context, objects: List<Value>) :
         val view = super.getDropDownView(position, convertView, parent)
         val item = getItem(position)
         if (item != null) {
-            (view.findViewById<TextView>(android.R.id.text1)).text = item.pubkey
+            (view.findViewById<TextView>(android.R.id.text1)).text = item.account.data.parsed.info.mint
             (view.findViewById<TextView>(android.R.id.text1)).setTextColor(ContextCompat.getColor(context, R.color.white))
         }
         return view

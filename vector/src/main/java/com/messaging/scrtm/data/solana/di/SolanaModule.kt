@@ -29,6 +29,7 @@ class SolanaModule {
         val loggingInterceptor =
             HttpLoggingInterceptor().apply {
                 setLevel(if (BuildConfig.DEBUG) HttpLoggingInterceptor.Level.BODY else HttpLoggingInterceptor.Level.NONE)
+
             }
         return Retrofit.Builder()
             .baseUrl("https://api.testnet.solana.com/")

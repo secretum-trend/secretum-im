@@ -1210,7 +1210,7 @@ class OnboardingViewModel @AssistedInject constructor(
         }
     }
 
-    fun joinWhitelistFree() = flow {
+    private fun joinWhitelistFree() = flow {
         try {
             emit(Resource.loading())
             val join =

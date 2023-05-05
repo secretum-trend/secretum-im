@@ -85,12 +85,13 @@
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <TextView
+    <EditText
         android:id="@+id/tvTo"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="15dp"
+        android:textColor="@color/white"
         android:fontFamily="@font/manrope_bold"
         android:text="@string/to"
         android:textSize="14sp"

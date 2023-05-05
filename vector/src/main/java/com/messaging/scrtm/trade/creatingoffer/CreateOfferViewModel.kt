@@ -2,8 +2,10 @@ package com.messaging.scrtm.trade.creatingoffer
 
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.auth.GetPartnerAddressByQuery
+import com.auth.GetTradeByPkQuery
 import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.data.solana.entity.ResponseSolana
 import com.messaging.scrtm.data.solana.entity.Value
@@ -75,5 +77,14 @@ class CreateOfferViewModel @Inject constructor(
         }
     }
 
+    fun tradeByPk(id: Int) = liveData {
+        emit(Resource.loading())
+        try {
+            emit(Resource.success(tradeRepository.tradeByPK(id)))
+
+        } catch (t: Throwable) {
+           emit(Resource.error(t.message.toString()))
+        }
+    }
 
 }

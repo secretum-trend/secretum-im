@@ -10,6 +10,7 @@ query getNonceByUserId($userId: Int!){
     }
 }
 
+
 mutation joinPublicKeyToWhitelist($publicKey: String!) {
     joinWhitelistFree(address: $publicKey) {
         joined
@@ -36,4 +37,37 @@ mutation createOfferBy($payLoad:CreateOfferPayload!) {
     }
 }
 
+query GetTradeByPk($tradeId: Int!) {
+    trades_by_pk(id: $tradeId) {
+        id
+        recipient_address
+        recipient_token_address
+        recipient_token_amount
+        recipient_user_id
+        sending_address
+        sending_token_address
+        sending_token_amount
+        sending_user_id
+        created_at
+        updated_at
+        status
+        message
+        userBySendingUserId {
+            username
+        }
+        user {
+            username
+        }
+    }
+}
+
+query GetRateByAddresses($addresses: [String!]) {
+    token_rates(where: {token_address: {_in: $addresses}}) {
+        name
+        rate
+        symbol
+        token_address
+        __typename
+    }
+}
 

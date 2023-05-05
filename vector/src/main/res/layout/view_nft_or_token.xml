@@ -108,7 +108,6 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:singleLine="true"
-                android:text="@string/unknown_token"
                 android:textColor="#60687C"
                 app:layout_constraintStart_toStartOf="@+id/spinerToken"
                 app:layout_constraintTop_toBottomOf="@+id/spinerToken" />

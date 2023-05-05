@@ -47,7 +47,30 @@ input Trade {
 type CreateOfferOutput {
     trade_id: Int!
 }
+type User {
+    username: String!
+}
+type UserBySendingUserId {
+    username: String!
+}
 
+type TradeByPkOutput {
+    id:Int!
+    recipient_address: String!
+    recipient_token_address: String!
+    recipient_token_amount: String!
+    recipient_user_id: Int!
+    sending_token_address: String!
+    sending_token_amount: String!
+    sending_address: String!
+    sending_user_id: String!
+    created_at: String!
+    updated_at: String!
+    message: String!
+    status: String!
+    user:User!
+    userBySendingUserId:UserBySendingUserId!
+}
 
 
 """
@@ -270,6 +293,7 @@ enum order_by {
 
 type query_root {
 
+
     wallets(where : wallets_bool_exp) : [WalletsRes]
 
     cronjobUserHold: CronjobUnsubscribeUserRes
@@ -309,6 +333,8 @@ type query_root {
     whitelist_by_pk(id: Int!): whitelist
 
     users_by_pk(id: Int) : GetNoneRes
+
+    trades_by_pk(id: Int) : TradeByPkOutput
 }
 
 """

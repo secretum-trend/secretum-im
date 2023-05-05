@@ -3557,5 +3557,8 @@
     <string name="price">Price</string>
     <string name="enable_accept_partialy">Enable accept partialy</string>
     <string name="unknown_token">%s Unknown Token</string>
+    <string name="publish_trade">Publish Trade</string>
+    <string name="invalid_token_amount">Invalid token amount</string>
+
 
 </resources>

@@ -1,15 +1,19 @@
 package com.messaging.scrtm.trade.previewtrade
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
 import com.auth.type.CreateOfferPayload
 import com.auth.type.Trade
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.messaging.scrtm.core.utils.Resource
+import com.messaging.scrtm.core.utils.showToast
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.trade.entity.CreateOfferPayloadModel
 import com.messaging.scrtm.data.trade.entity.TradeModel
@@ -23,7 +27,12 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
     lateinit var binding: BottomsheetPreviewTradeBinding
     val viewModel by viewModels<PreviewTradeViewModel>()
     private val recipientUserId by lazy { arguments?.getInt(USER_ID) ?: 0 }
-    private val createOfferPayload by lazy { arguments?.getSerializable(OFFER_PAYLOAD,CreateOfferPayloadModel::class.java )}
+    private val createOfferPayload by lazy {
+        arguments?.getSerializable(
+            OFFER_PAYLOAD,
+            CreateOfferPayloadModel::class.java
+        )
+    }
 
     @Inject
     lateinit var sessionPref: SessionPref
@@ -45,8 +54,19 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
         initActions()
         observingValues()
+    }
+
+    private fun initViews() {
+        binding.apply {
+            tvAmount.text = createOfferPayload?.trade?.sending_token_amount
+            tvToken.text = createOfferPayload?.trade?.sending_token_address
+
+            tvAmount2.text = createOfferPayload?.trade?.recipient_token_amount
+            tvToken2.text = createOfferPayload?.trade?.recipient_token_address
+        }
     }
 
     private fun initActions() {
@@ -86,7 +106,19 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
                     createOfferPayload!!.publicKey,
                     createOfferPayload!!.signature
                 )
-                viewModel.createOffer(createOfferPayload)
+                viewModel.createOffer(createOfferPayload).observe(viewLifecycleOwner) {
+                    when (it.status) {
+                        Resource.Status.ERROR ->{
+                            requireActivity().showToast(it.message.toString())
+                        }
+                        Resource.Status.SUCCESS -> {
+                            dismiss()
+                        }
+                        Resource.Status.LOADING -> {
+
+                        }
+                    }
+                }
             }
         }
     }

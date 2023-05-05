@@ -141,16 +141,13 @@ class PreviewTradeViewModel @Inject constructor(
         }
     }
 
-
-    fun createOffer(payload: CreateOfferPayload) {
-        viewModelScope.launch {
+    fun createOffer(payload: CreateOfferPayload) = liveData<Resource<CreateOfferByMutation.Data?>> {
             _createOffer.value = Resource.loading()
             try {
                 _createOffer.value = Resource.success(tradeRepository.createOffer(payload))
-            } catch (_: Throwable) {
-                _createOffer.value = Resource.error("Null")
+            } catch (t: Throwable) {
+                _createOffer.value = Resource.error(t.message.toString())
             }
-        }
     }
 
 }

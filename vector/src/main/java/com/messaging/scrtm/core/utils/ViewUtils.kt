@@ -16,8 +16,10 @@
 
 package com.messaging.scrtm.core.utils
 
+import android.app.Activity
 import android.text.Editable
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.children
 import com.google.android.material.textfield.TextInputLayout
 import com.messaging.scrtm.core.platform.SimpleTextWatcher
@@ -52,4 +54,8 @@ fun autoResetTextInputLayoutErrors(textInputLayouts: List<TextInputLayout>) {
             }
         })
     }
+}
+
+fun Activity.showToast(string: String){
+    Toast.makeText(this, string, Toast.LENGTH_SHORT).show()
 }

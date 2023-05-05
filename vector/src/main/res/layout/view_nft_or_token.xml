@@ -97,7 +97,6 @@
                 android:layout_height="wrap_content"
                 android:backgroundTint="@color/white"
                 android:prompt="@string/choose_nft"
-                app:layout_constraintEnd_toStartOf="@+id/tvNumber"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.5"
@@ -116,15 +115,17 @@
 
             <EditText
                 android:id="@+id/tvNumber"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:hint="0"
-                android:textColorHint="@color/white"
-                android:textColor="@color/white"
-                android:inputType="number"
                 android:background="@color/clear"
+                android:gravity="end"
+                android:hint="0"
+                android:inputType="number"
+                android:textColor="@color/white"
+                android:textColorHint="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/spinerToken"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/ic_arrow_bottom" />
 

@@ -8,11 +8,11 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
-import com.auth.type.Trade
 import com.messaging.lib.core.utils.view.hide
 import com.messaging.lib.core.utils.view.show
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.utils.Resource
+import com.messaging.scrtm.core.utils.showToast
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.solana.entity.Value
 import com.messaging.scrtm.data.trade.entity.CreateOfferPayloadModel
@@ -181,11 +181,12 @@ class CreateOfferActivity : AppCompatActivity() {
                 ) {
                     val selectedObject = parent.getItemAtPosition(position) as Value
                     viewModel.tokenSending = selectedObject
-                    binding.tokenOrNft.tvBalances.text = selectedObject.account.data.parsed.info.tokenAmount.uiAmountString
+                    binding.tokenOrNft.tvBalances.text =
+                        selectedObject.account.data.parsed.info.tokenAmount.uiAmountString
                     if ((binding.tokenOrNft.tvNumber.text.toString().toDoubleOrNull()
                             ?: 0.0) > (binding.tokenOrNft.tvBalances.text.toString()
                             .toDoubleOrNull() ?: 0.0)
-                    ){
+                    ) {
                         binding.tokenOrNft.tvNumber.setText(binding.tokenOrNft.tvBalances.text.toString())
                     }
 
@@ -210,7 +211,8 @@ class CreateOfferActivity : AppCompatActivity() {
                         selectedObject.account.data.parsed.info.tokenAmount.uiAmountString
                     if ((binding.tokenOrNft2.tvNumber.text.toString().toDoubleOrNull()
                             ?: 0.0) > (binding.tokenOrNft2.tvBalances.text.toString()
-                            .toDoubleOrNull() ?: 0.0)){
+                            .toDoubleOrNull() ?: 0.0)
+                    ) {
                         binding.tokenOrNft2.tvNumber.setText(binding.tokenOrNft2.tvBalances.text.toString())
                     }
                 }
@@ -223,7 +225,8 @@ class CreateOfferActivity : AppCompatActivity() {
         binding.tokenOrNft.tvNumber.doAfterTextChanged { text ->
             if ((text.toString().toDoubleOrNull()
                     ?: 0.0) > (binding.tokenOrNft.tvBalances.text.toString()
-                    .toDoubleOrNull() ?: 0.0) ){
+                    .toDoubleOrNull() ?: 0.0)
+            ) {
                 binding.tokenOrNft.tvNumber.setText(binding.tokenOrNft.tvBalances.text.toString())
             }
         }
@@ -231,7 +234,8 @@ class CreateOfferActivity : AppCompatActivity() {
         binding.tokenOrNft2.tvNumber.doAfterTextChanged { text ->
             if ((text.toString().toDoubleOrNull()
                     ?: 0.0) > (binding.tokenOrNft2.tvBalances.text.toString()
-                    .toDoubleOrNull() ?: 0.0) ){
+                    .toDoubleOrNull() ?: 0.0)
+            ) {
                 binding.tokenOrNft2.tvNumber.setText(binding.tokenOrNft2.tvBalances.text.toString())
             }
         }
@@ -243,16 +247,31 @@ class CreateOfferActivity : AppCompatActivity() {
                     recipient_token_address = viewModel.tokenRecipient?.account?.data?.parsed?.info?.mint.toString(),
                     recipient_token_amount = binding.tokenOrNft2.tvNumber.text.toString(),
                     recipient_user_id = recipientUserId!!.toInt(),
-                    sending_token_address = sessionPref.address,
+                    sending_token_address = viewModel.tokenSending?.account?.data?.parsed?.info?.mint.toString(),
                     sending_token_amount = binding.tokenOrNft.tvNumber.text.toString(),
                 ),
                 publicKey = sessionPref.address,
                 signature = ""
             )
-            PreviewTradeBottomSheet.newInstance(createOfferPayloadModel, recipientUserId!!.toInt()).show(supportFragmentManager, null)
+            if (invalidData(createOfferPayloadModel)){
+                PreviewTradeBottomSheet.newInstance(createOfferPayloadModel, recipientUserId!!.toInt())
+                    .show(supportFragmentManager, null)
+            }
         }
 
     }
 
+    private fun invalidData(createOfferPayloadModel: CreateOfferPayloadModel): Boolean {
+        if (createOfferPayloadModel.trade.sending_token_amount.isEmpty() || createOfferPayloadModel.trade.sending_token_amount.toInt() <= 0) {
+            showToast(getString(R.string.invalid_token_amount))
+            return false
+        }
+        if (createOfferPayloadModel.trade.recipient_token_amount.isEmpty() || createOfferPayloadModel.trade.recipient_token_amount.toInt() <= 0) {
+            showToast(getString(R.string.invalid_token_amount))
+            return false
+        }
+
+        return true
+    }
 
 }

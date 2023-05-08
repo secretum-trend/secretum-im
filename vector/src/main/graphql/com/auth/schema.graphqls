@@ -72,6 +72,10 @@ type TradeByPkOutput {
     userBySendingUserId:UserBySendingUserId!
 }
 
+input WalletByUsernameInput {
+    username: String!
+}
+
 
 """
 Boolean expression to compare columns of type "Int". All fields are combined with logical 'AND'.
@@ -256,6 +260,13 @@ type mutation_root {
     createOffer(payload: CreateOfferPayload!): CreateOfferOutput
 }
 
+type Wallet {
+    id: ID!
+    user: User!
+    address: String!
+    user_id: ID!
+}
+
 """
 column ordering options
 """
@@ -293,6 +304,7 @@ enum order_by {
 
 type query_root {
 
+    GetWalletByUsername(username: String!): [Wallet!]!
 
     wallets(where : wallets_bool_exp) : [WalletsRes]
 

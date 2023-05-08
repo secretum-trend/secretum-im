@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import androidx.lifecycle.viewModelScope
 import com.auth.CreateOfferByMutation
+import com.auth.GetTradeByPkQuery
 import com.auth.type.CreateOfferPayload
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.di.login.repository.LoginRepository
@@ -44,8 +45,8 @@ class PreviewTradeViewModel @Inject constructor(
     private val _message = MutableLiveData<Int>()
     val message = _message
 
-    private val _createOffer = MutableLiveData<Resource<CreateOfferByMutation.Data?>>()
-    val createOffer = _createOffer
+    private val _tradeByPk = MutableLiveData<Resource<GetTradeByPkQuery.Data?>>()
+    val tradeByPk = _tradeByPk
 
     fun signNonce(
         intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
@@ -58,7 +59,7 @@ class PreviewTradeViewModel @Inject constructor(
                 doReauthorize(client, OnboardingViewModel.IDENTITY, sessionPref.authToken)
                 client.signMessagesDetached(
                     arrayMessage,
-                    arrayOf(Base58DecodeUseCase(sessionPref.address))
+                    arrayOf(Base58DecodeUseCase.invoke(sessionPref.address))
                 )
             }
         } catch (e: MobileWalletAdapterUseCase.LocalAssociationFailedException) {
@@ -73,12 +74,11 @@ class PreviewTradeViewModel @Inject constructor(
             OffChainMessageSigningUseCase.verify(
                 signedMessages[0].message,
                 signedMessages[0].signatures[0],
-                _uiState.value.publicKey!!,
+                Base58DecodeUseCase.invoke(sessionPref.address),
                 nonce.toString().toByteArray(Charsets.UTF_8)
             )
-            Timber.tag("signature").d(signedMessages[0].signatures[0].toString())
             _signature.value = Base58EncodeUseCase.invoke(signedMessages[0].signatures[0])
-            showMessage(R.string.msg_request_succeeded)
+//            showMessage(R.string.msg_request_succeeded)
         } catch (e: IllegalArgumentException) {
             showMessage(R.string.msg_request_failed)
         }
@@ -134,20 +134,10 @@ class PreviewTradeViewModel @Inject constructor(
         _message.value = resId
     }
 
-    fun getNonceByUserId(userId: Int) = liveData {
-        emit(Resource.loading())
-        try {
-            val data = tradeRepository.getNonceByUserId(userId)
-            emit(Resource.success(data))
-        } catch (_: Throwable) {
-        }
-    }
-
     fun getNonce() = liveData {
         emit(Resource.loading())
         try {
-            val nonce =
-                loginRepository.getNonce(sessionPref.address)
+            val nonce = loginRepository.getNonce(sessionPref.address)
             emit(Resource.success(nonce))
         } catch (t: Throwable) {
             emit(Resource.error("error"))
@@ -161,6 +151,17 @@ class PreviewTradeViewModel @Inject constructor(
             emit(Resource.success(tradeRepository.createOffer(payload)))
         } catch (t: Throwable) {
             emit(Resource.error(t.message.toString()))
+        }
+    }
+
+    fun getTradeByPk(tradeId: Int?) {
+        viewModelScope.launch {
+            try {
+                _tradeByPk.value = Resource.loading()
+                _tradeByPk.value = Resource.success(tradeRepository.tradeByPK(tradeId!!))
+            } catch (t: Throwable) {
+                _tradeByPk.value = Resource.error("")
+            }
         }
     }
 

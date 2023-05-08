@@ -71,3 +71,11 @@ query GetRateByAddresses($addresses: [String!]) {
     }
 }
 
+query GetWalletByUsername($username: String!) {
+    GetWalletByUsername(username: $username) {
+        address
+        user_id
+        __typename
+    }
+}
+

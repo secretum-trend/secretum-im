@@ -9,6 +9,7 @@ class SessionPref @Inject constructor(context : Context)  {
     companion object {
         const val PREF_ADDRESS = "pref_address"
         const val PREF_AUTH_TOKEN = "pref_auth_token"
+        const val PREF_ACCESS_TOKEN = "pref_accessToken"
 
     }
 
@@ -22,4 +23,8 @@ class SessionPref @Inject constructor(context : Context)  {
     var authToken : String
         get() = sharedPreferences.getString(PREF_AUTH_TOKEN, "") ?: ""
         set(value) = sharedPreferences.edit().putString(PREF_AUTH_TOKEN, value).apply()
+
+    var accessToken : String
+        get() = sharedPreferences.getString(PREF_ACCESS_TOKEN, "") ?: ""
+        set(value) = sharedPreferences.edit().putString(PREF_ACCESS_TOKEN, value).apply()
 }

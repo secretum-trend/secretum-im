@@ -22,14 +22,17 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 class LoginModule {
 
+    @Provides
+    @Singleton
+    fun provideAuthorizationInterceptor(session: SessionPref) = AuthorizationInterceptor(session)
 
     @Provides
     @Singleton
-    fun okhttpClient(): OkHttpClient {
+    fun okhttpClient(authorizationInterceptor:AuthorizationInterceptor): OkHttpClient {
         val logging = HttpLoggingInterceptor()
-            .apply { level = HttpLoggingInterceptor.Level.BODY  }
+            .apply { level = HttpLoggingInterceptor.Level.BODY }
         return OkHttpClient.Builder()
-            .addInterceptor(AuthorizationInterceptor())
+            .addInterceptor(authorizationInterceptor)
             .addInterceptor(logging)
             .build()
     }

@@ -1,5 +1,6 @@
 package com.messaging.scrtm.trade.previewtrade
 
+import android.os.Build
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -34,6 +35,7 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
             OFFER_PAYLOAD,
             CreateOfferPayloadModel::class.java
         )
+
     }
 
     @Inject
@@ -91,7 +93,7 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
 
         binding.tvTo.setOnLongClickListener {
             viewModel.signNonce(mwaLauncher, binding.tvTo.text.toString().toInt())
-           true
+            true
         }
     }
 
@@ -127,6 +129,7 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
                         Resource.Status.SUCCESS -> {
                             dismissLoadingDialog()
                             dismiss()
+                            viewModel.getTradeByPk(it.data?.createOffer?.trade_id)
                             requireActivity().showToast(it.message.toString())
                         }
                         Resource.Status.LOADING -> {

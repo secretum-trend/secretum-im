@@ -1234,6 +1234,7 @@ class OnboardingViewModel @AssistedInject constructor(
                     _authenticate.value = Resource.success(authenticateResult)
                     sessionPref.address = Base58EncodeUseCase.invoke(_uiState.value.publicKey!!)
                     sessionPref.authToken = _uiState.value.authToken!!
+                    sessionPref.accessToken = _authenticate.value!!.data!!.accessToken.toString()
 
                 } else {
                     _authenticate.value = Resource.error("error")

@@ -38,6 +38,8 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
 
     }
 
+    var action: ((Boolean,Int?) -> Unit)? = null
+
     @Inject
     lateinit var sessionPref: SessionPref
 
@@ -125,12 +127,14 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
                         Resource.Status.ERROR -> {
                             dismissLoadingDialog()
                             requireActivity().showToast(it.message.toString())
+                            action?.invoke(false, null)
+
                         }
                         Resource.Status.SUCCESS -> {
                             dismissLoadingDialog()
                             dismiss()
-                            viewModel.getTradeByPk(it.data?.createOffer?.trade_id)
-                            requireActivity().showToast(it.message.toString())
+//                            viewModel.getTradeByPk(it.data?.createOffer?.trade_id)
+                            action?.invoke(it.data?.createOffer?.trade_id.toString().isNotEmpty(),it.data?.createOffer?.trade_id )
                         }
                         Resource.Status.LOADING -> {
                             showLoadingDialog()
@@ -157,7 +161,7 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
         private const val USER_ID = "user_id"
         fun newInstance(
             createOfferPayload: CreateOfferPayloadModel,
-            userId: Int
+            userId: Int,
         ): PreviewTradeBottomSheet {
             val args = Bundle().apply {
                 putSerializable(OFFER_PAYLOAD, createOfferPayload)

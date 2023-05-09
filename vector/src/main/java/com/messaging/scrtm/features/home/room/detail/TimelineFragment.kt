@@ -28,6 +28,7 @@ import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.ContextCompat
@@ -70,6 +71,7 @@ import com.messaging.scrtm.core.resources.UserPreferencesProvider
 import com.messaging.scrtm.core.time.Clock
 import com.messaging.scrtm.core.ui.views.*
 import com.messaging.scrtm.core.utils.*
+import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.databinding.DialogReportContentBinding
 import com.messaging.scrtm.databinding.FragmentTimelineBinding
 import com.messaging.scrtm.features.VectorFeatures
@@ -141,11 +143,15 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.billcarsonfr.jsonviewer.JSonViewerDialog
 import org.matrix.android.sdk.api.MatrixPatterns.getUserId
+import org.matrix.android.sdk.api.crypto.MXCRYPTO_ALGORITHM_MEGOLM
 import org.matrix.android.sdk.api.session.Session
 import org.matrix.android.sdk.api.session.events.model.EventType
 import org.matrix.android.sdk.api.session.events.model.content.EncryptedEventContent
+import org.matrix.android.sdk.api.session.events.model.content.EncryptionEventContent
 import org.matrix.android.sdk.api.session.events.model.content.WithHeldCode
+import org.matrix.android.sdk.api.session.events.model.toContent
 import org.matrix.android.sdk.api.session.events.model.toModel
+import org.matrix.android.sdk.api.session.getRoom
 import org.matrix.android.sdk.api.session.room.model.Membership
 import org.matrix.android.sdk.api.session.room.model.RoomSummary
 import org.matrix.android.sdk.api.session.room.model.message.*
@@ -254,7 +260,6 @@ class TimelineFragment :
 
     private lateinit var scrollOnNewMessageCallback: ScrollOnNewMessageCallback
     private lateinit var scrollOnHighlightedEventCallback: ScrollOnHighlightedEventCallback
-
     override fun getBinding(
         inflater: LayoutInflater,
         container: ViewGroup?
@@ -903,6 +908,16 @@ class TimelineFragment :
         }
     }
 
+    private val createOfferResultContracts =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                val data = result.data?.getSerializableExtra("data",TradeInfo::class.java)
+                if (data != null) {
+                    timelineViewModel.sendOffer(data)
+                }
+            }
+        }
+
     override fun handleMenuItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.invite -> {
@@ -934,7 +949,7 @@ class TimelineFragment :
                         )
                     }
                 }
-                startActivity(intent)
+                createOfferResultContracts.launch(intent)
                 true
             }
             R.id.menu_timeline_thread_list -> {

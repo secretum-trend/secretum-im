@@ -18,11 +18,13 @@ package com.messaging.scrtm.features.home.room.detail
 
 import android.net.Uri
 import android.view.View
+import com.messaging.scrtm.core.platform.StateView
 import com.messaging.scrtm.core.platform.VectorViewModelAction
 import com.messaging.scrtm.features.call.conference.ConferenceEvent
 import com.messaging.scrtm.features.voicebroadcast.model.VoiceBroadcast
 import org.matrix.android.sdk.api.session.content.ContentAttachmentData
 import org.matrix.android.sdk.api.session.room.model.message.MessageStickerContent
+import org.matrix.android.sdk.api.session.room.model.message.MessageTextContent
 import org.matrix.android.sdk.api.session.room.model.message.MessageWithAttachmentContent
 import org.matrix.android.sdk.api.session.room.timeline.Timeline
 import org.matrix.android.sdk.api.session.room.timeline.TimelineEvent

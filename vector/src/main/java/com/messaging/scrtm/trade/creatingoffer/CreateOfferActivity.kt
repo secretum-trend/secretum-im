@@ -16,6 +16,7 @@ import com.messaging.scrtm.core.utils.showToast
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.solana.entity.Value
 import com.messaging.scrtm.data.trade.entity.CreateOfferPayloadModel
+import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.data.trade.entity.TradeModel
 import com.messaging.scrtm.databinding.ActivityCreateOfferBinding
 import com.messaging.scrtm.trade.choosenft.ChooseNFTActivity
@@ -253,9 +254,33 @@ class CreateOfferActivity : AppCompatActivity() {
                 publicKey = sessionPref.address,
                 signature = ""
             )
-            if (invalidData(createOfferPayloadModel)){
-                PreviewTradeBottomSheet.newInstance(createOfferPayloadModel, recipientUserId!!.toInt())
-                    .show(supportFragmentManager, null)
+            if (invalidData(createOfferPayloadModel)) {
+                val bottomSheet = PreviewTradeBottomSheet.newInstance(
+                    createOfferPayloadModel,
+                    recipientUserId!!.toInt()
+                )
+                bottomSheet.action = { status, tradeId ->
+                    if (status) {
+                        val tradeInfo = TradeInfo(
+                            tradeId = tradeId.toString(),
+                            sending_address = sessionPref.address,
+                            sending_token_address = viewModel.tokenSending?.account?.data?.parsed?.info?.mint.toString(),
+                            sending_token_amount = binding.tokenOrNft.tvNumber.text.toString(),
+                            recipient_address = viewModel.partner.value?.data?.wallets?.first()?.address.toString(),
+                            recipient_token_address = viewModel.tokenRecipient?.account?.data?.parsed?.info?.mint.toString(),
+                            recipient_token_amount = binding.tokenOrNft2.tvNumber.text.toString(),
+                            recipient_user_id = recipientUserId!!.toInt()
+                        )
+                        val intent = Intent().apply {
+                            putExtra("data", tradeInfo)
+                        }
+                        setResult(RESULT_OK, intent)
+                    } else {
+                        setResult(RESULT_CANCELED)
+                    }
+                    finish()
+                }
+                bottomSheet.show(supportFragmentManager, null)
             }
         }
 

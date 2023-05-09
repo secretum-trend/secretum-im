@@ -88,17 +88,6 @@
         android:layout_toEndOf="@id/messageStartGuideline"
         android:addStatesFromChildren="true" />
 
-    <include
-        android:id="@+id/viewTradeStatus"
-        layout="@layout/item_timeline_event_view_stubs_container"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/messageMemberNameView"
-        android:layout_marginEnd="8dp"
-        android:layout_toStartOf="@id/messageSendStateImageView"
-        android:layout_toEndOf="@id/messageStartGuideline"
-        android:addStatesFromChildren="true" />
-
     <com.messaging.scrtm.core.ui.views.SendStateImageView
         android:id="@+id/messageSendStateImageView"
         android:layout_width="@dimen/item_event_message_state_size"

@@ -12,11 +12,11 @@ class AuthorizationInterceptor( val session : SessionPref) : Interceptor {
         val key = session.accessToken
         val header = String.format("Bearer %s", key)
 
-        val request = chain.request()
-            .newBuilder()
+        val request = chain.request().newBuilder()
 //            .addHeader("x-hasura-admin-secret","l4NsKP3fan1E3j41")
-            .addHeader("Authorization",header)
-            .build()
-        return chain.proceed(request)
+        if (key.isNotEmpty()){
+            request.addHeader("Authorization",header)
+        }
+        return chain.proceed(request.build())
     }
 }

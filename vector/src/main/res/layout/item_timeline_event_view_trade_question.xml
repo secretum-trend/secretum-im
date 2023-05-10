@@ -136,6 +136,7 @@
             app:layout_constraintTop_toBottomOf="@id/imgOffer">
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDismiss"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -148,6 +149,7 @@
                 />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAcceptTrade"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"

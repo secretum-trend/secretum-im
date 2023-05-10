@@ -262,7 +262,7 @@ class CreateOfferActivity : AppCompatActivity() {
                 bottomSheet.action = { status, tradeId ->
                     if (status) {
                         val tradeInfo = TradeInfo(
-                            tradeId = tradeId.toString(),
+                            trade_id = tradeId.toString(),
                             sending_address = sessionPref.address,
                             sending_token_address = viewModel.tokenSending?.account?.data?.parsed?.info?.mint.toString(),
                             sending_token_amount = binding.tokenOrNft.tvNumber.text.toString(),

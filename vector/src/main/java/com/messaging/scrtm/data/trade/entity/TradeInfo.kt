@@ -8,5 +8,5 @@ data class TradeInfo(
     val recipient_token_address: String,
     val recipient_token_amount: String,
     val recipient_user_id: Int,
-    val tradeId: String,
+    val trade_id: String,
     ) : java.io.Serializable

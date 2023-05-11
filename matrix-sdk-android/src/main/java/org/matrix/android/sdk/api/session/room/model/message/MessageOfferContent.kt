@@ -24,7 +24,21 @@ import org.matrix.android.sdk.api.session.room.model.relation.RelationDefaultCon
 
 @JsonClass(generateAdapter = true)
 data class MessageOfferContent(
-    val msgtype: String = MessageType.MSGTYPE_TEXT,
-    @Json(name = "body") val body: String = "",
+    @Json(name = "body") override val body: String = "",
     @Json(name = "trade") val trade: String = "",
-)
+    @Json(name = "msgtype") override val msgType: String = MessageType.MSGTYPE_TEXT,
+    override val relatesTo: RelationDefaultContent? = null,
+    override val newContent: Content? = null,
+): MessageContent
+
+//this MessageOfferContent2 is class check offer. I have no better way
+@JsonClass(generateAdapter = true)
+data class MessageOfferContent2(
+    @Json(name = "body") override val body: String = "",
+    val sender: String = "",
+    @Json(name = "msgtype") override val msgType: String = MessageType.MSGTYPE_TEXT,
+    override val relatesTo: RelationDefaultContent? = null,
+    @Json(name = "content") override val newContent: Content? = null,
+    val event_id: String? = null,
+    val room_id: String? = null,
+): MessageContent

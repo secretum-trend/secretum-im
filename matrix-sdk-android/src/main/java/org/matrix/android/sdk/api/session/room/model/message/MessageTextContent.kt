@@ -16,6 +16,7 @@
 
 package org.matrix.android.sdk.api.session.room.model.message
 
+import android.view.ContentInfo
 import com.squareup.moshi.Json
 import com.squareup.moshi.JsonClass
 import org.matrix.android.sdk.api.session.events.model.Content
@@ -44,5 +45,7 @@ data class MessageTextContent(
         @Json(name = "formatted_body") override val formattedBody: String? = null,
 
         @Json(name = "m.relates_to") override val relatesTo: RelationDefaultContent? = null,
-        @Json(name = "m.new_content") override val newContent: Content? = null
+        @Json(name = "m.new_content") override val newContent: Content? = null,
+        @Json(name = "trade")  val trade: String? = null,
+
 ) : MessageContentWithFormattedBody

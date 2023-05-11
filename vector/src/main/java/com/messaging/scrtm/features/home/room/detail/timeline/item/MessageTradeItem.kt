@@ -17,19 +17,14 @@
 package com.messaging.scrtm.features.home.room.detail.timeline.item
 
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.core.view.isVisible
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.messaging.scrtm.R
-import com.messaging.scrtm.core.date.DateFormatKind
-import com.messaging.scrtm.core.date.VectorDateFormatter
-import com.messaging.scrtm.core.resources.toTimestamp
-import com.messaging.scrtm.core.utils.DimensionConverter
+import com.messaging.scrtm.data.trade.repository.TradeRepository
 import com.messaging.scrtm.features.home.room.detail.RoomDetailAction
-import com.messaging.scrtm.features.home.room.detail.timeline.style.TimelineMessageLayout
-import com.messaging.scrtm.features.location.live.LiveLocationMessageBannerViewState
-import com.messaging.scrtm.features.location.live.LiveLocationRunningBannerView
-import org.threeten.bp.LocalDateTime
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 @EpoxyModelClass
 abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder>() {
@@ -40,8 +35,8 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
 //    @EpoxyAttribute
 //    var endOfLiveDateTime: LocalDateTime? = null
 
-    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
-    lateinit var vectorDateFormatter: VectorDateFormatter
+//    @EpoxyAttribute(EpoxyAttribute.Option.DoNotHash)
+//    lateinit var vectorDateFormatter: VectorDateFormatter
 
     override fun bind(holder: Holder) {
         super.bind(holder)
@@ -60,63 +55,30 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
         holder.tvAcceptTrade.setOnClickListener {
             attributes.callback?.onTimelineItemAction(RoomDetailAction.StopLiveLocationSharing)
         }
-    }
-//
-//    private fun buildViewState(
-//            holder: Holder,
-//            messageLayout: TimelineMessageLayout,
-//            isEmitter: Boolean
-//    ): LiveLocationMessageBannerViewState {
-//        return when {
-//            messageLayout is TimelineMessageLayout.Bubble && isEmitter ->
-//                LiveLocationMessageBannerViewState.Emitter(
-//                        remainingTimeInMillis = getRemainingTimeOfLiveInMillis(),
-//                        bottomStartCornerRadiusInDp = messageLayout.cornersRadius.bottomStartRadius,
-//                        bottomEndCornerRadiusInDp = messageLayout.cornersRadius.bottomEndRadius,
-//                        isStopButtonCenteredVertically = false
-//                )
-//            messageLayout is TimelineMessageLayout.Bubble ->
-//                LiveLocationMessageBannerViewState.Watcher(
-//                        bottomStartCornerRadiusInDp = messageLayout.cornersRadius.bottomStartRadius,
-//                        bottomEndCornerRadiusInDp = messageLayout.cornersRadius.bottomEndRadius,
-//                        formattedLocalTimeOfEndOfLive = getFormattedLocalTimeEndOfLive(),
-//                )
-//            isEmitter -> {
-//                val cornerRadius = getBannerCornerRadiusForDefaultLayout(holder)
-//                LiveLocationMessageBannerViewState.Emitter(
-//                        remainingTimeInMillis = getRemainingTimeOfLiveInMillis(),
-//                        bottomStartCornerRadiusInDp = cornerRadius,
-//                        bottomEndCornerRadiusInDp = cornerRadius,
-//                        isStopButtonCenteredVertically = true
-//                )
-//            }
-//            else -> {
-//                val cornerRadius = getBannerCornerRadiusForDefaultLayout(holder)
-//                LiveLocationMessageBannerViewState.Watcher(
-//                        bottomStartCornerRadiusInDp = cornerRadius,
-//                        bottomEndCornerRadiusInDp = cornerRadius,
-//                        formattedLocalTimeOfEndOfLive = getFormattedLocalTimeEndOfLive(),
-//                )
-//            }
-//        }
-//    }
 
-//    private fun getBannerCornerRadiusForDefaultLayout(holder: Holder): Float {
-//        val dimensionConverter = DimensionConverter(holder.view.resources)
-//        return dimensionConverter.dpToPx(8).toFloat()
-//    }
-//
-//    private fun getFormattedLocalTimeEndOfLive() =
-//            endOfLiveDateTime?.toTimestamp()?.let { vectorDateFormatter.format(it, DateFormatKind.MESSAGE_SIMPLE) }.orEmpty()
-//
-//    private fun getRemainingTimeOfLiveInMillis() =
-//            (endOfLiveDateTime?.toTimestamp() ?: 0) - LocalDateTime.now().toTimestamp()
+        holder.tvSendingToken.text = String.format(
+            "${attributes.tradeInfo?.sending_token_amount} %s",
+            attributes.tradeInfo?.sending_token_address
+        )
+        holder.tvRecipientToken.text = String.format(
+            "${attributes.tradeInfo?.recipient_token_amount} %s",
+            attributes.tradeInfo?.recipient_token_address
+        )
+
+        holder.tvFromAddress.text = attributes.tradeInfo?.sending_address
+    }
 
     override fun getViewStubId() = STUB_ID
 
     class Holder : AbsMessageLocationItem.Holder(STUB_ID) {
         val tvAcceptTrade by bind<AppCompatTextView>(R.id.tvAcceptTrade)
         val tvDismiss by bind<AppCompatTextView>(R.id.tvDismiss)
+
+        val tvSendingToken by bind<AppCompatTextView>(R.id.tvSendingToken)
+        val tvRecipientToken by bind<AppCompatTextView>(R.id.tvRecipientToken)
+
+        val tvFromAddress by bind<AppCompatTextView>(R.id.tvFromAddress)
+
     }
 
     companion object {

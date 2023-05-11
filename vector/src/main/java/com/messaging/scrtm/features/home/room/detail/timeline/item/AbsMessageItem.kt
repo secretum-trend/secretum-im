@@ -33,6 +33,7 @@ import com.messaging.scrtm.R
 import com.messaging.scrtm.core.epoxy.ClickListener
 import com.messaging.scrtm.core.epoxy.onClick
 import com.messaging.scrtm.core.ui.views.SendStateImageView
+import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.features.home.AvatarRenderer
 import com.messaging.scrtm.features.home.room.detail.timeline.MessageColorProvider
 import com.messaging.scrtm.features.home.room.detail.timeline.TimelineEventController
@@ -187,6 +188,7 @@ abstract class AbsMessageItem<H : AbsMessageItem.Holder>(
             val areThreadMessagesEnabled: Boolean = false,
             val autoplayAnimatedImages: Boolean = false,
             override val reactionsSummaryEvents: ReactionsSummaryEvents? = null,
+            val tradeInfo: TradeInfo? = null
     ) : AbsBaseMessageItem.Attributes {
 
         // Have to override as it's used to diff epoxy items

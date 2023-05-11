@@ -24,6 +24,8 @@ import android.text.style.AbsoluteSizeSpan
 import android.text.style.ClickableSpan
 import android.text.style.ForegroundColorSpan
 import android.view.View
+import com.auth.type.Trade
+import com.google.gson.Gson
 import dagger.Lazy
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.epoxy.ClickListener
@@ -44,27 +46,6 @@ import com.messaging.scrtm.features.home.room.detail.timeline.helper.LocationPin
 import com.messaging.scrtm.features.home.room.detail.timeline.helper.MessageInformationDataFactory
 import com.messaging.scrtm.features.home.room.detail.timeline.helper.MessageItemAttributesFactory
 import com.messaging.scrtm.features.home.room.detail.timeline.helper.TimelineMediaSizeProvider
-import com.messaging.scrtm.features.home.room.detail.timeline.item.AbsMessageItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.BaseEventItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageAudioItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageAudioItem_
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageFileItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageFileItem_
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageImageVideoItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageImageVideoItem_
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageInformationData
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageLocationItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageLocationItem_
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageTextItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageTextItem_
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageVoiceItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageVoiceItem_
-import com.messaging.scrtm.features.home.room.detail.timeline.item.PollItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.PollItem_
-import com.messaging.scrtm.features.home.room.detail.timeline.item.RedactedMessageItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.RedactedMessageItem_
-import com.messaging.scrtm.features.home.room.detail.timeline.item.VerificationRequestItem
-import com.messaging.scrtm.features.home.room.detail.timeline.item.VerificationRequestItem_
 import com.messaging.scrtm.features.home.room.detail.timeline.render.EventTextRenderer
 import com.messaging.scrtm.features.home.room.detail.timeline.render.ProcessBodyOfReplyToEventUseCase
 import com.messaging.scrtm.features.home.room.detail.timeline.tools.createLinkMovementMethod
@@ -83,6 +64,8 @@ import com.messaging.scrtm.features.voice.AudioWaveformView
 import com.messaging.scrtm.features.voicebroadcast.isVoiceBroadcast
 import com.messaging.scrtm.features.voicebroadcast.model.MessageVoiceBroadcastInfoContent
 import com.messaging.lib.core.utils.epoxy.charsequence.toEpoxyCharSequence
+import com.messaging.scrtm.data.trade.entity.TradeInfo
+import com.messaging.scrtm.features.home.room.detail.timeline.item.*
 import me.gujun.android.span.span
 import org.matrix.android.sdk.api.MatrixUrls.isMxcUrl
 import org.matrix.android.sdk.api.session.Session
@@ -92,24 +75,7 @@ import org.matrix.android.sdk.api.session.events.model.content.EncryptedEventCon
 import org.matrix.android.sdk.api.session.events.model.isThread
 import org.matrix.android.sdk.api.session.events.model.toModel
 import org.matrix.android.sdk.api.session.room.getTimelineEvent
-import org.matrix.android.sdk.api.session.room.model.message.MessageAudioContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageBeaconInfoContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageContentWithFormattedBody
-import org.matrix.android.sdk.api.session.room.model.message.MessageEmoteContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageEndPollContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageFileContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageImageInfoContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageLocationContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageNoticeContent
-import org.matrix.android.sdk.api.session.room.model.message.MessagePollContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageTextContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageType
-import org.matrix.android.sdk.api.session.room.model.message.MessageVerificationRequestContent
-import org.matrix.android.sdk.api.session.room.model.message.MessageVideoContent
-import org.matrix.android.sdk.api.session.room.model.message.asMessageAudioEvent
-import org.matrix.android.sdk.api.session.room.model.message.getFileUrl
-import org.matrix.android.sdk.api.session.room.model.message.getThumbnailUrl
+import org.matrix.android.sdk.api.session.room.model.message.*
 import org.matrix.android.sdk.api.session.room.model.relation.ReplyToContent
 import org.matrix.android.sdk.api.session.room.timeline.getRelationContent
 import org.matrix.android.sdk.api.settings.LightweightSettingsStorage
@@ -179,6 +145,7 @@ class MessageItemFactory @Inject constructor(
         }
 
         val messageContent = event.getVectorLastMessageContent()
+
         if (messageContent == null) {
             val malformedText = stringProvider.getString(R.string.malformed_message)
             return defaultItemFactory.create(malformedText, informationData, highlight, callback)
@@ -202,7 +169,14 @@ class MessageItemFactory @Inject constructor(
         //        val ev = all.toModel<Event>()
         val messageItem = when (messageContent) {
             is MessageEmoteContent -> buildEmoteMessageItem(messageContent, informationData, highlight, callback, attributes)
-            is MessageTextContent -> buildItemForTextContent(messageContent, informationData, highlight, callback, attributes)
+            is MessageTextContent ->{
+
+                if (messageContent.body.isEmpty() && Gson().fromJson (messageContent.trade, TradeInfo::class.java) is TradeInfo){
+                    buildOfferItem(attributes)
+                }else{
+                    buildItemForTextContent(messageContent, informationData, highlight, callback, attributes)
+                }
+            }
             is MessageImageInfoContent -> buildImageMessageItem(messageContent, informationData, highlight, callback, attributes)
             is MessageNoticeContent -> buildNoticeMessageItem(messageContent, informationData, highlight, callback, attributes)
             is MessageVideoContent -> buildVideoMessageItem(messageContent, informationData, highlight, callback, attributes)
@@ -651,6 +625,20 @@ class MessageItemFactory @Inject constructor(
                 .attributes(attributes)
                 .highlighted(highlight)
                 .movementMethod(createLinkMovementMethod(callback))
+    }
+
+    private fun buildOfferItem(
+        //        callback: TimelineEventController.Callback?,
+        attributes: AbsMessageItem.Attributes,
+    ): MessageTradeItem? {
+//        val renderedBody = textRenderer.render(body)
+//        val bindingOptions = spanUtils.getBindingOptions(renderedBody)
+//        val linkifiedBody = renderedBody.linkify(callback)
+
+        return MessageTradeItem_()
+                .leftGuideline(avatarSizeProvider.leftGuideline)
+                .attributes(attributes)
+//                .movementMethod(createLinkMovementMethod(callback))
     }
 
     private fun annotateWithEdited(

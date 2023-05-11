@@ -15,10 +15,12 @@
  */
 package com.messaging.scrtm.features.home.room.detail.timeline.helper
 
+import com.google.gson.Gson
 import com.messaging.scrtm.EmojiCompatFontProvider
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.resources.StringProvider
 import com.messaging.scrtm.core.resources.UserPreferencesProvider
+import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.features.home.AvatarRenderer
 import com.messaging.scrtm.features.home.room.detail.timeline.MessageColorProvider
 import com.messaging.scrtm.features.home.room.detail.timeline.TimelineEventController
@@ -26,52 +28,64 @@ import com.messaging.scrtm.features.home.room.detail.timeline.format.Displayable
 import com.messaging.scrtm.features.home.room.detail.timeline.item.AbsMessageItem
 import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageInformationData
 import com.messaging.scrtm.features.home.room.detail.timeline.item.ReactionsSummaryEvents
+import org.matrix.android.sdk.api.session.room.model.message.MessageContent
+import org.matrix.android.sdk.api.session.room.model.message.MessageTextContent
 import org.matrix.android.sdk.api.session.threads.ThreadDetails
 import javax.inject.Inject
 
 class MessageItemAttributesFactory @Inject constructor(
-        private val avatarRenderer: AvatarRenderer,
-        private val messageColorProvider: MessageColorProvider,
-        private val avatarSizeProvider: AvatarSizeProvider,
-        private val stringProvider: StringProvider,
-        private val displayableEventFormatter: DisplayableEventFormatter,
-        private val preferencesProvider: UserPreferencesProvider,
-        private val emojiCompatFontProvider: EmojiCompatFontProvider
+    private val avatarRenderer: AvatarRenderer,
+    private val messageColorProvider: MessageColorProvider,
+    private val avatarSizeProvider: AvatarSizeProvider,
+    private val stringProvider: StringProvider,
+    private val displayableEventFormatter: DisplayableEventFormatter,
+    private val preferencesProvider: UserPreferencesProvider,
+    private val emojiCompatFontProvider: EmojiCompatFontProvider
 ) {
 
     fun create(
-            messageContent: Any?,
-            informationData: MessageInformationData,
-            callback: TimelineEventController.Callback?,
-            reactionsSummaryEvents: ReactionsSummaryEvents?,
-            threadDetails: ThreadDetails? = null
+        messageContent: Any?,
+        informationData: MessageInformationData,
+        callback: TimelineEventController.Callback?,
+        reactionsSummaryEvents: ReactionsSummaryEvents?,
+        threadDetails: ThreadDetails? = null
     ): AbsMessageItem.Attributes {
         return AbsMessageItem.Attributes(
-                avatarSize = avatarSizeProvider.avatarSize,
-                informationData = informationData,
-                avatarRenderer = avatarRenderer,
-                messageColorProvider = messageColorProvider,
-                itemLongClickListener = { view ->
-                    callback?.onEventLongClicked(informationData, messageContent, view) ?: false
-                },
-                itemClickListener = { view ->
-                    callback?.onEventCellClicked(informationData, messageContent, view, threadDetails?.isRootThread ?: false)
-                },
-                memberClickListener = {
-                    callback?.onMemberNameClicked(informationData)
-                },
-                callback = callback,
-                reactionPillCallback = callback,
-                avatarCallback = callback,
-                threadCallback = callback,
-                readReceiptsCallback = callback,
-                emojiTypeFace = emojiCompatFontProvider.typeface,
-                decryptionErrorMessage = stringProvider.getString(R.string.encrypted_message),
-                threadSummaryFormatted = displayableEventFormatter.formatThreadSummary(threadDetails?.threadSummaryLatestEvent).toString(),
-                threadDetails = threadDetails,
-                reactionsSummaryEvents = reactionsSummaryEvents,
-                areThreadMessagesEnabled = preferencesProvider.areThreadMessagesEnabled(),
-                autoplayAnimatedImages = preferencesProvider.autoplayAnimatedImages()
+            avatarSize = avatarSizeProvider.avatarSize,
+            informationData = informationData,
+            avatarRenderer = avatarRenderer,
+            messageColorProvider = messageColorProvider,
+            itemLongClickListener = { view ->
+                callback?.onEventLongClicked(informationData, messageContent, view) ?: false
+            },
+            itemClickListener = { view ->
+                callback?.onEventCellClicked(
+                    informationData,
+                    messageContent,
+                    view,
+                    threadDetails?.isRootThread ?: false
+                )
+            },
+            memberClickListener = {
+                callback?.onMemberNameClicked(informationData)
+            },
+            callback = callback,
+            reactionPillCallback = callback,
+            avatarCallback = callback,
+            threadCallback = callback,
+            readReceiptsCallback = callback,
+            emojiTypeFace = emojiCompatFontProvider.typeface,
+            decryptionErrorMessage = stringProvider.getString(R.string.encrypted_message),
+            threadSummaryFormatted = displayableEventFormatter.formatThreadSummary(threadDetails?.threadSummaryLatestEvent)
+                .toString(),
+            threadDetails = threadDetails,
+            reactionsSummaryEvents = reactionsSummaryEvents,
+            areThreadMessagesEnabled = preferencesProvider.areThreadMessagesEnabled(),
+            autoplayAnimatedImages = preferencesProvider.autoplayAnimatedImages(),
+            tradeInfo = Gson().fromJson(
+                (messageContent as MessageTextContent).trade,
+                TradeInfo::class.java
+            )
         )
     }
 }

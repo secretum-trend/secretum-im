@@ -461,7 +461,7 @@ class TimelineViewModel @AssistedInject constructor(
     fun sendOffer(tradeInfo: TradeInfo) {
         val json = Gson().toJson(tradeInfo)
         val content = MessageOfferContent(
-            msgtype = MessageType.MSGTYPE_TEXT, trade = json, body = ""
+            msgType = MessageType.MSGTYPE_TEXT, trade = json, body = ""
         )
         room?.sendService()?.sendEvent(
             eventType = EventType.MESSAGE,

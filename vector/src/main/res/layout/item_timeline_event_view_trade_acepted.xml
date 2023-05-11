@@ -44,7 +44,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTradedSuccessfully">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView2"
+                android:id="@+id/tvSendingToken"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -71,7 +71,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView3"
+                android:id="@+id/tvRecipientToken"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -92,8 +92,8 @@
                 android:text="From"
                 android:textColor="#66FFFFFF"
                 android:fontFamily="@font/nunito_semi_bold"
-                app:layout_constraintStart_toStartOf="@+id/appCompatTextView2"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+                app:layout_constraintStart_toStartOf="@+id/tvSendingToken"
+                app:layout_constraintTop_toBottomOf="@+id/tvSendingToken" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"

@@ -2,7 +2,7 @@
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:addStatesFromChildren="true"
     app:cardBackgroundColor="#202B58"
@@ -37,19 +37,21 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTradedSuccessfully">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView2"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvSendingToken"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:fontFamily="@font/nunito_bold"
                 android:gravity="end"
+                android:ellipsize="middle"
+                android:singleLine="true"
                 android:textColor="#5267E3"
                 android:textSize="24sp"
                 app:layout_constraintEnd_toStartOf="@+id/appCompatImageView4"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="1 ETH" />
+                tools:text="1 ETqqwerqwerqwerqerqerH" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/appCompatImageView4"
@@ -57,14 +59,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:src="@drawable/ic_equal"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView2"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSendingToken"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/appCompatTextView2" />
+                app:layout_constraintTop_toTopOf="@+id/tvSendingToken" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView3"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvRecipientToken"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:fontFamily="@font/nunito_bold"
@@ -72,10 +74,12 @@
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView4"
                 app:layout_constraintEnd_toEndOf="parent"
+                android:ellipsize="middle"
+                android:singleLine="true"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/appCompatImageView4"
                 app:layout_constraintTop_toTopOf="@+id/appCompatImageView4"
-                tools:text="1 ETH" />
+                tools:text="1 ETHÁDFASDFASDFADSFADSFAD" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView4"
@@ -84,16 +88,19 @@
                 android:fontFamily="@font/nunito_semi_bold"
                 android:text="@string/from"
                 android:textColor="#66FFFFFF"
-                app:layout_constraintStart_toStartOf="@+id/appCompatTextView2"
-                app:layout_constraintTop_toBottomOf="@+id/appCompatTextView2" />
+                app:layout_constraintStart_toStartOf="@+id/tvSendingToken"
+                app:layout_constraintTop_toBottomOf="@+id/tvSendingToken" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/appCompatTextView5"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvFromAddress"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
+                android:ellipsize="middle"
                 android:fontFamily="@font/nunito_semi_bold"
+                android:singleLine="true"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
+                app:layout_constraintEnd_toStartOf="@+id/tvRecipientToken"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView4"
                 tools:text="Peter" />
 
@@ -114,7 +121,7 @@
 
         <androidx.appcompat.widget.AppCompatImageView
             android:id="@+id/imgOffer"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="8dp"

@@ -6,6 +6,7 @@ import com.auth.GetPartnerAddressByQuery
 import com.auth.GetTradeByPkQuery
 import com.auth.type.CreateOfferPayload
 import com.messaging.scrtm.data.trade.domain.ApolloTradeClient
+import javax.inject.Inject
 
 interface TradeRepository {
     suspend fun getPartnerAddress(userId: Int):
@@ -18,7 +19,7 @@ interface TradeRepository {
 
 }
 
-class TradeRepositoryImp(private val apolloTradeClient: ApolloTradeClient) : TradeRepository {
+class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: ApolloTradeClient) : TradeRepository {
     override suspend fun getPartnerAddress(userId: Int): GetPartnerAddressByQuery.Data? {
         return apolloTradeClient.getPartnerAddress(userId)
     }

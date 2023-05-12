@@ -66,6 +66,7 @@ import com.messaging.scrtm.features.voice.AudioWaveformView
 import com.messaging.scrtm.features.voicebroadcast.isVoiceBroadcast
 import com.messaging.scrtm.features.voicebroadcast.model.MessageVoiceBroadcastInfoContent
 import com.messaging.lib.core.utils.epoxy.charsequence.toEpoxyCharSequence
+import com.messaging.scrtm.core.extensions.orEmpty
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.data.trade.repository.TradeRepository
@@ -199,7 +200,6 @@ class MessageItemFactory @Inject constructor(
                 attributes
             )
             is MessageTextContent -> {
-
                 if (messageContent.body.isEmpty() && Gson().fromJson(
                         messageContent.trade,
                         TradeInfo::class.java

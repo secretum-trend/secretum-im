@@ -49,6 +49,13 @@ class MessageItemAttributesFactory @Inject constructor(
         reactionsSummaryEvents: ReactionsSummaryEvents?,
         threadDetails: ThreadDetails? = null
     ): AbsMessageItem.Attributes {
+        var trade: TradeInfo? = null
+        (messageContent as? MessageTextContent)?.trade?.let {
+            trade = Gson().fromJson(
+                it,
+                TradeInfo::class.java
+            )
+        }
         return AbsMessageItem.Attributes(
             avatarSize = avatarSizeProvider.avatarSize,
             informationData = informationData,
@@ -81,10 +88,7 @@ class MessageItemAttributesFactory @Inject constructor(
             reactionsSummaryEvents = reactionsSummaryEvents,
             areThreadMessagesEnabled = preferencesProvider.areThreadMessagesEnabled(),
             autoplayAnimatedImages = preferencesProvider.autoplayAnimatedImages(),
-            tradeInfo = Gson().fromJson(
-                (messageContent as MessageTextContent).trade,
-                TradeInfo::class.java
-            )
+            tradeInfo = trade
         )
     }
 }

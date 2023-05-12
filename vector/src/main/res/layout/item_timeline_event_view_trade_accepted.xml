@@ -139,9 +139,10 @@
 
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvDate"
-                    android:layout_width="wrap_content"
+                    android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="16dp"
+                    android:singleLine="true"
                     android:text="26 Apr"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="parent"

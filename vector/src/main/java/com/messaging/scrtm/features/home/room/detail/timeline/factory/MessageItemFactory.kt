@@ -207,7 +207,7 @@ class MessageItemFactory @Inject constructor(
                 ) {
                     val trade = Gson().fromJson(messageContent.trade, TradeInfo::class.java)
                     val data = tradeRepository.tradeByPK(trade.trade_id.toInt())
-                    buildOfferItem(attributes, data)
+                    buildOfferItem(callback, attributes, data)
                 } else {
                     buildItemForTextContent(
                         messageContent,
@@ -779,7 +779,7 @@ class MessageItemFactory @Inject constructor(
     }
 
     private fun buildOfferItem(
-        //        callback: TimelineEventController.Callback?,
+        callback: TimelineEventController.Callback?,
         attributes: AbsMessageItem.Attributes,
         tradeInfo: GetTradeByPkQuery.Data?
     ): MessageTradeItem? {
@@ -792,6 +792,7 @@ class MessageItemFactory @Inject constructor(
             .attributes(attributes)
             .tradeByPkOutput(tradeInfo)
             .sessionPref(sessionPref)
+            .tradeCallBack(callback)
 //                .movementMethod(createLinkMovementMethod(callback))
     }
 

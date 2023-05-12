@@ -3566,6 +3566,10 @@
     <string name="accept_the_trade">Accept the trade</string>
     <string name="traded_successfully">Traded successfully!</string>
     <string name="cancel_offer">Cancel offer</string>
+    <string name="wait_seller_start">Wait for seller to start trading</string>
+    <string name="escrow">Escrow</string>
+    <string name="completed">Completed</string>
+    <string name="by_name">By %s</string>
 
 
 </resources>

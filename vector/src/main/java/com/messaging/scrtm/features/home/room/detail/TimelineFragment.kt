@@ -51,6 +51,7 @@ import com.airbnb.mvrx.Fail
 import com.airbnb.mvrx.args
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
+import com.auth.GetTradeByPkQuery
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.animations.play
@@ -1878,6 +1879,18 @@ class TimelineFragment :
 
     override fun onPreviewUrlImageClicked(sharedView: View?, mxcUrl: String?, title: String?) {
         navigator.openBigImageViewer(requireActivity(), sharedView, mxcUrl, title)
+    }
+
+    override fun disMissOffer(tradeInfo: GetTradeByPkQuery.Data?) {
+        Timber.d("disMissOffer $tradeInfo")
+    }
+
+    override fun acceptTrade(tradeInfo: GetTradeByPkQuery.Data?) {
+        Timber.d("acceptTrade $tradeInfo")
+    }
+
+    override fun cancelOffer(tradeInfo: GetTradeByPkQuery.Data?) {
+        Timber.d("cancelOffer $tradeInfo")
     }
 
     override fun onVoiceControlButtonClicked(

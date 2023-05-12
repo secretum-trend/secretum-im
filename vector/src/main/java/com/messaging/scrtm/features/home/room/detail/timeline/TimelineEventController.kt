@@ -25,6 +25,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.airbnb.epoxy.EpoxyController
 import com.airbnb.epoxy.EpoxyModel
 import com.airbnb.epoxy.VisibilityState
+import com.auth.GetTradeByPkQuery
 import com.messaging.scrtm.core.date.DateFormatKind
 import com.messaging.scrtm.core.date.VectorDateFormatter
 import com.messaging.scrtm.core.epoxy.LoadingItem_
@@ -32,6 +33,7 @@ import com.messaging.scrtm.core.extensions.localDateTime
 import com.messaging.scrtm.core.extensions.nextOrNull
 import com.messaging.scrtm.core.extensions.prevOrNull
 import com.messaging.scrtm.core.time.Clock
+import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.features.home.AvatarRenderer
 import com.messaging.scrtm.features.home.room.detail.JitsiState
 import com.messaging.scrtm.features.home.room.detail.RoomDetailAction
@@ -129,7 +131,9 @@ class TimelineEventController @Inject constructor(
             ThreadCallback,
             UrlClickCallback,
             ReadReceiptsCallback,
-            PreviewUrlCallback {
+            PreviewUrlCallback,
+            TradeCallBack
+    {
         fun onLoadMore(direction: Timeline.Direction)
         fun onEventInvisible(event: TimelineEvent)
         fun onEventVisible(event: TimelineEvent)
@@ -197,6 +201,13 @@ class TimelineEventController @Inject constructor(
         fun onPreviewUrlCloseClicked(eventId: String, url: String)
         fun onPreviewUrlImageClicked(sharedView: View?, mxcUrl: String?, title: String?)
     }
+
+    interface TradeCallBack {
+        fun disMissOffer(tradeInfo: GetTradeByPkQuery.Data?)
+        fun acceptTrade(tradeInfo: GetTradeByPkQuery.Data?)
+        fun cancelOffer(tradeInfo: GetTradeByPkQuery.Data?)
+    }
+
 
     // Map eventId to adapter position
     private val adapterPositionMapping = HashMap<String, Int>()

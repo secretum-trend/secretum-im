@@ -47,6 +47,41 @@ input Trade {
 type CreateOfferOutput {
     trade_id: Int!
 }
+
+input CancelOfferPayload {
+    signature: String
+    tradeId: Int!
+}
+
+type CancelOfferOutput {
+    updated: Boolean
+}
+
+input AcceptTradePayload {
+    tradeId: Int!
+}
+
+type AcceptTradeOutput {
+    updated: Boolean!
+}
+
+input InitializeTradePayload{
+    tradeId: Int!
+}
+
+type InitializeTradeOutput {
+    updated: Boolean!
+}
+
+input ExchangeTradePayload{
+    signature: String!
+    tradeId: Int!
+}
+
+type ExchangeTradeOutput {
+    updated: Boolean!
+}
+
 type User {
     username: String!
 }
@@ -258,6 +293,14 @@ type mutation_root {
     joinWhitelistFree(address: String!): JoinWhitelistFreeRepsonse!
 
     createOffer(payload: CreateOfferPayload!): CreateOfferOutput
+
+    cancelOffer(payload: CancelOfferPayload!): CancelOfferOutput
+
+    acceptTrade(payload: AcceptTradePayload!): AcceptTradeOutput
+
+    exchangeTrade(payload: ExchangeTradePayload!): ExchangeTradeOutput
+
+    initializeTrade(payload: InitializeTradePayload!): InitializeTradeOutput
 }
 
 type Wallet {

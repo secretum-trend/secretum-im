@@ -37,6 +37,34 @@ mutation createOfferBy($payLoad:CreateOfferPayload!) {
     }
 }
 
+mutation cancelOffer($tradeId: Int!) {
+    cancelOffer(payload: {tradeId: $tradeId}) {
+        updated
+        __typename
+    }
+}
+
+mutation AcceptTrade($tradeId: Int!) {
+    acceptTrade(payload: {tradeId: $tradeId}) {
+        updated
+        __typename
+    }
+}
+
+mutation InitializeTrade($tradeId: Int!) {
+    initializeTrade(payload: {tradeId: $tradeId}) {
+        updated
+        __typename
+    }
+}
+
+mutation ExchangeTrade($tradeId: Int!, $signature: String!) {
+    exchangeTrade(payload: {tradeId: $tradeId, signature: $signature}) {
+        updated
+        __typename
+    }
+}
+
 query GetTradeByPk($tradeId: Int!) {
     trades_by_pk(id: $tradeId) {
         id

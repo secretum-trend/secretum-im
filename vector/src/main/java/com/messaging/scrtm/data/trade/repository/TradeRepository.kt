@@ -1,9 +1,13 @@
 package com.messaging.scrtm.data.trade.repository
 
+import com.auth.AcceptTradeMutation
+import com.auth.CancelOfferMutation
 import com.auth.CreateOfferByMutation
+import com.auth.ExchangeTradeMutation
 import com.auth.GetNonceByUserIdQuery
 import com.auth.GetPartnerAddressByQuery
 import com.auth.GetTradeByPkQuery
+import com.auth.InitializeTradeMutation
 import com.auth.type.CreateOfferPayload
 import com.messaging.scrtm.data.trade.domain.ApolloTradeClient
 import javax.inject.Inject
@@ -11,15 +15,24 @@ import javax.inject.Inject
 interface TradeRepository {
     suspend fun getPartnerAddress(userId: Int):
             GetPartnerAddressByQuery.Data?
-    suspend fun createOffer(payload: CreateOfferPayload) : CreateOfferByMutation.Data?
+
+    suspend fun createOffer(payload: CreateOfferPayload): CreateOfferByMutation.Data?
 
     suspend fun getNonceByUserId(userId: Int): GetNonceByUserIdQuery.Data?
 
-    suspend fun tradeByPK(id: Int) : GetTradeByPkQuery.Data?
+    suspend fun tradeByPK(id: Int): GetTradeByPkQuery.Data?
 
+    suspend fun cancelOffer(id: Int): CancelOfferMutation.Data?
+
+    suspend fun acceptTrade(id: Int): AcceptTradeMutation.Data?
+
+    suspend fun initializeTrade(id: Int): InitializeTradeMutation.Data?
+
+    suspend fun exchangeTrade(id: Int, signature: String): ExchangeTradeMutation.Data?
 }
 
-class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: ApolloTradeClient) : TradeRepository {
+class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: ApolloTradeClient) :
+    TradeRepository {
     override suspend fun getPartnerAddress(userId: Int): GetPartnerAddressByQuery.Data? {
         return apolloTradeClient.getPartnerAddress(userId)
     }
@@ -33,6 +46,22 @@ class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: Apol
     }
 
     override suspend fun tradeByPK(id: Int): GetTradeByPkQuery.Data? {
-        return apolloTradeClient.tradeByPK(id)    }
+        return apolloTradeClient.tradeByPK(id)
+    }
 
+    override suspend fun cancelOffer(id: Int): CancelOfferMutation.Data? {
+        return apolloTradeClient.cancelOffer(id)
+    }
+
+    override suspend fun acceptTrade(id: Int): AcceptTradeMutation.Data? {
+        return apolloTradeClient.acceptTrade(id)
+    }
+
+    override suspend fun initializeTrade(id: Int): InitializeTradeMutation.Data? {
+        return apolloTradeClient.initializeTrade(id)
+    }
+
+    override suspend fun exchangeTrade(id: Int, signature: String): ExchangeTradeMutation.Data? {
+        return apolloTradeClient.exchangeTrade(id, signature)
+    }
 }

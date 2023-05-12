@@ -96,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         tools:visibility="visible"
-        android:layout="@layout/item_timeline_event_view_trade_question" />
+        android:layout="@layout/item_timeline_event_view_trade" />
 
 </FrameLayout>
 

@@ -152,7 +152,6 @@
                 android:gravity="center"
                 android:minHeight="38dp"
                 android:text="@string/action_dismiss"
-
                 />
 
             <androidx.appcompat.widget.AppCompatTextView

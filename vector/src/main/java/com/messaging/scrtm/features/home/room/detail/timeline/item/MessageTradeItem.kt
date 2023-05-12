@@ -16,21 +16,31 @@
 
 package com.messaging.scrtm.features.home.room.detail.timeline.item
 
+import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
+import com.auth.GetTradeByPkQuery
+import com.messaging.lib.core.utils.view.hide
+import com.messaging.lib.core.utils.view.invisible
+import com.messaging.lib.core.utils.view.show
 import com.messaging.scrtm.R
-import com.messaging.scrtm.data.trade.repository.TradeRepository
+import com.messaging.scrtm.data.SessionPref
+import com.messaging.scrtm.data.trade.entity.TradeStatus
 import com.messaging.scrtm.features.home.room.detail.RoomDetailAction
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @EpoxyModelClass
 abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder>() {
 
     @EpoxyAttribute
     var currentUserId: String? = null
+
+    @EpoxyAttribute
+    var sessionPref: SessionPref? = null
+
+
+    @EpoxyAttribute
+    var tradeByPkOutput: GetTradeByPkQuery.Data? = null
 
 //    @EpoxyAttribute
 //    var endOfLiveDateTime: LocalDateTime? = null
@@ -56,6 +66,34 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             attributes.callback?.onTimelineItemAction(RoomDetailAction.StopLiveLocationSharing)
         }
 
+        holder.layoutTradeQuestion.hide()
+        holder.layoutTradeAccepted.hide()
+        when (TradeStatus.valueOf(tradeByPkOutput?.trades_by_pk?.status.toString())) {
+            TradeStatus.WAIT_FOR_APPROVAL -> {
+                holder.layoutTradeQuestion.show()
+                if (sessionPref?.address == tradeByPkOutput?.trades_by_pk?.sending_address) {
+                    holder.tvAcceptTrade.invisible()
+                    holder.tvDismiss.text = holder.view.context.getString(R.string.cancel_offer)
+                } else {
+                    holder.tvAcceptTrade.show()
+                    holder.tvDismiss.text = holder.view.context.getString(R.string.action_dismiss)
+                }
+            }
+            TradeStatus.CANCELLED -> {
+                holder.layoutTradeAccepted.show()
+            }
+            TradeStatus.ACCEPTED -> {
+                holder.layoutTradeAccepted.show()
+            }
+            TradeStatus.INITIALIZED -> {
+                holder.layoutTradeQuestion
+            }
+            TradeStatus.SUCCESSFUL -> {
+
+            }
+        }
+
+
         holder.tvSendingToken.text = String.format(
             "${attributes.tradeInfo?.sending_token_amount} %s",
             attributes.tradeInfo?.sending_token_address
@@ -71,13 +109,17 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
     override fun getViewStubId() = STUB_ID
 
     class Holder : AbsMessageLocationItem.Holder(STUB_ID) {
+        //layout trade question
+        val layoutTradeQuestion by bind<FrameLayout>(R.id.layoutTradeQuestion)
         val tvAcceptTrade by bind<AppCompatTextView>(R.id.tvAcceptTrade)
         val tvDismiss by bind<AppCompatTextView>(R.id.tvDismiss)
 
         val tvSendingToken by bind<AppCompatTextView>(R.id.tvSendingToken)
         val tvRecipientToken by bind<AppCompatTextView>(R.id.tvRecipientToken)
-
         val tvFromAddress by bind<AppCompatTextView>(R.id.tvFromAddress)
+
+        //layout trade accepted
+        val layoutTradeAccepted by bind<FrameLayout>(R.id.layoutTradeAccepted)
 
     }
 

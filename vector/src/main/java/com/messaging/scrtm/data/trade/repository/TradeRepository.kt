@@ -10,6 +10,10 @@ import com.auth.GetTradeByPkQuery
 import com.auth.InitializeTradeMutation
 import com.auth.type.CreateOfferPayload
 import com.messaging.scrtm.data.trade.domain.ApolloTradeClient
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.runBlocking
 import javax.inject.Inject
 
 interface TradeRepository {
@@ -20,7 +24,7 @@ interface TradeRepository {
 
     suspend fun getNonceByUserId(userId: Int): GetNonceByUserIdQuery.Data?
 
-    suspend fun tradeByPK(id: Int): GetTradeByPkQuery.Data?
+    fun tradeByPK(id: Int): GetTradeByPkQuery.Data?
 
     suspend fun cancelOffer(id: Int): CancelOfferMutation.Data?
 
@@ -45,8 +49,15 @@ class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: Apol
         return apolloTradeClient.getNonceByUserId(userId)
     }
 
-    override suspend fun tradeByPK(id: Int): GetTradeByPkQuery.Data? {
-        return apolloTradeClient.tradeByPK(id)
+
+    override fun tradeByPK(id: Int): GetTradeByPkQuery.Data? {
+        val deferred = CoroutineScope(Dispatchers.IO).async {
+            apolloTradeClient.tradeByPK(id)
+        }
+
+        return runBlocking {
+            deferred.await()
+        }
     }
 
     override suspend fun cancelOffer(id: Int): CancelOfferMutation.Data? {

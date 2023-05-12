@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:addStatesFromChildren="true"
+    app:cardBackgroundColor="#202B58"
+    app:cardCornerRadius="12dp">
+
+    <include
+        android:id="@+id/layoutTradeQuestion"
+        layout="@layout/item_timeline_event_view_trade_question"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/layoutTradeAccepted"
+        layout="@layout/item_timeline_event_view_trade_accepted"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:visibility="gone" />
+
+</androidx.cardview.widget.CardView>
+
+

@@ -101,7 +101,7 @@ type TradeByPkOutput {
     sending_user_id: String!
     created_at: String!
     updated_at: String!
-    message: String!
+    message: String
     status: String!
     user:User!
     userBySendingUserId:UserBySendingUserId!

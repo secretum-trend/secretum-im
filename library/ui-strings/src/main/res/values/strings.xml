@@ -3564,6 +3564,8 @@
     <string name="you_have_an_offer_make_a_deal">You have an offer. Make a deal!</string>
     <string name="offered_trade">Offered trade</string>
     <string name="accept_the_trade">Accept the trade</string>
+    <string name="traded_successfully">Traded successfully!</string>
+    <string name="cancel_offer">Cancel offer</string>
 
 
 </resources>

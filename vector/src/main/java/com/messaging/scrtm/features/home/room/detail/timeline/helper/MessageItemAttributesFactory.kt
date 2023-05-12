@@ -28,7 +28,6 @@ import com.messaging.scrtm.features.home.room.detail.timeline.format.Displayable
 import com.messaging.scrtm.features.home.room.detail.timeline.item.AbsMessageItem
 import com.messaging.scrtm.features.home.room.detail.timeline.item.MessageInformationData
 import com.messaging.scrtm.features.home.room.detail.timeline.item.ReactionsSummaryEvents
-import org.matrix.android.sdk.api.session.room.model.message.MessageContent
 import org.matrix.android.sdk.api.session.room.model.message.MessageTextContent
 import org.matrix.android.sdk.api.session.threads.ThreadDetails
 import javax.inject.Inject

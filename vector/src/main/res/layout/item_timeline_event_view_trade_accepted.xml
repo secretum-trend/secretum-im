@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:addStatesFromChildren="true"
     app:cardBackgroundColor="#202B58"
     app:cardCornerRadius="12dp">
@@ -27,7 +28,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/nunito_semi_bold"
-            android:text="Traded succesfully!"
+            android:text="@string/traded_successfully"
             android:textColor="#80FFFFFF"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -50,14 +51,13 @@
                 android:layout_marginHorizontal="16dp"
                 android:fontFamily="@font/nunito_bold"
                 android:gravity="end"
-                android:text="1 ETH"
                 android:textColor="#5267E3"
                 android:textSize="24sp"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView4"
                 app:layout_constraintEnd_toStartOf="@+id/appCompatImageView4"
                 app:layout_constraintHorizontal_bias="1"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/appCompatImageView4" />
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="1 ETH" />
 
             <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/appCompatImageView4"
@@ -65,10 +65,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:src="@drawable/ic_equal"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSendingToken"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="@+id/tvSendingToken" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/tvRecipientToken"
@@ -76,35 +76,34 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:fontFamily="@font/nunito_bold"
-                android:text="1 ETH"
                 android:textColor="#5267E3"
                 android:textSize="24sp"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView4"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0"
                 app:layout_constraintStart_toEndOf="@+id/appCompatImageView4"
-                app:layout_constraintTop_toTopOf="@+id/appCompatImageView4" />
+                app:layout_constraintTop_toTopOf="@+id/appCompatImageView4"
+                tools:text="1 ETH" />
 
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/appCompatTextView4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="From"
-                android:textColor="#66FFFFFF"
                 android:fontFamily="@font/nunito_semi_bold"
+                android:text="@string/from"
+                android:textColor="#66FFFFFF"
                 app:layout_constraintStart_toStartOf="@+id/tvSendingToken"
                 app:layout_constraintTop_toBottomOf="@+id/tvSendingToken" />
 
             <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/appCompatTextView2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
                 android:fontFamily="@font/nunito_semi_bold"
-                android:text="Peter"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
-                app:layout_constraintStart_toEndOf="@+id/appCompatTextView4" />
-
-
+                app:layout_constraintStart_toEndOf="@+id/appCompatTextView4"
+                tools:text="Peter" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -122,11 +121,53 @@
             app:layout_constraintTop_toBottomOf="@+id/compare" />
 
         <include
+            android:id="@+id/include"
+            layout="@layout/view_trade_status"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            layout="@layout/view_trade_status"
             android:layout_marginHorizontal="16dp"
-            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6" />
+            app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
+            tools:layout_editor_absoluteX="16dp" />
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"
+            android:orientation="horizontal"
+            android:paddingHorizontal="16dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/include">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvDismiss"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/selector_radio_button_trade"
+                android:fontFamily="@font/manrope_bold"
+                android:gravity="center"
+                android:minHeight="38dp"
+                android:text="@string/action_dismiss" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvAcceptTrade"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_weight="1"
+                android:background="@drawable/bg_fill_coner_8"
+                android:backgroundTint="@color/white"
+                android:fontFamily="@font/manrope_bold"
+                android:gravity="center"
+                android:minHeight="38dp"
+                android:text="@string/accept_trade"
+                android:textColor="#102A87" />
+
+        </LinearLayout>
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

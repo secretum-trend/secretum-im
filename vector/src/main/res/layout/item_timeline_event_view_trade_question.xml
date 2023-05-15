@@ -151,7 +151,7 @@
                 android:fontFamily="@font/manrope_bold"
                 android:gravity="center"
                 android:minHeight="38dp"
-                android:text="@string/action_dismiss"
+                android:text="@string/cancel_offer"
                 />
 
             <androidx.appcompat.widget.AppCompatTextView

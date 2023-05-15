@@ -19,7 +19,9 @@ package com.messaging.scrtm.features.home.room.detail
 import android.net.Uri
 import androidx.annotation.IdRes
 import androidx.lifecycle.asFlow
+import androidx.lifecycle.liveData
 import com.airbnb.mvrx.*
+import com.auth.GetTradeByPkQuery
 import com.google.gson.Gson
 import com.messaging.lib.core.utils.flow.chunk
 import com.messaging.scrtm.R
@@ -32,7 +34,9 @@ import com.messaging.scrtm.core.platform.VectorViewModel
 import com.messaging.scrtm.core.resources.BuildMeta
 import com.messaging.scrtm.core.resources.StringProvider
 import com.messaging.scrtm.core.utils.BehaviorDataSource
+import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.data.trade.entity.TradeInfo
+import com.messaging.scrtm.data.trade.repository.TradeRepository
 import com.messaging.scrtm.features.analytics.AnalyticsTracker
 import com.messaging.scrtm.features.analytics.DecryptionFailureTracker
 import com.messaging.scrtm.features.analytics.extensions.toAnalyticsJoinedRoom
@@ -64,6 +68,7 @@ import com.messaging.scrtm.features.session.coroutineScope
 import com.messaging.scrtm.features.settings.VectorDataStore
 import com.messaging.scrtm.features.settings.VectorPreferences
 import com.messaging.scrtm.features.voicebroadcast.VoiceBroadcastHelper
+import com.messaging.scrtm.trade.eventBus.TradeEventType
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -139,7 +144,9 @@ class TimelineViewModel @AssistedInject constructor(
     timelineFactory: TimelineFactory,
     private val spaceStateHandler: SpaceStateHandler,
     private val voiceBroadcastHelper: VoiceBroadcastHelper,
-) : VectorViewModel<RoomDetailViewState, RoomDetailAction, RoomDetailViewEvents>(initialState),
+    private val tradeRepository: TradeRepository,
+
+    ) : VectorViewModel<RoomDetailViewState, RoomDetailAction, RoomDetailViewEvents>(initialState),
     Timeline.Listener, ChatEffectManager.Delegate, CallProtocolsChecker.Listener,
     LocationSharingServiceConnection.Callback {
 
@@ -270,6 +277,43 @@ class TimelineViewModel @AssistedInject constructor(
         // Observe location service lifecycle to be able to warn the user
         locationSharingServiceConnection.bind(this)
     }
+
+    fun cancelOffer(offer: GetTradeByPkQuery.Data?) = liveData {
+        try {
+            emit(Resource.loading())
+            val data = offer?.trades_by_pk?.id?.let {
+                tradeRepository.cancelOffer(it)
+            }
+            emit(Resource.success(data))
+        } catch (_: Throwable) {
+        }
+    }
+
+    fun acceptTrade(offer: GetTradeByPkQuery.Data?) = liveData {
+        try {
+            emit(Resource.loading())
+            val data = offer?.trades_by_pk?.id?.let { tradeRepository.acceptTrade(it) }
+            emit(Resource.success(data))
+        } catch (_: Throwable) {
+        }
+    }
+
+    fun initiateTrade(offer: GetTradeByPkQuery.Data?) = liveData {
+        try {
+            emit(Resource.loading())
+            val data = offer?.trades_by_pk?.id?.let { tradeRepository.initializeTrade(it) }
+            emit(Resource.success(data))
+        } catch (_: Throwable) {
+        }
+    }
+//    fun exchangeTrade(offer: GetTradeByPkQuery.Data?, signature : String) = liveData {
+//        try {
+//            emit(Resource.loading())
+//            val data = offer?.trades_by_pk?.id?.let { tradeRepository.exchangeTrade(it) }
+//            emit(Resource.success(data))
+//        } catch (_: Throwable) {
+//        }
+//    }
 
     /**
      * Threads specific initialization.
@@ -917,7 +961,7 @@ class TimelineViewModel @AssistedInject constructor(
         }
     }
 
-    // PRIVATE METHODS *****************************************************************************
+// PRIVATE METHODS *****************************************************************************
 
     private fun handleSendReaction(action: RoomDetailAction.SendReaction) {
         if (room == null) return

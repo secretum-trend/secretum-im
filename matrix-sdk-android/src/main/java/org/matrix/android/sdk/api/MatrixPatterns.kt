@@ -16,10 +16,15 @@
 
 package org.matrix.android.sdk.api
 
+import android.os.Build
 import org.matrix.android.sdk.BuildConfig
 import org.matrix.android.sdk.internal.util.removeInvalidRoomNameChars
 import org.matrix.android.sdk.internal.util.replaceSpaceChars
 import timber.log.Timber
+import java.text.SimpleDateFormat
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
+import java.util.*
 
 /**
  * This class contains pattern to match the different Matrix ids
@@ -33,31 +38,38 @@ object MatrixPatterns {
     // regex pattern to find matrix user ids in a string.
     // See https://matrix.org/docs/spec/appendices#historical-user-ids
     private const val MATRIX_USER_IDENTIFIER_REGEX = "@[A-Z0-9\\x21-\\x39\\x3B-\\x7F]+$DOMAIN_REGEX"
-    val PATTERN_CONTAIN_MATRIX_USER_IDENTIFIER = MATRIX_USER_IDENTIFIER_REGEX.toRegex(RegexOption.IGNORE_CASE)
+    val PATTERN_CONTAIN_MATRIX_USER_IDENTIFIER =
+        MATRIX_USER_IDENTIFIER_REGEX.toRegex(RegexOption.IGNORE_CASE)
 
     // regex pattern to find room ids in a string.
     private const val MATRIX_ROOM_IDENTIFIER_REGEX = "![A-Z0-9]+$DOMAIN_REGEX"
-    private val PATTERN_CONTAIN_MATRIX_ROOM_IDENTIFIER = MATRIX_ROOM_IDENTIFIER_REGEX.toRegex(RegexOption.IGNORE_CASE)
+    private val PATTERN_CONTAIN_MATRIX_ROOM_IDENTIFIER =
+        MATRIX_ROOM_IDENTIFIER_REGEX.toRegex(RegexOption.IGNORE_CASE)
 
     // regex pattern to find room aliases in a string.
     private const val MATRIX_ROOM_ALIAS_REGEX = "#[A-Z0-9._%#@=+-]+$DOMAIN_REGEX"
-    private val PATTERN_CONTAIN_MATRIX_ALIAS = MATRIX_ROOM_ALIAS_REGEX.toRegex(RegexOption.IGNORE_CASE)
+    private val PATTERN_CONTAIN_MATRIX_ALIAS =
+        MATRIX_ROOM_ALIAS_REGEX.toRegex(RegexOption.IGNORE_CASE)
 
     // regex pattern to find message ids in a string.
     private const val MATRIX_EVENT_IDENTIFIER_REGEX = "\\$[A-Z0-9]+$DOMAIN_REGEX"
-    private val PATTERN_CONTAIN_MATRIX_EVENT_IDENTIFIER = MATRIX_EVENT_IDENTIFIER_REGEX.toRegex(RegexOption.IGNORE_CASE)
+    private val PATTERN_CONTAIN_MATRIX_EVENT_IDENTIFIER =
+        MATRIX_EVENT_IDENTIFIER_REGEX.toRegex(RegexOption.IGNORE_CASE)
 
     // regex pattern to find message ids in a string.
     private const val MATRIX_EVENT_IDENTIFIER_V3_REGEX = "\\$[A-Z0-9/+]+"
-    private val PATTERN_CONTAIN_MATRIX_EVENT_IDENTIFIER_V3 = MATRIX_EVENT_IDENTIFIER_V3_REGEX.toRegex(RegexOption.IGNORE_CASE)
+    private val PATTERN_CONTAIN_MATRIX_EVENT_IDENTIFIER_V3 =
+        MATRIX_EVENT_IDENTIFIER_V3_REGEX.toRegex(RegexOption.IGNORE_CASE)
 
     // Ref: https://matrix.org/docs/spec/rooms/v4#event-ids
     private const val MATRIX_EVENT_IDENTIFIER_V4_REGEX = "\\$[A-Z0-9\\-_]+"
-    private val PATTERN_CONTAIN_MATRIX_EVENT_IDENTIFIER_V4 = MATRIX_EVENT_IDENTIFIER_V4_REGEX.toRegex(RegexOption.IGNORE_CASE)
+    private val PATTERN_CONTAIN_MATRIX_EVENT_IDENTIFIER_V4 =
+        MATRIX_EVENT_IDENTIFIER_V4_REGEX.toRegex(RegexOption.IGNORE_CASE)
 
     // regex pattern to find group ids in a string.
     private const val MATRIX_GROUP_IDENTIFIER_REGEX = "\\+[A-Z0-9=_\\-./]+$DOMAIN_REGEX"
-    private val PATTERN_CONTAIN_MATRIX_GROUP_IDENTIFIER = MATRIX_GROUP_IDENTIFIER_REGEX.toRegex(RegexOption.IGNORE_CASE)
+    private val PATTERN_CONTAIN_MATRIX_GROUP_IDENTIFIER =
+        MATRIX_GROUP_IDENTIFIER_REGEX.toRegex(RegexOption.IGNORE_CASE)
 
     // regex pattern to find permalink with message id.
     // Android does not support in URL so extract it.
@@ -65,32 +77,40 @@ object MatrixPatterns {
     private const val APP_BASE_REGEX = "https://[A-Z0-9.-]+\\.[A-Z]{2,}/[A-Z]{3,}/#/room/"
     const val SEP_REGEX = "/"
 
-    private const val LINK_TO_ROOM_ID_REGEXP = PERMALINK_BASE_REGEX + MATRIX_ROOM_IDENTIFIER_REGEX + SEP_REGEX + MATRIX_EVENT_IDENTIFIER_REGEX
-    private val PATTERN_CONTAIN_MATRIX_TO_PERMALINK_ROOM_ID = LINK_TO_ROOM_ID_REGEXP.toRegex(RegexOption.IGNORE_CASE)
+    private const val LINK_TO_ROOM_ID_REGEXP =
+        PERMALINK_BASE_REGEX + MATRIX_ROOM_IDENTIFIER_REGEX + SEP_REGEX + MATRIX_EVENT_IDENTIFIER_REGEX
+    private val PATTERN_CONTAIN_MATRIX_TO_PERMALINK_ROOM_ID =
+        LINK_TO_ROOM_ID_REGEXP.toRegex(RegexOption.IGNORE_CASE)
 
-    private const val LINK_TO_ROOM_ALIAS_REGEXP = PERMALINK_BASE_REGEX + MATRIX_ROOM_ALIAS_REGEX + SEP_REGEX + MATRIX_EVENT_IDENTIFIER_REGEX
-    private val PATTERN_CONTAIN_MATRIX_TO_PERMALINK_ROOM_ALIAS = LINK_TO_ROOM_ALIAS_REGEXP.toRegex(RegexOption.IGNORE_CASE)
+    private const val LINK_TO_ROOM_ALIAS_REGEXP =
+        PERMALINK_BASE_REGEX + MATRIX_ROOM_ALIAS_REGEX + SEP_REGEX + MATRIX_EVENT_IDENTIFIER_REGEX
+    private val PATTERN_CONTAIN_MATRIX_TO_PERMALINK_ROOM_ALIAS =
+        LINK_TO_ROOM_ALIAS_REGEXP.toRegex(RegexOption.IGNORE_CASE)
 
-    private const val LINK_TO_APP_ROOM_ID_REGEXP = APP_BASE_REGEX + MATRIX_ROOM_IDENTIFIER_REGEX + SEP_REGEX + MATRIX_EVENT_IDENTIFIER_REGEX
-    private val PATTERN_CONTAIN_APP_LINK_PERMALINK_ROOM_ID = LINK_TO_APP_ROOM_ID_REGEXP.toRegex(RegexOption.IGNORE_CASE)
+    private const val LINK_TO_APP_ROOM_ID_REGEXP =
+        APP_BASE_REGEX + MATRIX_ROOM_IDENTIFIER_REGEX + SEP_REGEX + MATRIX_EVENT_IDENTIFIER_REGEX
+    private val PATTERN_CONTAIN_APP_LINK_PERMALINK_ROOM_ID =
+        LINK_TO_APP_ROOM_ID_REGEXP.toRegex(RegexOption.IGNORE_CASE)
 
-    private const val LINK_TO_APP_ROOM_ALIAS_REGEXP = APP_BASE_REGEX + MATRIX_ROOM_ALIAS_REGEX + SEP_REGEX + MATRIX_EVENT_IDENTIFIER_REGEX
-    private val PATTERN_CONTAIN_APP_LINK_PERMALINK_ROOM_ALIAS = LINK_TO_APP_ROOM_ALIAS_REGEXP.toRegex(RegexOption.IGNORE_CASE)
+    private const val LINK_TO_APP_ROOM_ALIAS_REGEXP =
+        APP_BASE_REGEX + MATRIX_ROOM_ALIAS_REGEX + SEP_REGEX + MATRIX_EVENT_IDENTIFIER_REGEX
+    private val PATTERN_CONTAIN_APP_LINK_PERMALINK_ROOM_ALIAS =
+        LINK_TO_APP_ROOM_ALIAS_REGEXP.toRegex(RegexOption.IGNORE_CASE)
 
     // ascii characters in the range \x20 (space) to \x7E (~)
     val ORDER_STRING_REGEX = "[ -~]+".toRegex()
 
     // list of patterns to find some matrix item.
     val MATRIX_PATTERNS = listOf(
-            PATTERN_CONTAIN_MATRIX_TO_PERMALINK_ROOM_ID,
-            PATTERN_CONTAIN_MATRIX_TO_PERMALINK_ROOM_ALIAS,
-            PATTERN_CONTAIN_APP_LINK_PERMALINK_ROOM_ID,
-            PATTERN_CONTAIN_APP_LINK_PERMALINK_ROOM_ALIAS,
-            PATTERN_CONTAIN_MATRIX_USER_IDENTIFIER,
-            PATTERN_CONTAIN_MATRIX_ALIAS,
-            PATTERN_CONTAIN_MATRIX_ROOM_IDENTIFIER,
-            PATTERN_CONTAIN_MATRIX_EVENT_IDENTIFIER,
-            PATTERN_CONTAIN_MATRIX_GROUP_IDENTIFIER
+        PATTERN_CONTAIN_MATRIX_TO_PERMALINK_ROOM_ID,
+        PATTERN_CONTAIN_MATRIX_TO_PERMALINK_ROOM_ALIAS,
+        PATTERN_CONTAIN_APP_LINK_PERMALINK_ROOM_ID,
+        PATTERN_CONTAIN_APP_LINK_PERMALINK_ROOM_ALIAS,
+        PATTERN_CONTAIN_MATRIX_USER_IDENTIFIER,
+        PATTERN_CONTAIN_MATRIX_ALIAS,
+        PATTERN_CONTAIN_MATRIX_ROOM_IDENTIFIER,
+        PATTERN_CONTAIN_MATRIX_EVENT_IDENTIFIER,
+        PATTERN_CONTAIN_MATRIX_GROUP_IDENTIFIER
     )
 
     /**
@@ -180,9 +200,9 @@ object MatrixPatterns {
 
     fun candidateAliasFromRoomName(roomName: String, domain: String): String {
         return roomName.lowercase()
-                .replaceSpaceChars(replacement = "_")
-                .removeInvalidRoomNameChars()
-                .take(MatrixConstants.maxAliasLocalPartLength(domain))
+            .replaceSpaceChars(replacement = "_")
+            .removeInvalidRoomNameChars()
+            .take(MatrixConstants.maxAliasLocalPartLength(domain))
     }
 
     /**
@@ -199,7 +219,18 @@ object MatrixPatterns {
         return substringAfter(":")
     }
 
-    fun String.getUserId() : String {
+    fun String.getUserId(): String {
         return this.replace("scrtm_", "")
+    }
+
+    fun String.toFormattedDate(): String {
+        return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSSSSXXX", Locale.US)
+            val outputFormat = SimpleDateFormat("dd MMM", Locale.US)
+            val date = inputFormat.parse(this)
+            return date?.let { outputFormat.format(it) } ?: this
+        } else {
+            this
+        }
     }
 }

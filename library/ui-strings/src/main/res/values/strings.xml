@@ -3570,6 +3570,10 @@
     <string name="escrow">Escrow</string>
     <string name="completed">Completed</string>
     <string name="by_name">By %s</string>
+    <string name="confirm_cancel_offer">Do you want to cancel the offer?</string>
+    <string name="confirm_accept_offer">Do you want to accept the offer?</string>
+    <string name="confirm_initiate_offer">Do you want to initiate the offer?</string>
+    <string name="confirm_confirm_offer">Do you want to confirm the offer?</string>
 
 
 </resources>

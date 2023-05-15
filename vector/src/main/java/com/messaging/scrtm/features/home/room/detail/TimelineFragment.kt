@@ -136,6 +136,8 @@ import com.messaging.scrtm.features.widgets.WidgetArgs
 import com.messaging.scrtm.features.widgets.WidgetKind
 import com.messaging.scrtm.features.widgets.permissions.RoomWidgetPermissionBottomSheet
 import com.messaging.scrtm.trade.creatingoffer.CreateOfferActivity
+import com.messaging.scrtm.trade.eventBus.TradeEventBus
+import com.messaging.scrtm.trade.eventBus.TradeEventType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -143,6 +145,8 @@ import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.billcarsonfr.jsonviewer.JSonViewerDialog
+import org.greenrobot.eventbus.EventBus
+import org.greenrobot.eventbus.Subscribe
 import org.matrix.android.sdk.api.MatrixPatterns.getUserId
 import org.matrix.android.sdk.api.session.Session
 import org.matrix.android.sdk.api.session.events.model.EventType
@@ -480,6 +484,50 @@ class TimelineFragment :
         )
         startActivity(intent)
     }
+
+    @Subscribe
+    fun handelTradeEvent(event: TradeEventBus) {
+        when (event.tradeEventType) {
+            TradeEventType.CANCEL -> {
+                showAlert(getString(R.string.confirm_cancel_offer)){
+                    timelineViewModel.cancelOffer(event.offer).observe(viewLifecycleOwner) {
+                        when (it.status){
+                            Resource.Status.SUCCESS -> {
+                            }
+                            else -> {}
+                        }
+                    }
+                }
+            }
+            TradeEventType.ACCEPT -> {
+                showAlert(getString(R.string.confirm_accept_offer)){
+                    timelineViewModel.acceptTrade(event.offer).observe(viewLifecycleOwner) {
+                        when (it.status){
+                            Resource.Status.SUCCESS -> {
+                            }
+                            else -> {}
+                        }
+                    }
+                }
+            }
+            TradeEventType.INITIATE -> {
+                showAlert(getString(R.string.confirm_initiate_offer)){
+                    timelineViewModel.initiateTrade(event.offer).observe(viewLifecycleOwner) {
+                        when (it.status){
+                            Resource.Status.SUCCESS -> {
+                            }
+                            else -> {}
+                        }
+                    }
+                }
+            }
+            TradeEventType.CONFIRM -> {
+                showAlert(getString(R.string.confirm_confirm_offer)){
+                }
+            }
+        }
+    }
+
 
     private fun handleRoomReplacement() {
         // this will join a new room, it can take time and might fail
@@ -908,7 +956,7 @@ class TimelineFragment :
     private val createOfferResultContracts =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val data = result.data?.getSerializableExtra("data",TradeInfo::class.java)
+                val data = result.data?.getSerializableExtra("data", TradeInfo::class.java)
                 if (data != null) {
                     timelineViewModel.sendOffer(data)
                 }
@@ -1058,6 +1106,7 @@ class TimelineFragment :
         roomDetailPendingActionStore.data?.let { handlePendingAction(it) }
         roomDetailPendingActionStore.data = null
         views.timelineRecyclerView.adapter = timelineEventController.adapter
+        EventBus.getDefault().register(this)
     }
 
     private fun handlePendingAction(roomDetailPendingAction: RoomDetailPendingAction) {
@@ -1086,6 +1135,7 @@ class TimelineFragment :
         notificationDrawerManager.setCurrentRoom(null)
         notificationDrawerManager.setCurrentThread(null)
         views.timelineRecyclerView.adapter = null
+        EventBus.getDefault().unregister(this)
     }
 
     private val emojiActivityResultLauncher = registerStartForActivityResult { activityResult ->
@@ -1881,17 +1931,6 @@ class TimelineFragment :
         navigator.openBigImageViewer(requireActivity(), sharedView, mxcUrl, title)
     }
 
-    override fun disMissOffer(tradeInfo: GetTradeByPkQuery.Data?) {
-        Timber.d("disMissOffer $tradeInfo")
-    }
-
-    override fun acceptTrade(tradeInfo: GetTradeByPkQuery.Data?) {
-        Timber.d("acceptTrade $tradeInfo")
-    }
-
-    override fun cancelOffer(tradeInfo: GetTradeByPkQuery.Data?) {
-        Timber.d("cancelOffer $tradeInfo")
-    }
 
     override fun onVoiceControlButtonClicked(
         eventId: String,
@@ -2256,6 +2295,17 @@ class TimelineFragment :
             )
             navigator.openThread(it, roomThreadDetailArgs)
         }
+    }
+
+    private fun showAlert(message: String, action : () -> Unit){
+        MaterialAlertDialogBuilder(requireActivity())
+            .setTitle(R.string.app_name)
+            .setTitle(message)
+            .setPositiveButton(R.string.ok) { _, _ ->
+                action.invoke()
+            }
+            .setNegativeButton(R.string.action_cancel, null)
+            .show()
     }
 
     private fun displayThreadsBetaOptInDialog() {

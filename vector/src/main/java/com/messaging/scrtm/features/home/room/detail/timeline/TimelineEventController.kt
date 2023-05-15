@@ -131,8 +131,7 @@ class TimelineEventController @Inject constructor(
             ThreadCallback,
             UrlClickCallback,
             ReadReceiptsCallback,
-            PreviewUrlCallback,
-            TradeCallBack
+            PreviewUrlCallback
     {
         fun onLoadMore(direction: Timeline.Direction)
         fun onEventInvisible(event: TimelineEvent)
@@ -200,12 +199,6 @@ class TimelineEventController @Inject constructor(
         fun onPreviewUrlClicked(url: String)
         fun onPreviewUrlCloseClicked(eventId: String, url: String)
         fun onPreviewUrlImageClicked(sharedView: View?, mxcUrl: String?, title: String?)
-    }
-
-    interface TradeCallBack {
-        fun disMissOffer(tradeInfo: GetTradeByPkQuery.Data?)
-        fun acceptTrade(tradeInfo: GetTradeByPkQuery.Data?)
-        fun cancelOffer(tradeInfo: GetTradeByPkQuery.Data?)
     }
 
 

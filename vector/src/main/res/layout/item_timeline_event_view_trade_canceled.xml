@@ -36,7 +36,7 @@
             app:layout_constraintTop_toBottomOf="@+id/tvTradedSuccessfullyCanceled">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvSendingToken2"
+                android:id="@+id/tvSendingTokenCanceled"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -58,13 +58,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:src="@drawable/ic_equal"
-                app:layout_constraintBottom_toBottomOf="@+id/tvSendingToken2"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSendingTokenCanceled"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvSendingToken2" />
+                app:layout_constraintTop_toTopOf="@+id/tvSendingTokenCanceled" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvRecipientToken2"
+                android:id="@+id/tvRecipientTokenCanceled"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -87,11 +87,11 @@
                 android:fontFamily="@font/nunito_semi_bold"
                 android:text="@string/from"
                 android:textColor="#66FFFFFF"
-                app:layout_constraintStart_toStartOf="@+id/tvSendingToken2"
-                app:layout_constraintTop_toBottomOf="@+id/tvSendingToken2" />
+                app:layout_constraintStart_toStartOf="@+id/tvSendingTokenCanceled"
+                app:layout_constraintTop_toBottomOf="@+id/tvSendingTokenCanceled" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvFromAddress2"
+                android:id="@+id/tvFromAddressCanceled"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -99,7 +99,7 @@
                 android:fontFamily="@font/nunito_semi_bold"
                 android:singleLine="true"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
-                app:layout_constraintEnd_toStartOf="@+id/tvRecipientToken2"
+                app:layout_constraintEnd_toStartOf="@+id/tvRecipientTokenCanceled"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView4"
                 tools:text="Peter" />
 

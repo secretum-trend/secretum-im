@@ -79,6 +79,7 @@ import me.gujun.android.span.span
 import org.matrix.android.sdk.api.MatrixUrls.isMxcUrl
 import org.matrix.android.sdk.api.session.Session
 import org.matrix.android.sdk.api.session.crypto.attachments.toElementToDecrypt
+import org.matrix.android.sdk.api.session.events.model.Event
 import org.matrix.android.sdk.api.session.events.model.RelationType
 import org.matrix.android.sdk.api.session.events.model.content.EncryptedEventContent
 import org.matrix.android.sdk.api.session.events.model.isThread
@@ -207,7 +208,7 @@ class MessageItemFactory @Inject constructor(
                 ) {
                     val trade = Gson().fromJson(messageContent.trade, TradeInfo::class.java)
                     val data = tradeRepository.tradeByPK(trade.trade_id.toInt())
-                    buildOfferItem( attributes, data)
+                    buildOfferItem( attributes, data,event.root)
                 } else {
                     buildItemForTextContent(
                         messageContent,
@@ -780,7 +781,8 @@ class MessageItemFactory @Inject constructor(
 
     private fun buildOfferItem(
         attributes: AbsMessageItem.Attributes,
-        tradeInfo: GetTradeByPkQuery.Data?
+        tradeInfo: GetTradeByPkQuery.Data?,
+        event : Event
     ): MessageTradeItem? {
 //        val renderedBody = textRenderer.render(body)
 //        val bindingOptions = spanUtils.getBindingOptions(renderedBody)
@@ -791,6 +793,7 @@ class MessageItemFactory @Inject constructor(
             .attributes(attributes)
             .tradeByPkOutput(tradeInfo)
             .sessionPref(sessionPref)
+            .event(event)
 //                .movementMethod(createLinkMovementMethod(callback))
     }
 

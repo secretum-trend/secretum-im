@@ -12,18 +12,28 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/imvSuccess"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/ic_trade_success" />
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTradedSuccessfully"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
             android:fontFamily="@font/nunito_semi_bold"
-            android:text="@string/you_have_an_offer"
+            android:text="@string/traded_successfully"
             android:textColor="#80FFFFFF"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@id/imvSuccess" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/compare"
@@ -187,7 +197,7 @@
                     android:layout_width="4dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="-6dp"
-                    android:background="@color/gray"
+                    android:background="#5267E3"
                     app:layout_constraintBottom_toTopOf="@+id/dot3"
                     app:layout_constraintEnd_toEndOf="@+id/cardView"
                     app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -199,7 +209,7 @@
                     android:layout_height="12dp"
                     android:layout_marginStart="8dp"
                     android:elevation="4dp"
-                    app:cardBackgroundColor="@color/gray"
+                    app:cardBackgroundColor="#5267E3"
                     app:cardCornerRadius="6dp"
                     app:layout_constraintStart_toEndOf="@+id/tvDate"
                     app:layout_constraintTop_toTopOf="@+id/escrow" />
@@ -209,7 +219,7 @@
                     android:layout_width="4dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="-6dp"
-                    android:background="@color/gray"
+                    android:background="#5267E3"
                     app:layout_constraintBottom_toTopOf="@+id/dot4"
                     app:layout_constraintEnd_toEndOf="@+id/cardView"
                     app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -221,7 +231,7 @@
                     android:layout_height="12dp"
                     android:layout_marginStart="8dp"
                     android:elevation="4dp"
-                    app:cardBackgroundColor="@color/gray"
+                    app:cardBackgroundColor="#5267E3"
                     app:cardCornerRadius="6dp"
                     app:layout_constraintStart_toEndOf="@+id/tvDate"
                     app:layout_constraintTop_toTopOf="@+id/complete" />
@@ -310,7 +320,6 @@
                     android:id="@+id/dotTime3"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
-                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:elevation="4dp"
                     app:cardBackgroundColor="#ffff"
@@ -321,7 +330,6 @@
                 <View
                     android:id="@+id/viewEscrow"
                     android:layout_width="3dp"
-                    android:visibility="gone"
                     android:layout_height="0dp"
                     android:background="#ffff"
                     app:layout_constraintBottom_toBottomOf="@+id/dotTime4"
@@ -333,7 +341,6 @@
                     android:id="@+id/tvEscrow2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
                     android:layout_marginHorizontal="8dp"
                     android:text="13.00 PM, by Alice"
                     android:textSize="10sp"
@@ -346,7 +353,6 @@
                     android:id="@+id/dotTime4"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
-                    android:visibility="gone"
                     android:layout_marginTop="8dp"
                     android:elevation="4dp"
                     app:cardBackgroundColor="#ffff"
@@ -358,7 +364,6 @@
                 <androidx.appcompat.widget.AppCompatTextView
                     android:id="@+id/tvEscrow3"
                     android:layout_width="0dp"
-                    android:visibility="gone"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toEndOf="@+id/dotTime3"
                     android:layout_marginHorizontal="8dp"
@@ -375,14 +380,13 @@
                     android:fontFamily="@font/nunito_medium"
                     android:text="@string/completed"
                     android:textSize="12sp"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
                     app:layout_constraintTop_toBottomOf="@+id/tvEscrow3" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
-
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -397,7 +401,7 @@
             app:layout_constraintTop_toBottomOf="@+id/include">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/cancelAccepted"
+                android:id="@+id/tvDismiss2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -407,14 +411,14 @@
                 android:layout_marginHorizontal="16dp"
                 android:minHeight="38dp"
                 android:singleLine="true"
-                app:layout_constraintEnd_toStartOf="@id/initialTradeAccepted"
+                app:layout_constraintEnd_toStartOf="@id/tvAcceptTrade2"
                 android:text="@string/cancel_offer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/initialTradeAccepted"
+                android:id="@+id/tvAcceptTrade2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -430,7 +434,7 @@
                 android:textColor="#102A87"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cancelAccepted"
+                app:layout_constraintStart_toEndOf="@+id/tvDismiss2"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

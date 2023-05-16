@@ -17,9 +17,12 @@
 package com.messaging.scrtm.features.home.room.detail
 
 import android.net.Uri
+import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.IdRes
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.liveData
+import androidx.lifecycle.viewModelScope
 import com.airbnb.mvrx.*
 import com.auth.GetTradeByPkQuery
 import com.google.gson.Gson
@@ -28,6 +31,7 @@ import com.messaging.scrtm.R
 import com.messaging.scrtm.SpaceStateHandler
 import com.messaging.scrtm.core.di.MavericksAssistedViewModelFactory
 import com.messaging.scrtm.core.di.hiltMavericksViewModelFactory
+import com.messaging.scrtm.core.di.login.repository.LoginRepository
 import com.messaging.scrtm.core.extensions.isVoiceBroadcast
 import com.messaging.scrtm.core.mvrx.runCatchingToAsync
 import com.messaging.scrtm.core.platform.VectorViewModel
@@ -35,6 +39,7 @@ import com.messaging.scrtm.core.resources.BuildMeta
 import com.messaging.scrtm.core.resources.StringProvider
 import com.messaging.scrtm.core.utils.BehaviorDataSource
 import com.messaging.scrtm.core.utils.Resource
+import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.data.trade.repository.TradeRepository
 import com.messaging.scrtm.features.analytics.AnalyticsTracker
@@ -60,6 +65,11 @@ import com.messaging.scrtm.features.home.room.typing.TypingHelper
 import com.messaging.scrtm.features.location.live.StopLiveLocationShareUseCase
 import com.messaging.scrtm.features.location.live.tracking.LocationSharingServiceConnection
 import com.messaging.scrtm.features.notifications.NotificationDrawerManager
+import com.messaging.scrtm.features.onboarding.OnboardingViewModel
+import com.messaging.scrtm.features.onboarding.usecase.Base58DecodeUseCase
+import com.messaging.scrtm.features.onboarding.usecase.Base58EncodeUseCase
+import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
+import com.messaging.scrtm.features.onboarding.usecase.OffChainMessageSigningUseCase
 import com.messaging.scrtm.features.powerlevel.PowerLevelsFlowFactory
 import com.messaging.scrtm.features.raw.wellknown.CryptoConfig
 import com.messaging.scrtm.features.raw.wellknown.getOutboundSessionKeySharingStrategyOrDefault
@@ -68,7 +78,7 @@ import com.messaging.scrtm.features.session.coroutineScope
 import com.messaging.scrtm.features.settings.VectorDataStore
 import com.messaging.scrtm.features.settings.VectorPreferences
 import com.messaging.scrtm.features.voicebroadcast.VoiceBroadcastHelper
-import com.messaging.scrtm.trade.eventBus.TradeEventType
+import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
@@ -145,6 +155,8 @@ class TimelineViewModel @AssistedInject constructor(
     private val spaceStateHandler: SpaceStateHandler,
     private val voiceBroadcastHelper: VoiceBroadcastHelper,
     private val tradeRepository: TradeRepository,
+    val sessionPref: SessionPref,
+    private val loginRepository: LoginRepository
 
     ) : VectorViewModel<RoomDetailViewState, RoomDetailAction, RoomDetailViewEvents>(initialState),
     Timeline.Listener, ChatEffectManager.Delegate, CallProtocolsChecker.Listener,
@@ -172,6 +184,15 @@ class TimelineViewModel @AssistedInject constructor(
     private var mostRecentDisplayedEvent: TimelineEvent? = null
 
     private var prepareToEncrypt: Async<Unit> = Uninitialized
+
+    private val _uiState = MutableStateFlow(OnboardingViewModel.UiState())
+    val uiState = _uiState.asStateFlow()
+
+    private val _signature = MutableLiveData<String?>()
+    val signature = _signature
+
+    private val _message = MutableLiveData<Int>()
+    val message = _message
 
     @AssistedFactory
     interface Factory : MavericksAssistedViewModelFactory<TimelineViewModel, RoomDetailViewState> {
@@ -306,14 +327,16 @@ class TimelineViewModel @AssistedInject constructor(
         } catch (_: Throwable) {
         }
     }
-//    fun exchangeTrade(offer: GetTradeByPkQuery.Data?, signature : String) = liveData {
-//        try {
-//            emit(Resource.loading())
-//            val data = offer?.trades_by_pk?.id?.let { tradeRepository.exchangeTrade(it) }
-//            emit(Resource.success(data))
-//        } catch (_: Throwable) {
-//        }
-//    }
+
+    fun exchangeTrade(offer: GetTradeByPkQuery.Data?, signature : String) = liveData {
+        try {
+            emit(Resource.loading())
+            val data = offer?.trades_by_pk?.id?.let { tradeRepository.exchangeTrade(it,signature) }
+            emit(Resource.success(data))
+        } catch (_: Throwable) {
+        }
+    }
+
 
     /**
      * Threads specific initialization.
@@ -507,6 +530,29 @@ class TimelineViewModel @AssistedInject constructor(
         val content = MessageOfferContent(
             msgType = MessageType.MSGTYPE_TEXT, trade = json, body = ""
         )
+        room?.sendService()?.sendEvent(
+            eventType = EventType.MESSAGE,
+            content = content.toContent()
+        )
+    }
+
+    fun updateMessageEvent(event : Event, data : GetTradeByPkQuery.Data?) {
+        val offer = data?.trades_by_pk
+        val tradeInfo = TradeInfo(
+            trade_id = offer?.id.toString(),
+            sending_address = offer?.sending_address.toString(),
+            sending_token_address = offer?.sending_token_address.toString(),
+            sending_token_amount = offer?.sending_token_amount.toString(),
+            recipient_address = offer?.recipient_address.toString(),
+            recipient_token_address = offer?.recipient_token_address.toString(),
+            recipient_token_amount = offer?.recipient_token_amount.toString(),
+            recipient_user_id = offer?.recipient_user_id ?: 0
+        )
+        val json = Gson().toJson(tradeInfo)
+        val content = MessageOfferContent(
+            msgType = MessageType.MSGTYPE_TEXT, trade = json, body = ""
+        )
+        room?.sendService()?.redactEvent(event = event.copy(), reason = "update trade", null)
         room?.sendService()?.sendEvent(
             eventType = EventType.MESSAGE,
             content = content.toContent()
@@ -1629,4 +1675,102 @@ class TimelineViewModel @AssistedInject constructor(
         locationSharingServiceConnection.unbind(this)
         super.onCleared()
     }
+
+    fun signNonce(
+        intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
+        nonce: Int
+    ) = viewModelScope.launch {
+        val message = nonce.toString().toByteArray(Charsets.UTF_8)
+        val arrayMessage = arrayOf(message.copyOfRange(0, message.size))
+        val signedMessages = try {
+            doLocalAssociateAndExecute(intentLauncher, _uiState.value.walletUriBase) { client ->
+                doReauthorize(client, OnboardingViewModel.IDENTITY, sessionPref.authToken)
+                client.signMessagesDetached(
+                    arrayMessage,
+                    arrayOf(Base58DecodeUseCase.invoke(sessionPref.address))
+                )
+            }
+        } catch (e: MobileWalletAdapterUseCase.LocalAssociationFailedException) {
+            showMessage(R.string.msg_association_failed)
+            return@launch
+        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
+            showMessage(R.string.msg_request_failed)
+            return@launch
+        }
+
+        try {
+            OffChainMessageSigningUseCase.verify(
+                signedMessages[0].message,
+                signedMessages[0].signatures[0],
+                Base58DecodeUseCase.invoke(sessionPref.address),
+                nonce.toString().toByteArray(Charsets.UTF_8)
+            )
+            _signature.value = Base58EncodeUseCase.invoke(signedMessages[0].signatures[0])
+//            showMessage(R.string.msg_request_succeeded)
+        } catch (e: IllegalArgumentException) {
+            showMessage(R.string.msg_request_failed)
+        }
+    }
+
+    private suspend fun doReauthorize(
+        client: MobileWalletAdapterUseCase.Client,
+        identity: MobileWalletAdapterUseCase.DappIdentity,
+        currentAuthToken: String
+    ): MobileWalletAdapterClient.AuthorizationResult {
+        val result = try {
+            client.reauthorize(identity, currentAuthToken)
+        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
+            _uiState.update {
+                it.copy(
+                    authToken = null,
+                    publicKey = null,
+                    accountLabel = null,
+                    walletUriBase = null
+                )
+            }
+            throw e
+        }
+
+        _uiState.update {
+            it.copy(
+                authToken = result.authToken,
+                publicKey = result.publicKey,
+                accountLabel = result.accountLabel,
+                walletUriBase = result.walletUriBase
+            )
+
+        }
+        sessionPref.authToken = _uiState.value.authToken!!
+        return result
+    }
+
+    private suspend fun <T> doLocalAssociateAndExecute(
+        intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
+        uriPrefix: Uri? = null,
+        action: suspend (MobileWalletAdapterUseCase.Client) -> T
+    ): T {
+        return try {
+            MobileWalletAdapterUseCase.localAssociateAndExecute(intentLauncher, uriPrefix, action)
+        } catch (e: MobileWalletAdapterUseCase.NoWalletAvailableException) {
+            showMessage(R.string.msg_no_wallet_found)
+            throw e
+        }
+    }
+
+
+    private fun showMessage(resId: Int) {
+        _message.value = resId
+    }
+
+    fun getNonce() = liveData {
+        emit(Resource.loading())
+        try {
+            val nonce = loginRepository.getNonce(sessionPref.address)
+            emit(Resource.success(nonce))
+        } catch (t: Throwable) {
+            emit(Resource.error("error"))
+        }
+
+    }
+
 }

@@ -17,26 +17,22 @@
 package com.messaging.scrtm.features.home.room.detail.timeline.item
 
 import android.content.res.ColorStateList
-import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
-import androidx.cardview.widget.CardView
 import androidx.core.content.ContextCompat.getColor
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.auth.GetTradeByPkQuery
-import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.messaging.lib.core.utils.view.hide
 import com.messaging.lib.core.utils.view.invisible
 import com.messaging.lib.core.utils.view.show
 import com.messaging.scrtm.R
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.trade.entity.TradeStatus
-import com.messaging.scrtm.features.home.room.detail.RoomDetailAction
 import com.messaging.scrtm.trade.eventBus.TradeEventBus
 import com.messaging.scrtm.trade.eventBus.TradeEventType
 import org.greenrobot.eventbus.EventBus
-import org.matrix.android.sdk.api.MatrixPatterns.toFormattedDate
+import org.matrix.android.sdk.api.session.events.model.Event
 
 @EpoxyModelClass
 abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder>() {
@@ -51,6 +47,9 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
     @EpoxyAttribute
     var tradeByPkOutput: GetTradeByPkQuery.Data? = null
 
+    @EpoxyAttribute
+    var event: Event? = null
+
     override fun bind(holder: Holder) {
         super.bind(holder)
         bindLiveLocationBanner(holder)
@@ -62,60 +61,80 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
 //        val messageLayout = attributes.informationData.messageLayout
 //        val viewState = buildViewState(holder, messageLayout, isEmitter)
 
+
         with(holder) {
-            tvDismiss.setOnClickListener {
-                EventBus.getDefault().post(TradeEventBus(offer = tradeByPkOutput, tradeEventType = TradeEventType.CANCEL))
+            //WaitApproval
+            tvDismissWaitApproval.setOnClickListener {
+                EventBus.getDefault().post(TradeEventBus(offer = tradeByPkOutput, tradeEventType = TradeEventType.CANCEL, event!!))
             }
-            tvDismiss2.setOnClickListener {
-                EventBus.getDefault().post(TradeEventBus(offer = tradeByPkOutput, tradeEventType = TradeEventType.CANCEL))
-            }
-
-            tvAcceptTrade.setOnClickListener {
-                EventBus.getDefault().post(TradeEventBus(offer = tradeByPkOutput, tradeEventType = TradeEventType.ACCEPT))
+            tvAcceptTradeWaitApproval.setOnClickListener {
+                EventBus.getDefault().post(TradeEventBus(offer = tradeByPkOutput, tradeEventType = TradeEventType.ACCEPT,event!!))
             }
 
-            layoutTradeQuestion.hide()
-            layoutTradeAccepted.hide()
+            //ACCEPTED,Accepted
+            cancelAccepted.setOnClickListener {
+                EventBus.getDefault().post(TradeEventBus(offer = tradeByPkOutput, tradeEventType = TradeEventType.CANCEL,event!!))
+            }
+            initialTradeAccepted.setOnClickListener {
+                EventBus.getDefault().post(TradeEventBus(offer = tradeByPkOutput, tradeEventType = TradeEventType.INITIATE,event!!))
+            }
+
+            //INITIALIZED
+            tvConfirmInitialized.setOnClickListener {
+                EventBus.getDefault().post(TradeEventBus(offer = tradeByPkOutput, tradeEventType = TradeEventType.CONFIRM,event!!))
+            }
+
+            //UI
+            layoutWaitApproval.hide()
+            layoutCanceled.hide()
+            layoutAccepted.hide()
+            layoutInitialized.hide()
+            layoutSuccessful.hide()
             when (TradeStatus.valueOf(tradeByPkOutput?.trades_by_pk?.status.toString())) {
                 TradeStatus.WAIT_FOR_APPROVAL -> {
-                    layoutTradeQuestion.show()
+                    layoutWaitApproval.show()
                     if (isSender()) {
-                        tvAcceptTrade.invisible()
+                        tvTradedSuccessfullyWaitApproval.text = view.context.getString(R.string.you_made_an_offer)
+                        tvAcceptTradeWaitApproval.invisible()
                     } else {
-                        tvAcceptTrade.show()
+                        tvTradedSuccessfullyWaitApproval.text = view.context.getString(R.string.you_have_an_offer)
+                        tvAcceptTradeWaitApproval.show()
                     }
 
-//                    layoutTradeAccepted.show()
-//                    view2.setBackgroundColor(getColor(holder.view.context, R.color.gray))
-//                    view3.setBackgroundColor(getColor(holder.view.context, R.color.gray))
-//                    dot3.setCardBackgroundColor(getColor(holder.view.context, R.color.gray))
-//                    dot4.setCardBackgroundColor(getColor(holder.view.context, R.color.gray))
-                    //done
                 }
                 TradeStatus.CANCELLED -> {
-                    layoutTradeAccepted.show()
-                    tvAcceptTrade2.invisible()
-
-                    tvDismiss2.setTextColor(getColor(holder.view.context, R.color.gray))
-                    tvDismiss2.isEnabled = false
+                    layoutCanceled.show()
+                    if (isSender()) {
+                        tvTradedSuccessfullyCanceled.text = view.context.getString(R.string.you_made_an_offer)
+                    } else {
+                        tvTradedSuccessfullyCanceled.text = view.context.getString(R.string.you_have_an_offer)
+                    }
                 }
+
                 TradeStatus.ACCEPTED -> {
-                    layoutTradeAccepted.show()
-                    view2.setBackgroundColor(getColor(holder.view.context, R.color.gray))
-                    view3.setBackgroundColor(getColor(holder.view.context, R.color.gray))
-                    dot3.setCardBackgroundColor(getColor(holder.view.context, R.color.gray))
-                    dot4.setCardBackgroundColor(getColor(holder.view.context, R.color.gray))
-                    tvAcceptTrade2.text = view.context.getString(R.string.wait_seller_start)
-                    tvAcceptTrade2.backgroundTintList =
-                        ColorStateList.valueOf(getColor(view.context, R.color.navigation))
-                    tvAcceptTrade2.setTextColor(getColor(holder.view.context, R.color.white_50))
+                    layoutAccepted.show()
+
+                    if (isSender()) {
+                        initialTradeAccepted.text = view.context.getString(R.string.initial_trade)
+                    } else {
+                        initialTradeAccepted.isEnabled = false
+                        initialTradeAccepted.text = view.context.getString(R.string.wait_seller_start)
+                        initialTradeAccepted.backgroundTintList =
+                            ColorStateList.valueOf(getColor(view.context, R.color.navigation))
+                        initialTradeAccepted.setTextColor(getColor(holder.view.context, R.color.white_50))
+                    }
+
                 }
                 TradeStatus.INITIALIZED -> {
-                    layoutTradeQuestion.show()
+                    layoutInitialized.show()
                     if (isSender()) {
-                        tvAcceptTrade.invisible()
+                        tvConfirmInitialized.isEnabled = false
+                        tvConfirmInitialized.text = view.context.getString(R.string.wait_buyer_exchange_token)
+                        tvConfirmInitialized.backgroundTintList =
+                            ColorStateList.valueOf(getColor(view.context, R.color.navigation))
+                        tvConfirmInitialized.setTextColor(getColor(holder.view.context, R.color.white_50))
                     } else {
-                        tvAcceptTrade.show()
+                        tvConfirmInitialized.text = view.context.getString(R.string.confirm_escrow)
                     }
                 }
                 TradeStatus.SUCCESSFUL -> {
@@ -143,14 +162,10 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             )
 
             tvFromAddress.text = attributes.tradeInfo?.sending_address
-            formAddress2.text = attributes.tradeInfo?.sending_address
-
-//            nameOfferTrade.text = tradeByPkOutput?.trades_by_pk?.sending_address
-//            tvAcceptBy.text = tradeByPkOutput?.trades_by_pk?.recipient_address
-            //
-            tvDate2.text = tradeByPkOutput?.trades_by_pk?.created_at?.toFormattedDate()
-            nameOfferTrade2.text = tradeByPkOutput?.trades_by_pk?.sending_address
-            tvAcceptby2.text = tradeByPkOutput?.trades_by_pk?.recipient_address
+//            formAddress2.text = attributes.tradeInfo?.sending_address
+//            tvDate2.text = tradeByPkOutput?.trades_by_pk?.created_at?.toFormattedDate()
+//            nameOfferTrade2.text = tradeByPkOutput?.trades_by_pk?.sending_address
+//            tvAcceptby2.text = tradeByPkOutput?.trades_by_pk?.recipient_address
         }
 
     }
@@ -160,38 +175,45 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
     override fun getViewStubId() = STUB_ID
 
     class Holder : AbsMessageLocationItem.Holder(STUB_ID) {
-        //layout trade question
-        val layoutTradeQuestion by bind<FrameLayout>(R.id.layoutTradeQuestion)
-        val tvAcceptTrade by bind<AppCompatTextView>(R.id.tvAcceptTrade)
-        val tvDismiss by bind<AppCompatTextView>(R.id.tvDismiss)
-//        val tvDate by bind<AppCompatTextView>(R.id.tvDate)
+        //WAIT_FOR_APPROVAL,WaitApproval
+        val layoutWaitApproval by bind<FrameLayout>(R.id.layoutWaitForApproval)
+        val tvTradedSuccessfullyWaitApproval by bind<AppCompatTextView>(R.id.tvTradedSuccessfullyWaitApproval)
+        val tvDismissWaitApproval by bind<AppCompatTextView>(R.id.tvDismissWaitApproval)
+        val tvAcceptTradeWaitApproval by bind<AppCompatTextView>(R.id.tvAcceptTradeWaitApproval)
 
-        val tvSendingToken by bind<AppCompatTextView>(R.id.tvSendingToken)
-        val tvRecipientToken by bind<AppCompatTextView>(R.id.tvRecipientToken)
-        val tvFromAddress by bind<AppCompatTextView>(R.id.tvFromAddress)
-
-        //layout trade accepted
-        val layoutTradeAccepted by bind<FrameLayout>(R.id.layoutTradeAccepted)
-
-        //        val nameOfferTrade by bind<AppCompatTextView>(R.id.nameOfferTrade)
-//        val tvAcceptBy by bind<AppCompatTextView>(R.id.tvAcceptby)
-        val tvDismiss2 by bind<AppCompatTextView>(R.id.tvDismiss2)
-
-        val tvDate2 by bind<AppCompatTextView>(R.id.tvDate)
-        val nameOfferTrade2 by bind<AppCompatTextView>(R.id.nameOfferTrade)
-        val tvAcceptby2 by bind<AppCompatTextView>(R.id.tvAcceptby)
+        //CANCELLED,Canceled
+        val layoutCanceled by bind<FrameLayout>(R.id.layoutCanceled)
+        val tvTradedSuccessfullyCanceled by bind<AppCompatTextView>(R.id.tvTradedSuccessfullyCanceled)
 
 
+
+        //ACCEPTED,Accepted
+        val layoutAccepted by bind<FrameLayout>(R.id.layoutAccepted)
+        val cancelAccepted by bind<AppCompatTextView>(R.id.cancelAccepted)
+        val initialTradeAccepted by bind<AppCompatTextView>(R.id.initialTradeAccepted)
+
+        //INITIALIZED,
+        val layoutInitialized by bind<FrameLayout>(R.id.layoutInitialized)
+        val tvConfirmInitialized by bind<AppCompatTextView>(R.id.tvConfirmInitialized)
+
+
+        //SUCCESSFUL,
+        val layoutSuccessful by bind<FrameLayout>(R.id.layoutSuccessful)
+
+
+        //common
         val tvSendingToken2 by bind<AppCompatTextView>(R.id.tvSendingToken2)
-        val tvRecipientToken2 by bind<AppCompatTextView>(R.id.tvRecipientToken2)
-        val formAddress2 by bind<AppCompatTextView>(R.id.tvFromAddress2)
-        val tvAcceptTrade2 by bind<AppCompatTextView>(R.id.tvAcceptTrade2)
+        val tvRecipientToken2 by bind<AppCompatTextView>(R.id.tvSendingToken)
+        //
 
+        val tvRecipientToken by bind<AppCompatTextView>(R.id.tvRecipientToken)
+        val tvSendingToken by bind<AppCompatTextView>(R.id.tvSendingToken)
+        val tvFromAddress by bind<AppCompatTextView>(R.id.tvFromAddress)
+//        val tvDate2 by bind<AppCompatTextView>(R.id.tvDate2)
+//        val formAddress2 by bind<AppCompatTextView>(R.id.formAddress2)
+//        val nameOfferTrade2 by bind<AppCompatTextView>(R.id.nameOfferTrade2)
+//        val tvAcceptby2 by bind<AppCompatTextView>(R.id.tvAcceptby2)
 
-        val view2 by bind<View>(R.id.view2)
-        val view3 by bind<View>(R.id.view3)
-        val dot3 by bind<CardView>(R.id.dot3)
-        val dot4 by bind<CardView>(R.id.dot4)
 
     }
 

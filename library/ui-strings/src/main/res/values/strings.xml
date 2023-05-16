@@ -3566,6 +3566,7 @@
     <string name="accept_the_trade">Accept the trade</string>
     <string name="traded_successfully">Traded successfully!</string>
     <string name="cancel_offer">Cancel offer</string>
+    <string name="initial_trade">Initial trade</string>
     <string name="wait_seller_start">Wait for seller to start trading</string>
     <string name="escrow">Escrow</string>
     <string name="completed">Completed</string>
@@ -3574,6 +3575,10 @@
     <string name="confirm_accept_offer">Do you want to accept the offer?</string>
     <string name="confirm_initiate_offer">Do you want to initiate the offer?</string>
     <string name="confirm_confirm_offer">Do you want to confirm the offer?</string>
+    <string name="you_made_an_offer">You made an offer. Wait for someone to start trading!</string>
+    <string name="wait_buyer_exchange_token">Wait for buyer to exchange token</string>
+    <string name="confirm_escrow">Confirm escrow</string>
+    <string name="you_have_an_offer">You have an offer. Make a deal!</string>
 
 
 </resources>

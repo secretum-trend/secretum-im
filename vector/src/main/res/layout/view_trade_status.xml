@@ -193,16 +193,73 @@
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
                 app:layout_constraintTop_toBottomOf="@+id/tvAcceptby" />
 
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dotTime3"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="8dp"
+                android:elevation="4dp"
+                app:cardBackgroundColor="#ffff"
+                app:cardCornerRadius="6dp"
+                app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
+                app:layout_constraintTop_toBottomOf="@+id/escrow" />
+
+            <View
+                android:id="@+id/viewEscrow"
+                android:layout_width="3dp"
+                android:layout_height="0dp"
+                android:background="#ffff"
+                app:layout_constraintBottom_toBottomOf="@+id/dotTime4"
+                app:layout_constraintEnd_toEndOf="@+id/dotTime3"
+                app:layout_constraintStart_toStartOf="@+id/dotTime4"
+                app:layout_constraintTop_toTopOf="@+id/dotTime3" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEscrow2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8dp"
+                android:text="13.00 PM, by Alice"
+                android:textSize="10sp"
+                app:layout_constraintBottom_toBottomOf="@+id/dotTime3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/dotTime3"
+                app:layout_constraintTop_toTopOf="@+id/dotTime3" />
+
+            <androidx.cardview.widget.CardView
+                android:id="@+id/dotTime4"
+                android:layout_width="8dp"
+                android:layout_height="8dp"
+                android:layout_marginTop="8dp"
+                android:elevation="4dp"
+                app:cardBackgroundColor="#ffff"
+                app:cardCornerRadius="6dp"
+                app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
+                app:layout_constraintTop_toTopOf="@id/tvEscrow3"
+                app:layout_constraintBottom_toBottomOf="@+id/tvEscrow3" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEscrow3"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toEndOf="@+id/dotTime3"
+                android:layout_marginHorizontal="8dp"
+                android:layout_marginTop="8dp"
+                android:text="13.00 PM, by Alice"
+                android:textSize="10sp"
+                app:layout_constraintTop_toBottomOf="@+id/tvEscrow2"
+                />
+
             <androidx.appcompat.widget.AppCompatTextView
                 android:id="@+id/complete"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
                 android:fontFamily="@font/nunito_medium"
                 android:text="@string/completed"
                 android:textSize="12sp"
+                android:layout_marginTop="8dp"
                 app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
-                app:layout_constraintTop_toBottomOf="@+id/escrow" />
+                app:layout_constraintTop_toBottomOf="@+id/tvEscrow3" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

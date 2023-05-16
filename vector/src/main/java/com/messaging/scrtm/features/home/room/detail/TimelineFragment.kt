@@ -51,7 +51,6 @@ import com.airbnb.mvrx.Fail
 import com.airbnb.mvrx.args
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
-import com.auth.GetTradeByPkQuery
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.animations.play
@@ -485,14 +484,17 @@ class TimelineFragment :
         startActivity(intent)
     }
 
+
+
     @Subscribe
     fun handelTradeEvent(event: TradeEventBus) {
         when (event.tradeEventType) {
             TradeEventType.CANCEL -> {
-                showAlert(getString(R.string.confirm_cancel_offer)){
+                showAlert(getString(R.string.confirm_cancel_offer)) {
                     timelineViewModel.cancelOffer(event.offer).observe(viewLifecycleOwner) {
-                        when (it.status){
+                        when (it.status) {
                             Resource.Status.SUCCESS -> {
+                               timelineViewModel.updateMessageEvent(event = event.event, event.offer )
                             }
                             else -> {}
                         }
@@ -500,10 +502,11 @@ class TimelineFragment :
                 }
             }
             TradeEventType.ACCEPT -> {
-                showAlert(getString(R.string.confirm_accept_offer)){
+                showAlert(getString(R.string.confirm_accept_offer)) {
                     timelineViewModel.acceptTrade(event.offer).observe(viewLifecycleOwner) {
-                        when (it.status){
+                        when (it.status) {
                             Resource.Status.SUCCESS -> {
+                                timelineViewModel.updateMessageEvent(event = event.event, event.offer)
                             }
                             else -> {}
                         }
@@ -511,10 +514,11 @@ class TimelineFragment :
                 }
             }
             TradeEventType.INITIATE -> {
-                showAlert(getString(R.string.confirm_initiate_offer)){
+                showAlert(getString(R.string.confirm_initiate_offer)) {
                     timelineViewModel.initiateTrade(event.offer).observe(viewLifecycleOwner) {
-                        when (it.status){
+                        when (it.status) {
                             Resource.Status.SUCCESS -> {
+                                timelineViewModel.updateMessageEvent(event = event.event, event.offer)
                             }
                             else -> {}
                         }
@@ -522,7 +526,8 @@ class TimelineFragment :
                 }
             }
             TradeEventType.CONFIRM -> {
-                showAlert(getString(R.string.confirm_confirm_offer)){
+                showAlert(getString(R.string.confirm_confirm_offer)) {
+
                 }
             }
         }
@@ -764,6 +769,7 @@ class TimelineFragment :
             .show()
     }
 
+    @Suppress("unused")
     private fun handleSpaceShare() {
         timelineArgs.openShareSpaceForId?.let { spaceId ->
             ShareSpaceBottomSheet.show(childFragmentManager, spaceId, true)
@@ -873,7 +879,7 @@ class TimelineFragment :
             if (menu is MenuBuilder) menu.setOptionalIconsVisible(true)
         }
 
-        menu.forEach { it ->
+        menu.forEach {
             it.setTextColor(ThemeUtils.getColor(requireContext(), R.attr.vctr_content_secondary))
         }
 
@@ -2297,7 +2303,7 @@ class TimelineFragment :
         }
     }
 
-    private fun showAlert(message: String, action : () -> Unit){
+    private fun showAlert(message: String, action: () -> Unit) {
         MaterialAlertDialogBuilder(requireActivity())
             .setTitle(R.string.app_name)
             .setTitle(message)

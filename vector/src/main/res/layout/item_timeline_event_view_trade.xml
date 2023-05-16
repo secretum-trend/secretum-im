@@ -3,23 +3,40 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:tools="http://schemas.android.com/tools"
     android:addStatesFromChildren="true"
     app:cardBackgroundColor="#202B58"
     app:cardCornerRadius="12dp">
 
+
     <include
-        android:id="@+id/layoutTradeQuestion"
-        layout="@layout/item_timeline_event_view_trade_question"
+        android:id="@+id/layoutWaitForApproval"
+        layout="@layout/item_timeline_event_veiw_trade_wait_approval"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
     <include
-        android:id="@+id/layoutTradeAccepted"
+        android:id="@+id/layoutCanceled"
+        layout="@layout/item_timeline_event_view_trade_canceled"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/layoutAccepted"
         layout="@layout/item_timeline_event_view_trade_accepted"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:visibility="gone" />
+        android:layout_height="wrap_content" />
+
+    <include
+        android:id="@+id/layoutInitialized"
+        layout="@layout/item_timeline_event_view_trade_initialized"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <include
+        android:id="@+id/layoutSuccessful"
+        layout="@layout/item_timeline_event_view_trade_succesful"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
 
 </androidx.cardview.widget.CardView>
 

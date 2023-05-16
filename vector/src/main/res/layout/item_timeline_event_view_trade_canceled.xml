@@ -12,9 +12,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-
         <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvTradedSuccessfully"
+            android:id="@+id/tvTradedSuccessfullyCanceled"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_semi_bold"
@@ -34,10 +33,10 @@
             android:orientation="horizontal"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvTradedSuccessfully">
+            app:layout_constraintTop_toBottomOf="@+id/tvTradedSuccessfullyCanceled">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvSendingToken"
+                android:id="@+id/tvSendingToken2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -59,13 +58,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
                 android:src="@drawable/ic_equal"
-                app:layout_constraintBottom_toBottomOf="@+id/tvSendingToken"
+                app:layout_constraintBottom_toBottomOf="@+id/tvSendingToken2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvSendingToken" />
+                app:layout_constraintTop_toTopOf="@+id/tvSendingToken2" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvRecipientToken"
+                android:id="@+id/tvRecipientToken2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="16dp"
@@ -88,11 +87,11 @@
                 android:fontFamily="@font/nunito_semi_bold"
                 android:text="@string/from"
                 android:textColor="#66FFFFFF"
-                app:layout_constraintStart_toStartOf="@+id/tvSendingToken"
-                app:layout_constraintTop_toBottomOf="@+id/tvSendingToken" />
+                app:layout_constraintStart_toStartOf="@+id/tvSendingToken2"
+                app:layout_constraintTop_toBottomOf="@+id/tvSendingToken2" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvFromAddress"
+                android:id="@+id/tvFromAddress2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -100,7 +99,7 @@
                 android:fontFamily="@font/nunito_semi_bold"
                 android:singleLine="true"
                 app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView4"
-                app:layout_constraintEnd_toStartOf="@+id/tvRecipientToken"
+                app:layout_constraintEnd_toStartOf="@+id/tvRecipientToken2"
                 app:layout_constraintStart_toEndOf="@+id/appCompatTextView4"
                 tools:text="Peter" />
 
@@ -187,7 +186,7 @@
                     android:layout_width="4dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="-6dp"
-                    android:background="@color/gray"
+                    android:background="#5267E3"
                     app:layout_constraintBottom_toTopOf="@+id/dot3"
                     app:layout_constraintEnd_toEndOf="@+id/cardView"
                     app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -199,7 +198,7 @@
                     android:layout_height="12dp"
                     android:layout_marginStart="8dp"
                     android:elevation="4dp"
-                    app:cardBackgroundColor="@color/gray"
+                    app:cardBackgroundColor="#5267E3"
                     app:cardCornerRadius="6dp"
                     app:layout_constraintStart_toEndOf="@+id/tvDate"
                     app:layout_constraintTop_toTopOf="@+id/escrow" />
@@ -209,7 +208,7 @@
                     android:layout_width="4dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="-6dp"
-                    android:background="@color/gray"
+                    android:background="#5267E3"
                     app:layout_constraintBottom_toTopOf="@+id/dot4"
                     app:layout_constraintEnd_toEndOf="@+id/cardView"
                     app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -221,7 +220,7 @@
                     android:layout_height="12dp"
                     android:layout_marginStart="8dp"
                     android:elevation="4dp"
-                    app:cardBackgroundColor="@color/gray"
+                    app:cardBackgroundColor="#5267E3"
                     app:cardCornerRadius="6dp"
                     app:layout_constraintStart_toEndOf="@+id/tvDate"
                     app:layout_constraintTop_toTopOf="@+id/complete" />
@@ -383,8 +382,6 @@
 
         </androidx.cardview.widget.CardView>
 
-
-
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -397,24 +394,26 @@
             app:layout_constraintTop_toBottomOf="@+id/include">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/cancelAccepted"
+                android:id="@+id/tvDismiss2"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
-                android:background="@drawable/selector_radio_button_trade"
+                android:background="@drawable/bg_fill_coner_8"
                 android:fontFamily="@font/manrope_bold"
+                android:backgroundTint="@color/navigation"
                 android:gravity="center"
+                android:textColor="@color/gray"
                 android:layout_marginHorizontal="16dp"
                 android:minHeight="38dp"
                 android:singleLine="true"
-                app:layout_constraintEnd_toStartOf="@id/initialTradeAccepted"
+                app:layout_constraintEnd_toStartOf="@id/tvAcceptTrade2"
                 android:text="@string/cancel_offer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/initialTradeAccepted"
+                android:id="@+id/tvAcceptTrade2"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -423,6 +422,7 @@
                 android:background="@drawable/bg_fill_coner_8"
                 android:backgroundTint="@color/white"
                 android:fontFamily="@font/manrope_bold"
+                android:visibility="invisible"
                 android:gravity="center"
                 android:maxLines="2"
                 android:minHeight="38dp"
@@ -430,7 +430,7 @@
                 android:textColor="#102A87"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cancelAccepted"
+                app:layout_constraintStart_toEndOf="@+id/tvDismiss2"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,13 +1,6 @@
 package com.messaging.scrtm.data.trade.repository
 
-import com.auth.AcceptTradeMutation
-import com.auth.CancelOfferMutation
-import com.auth.CreateOfferByMutation
-import com.auth.ExchangeTradeMutation
-import com.auth.GetNonceByUserIdQuery
-import com.auth.GetPartnerAddressByQuery
-import com.auth.GetTradeByPkQuery
-import com.auth.InitializeTradeMutation
+import com.auth.*
 import com.auth.type.CreateOfferPayload
 import com.messaging.scrtm.data.trade.domain.ApolloTradeClient
 import kotlinx.coroutines.CoroutineScope
@@ -33,6 +26,10 @@ interface TradeRepository {
     suspend fun initializeTrade(id: Int): InitializeTradeMutation.Data?
 
     suspend fun exchangeTrade(id: Int, signature: String): ExchangeTradeMutation.Data?
+    suspend fun getRateByAddress(
+        addresses: List<String>
+    ): GetRateByAddressesQuery.Data?
+
 }
 
 class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: ApolloTradeClient) :
@@ -74,5 +71,11 @@ class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: Apol
 
     override suspend fun exchangeTrade(id: Int, signature: String): ExchangeTradeMutation.Data? {
         return apolloTradeClient.exchangeTrade(id, signature)
+    }
+
+    override suspend fun getRateByAddress(
+        addresses: List<String>
+    ): GetRateByAddressesQuery.Data? {
+        return apolloTradeClient.getRateByAddress(addresses)
     }
 }

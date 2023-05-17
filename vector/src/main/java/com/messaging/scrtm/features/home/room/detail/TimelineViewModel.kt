@@ -22,7 +22,6 @@ import androidx.annotation.IdRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.liveData
-import androidx.lifecycle.viewModelScope
 import com.airbnb.mvrx.*
 import com.auth.GetTradeByPkQuery
 import com.google.gson.Gson
@@ -40,6 +39,8 @@ import com.messaging.scrtm.core.resources.StringProvider
 import com.messaging.scrtm.core.utils.BehaviorDataSource
 import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.data.SessionPref
+import com.messaging.scrtm.data.solana.repository.SolanaRepository
+import com.messaging.scrtm.data.trade.entity.TokenRate
 import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.data.trade.repository.TradeRepository
 import com.messaging.scrtm.features.analytics.AnalyticsTracker
@@ -126,6 +127,7 @@ import org.matrix.android.sdk.api.util.toOptional
 import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
 import timber.log.Timber
+import java.security.PublicKey
 import java.util.concurrent.atomic.AtomicBoolean
 
 class TimelineViewModel @AssistedInject constructor(
@@ -156,7 +158,9 @@ class TimelineViewModel @AssistedInject constructor(
     private val voiceBroadcastHelper: VoiceBroadcastHelper,
     private val tradeRepository: TradeRepository,
     val sessionPref: SessionPref,
-    private val loginRepository: LoginRepository
+    private val loginRepository: LoginRepository,
+    private val solanaRepository: SolanaRepository,
+
 
     ) : VectorViewModel<RoomDetailViewState, RoomDetailAction, RoomDetailViewEvents>(initialState),
     Timeline.Listener, ChatEffectManager.Delegate, CallProtocolsChecker.Listener,
@@ -319,6 +323,72 @@ class TimelineViewModel @AssistedInject constructor(
         }
     }
 
+    fun startInitiateTrade(offer: GetTradeByPkQuery.Data) {
+        viewModelScope.launch {
+            //Get a rate from the token_rates table.
+            val listAddress = mutableListOf<String>()
+            listAddress.add(offer.trades_by_pk?.sending_address.toString())
+            val data = tradeRepository.getRateByAddress(listAddress)
+
+            //Calculate the fee
+            val dataTokenRate = data?.token_rates?.map {
+                TokenRate(it.token_address, it.rate.toString().toDoubleOrNull() ?: 0.0)
+            }
+
+            val fee = dataTokenRate?.let {
+                calculateFee(
+                    tokenRates = it,
+                    sendingTokenAddress = offer.trades_by_pk?.sending_token_address.toString(),
+                    initializerAmount = offer.trades_by_pk?.sending_token_amount?.toDouble() ?: 0.0,
+                    recipientTokenAddress = offer.trades_by_pk?.recipient_token_address.toString(),
+                    takerAmount = offer.trades_by_pk?.recipient_token_amount?.toDouble() ?: 0.0
+                )
+            }
+
+            //   Check enough SOL fee to execute the transaction
+            val check = checkIsEnoughFee(
+                fee = fee?.second?.toDouble() ?: 0.0,
+                sentAmount = offer.trades_by_pk?.sending_token_amount?.toDouble() ?: 0.0,
+                sentTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
+                feeTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
+            )
+        }
+    }
+
+    suspend fun checkIsEnoughFee(
+        fee: Double,
+        sentAmount: Double,
+        sentTokenAccount: String,
+        feeTokenAccount: String
+    ): Boolean {
+        val checkingSERBalance = if (sentTokenAccount == feeTokenAccount) {
+            fee + sentAmount
+        } else {
+            fee
+        }
+        val serTokenBalance = solanaRepository.getTokenBalance(feeTokenAccount)
+        return serTokenBalance.result.value >= checkingSERBalance
+    }
+
+    fun calculateFee(
+        tokenRates: List<TokenRate>,
+        sendingTokenAddress: String,
+        initializerAmount: Double,
+        recipientTokenAddress: String,
+        takerAmount: Double
+    ): Pair<Int, Int> {
+        val initializerTokenRate =
+            tokenRates.find { it.token_address == sendingTokenAddress }?.rate ?: 0.0
+        val initializerFee = (initializerAmount * initializerTokenRate * 0.0002).toInt()
+
+        val takerTokenRate =
+            tokenRates.find { it.token_address == recipientTokenAddress }?.rate ?: 0.0
+        val takerFee = (takerAmount * takerTokenRate * 0.0002).toInt()
+
+        return Pair(initializerFee, takerFee)
+    }
+
+
     fun initiateTrade(offer: GetTradeByPkQuery.Data?) = liveData {
         try {
             emit(Resource.loading())
@@ -328,10 +398,10 @@ class TimelineViewModel @AssistedInject constructor(
         }
     }
 
-    fun exchangeTrade(offer: GetTradeByPkQuery.Data?, signature : String) = liveData {
+    fun exchangeTrade(offer: GetTradeByPkQuery.Data?, signature: String) = liveData {
         try {
             emit(Resource.loading())
-            val data = offer?.trades_by_pk?.id?.let { tradeRepository.exchangeTrade(it,signature) }
+            val data = offer?.trades_by_pk?.id?.let { tradeRepository.exchangeTrade(it, signature) }
             emit(Resource.success(data))
         } catch (_: Throwable) {
         }
@@ -536,7 +606,7 @@ class TimelineViewModel @AssistedInject constructor(
         )
     }
 
-    fun updateMessageEvent(event : Event, data : GetTradeByPkQuery.Data?) {
+    fun updateMessageEvent(event: Event, data: GetTradeByPkQuery.Data?) {
         val offer = data?.trades_by_pk
         val tradeInfo = TradeInfo(
             trade_id = offer?.id.toString(),
@@ -972,7 +1042,7 @@ class TimelineViewModel @AssistedInject constructor(
 
     private fun isIntegrationEnabled() = session.integrationManagerService().isIntegrationEnabled()
 
-    fun isMenuItemVisible(@IdRes itemId: Int): Boolean = com.airbnb.mvrx.withState(this) { state ->
+    fun isMenuItemVisible(@IdRes itemId: Int): Boolean = withState(this) { state ->
 
         if (state.asyncRoomSummary()?.membership != Membership.JOIN) {
             return@withState false

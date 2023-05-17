@@ -14,8 +14,9 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTradedSuccessfullyCanceled"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:gravity="center"
+            android:layout_marginHorizontal="16dp"            android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_semi_bold"
             android:text="@string/you_have_an_offer"
             android:textColor="#80FFFFFF"
@@ -249,7 +250,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/appCompatTextView7" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/nameOfferTrade"
+                    android:id="@+id/nameOfferTradeCanceled"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
@@ -269,7 +270,7 @@
                     android:text="@string/accept_the_trade"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
-                    app:layout_constraintTop_toBottomOf="@+id/nameOfferTrade" />
+                    app:layout_constraintTop_toBottomOf="@+id/nameOfferTradeCanceled" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/dotTime2"
@@ -283,7 +284,7 @@
                     app:layout_constraintTop_toBottomOf="@+id/aceptTrade" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvAcceptby"
+                    android:id="@+id/tvAcceptbyCanceled"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
@@ -303,7 +304,7 @@
                     android:text="@string/escrow"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@+id/appCompatTextView7"
-                    app:layout_constraintTop_toBottomOf="@+id/tvAcceptby" />
+                    app:layout_constraintTop_toBottomOf="@+id/tvAcceptbyCanceled" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/dotTime3"

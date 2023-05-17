@@ -24,11 +24,13 @@
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTradedSuccessfully"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:fontFamily="@font/nunito_semi_bold"
+            android:gravity="center"
             android:text="@string/traded_successfully"
+            android:layout_marginHorizontal="16dp"
             android:textColor="#80FFFFFF"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -401,7 +403,7 @@
             app:layout_constraintTop_toBottomOf="@+id/include">
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvDismiss2"
+                android:id="@+id/tvCancelSuccessful"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:layout_weight="1"
@@ -411,14 +413,14 @@
                 android:layout_marginHorizontal="16dp"
                 android:minHeight="38dp"
                 android:singleLine="true"
-                app:layout_constraintEnd_toStartOf="@id/tvAcceptTrade2"
+                app:layout_constraintEnd_toStartOf="@id/tvOkSuccessful"
                 android:text="@string/cancel_offer"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvAcceptTrade2"
+                android:id="@+id/tvOkSuccessful"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
@@ -434,7 +436,7 @@
                 android:textColor="#102A87"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvDismiss2"
+                app:layout_constraintStart_toEndOf="@+id/tvCancelSuccessful"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

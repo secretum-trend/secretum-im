@@ -1,6 +1,7 @@
 package com.messaging.scrtm.data.solana.repository
 
 import com.messaging.scrtm.data.solana.entity.ApiResponse
+import com.messaging.scrtm.data.solana.entity.ResponseGetBalance
 import com.messaging.scrtm.data.solana.entity.ResponseSolana
 import com.messaging.scrtm.data.solana.entity.TokenAccount
 import com.messaging.scrtm.data.solana.remote.SolanaRemoteDataSource
@@ -12,6 +13,7 @@ import java.util.*
 
 interface SolanaRepository {
     suspend fun getTokenAccountsByOwner(address : String) : ResponseSolana
+    suspend fun getTokenBalance(address : String) : ResponseGetBalance
 
 }
 
@@ -34,5 +36,17 @@ class SolanaRepositoryImp(private val solanaRemoteDataSource: SolanaRemoteDataSo
                 "}"
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
         return solanaRemoteDataSource.getTokenAccountsByOwner(requestBody)
+    }
+
+    override suspend fun getTokenBalance(address: String) : ResponseGetBalance {
+        val json = "{\n" +
+                "    \"jsonrpc\": \"2.0\", \"id\": 1,\n" +
+                "    \"method\": \"getBalance\",\n" +
+                "    \"params\": [\n" +
+                "      \"$address\"\n" +
+                "    ]\n" +
+                "  }"
+        val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
+        return solanaRemoteDataSource.getBalance(requestBody)
     }
 }

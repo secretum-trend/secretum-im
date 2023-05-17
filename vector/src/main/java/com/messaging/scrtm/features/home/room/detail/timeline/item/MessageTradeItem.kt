@@ -40,6 +40,7 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
     @EpoxyAttribute
     var currentUserId: String? = null
 
+
     @EpoxyAttribute
     var sessionPref: SessionPref? = null
 
@@ -104,6 +105,15 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             }
 
             //INITIALIZED
+            tvCancelInitial.setOnClickListener {
+                EventBus.getDefault().post(
+                    TradeEventBus(
+                        offer = tradeByPkOutput,
+                        tradeEventType = TradeEventType.CANCEL,
+                        event!!
+                    )
+                )
+            }
             tvConfirmInitialized.setOnClickListener {
                 EventBus.getDefault().post(
                     TradeEventBus(
@@ -112,6 +122,12 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
                         event!!
                     )
                 )
+            }
+
+            //Successful
+
+            tvOkSuccessful.setOnClickListener {
+               //new offer
             }
 
             //UI
@@ -147,7 +163,6 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
 
                 TradeStatus.ACCEPTED -> {
                     layoutAccepted.show()
-
                     if (isSender()) {
                         initialTradeAccepted.text = view.context.getString(R.string.initial_trade)
                     } else {
@@ -163,8 +178,8 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
                             )
                         )
                     }
-
                 }
+
                 TradeStatus.INITIALIZED -> {
                     layoutInitialized.show()
                     if (isSender()) {
@@ -183,7 +198,9 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
                         tvConfirmInitialized.text = view.context.getString(R.string.confirm_escrow)
                     }
                 }
+
                 TradeStatus.SUCCESSFUL -> {
+                    layoutSuccessful.show()
 
                 }
             }
@@ -200,6 +217,7 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             tvFromAddress.text = attributes.tradeInfo?.sending_address
 
 
+            //cancel
             tvSendingTokenCanceled.text = String.format(
                 "${attributes.tradeInfo?.sending_token_amount} %s",
                 attributes.tradeInfo?.sending_token_address
@@ -210,7 +228,10 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             )
             tvFromAddressCanceled.text = attributes.tradeInfo?.sending_address
 
+            nameOfferTradeCanceled.text = attributes.tradeInfo?.sending_address
+            tvAcceptbyCanceled.text = attributes.tradeInfo?.recipient_address
 
+            //Accepted
             tvSendingTokenAccepted.text = String.format(
                 "${attributes.tradeInfo?.sending_token_amount} %s",
                 attributes.tradeInfo?.sending_token_address
@@ -221,7 +242,10 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             )
             tvFromAddressAccepted.text = attributes.tradeInfo?.sending_address
 
+            nameOfferTradeAccepted.text = attributes.tradeInfo?.sending_address
+            tvAcceptbyAccepted.text = attributes.tradeInfo?.recipient_address
 
+            //Initialized
             tvSendingTokenInitialized.text = String.format(
                 "${attributes.tradeInfo?.sending_token_amount} %s",
                 attributes.tradeInfo?.sending_token_address
@@ -232,6 +256,10 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             )
             tvFromAddressInitialized.text = attributes.tradeInfo?.sending_address
 
+            nameOfferTradeInitialized.text = attributes.tradeInfo?.sending_address
+            tvAcceptbyInitialized.text = attributes.tradeInfo?.recipient_address
+
+            //Successful
             tvSendingTokenSuccessful.text = String.format(
                 "${attributes.tradeInfo?.sending_token_amount} %s",
                 attributes.tradeInfo?.sending_token_address
@@ -263,15 +291,17 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
         val tvSendingToken by bind<AppCompatTextView>(R.id.tvSendingToken)
         val tvFromAddress by bind<AppCompatTextView>(R.id.tvFromAddress)
 
-
         //CANCELLED,Canceled
         val layoutCanceled by bind<FrameLayout>(R.id.layoutCanceled)
         val tvTradedSuccessfullyCanceled by bind<AppCompatTextView>(R.id.tvTradedSuccessfullyCanceled)
 
-        //common
         val tvRecipientTokenCanceled by bind<AppCompatTextView>(R.id.tvRecipientTokenCanceled)
         val tvSendingTokenCanceled by bind<AppCompatTextView>(R.id.tvSendingTokenCanceled)
         val tvFromAddressCanceled by bind<AppCompatTextView>(R.id.tvFromAddressCanceled)
+
+        val nameOfferTradeCanceled by bind<AppCompatTextView>(R.id.nameOfferTradeCanceled)
+        val tvAcceptbyCanceled by bind<AppCompatTextView>(R.id.tvAcceptbyCanceled)
+
 
         //ACCEPTED,Accepted
         val layoutAccepted by bind<FrameLayout>(R.id.layoutAccepted)
@@ -282,17 +312,27 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
         val tvSendingTokenAccepted by bind<AppCompatTextView>(R.id.tvSendingTokenAccepted)
         val tvFromAddressAccepted by bind<AppCompatTextView>(R.id.tvFromAddressAccepted)
 
+        val nameOfferTradeAccepted by bind<AppCompatTextView>(R.id.nameOfferTradeAccepted)
+        val tvAcceptbyAccepted by bind<AppCompatTextView>(R.id.tvAcceptbyAccepted)
+
         //INITIALIZED,Initialized
         val layoutInitialized by bind<FrameLayout>(R.id.layoutInitialized)
+        val tvCancelInitial by bind<AppCompatTextView>(R.id.tvCancelInitial)
         val tvConfirmInitialized by bind<AppCompatTextView>(R.id.tvConfirmInitialized)
 
         val tvSendingTokenInitialized by bind<AppCompatTextView>(R.id.tvSendingTokenInitialized)
         val tvRecipientTokenInitialized by bind<AppCompatTextView>(R.id.tvRecipientTokenInitialized)
         val tvFromAddressInitialized by bind<AppCompatTextView>(R.id.tvFromAddressInitialized)
 
+        val nameOfferTradeInitialized by bind<AppCompatTextView>(R.id.nameOfferTradeInitialized)
+        val tvAcceptbyInitialized by bind<AppCompatTextView>(R.id.tvAcceptbyInitialized)
+
 
         //SUCCESSFUL,Successful
         val layoutSuccessful by bind<FrameLayout>(R.id.layoutSuccessful)
+
+        val tvCancelSuccessful by bind<AppCompatTextView>(R.id.tvCancelSuccessful)
+        val tvOkSuccessful by bind<AppCompatTextView>(R.id.tvOkSuccessful)
 
         val tvSendingTokenSuccessful by bind<AppCompatTextView>(R.id.tvSendingTokenSuccessful)
         val tvRecipientTokenSuccessful by bind<AppCompatTextView>(R.id.tvRecipientTokenSuccessful)

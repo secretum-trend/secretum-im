@@ -111,6 +111,7 @@ android {
     buildFeatures {
         viewBinding true
     }
+
 }
 dependencies {
 
@@ -125,6 +126,7 @@ dependencies {
     implementation project(":library:attachment-viewer")
     implementation project(":library:multipicker")
     implementation project(":lib-solana:clientlib")
+    implementation project(":lib-solana:solanaj-main")
 
     implementation libs.jetbrains.coroutinesCore
     implementation libs.jetbrains.coroutinesAndroid
@@ -354,7 +356,7 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
 
     //bouncycastle
-    implementation 'org.bouncycastle:bcprov-jdk18on:1.72'
+//    implementation 'org.bouncycastle:bcprov-jdk18on:1.72'
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

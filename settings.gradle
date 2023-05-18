@@ -16,6 +16,7 @@ include ':lib-solana:clientlib'
 include ':lib-solana:clientlib-ktx'
 include ':lib-solana:clientlib-rxjava'
 include ':lib-solana:common'
+include ':lib-solana:solanaj-main'
 
 include ':matrix-sdk-android'
 include ':matrix-sdk-android-flow'

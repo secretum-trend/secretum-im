@@ -126,9 +126,11 @@ import org.matrix.android.sdk.api.session.widgets.model.WidgetType
 import org.matrix.android.sdk.api.util.toOptional
 import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
+import org.p2p.solanaj.rpc.Cluster
+import org.p2p.solanaj.rpc.RpcClient
 import timber.log.Timber
-import java.security.PublicKey
 import java.util.concurrent.atomic.AtomicBoolean
+
 
 class TimelineViewModel @AssistedInject constructor(
     @Assisted private val initialState: RoomDetailViewState,
@@ -330,7 +332,7 @@ class TimelineViewModel @AssistedInject constructor(
             listAddress.add(offer.trades_by_pk?.sending_address.toString())
             val data = tradeRepository.getRateByAddress(listAddress)
 
-            //Calculate the fee
+//            Calculate the fee
             val dataTokenRate = data?.token_rates?.map {
                 TokenRate(it.token_address, it.rate.toString().toDoubleOrNull() ?: 0.0)
             }
@@ -345,13 +347,15 @@ class TimelineViewModel @AssistedInject constructor(
                 )
             }
 
-            //   Check enough SOL fee to execute the transaction
+//               Check enough SOL fee to execute the transaction
             val check = checkIsEnoughFee(
                 fee = fee?.second?.toDouble() ?: 0.0,
                 sentAmount = offer.trades_by_pk?.sending_token_amount?.toDouble() ?: 0.0,
                 sentTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
                 feeTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
             )
+            val clientApi = RpcClient(Cluster.TESTNET).api.getBalance()
+
         }
     }
 

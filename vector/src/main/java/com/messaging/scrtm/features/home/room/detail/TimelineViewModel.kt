@@ -126,6 +126,8 @@ import org.matrix.android.sdk.api.session.widgets.model.WidgetType
 import org.matrix.android.sdk.api.util.toOptional
 import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
+import org.p2p.solanaj.core.Transaction
+import org.p2p.solanaj.programs.SystemProgram
 import org.p2p.solanaj.rpc.Cluster
 import org.p2p.solanaj.rpc.RpcClient
 import timber.log.Timber
@@ -354,7 +356,22 @@ class TimelineViewModel @AssistedInject constructor(
                 sentTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
                 feeTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
             )
-            val clientApi = RpcClient(Cluster.TESTNET).api.getBalance()
+
+//            val transaction = Transaction()
+//            transaction.addInstruction(
+//                SystemProgram.transfer(
+//                    send
+//
+//                    ,
+//                    toPublickKey,
+//                    lamports.toLong()
+//                )
+//            )
+//            transaction.setRecentBlockHash("Eit7RCyhUixAe2hGBS8oqnw59QK3kgMMjfLME5bm9wRn")
+//            transaction.sign(signer)
+//            val serializedTransaction = transaction.serialize()
+//
+//            val clientApi = RpcClient(Cluster.TESTNET).api.sendTransaction()
 
         }
     }

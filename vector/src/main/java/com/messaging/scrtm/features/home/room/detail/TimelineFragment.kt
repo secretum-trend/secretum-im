@@ -23,6 +23,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
+import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -119,6 +120,7 @@ import com.messaging.scrtm.features.media.ImageContentRenderer
 import com.messaging.scrtm.features.media.VideoContentRenderer
 import com.messaging.scrtm.features.notifications.NotificationDrawerManager
 import com.messaging.scrtm.features.notifications.NotificationUtils
+import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
 import com.messaging.scrtm.features.permalink.NavigationInterceptor
 import com.messaging.scrtm.features.permalink.PermalinkFactory
 import com.messaging.scrtm.features.permalink.PermalinkHandler
@@ -441,6 +443,15 @@ class TimelineFragment :
         }
     }
 
+    private val mwaLauncher =
+        registerForActivityResult(
+            MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity(
+                lifecycle
+            )
+        ) {
+            Log.d("ccc", it.toString())
+        }
+
     private fun setupBackPressHandling() {
         requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner) {
             withState(messageComposerViewModel) { state ->
@@ -515,19 +526,27 @@ class TimelineFragment :
             }
             TradeEventType.INITIATE -> {
                 showAlert(getString(R.string.confirm_initiate_offer)) {
-                    timelineViewModel.initiateTrade(event.offer).observe(viewLifecycleOwner) {
-                        when (it.status) {
-                            Resource.Status.SUCCESS -> {
-                                timelineViewModel.updateMessageEvent(event = event.event, event.offer)
-                            }
-                            else -> {}
+
+//                    timelineViewModel.initiateTrade(event.offer).observe(viewLifecycleOwner) {
+//                        when (it.status) {
+//                            Resource.Status.SUCCESS -> {
+//                                timelineViewModel.updateMessageEvent(event = event.event, event.offer)
+//                            }
+//                            else -> {}
+//                        }
+//                    }
+                    event.offer?.let { offer ->
+                        timelineViewModel.startInitiateTrade(offer){
+                            timelineViewModel.signAndSendTransactions(mwaLauncher,1)
                         }
                     }
                 }
             }
             TradeEventType.CONFIRM -> {
                 showAlert(getString(R.string.confirm_confirm_offer)) {
-
+                    event.offer?.let { offer ->
+//                        timelineViewModel.exchangeTrade(offer, "")
+                    }
                 }
             }
         }

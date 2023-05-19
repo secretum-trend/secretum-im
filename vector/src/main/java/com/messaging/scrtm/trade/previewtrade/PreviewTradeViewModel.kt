@@ -67,6 +67,7 @@ class PreviewTradeViewModel @Inject constructor(
             return@launch
         } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
             showMessage(R.string.msg_request_failed)
+
             return@launch
         }
 

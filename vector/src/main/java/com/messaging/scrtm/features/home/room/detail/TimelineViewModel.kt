@@ -79,6 +79,8 @@ import com.messaging.scrtm.features.session.coroutineScope
 import com.messaging.scrtm.features.settings.VectorDataStore
 import com.messaging.scrtm.features.settings.VectorPreferences
 import com.messaging.scrtm.features.voicebroadcast.VoiceBroadcastHelper
+import com.portto.solana.web3.Transaction
+import com.portto.solana.web3.programs.MemoProgram
 import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -126,10 +128,7 @@ import org.matrix.android.sdk.api.session.widgets.model.WidgetType
 import org.matrix.android.sdk.api.util.toOptional
 import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
-import org.p2p.solanaj.core.Transaction
-import org.p2p.solanaj.programs.SystemProgram
-import org.p2p.solanaj.rpc.Cluster
-import org.p2p.solanaj.rpc.RpcClient
+
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -372,6 +371,12 @@ class TimelineViewModel @AssistedInject constructor(
 //            val serializedTransaction = transaction.serialize()
 //
 //            val clientApi = RpcClient(Cluster.TESTNET).api.sendTransaction()
+
+//            val tx = Transaction()
+//            tx.add(MemoProgram.writeUtf8(conn.publicKey, memoText))
+//            tx.setRecentBlockHash(blockHash!!)
+//            tx.feePayer = conn.publicKey
+
 
         }
     }

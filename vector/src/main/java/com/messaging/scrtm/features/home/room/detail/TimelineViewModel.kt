@@ -16,7 +16,9 @@
 
 package com.messaging.scrtm.features.home.room.detail
 
+import android.content.ContentValues.TAG
 import android.net.Uri
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.IdRes
 import androidx.lifecycle.MutableLiveData
@@ -67,10 +69,7 @@ import com.messaging.scrtm.features.location.live.StopLiveLocationShareUseCase
 import com.messaging.scrtm.features.location.live.tracking.LocationSharingServiceConnection
 import com.messaging.scrtm.features.notifications.NotificationDrawerManager
 import com.messaging.scrtm.features.onboarding.OnboardingViewModel
-import com.messaging.scrtm.features.onboarding.usecase.Base58DecodeUseCase
-import com.messaging.scrtm.features.onboarding.usecase.Base58EncodeUseCase
-import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
-import com.messaging.scrtm.features.onboarding.usecase.OffChainMessageSigningUseCase
+import com.messaging.scrtm.features.onboarding.usecase.*
 import com.messaging.scrtm.features.powerlevel.PowerLevelsFlowFactory
 import com.messaging.scrtm.features.raw.wellknown.CryptoConfig
 import com.messaging.scrtm.features.raw.wellknown.getOutboundSessionKeySharingStrategyOrDefault
@@ -82,10 +81,12 @@ import com.messaging.scrtm.features.voicebroadcast.VoiceBroadcastHelper
 import com.portto.solana.web3.Transaction
 import com.portto.solana.web3.programs.MemoProgram
 import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
+import com.solana.mobilewalletadapter.common.ProtocolContract
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -128,7 +129,6 @@ import org.matrix.android.sdk.api.session.widgets.model.WidgetType
 import org.matrix.android.sdk.api.util.toOptional
 import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
-
 import timber.log.Timber
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -208,6 +208,14 @@ class TimelineViewModel @AssistedInject constructor(
 
     companion object :
         MavericksViewModelFactory<TimelineViewModel, RoomDetailViewState> by hiltMavericksViewModelFactory() {
+
+        private val CLUSTER_RPC_URI = Uri.parse("https://api.testnet.solana.com")
+        private const val CLUSTER_NAME = ProtocolContract.CLUSTER_TESTNET
+        private val IDENTITY = MobileWalletAdapterUseCase.DappIdentity(
+            uri = Uri.parse("https://solanamobile.com"),
+            iconRelativeUri = Uri.parse("favicon.ico"),
+            name = "FakeDApp"
+        )
         const val PAGINATION_COUNT = 50
 
         // The larger the number the faster the results, COUNT=200 for 500 thread messages its x4 faster than COUNT=50
@@ -326,18 +334,16 @@ class TimelineViewModel @AssistedInject constructor(
         }
     }
 
-    fun startInitiateTrade(offer: GetTradeByPkQuery.Data) {
+    fun startInitiateTrade(offer: GetTradeByPkQuery.Data, action: () -> Unit) {
         viewModelScope.launch {
             //Get a rate from the token_rates table.
             val listAddress = mutableListOf<String>()
             listAddress.add(offer.trades_by_pk?.sending_address.toString())
-            val data = tradeRepository.getRateByAddress(listAddress)
-
-//            Calculate the fee
-            val dataTokenRate = data?.token_rates?.map {
+            val rate = tradeRepository.getRateByAddress(listAddress)
+            //Calculate the fee
+            val dataTokenRate = rate?.token_rates?.map {
                 TokenRate(it.token_address, it.rate.toString().toDoubleOrNull() ?: 0.0)
             }
-
             val fee = dataTokenRate?.let {
                 calculateFee(
                     tokenRates = it,
@@ -347,14 +353,17 @@ class TimelineViewModel @AssistedInject constructor(
                     takerAmount = offer.trades_by_pk?.recipient_token_amount?.toDouble() ?: 0.0
                 )
             }
-
-//               Check enough SOL fee to execute the transaction
+            //Check enough SOL fee to execute the transaction
             val check = checkIsEnoughFee(
                 fee = fee?.second?.toDouble() ?: 0.0,
                 sentAmount = offer.trades_by_pk?.sending_token_amount?.toDouble() ?: 0.0,
                 sentTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
                 feeTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
             )
+
+            if (check) {
+                action.invoke()
+            }
 
 //            val transaction = Transaction()
 //            transaction.addInstruction(
@@ -1868,5 +1877,51 @@ class TimelineViewModel @AssistedInject constructor(
         }
 
     }
+
+    fun signAndSendTransactions(
+        intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
+        numTransactions: Int
+    ) = viewModelScope.launch {
+        val latestBlockhash = viewModelScope.async(Dispatchers.IO) {
+            GetLatestBlockhashUseCase(CLUSTER_RPC_URI)
+        }
+
+        try {
+            doLocalAssociateAndExecute(intentLauncher, _uiState.value.walletUriBase) { client ->
+                doReauthorize(client, IDENTITY, sessionPref.authToken).also {
+                    Log.d(TAG, "Reauthorized: $it")
+                }
+                val (blockhash, slot) = latestBlockhash.await()
+                val transactions = Array(numTransactions) {
+                    transactionUseCase.create(
+                        Base58DecodeUseCase.invoke(sessionPref.address),
+                        blockhash
+                    )
+                }
+                client.signAndSendTransactions(transactions, slot).also {
+                    Log.d(TAG, "Transaction signature(s): $it")
+                }
+            }.also { showMessage(R.string.msg_request_succeeded) }
+        } catch (e: MobileWalletAdapterUseCase.LocalAssociationFailedException) {
+            Log.e(TAG, "Error associating", e)
+            showMessage(R.string.msg_association_failed)
+            return@launch
+        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
+            Log.e(TAG, "Failed invoking reauthorize + sign_and_send_transactions", e)
+            showMessage(R.string.msg_request_failed)
+            return@launch
+        } catch (e: GetLatestBlockhashUseCase.GetLatestBlockhashFailedException) {
+            Log.e(TAG, "Failed retrieving latest blockhash", e)
+            showMessage(R.string.msg_request_failed)
+            return@launch
+        }
+    }
+
+    private val transactionUseCase
+        get() = when (_uiState.value.txnVersion) {
+            MemoTransactionVersion.Legacy -> MemoTransactionLegacyUseCase
+            MemoTransactionVersion.V0 -> MemoTransactionV0UseCase
+        }
+
 
 }

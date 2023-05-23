@@ -19,6 +19,8 @@ package com.messaging.scrtm.features.home.room.detail.composer
 import android.content.Context
 import android.media.AudioAttributes
 import android.media.MediaPlayer
+import android.os.Handler
+import android.os.Looper
 import androidx.core.content.FileProvider
 import com.messaging.scrtm.core.resources.BuildMeta
 import com.messaging.scrtm.features.home.room.detail.timeline.helper.AudioMessagePlaybackTracker
@@ -28,6 +30,7 @@ import com.messaging.scrtm.features.voice.VoiceRecorderProvider
 import com.messaging.lib.core.utils.timer.CountUpTimer
 import com.messaging.lib.multipicker.entity.MultiPickerAudioType
 import com.messaging.lib.multipicker.utils.toMultiPickerAudioType
+import org.checkerframework.org.objectweb.asm.Handle
 import org.matrix.android.sdk.api.extensions.orFalse
 import org.matrix.android.sdk.api.extensions.tryOrNull
 import org.matrix.android.sdk.api.session.content.ContentAttachmentData
@@ -54,6 +57,7 @@ class AudioMessageHelper @Inject constructor(
 
     private var amplitudeTicker: CountUpTimer? = null
     private var playbackTicker: CountUpTimer? = null
+    private val handle = Handler(Looper.getMainLooper())
 
     fun initializeRecorder(roomId: String, attachmentData: ContentAttachmentData) {
         voiceRecorder.initializeRecord(roomId, attachmentData)
@@ -230,7 +234,11 @@ class AudioMessageHelper @Inject constructor(
     private fun startPlaybackTicker(id: String) {
         playbackTicker?.stop()
         playbackTicker = CountUpTimer().apply {
-            tickListener = CountUpTimer.TickListener { onPlaybackTick(id) }
+            tickListener = CountUpTimer.TickListener {
+                handle.post{
+                    onPlaybackTick(id)
+                }
+            }
             resume()
         }
         onPlaybackTick(id)

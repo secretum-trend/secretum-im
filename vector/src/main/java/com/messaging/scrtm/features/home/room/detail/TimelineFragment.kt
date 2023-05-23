@@ -544,7 +544,7 @@ class TimelineFragment :
             }
             TradeEventType.CONFIRM -> {
                 showAlert(getString(R.string.confirm_confirm_offer)) {
-                    event.offer?.let { offer ->
+                    event.offer?.let {
 //                        timelineViewModel.exchangeTrade(offer, "")
                     }
                 }

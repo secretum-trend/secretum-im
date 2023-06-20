@@ -26,6 +26,7 @@ import androidx.lifecycle.asFlow
 import androidx.lifecycle.liveData
 import com.airbnb.mvrx.*
 import com.auth.GetTradeByPkQuery
+import com.auth.type.InitializePayload
 import com.google.gson.Gson
 import com.messaging.lib.core.utils.flow.chunk
 import com.messaging.scrtm.R
@@ -78,9 +79,14 @@ import com.messaging.scrtm.features.session.coroutineScope
 import com.messaging.scrtm.features.settings.VectorDataStore
 import com.messaging.scrtm.features.settings.VectorPreferences
 import com.messaging.scrtm.features.voicebroadcast.VoiceBroadcastHelper
+import com.portto.solana.web3.PublicKey
+import com.portto.solana.web3.SerializeConfig
 import com.portto.solana.web3.Transaction
 import com.portto.solana.web3.programs.MemoProgram
+import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
+import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
+import com.solana.mobilewalletadapter.clientlib.successPayload
 import com.solana.mobilewalletadapter.common.ProtocolContract
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -90,6 +96,7 @@ import kotlinx.coroutines.async
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import org.bitcoinj.core.Base58
 import org.matrix.android.sdk.api.MatrixPatterns
 import org.matrix.android.sdk.api.extensions.orFalse
 import org.matrix.android.sdk.api.extensions.tryOrNull
@@ -164,11 +171,10 @@ class TimelineViewModel @AssistedInject constructor(
     private val loginRepository: LoginRepository,
     private val solanaRepository: SolanaRepository,
 
-
     ) : VectorViewModel<RoomDetailViewState, RoomDetailAction, RoomDetailViewEvents>(initialState),
     Timeline.Listener, ChatEffectManager.Delegate, CallProtocolsChecker.Listener,
     LocationSharingServiceConnection.Callback {
-
+    val mobileWalletAdapter = MobileWalletAdapter()
     private val room = session.getRoom(initialState.roomId)
     private val eventId = initialState.eventId
     private val invisibleEventsSource =
@@ -334,58 +340,50 @@ class TimelineViewModel @AssistedInject constructor(
         }
     }
 
-    fun startInitiateTrade(offer: GetTradeByPkQuery.Data, action: () -> Unit) {
+
+
+
+    val solanaUri = Uri.parse("https://solana.com")
+    val iconUri = Uri.parse("favicon.ico")
+    val identityName = "Solana"
+
+    fun startInitiateTrade(sender : ActivityResultSender,offer: GetTradeByPkQuery.Data, action: (String) -> Unit) {
         viewModelScope.launch {
-            //Get a rate from the token_rates table.
-            val listAddress = mutableListOf<String>()
-            listAddress.add(offer.trades_by_pk?.sending_address.toString())
-            val rate = tradeRepository.getRateByAddress(listAddress)
-            //Calculate the fee
-            val dataTokenRate = rate?.token_rates?.map {
-                TokenRate(it.token_address, it.rate.toString().toDoubleOrNull() ?: 0.0)
-            }
-            val fee = dataTokenRate?.let {
-                calculateFee(
-                    tokenRates = it,
-                    sendingTokenAddress = offer.trades_by_pk?.sending_token_address.toString(),
-                    initializerAmount = offer.trades_by_pk?.sending_token_amount?.toDouble() ?: 0.0,
-                    recipientTokenAddress = offer.trades_by_pk?.recipient_token_address.toString(),
-                    takerAmount = offer.trades_by_pk?.recipient_token_amount?.toDouble() ?: 0.0
-                )
-            }
-            //Check enough SOL fee to execute the transaction
-            val check = checkIsEnoughFee(
-                fee = fee?.second?.toDouble() ?: 0.0,
-                sentAmount = offer.trades_by_pk?.sending_token_amount?.toDouble() ?: 0.0,
-                sentTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
-                feeTokenAccount = offer.trades_by_pk?.sending_token_address.toString(),
+            val initPayload = InitializePayload(
+                recipient_token_address = offer.trades_by_pk?.recipient_token_address.toString(),
+                sending_token_address = offer.trades_by_pk?.sending_token_address.toString(),
+                ui_taker_amount = offer.trades_by_pk?.recipient_token_amount?.toInt() ?: 0,
+                ui_initializer_amount = offer.trades_by_pk?.sending_token_amount?.toInt() ?: 0
             )
 
-            if (check) {
-                action.invoke()
+            val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
+
+            val tx = Transaction()
+            tx.add(MemoProgram.writeUtf8(PublicKey(sessionPref.address), buildInitTrade?.buildInitializeTransaction?.transaction_base_64.toString()))
+//            tx.setRecentBlockHash(blockHash!!)
+//            tx.feePayer = PublicKey(sessionPref.address)
+
+            val bytes = tx.serialize(SerializeConfig(requireAllSignatures = false))
+
+
+            val result = mobileWalletAdapter.transact(sender) {
+                reauthorize(solanaUri, iconUri, identityName, sessionPref.authToken)
+                signAndSendTransactions(arrayOf(bytes))
             }
 
-//            val transaction = Transaction()
-//            transaction.addInstruction(
-//                SystemProgram.transfer(
-//                    send
-//
-//                    ,
-//                    toPublickKey,
-//                    lamports.toLong()
-//                )
-//            )
-//            transaction.setRecentBlockHash("Eit7RCyhUixAe2hGBS8oqnw59QK3kgMMjfLME5bm9wRn")
-//            transaction.sign(signer)
-//            val serializedTransaction = transaction.serialize()
-//
-//            val clientApi = RpcClient(Cluster.TESTNET).api.sendTransaction()
+            result.successPayload?.signatures?.firstOrNull()?.let { sig ->
+                val readableSig = Base58.encode(sig)
 
-//            val tx = Transaction()
-//            tx.add(MemoProgram.writeUtf8(conn.publicKey, memoText))
-//            tx.setRecentBlockHash(blockHash!!)
-//            tx.feePayer = conn.publicKey
+//                _state.value.copy(
+//                    isLoading = false,
+//                    memoTx = readableSig
+//                ).updateViewState()
 
+                //Clear out the recent transaction
+//                delay(5000)
+//                _state.value.copy(memoTx = "").updateViewState()
+                action.invoke(readableSig)
+            }
 
         }
     }

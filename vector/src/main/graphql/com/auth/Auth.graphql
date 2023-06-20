@@ -65,6 +65,12 @@ mutation ExchangeTrade($tradeId: Int!, $signature: String!) {
     }
 }
 
+mutation buildInitializeTransaction($payload: InitializePayload!) {
+    buildInitializeTransaction(payload: $payload) {
+        transaction_base_64
+    }
+}
+
 query GetTradeByPk($tradeId: Int!) {
     trades_by_pk(id: $tradeId) {
         id
@@ -106,4 +112,6 @@ query GetWalletByUsername($username: String!) {
         __typename
     }
 }
+
+
 

@@ -347,11 +347,11 @@ object MobileWalletAdapterUseCase {
                             associationIntent, this
                         )
                     )
-                } catch (e: ActivityNotFoundException) {
+                } catch (e: Throwable) {
                     Log.e(TAG, "No Mobile Wallet Adapter-compatible wallet is available", e)
-                    throw NoWalletAvailableException(
-                        "No Mobile Wallet Adapter Activity available", e
-                    )
+//                    throw NoWalletAvailableException(
+//                        "No Mobile Wallet Adapter Activity available", e
+//                    )
                 }
 
                 withContext(Dispatchers.IO) {

@@ -180,6 +180,17 @@ type WalletsRes {
     address: String!
 }
 
+input InitializePayload {
+    recipient_token_address: String!
+    sending_token_address: String!
+    ui_taker_amount: Int!
+    ui_initializer_amount: Int!
+}
+
+type InitializeResp {
+    transaction_base_64: String!
+}
+
 """
 Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
 """
@@ -301,6 +312,8 @@ type mutation_root {
     exchangeTrade(payload: ExchangeTradePayload!): ExchangeTradeOutput
 
     initializeTrade(payload: InitializeTradePayload!): InitializeTradeOutput
+
+    buildInitializeTransaction(payload: InitializePayload!): InitializeResp
 }
 
 type Wallet {

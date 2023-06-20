@@ -126,7 +126,10 @@ dependencies {
     implementation project(":library:attachment-viewer")
     implementation project(":library:multipicker")
     implementation project(":lib-solana:clientlib")
+    implementation project(":lib-solana:clientlib-ktx")
     implementation project(":lib-solana:solanaj-main")
+
+
 
     implementation libs.jetbrains.coroutinesCore
     implementation libs.jetbrains.coroutinesAndroid

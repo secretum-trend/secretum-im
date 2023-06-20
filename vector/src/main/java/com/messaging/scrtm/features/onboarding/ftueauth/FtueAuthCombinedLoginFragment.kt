@@ -16,6 +16,8 @@
 
 package com.messaging.scrtm.features.onboarding.ftueauth
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -25,17 +27,16 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
-import dagger.hilt.android.AndroidEntryPoint
 import com.messaging.scrtm.R
-import com.messaging.scrtm.core.extensions.*
 import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.databinding.FragmentFtueCombinedLoginBinding
 import com.messaging.scrtm.features.VectorFeatures
-import com.messaging.scrtm.features.login.*
+import com.messaging.scrtm.features.login.LoginMode
 import com.messaging.scrtm.features.onboarding.OnboardingAction
 import com.messaging.scrtm.features.onboarding.OnboardingViewState
 import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -45,10 +46,13 @@ class FtueAuthCombinedLoginFragment :
 
     @Inject
     lateinit var loginFieldsValidation: LoginFieldsValidation
+
     @Inject
     lateinit var loginErrorParser: LoginErrorParser
+
     @Inject
     lateinit var vectorFeatures: VectorFeatures
+
     @Inject
     lateinit var sessionPref: SessionPref
 
@@ -101,7 +105,7 @@ class FtueAuthCombinedLoginFragment :
         viewModel.authenticate.observe(viewLifecycleOwner) {
             when (it.status) {
                 Resource.Status.SUCCESS -> {
-                    if (it.data != null){
+                    if (it.data != null) {
                         cleanupUi()
                         loginFieldsValidation.validate(
                             it.data.username.toString(),
@@ -109,7 +113,8 @@ class FtueAuthCombinedLoginFragment :
                         ).onUsernameOrIdError { }
                             .onPasswordError { }
                             .onValid { usernameOrId, password ->
-                                val initialDeviceName = getString(R.string.login_default_session_public_name)
+                                val initialDeviceName =
+                                    getString(R.string.login_default_session_public_name)
                                 viewModel.handle(
                                     OnboardingAction.AuthenticateAction.Login(
                                         usernameOrId,
@@ -120,8 +125,10 @@ class FtueAuthCombinedLoginFragment :
                             }
                     }
                 }
+
                 Resource.Status.ERROR -> {
                 }
+
                 Resource.Status.LOADING -> {
                     //loading
                 }
@@ -141,6 +148,7 @@ class FtueAuthCombinedLoginFragment :
                         viewModel.signNonce(mwaLauncher, nonce)
                     }
                 }
+
                 Resource.Status.ERROR -> {
 
                 }
@@ -154,9 +162,20 @@ class FtueAuthCombinedLoginFragment :
     }
 
     private fun setupSubmitButton() {
-
         views.cvLogin.debouncedClicks {
             viewModel.authorize(mwaLauncher)
+        }
+
+        views.tvDownload.debouncedClicks {
+            try {
+                val packageName =
+                    "org.phantom.wallet" //  packageName phantom wallet
+                val intent =
+                    Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
+                intent.setPackage("com.android.vending")
+                startActivity(intent)
+            } catch (_: Throwable) {
+            }
         }
     }
 
@@ -182,10 +201,12 @@ class FtueAuthCombinedLoginFragment :
                 showUsernamePassword()
                 renderSsoProviders()
             }
+
             is LoginMode.Sso -> {
                 hideUsernamePassword()
                 renderSsoProviders()
             }
+
             else -> {
                 showUsernamePassword()
                 hideSsoProviders()
@@ -206,6 +227,7 @@ class FtueAuthCombinedLoginFragment :
 
     private fun showUsernamePassword() {
     }
+
     private fun setupAutoFill() {
 
     }

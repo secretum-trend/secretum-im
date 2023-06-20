@@ -139,6 +139,7 @@ import com.messaging.scrtm.features.widgets.permissions.RoomWidgetPermissionBott
 import com.messaging.scrtm.trade.creatingoffer.CreateOfferActivity
 import com.messaging.scrtm.trade.eventBus.TradeEventBus
 import com.messaging.scrtm.trade.eventBus.TradeEventType
+import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
@@ -286,6 +287,8 @@ class TimelineFragment :
     private val currentCallsViewPresenter = CurrentCallsViewPresenter()
 
     private val lazyLoadedViews = RoomDetailLazyLoadedViews()
+    private var sender : ActivityResultSender? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -309,6 +312,9 @@ class TimelineFragment :
                 replace(R.id.voiceMessageRecorderContainer, VoiceRecorderFragment())
             }
         }
+
+        sender = ActivityResultSender(requireActivity())
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -536,9 +542,9 @@ class TimelineFragment :
 //                        }
 //                    }
                     event.offer?.let { offer ->
-                        timelineViewModel.startInitiateTrade(offer){
+                        timelineViewModel.startInitiateTrade(sender!!,offer, action = {
                             timelineViewModel.signAndSendTransactions(mwaLauncher,1)
-                        }
+                        })
                     }
                 }
             }

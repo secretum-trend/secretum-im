@@ -48,6 +48,8 @@ class LocalAdapterOperations(
         }
     }
 
+    @Deprecated("This method is deprecated. Please use the updated method.")
+    @Suppress("deprecation")
     override suspend fun signMessages(messages: Array<ByteArray>, addresses: Array<ByteArray>): MobileWalletAdapterClient.SignPayloadsResult {
         return withContext(ioDispatcher) {
             @Suppress("BlockingMethodInNonBlockingContext")

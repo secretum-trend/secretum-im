@@ -2,6 +2,7 @@ package com.messaging.scrtm.data.trade.repository
 
 import com.auth.*
 import com.auth.type.CreateOfferPayload
+import com.auth.type.InitializePayload
 import com.messaging.scrtm.data.trade.domain.ApolloTradeClient
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -26,9 +27,14 @@ interface TradeRepository {
     suspend fun initializeTrade(id: Int): InitializeTradeMutation.Data?
 
     suspend fun exchangeTrade(id: Int, signature: String): ExchangeTradeMutation.Data?
+
     suspend fun getRateByAddress(
         addresses: List<String>
     ): GetRateByAddressesQuery.Data?
+
+    suspend fun buildInitializeTransaction(
+        initializePayload: InitializePayload
+    ): BuildInitializeTransactionMutation.Data?
 
 }
 
@@ -45,7 +51,6 @@ class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: Apol
     override suspend fun getNonceByUserId(userId: Int): GetNonceByUserIdQuery.Data? {
         return apolloTradeClient.getNonceByUserId(userId)
     }
-
 
     override fun tradeByPK(id: Int): GetTradeByPkQuery.Data? {
         val deferred = CoroutineScope(Dispatchers.IO).async {
@@ -78,4 +83,6 @@ class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: Apol
     ): GetRateByAddressesQuery.Data? {
         return apolloTradeClient.getRateByAddress(addresses)
     }
+
+    override suspend fun buildInitializeTransaction(initializePayload: InitializePayload): BuildInitializeTransactionMutation.Data? = apolloTradeClient.buildInitializeTransaction(initializePayload)
 }

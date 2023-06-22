@@ -35,7 +35,7 @@ object MobileWalletAdapterUseCase {
     private const val LOCAL_ASSOCIATION_SEND_INTENT_TIMEOUT_MS = 20000L
     private const val LOCAL_ASSOCIATION_START_TIMEOUT_MS =
         60000L // LocalAssociationScenario.start() has a shorter timeout; this is just a backup safety measure
-    private const val LOCAL_ASSOCIATION_CLOSE_TIMEOUT_MS = 2000L
+    private const val LOCAL_ASSOCIATION_CLOSE_TIMEOUT_MS = 10000L
     private const val LOCAL_ASSOCIATION_CANCEL_AFTER_WALLET_CLOSED_TIMEOUT_MS = 5000L
 
     private val mobileWalletAdapterClientSem = Semaphore(1) // allow only a single MWA connection at a time

@@ -17,6 +17,7 @@
 package com.messaging.scrtm.features.home.room.detail.timeline.item
 
 import android.content.res.ColorStateList
+import android.util.Log
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat.getColor
@@ -114,6 +115,7 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
                     )
                 )
             }
+
             tvConfirmInitialized.setOnClickListener {
                 EventBus.getDefault().post(
                     TradeEventBus(
@@ -136,6 +138,7 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             layoutAccepted.hide()
             layoutInitialized.hide()
             layoutSuccessful.hide()
+            Log.d("Trade Status", TradeStatus.valueOf(tradeByPkOutput?.trades_by_pk?.status.toString()).name)
             when (TradeStatus.valueOf(tradeByPkOutput?.trades_by_pk?.status.toString())) {
                 TradeStatus.WAIT_FOR_APPROVAL -> {
                     layoutWaitApproval.show()

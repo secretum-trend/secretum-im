@@ -18,13 +18,20 @@ package com.messaging.scrtm.features.home.room.detail
 
 import android.content.ContentValues.TAG
 import android.net.Uri
+import java.util.Base64
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.IdRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.liveData
-import com.airbnb.mvrx.*
+import com.airbnb.mvrx.Async
+import com.airbnb.mvrx.Fail
+import com.airbnb.mvrx.Loading
+import com.airbnb.mvrx.MavericksViewModelFactory
+import com.airbnb.mvrx.Success
+import com.airbnb.mvrx.Uninitialized
+import com.airbnb.mvrx.withState
 import com.auth.GetTradeByPkQuery
 import com.auth.type.InitializePayload
 import com.google.gson.Gson
@@ -70,7 +77,14 @@ import com.messaging.scrtm.features.location.live.StopLiveLocationShareUseCase
 import com.messaging.scrtm.features.location.live.tracking.LocationSharingServiceConnection
 import com.messaging.scrtm.features.notifications.NotificationDrawerManager
 import com.messaging.scrtm.features.onboarding.OnboardingViewModel
-import com.messaging.scrtm.features.onboarding.usecase.*
+import com.messaging.scrtm.features.onboarding.usecase.Base58DecodeUseCase
+import com.messaging.scrtm.features.onboarding.usecase.Base58EncodeUseCase
+import com.messaging.scrtm.features.onboarding.usecase.GetLatestBlockhashUseCase
+import com.messaging.scrtm.features.onboarding.usecase.MemoTransactionLegacyUseCase
+import com.messaging.scrtm.features.onboarding.usecase.MemoTransactionV0UseCase
+import com.messaging.scrtm.features.onboarding.usecase.MemoTransactionVersion
+import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
+import com.messaging.scrtm.features.onboarding.usecase.OffChainMessageSigningUseCase
 import com.messaging.scrtm.features.powerlevel.PowerLevelsFlowFactory
 import com.messaging.scrtm.features.raw.wellknown.CryptoConfig
 import com.messaging.scrtm.features.raw.wellknown.getOutboundSessionKeySharingStrategyOrDefault
@@ -79,24 +93,29 @@ import com.messaging.scrtm.features.session.coroutineScope
 import com.messaging.scrtm.features.settings.VectorDataStore
 import com.messaging.scrtm.features.settings.VectorPreferences
 import com.messaging.scrtm.features.voicebroadcast.VoiceBroadcastHelper
-import com.portto.solana.web3.PublicKey
-import com.portto.solana.web3.SerializeConfig
-import com.portto.solana.web3.Transaction
-import com.portto.solana.web3.programs.MemoProgram
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
-import com.solana.mobilewalletadapter.clientlib.successPayload
 import com.solana.mobilewalletadapter.common.ProtocolContract
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filter
+import kotlinx.coroutines.flow.filterIsInstance
+import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import org.bitcoinj.core.Base58
 import org.matrix.android.sdk.api.MatrixPatterns
 import org.matrix.android.sdk.api.extensions.orFalse
 import org.matrix.android.sdk.api.extensions.tryOrNull
@@ -104,8 +123,15 @@ import org.matrix.android.sdk.api.query.QueryStringValue
 import org.matrix.android.sdk.api.raw.RawService
 import org.matrix.android.sdk.api.session.Session
 import org.matrix.android.sdk.api.session.crypto.MXCryptoError
-import org.matrix.android.sdk.api.session.events.model.*
+import org.matrix.android.sdk.api.session.events.model.Event
+import org.matrix.android.sdk.api.session.events.model.EventType
+import org.matrix.android.sdk.api.session.events.model.LocalEcho
+import org.matrix.android.sdk.api.session.events.model.RelationType
 import org.matrix.android.sdk.api.session.events.model.content.WithHeldCode
+import org.matrix.android.sdk.api.session.events.model.isAttachmentMessage
+import org.matrix.android.sdk.api.session.events.model.isTextMessage
+import org.matrix.android.sdk.api.session.events.model.toContent
+import org.matrix.android.sdk.api.session.events.model.toModel
 import org.matrix.android.sdk.api.session.file.FileService
 import org.matrix.android.sdk.api.session.getRoom
 import org.matrix.android.sdk.api.session.room.Room
@@ -137,6 +163,7 @@ import org.matrix.android.sdk.api.util.toOptional
 import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
 import timber.log.Timber
+import java.math.BigInteger
 import java.util.concurrent.atomic.AtomicBoolean
 
 
@@ -174,7 +201,9 @@ class TimelineViewModel @AssistedInject constructor(
     ) : VectorViewModel<RoomDetailViewState, RoomDetailAction, RoomDetailViewEvents>(initialState),
     Timeline.Listener, ChatEffectManager.Delegate, CallProtocolsChecker.Listener,
     LocationSharingServiceConnection.Callback {
-    val mobileWalletAdapter = MobileWalletAdapter()
+
+    private val walletAdapter = MobileWalletAdapter()
+
     private val room = session.getRoom(initialState.roomId)
     private val eventId = initialState.eventId
     private val invisibleEventsSource =
@@ -220,7 +249,7 @@ class TimelineViewModel @AssistedInject constructor(
         private val IDENTITY = MobileWalletAdapterUseCase.DappIdentity(
             uri = Uri.parse("https://solanamobile.com"),
             iconRelativeUri = Uri.parse("favicon.ico"),
-            name = "FakeDApp"
+            name = "Secretum"
         )
         const val PAGINATION_COUNT = 50
 
@@ -340,51 +369,99 @@ class TimelineViewModel @AssistedInject constructor(
         }
     }
 
+    fun base64ToArrayBuffer(base64: String): ByteArray {
+        val binaryString = android.util.Base64.decode(base64, android.util.Base64.DEFAULT)
+        val bytes = ByteArray(binaryString.size)
+        for (i in binaryString.indices) {
+            bytes[i] = binaryString[i].toByte()
+        }
+        return bytes
+    }
+
+    suspend fun getTransactionBase64(offer: GetTradeByPkQuery.Data): ByteArray {
+        val initPayload = InitializePayload(
+            recipient_token_address = offer.trades_by_pk?.recipient_token_address.toString(),
+            sending_token_address = offer.trades_by_pk?.sending_token_address.toString(),
+            ui_taker_amount = offer.trades_by_pk?.recipient_token_amount?.toInt() ?: 0,
+            ui_initializer_amount = offer.trades_by_pk?.sending_token_amount?.toInt() ?: 0
+        )
+        //api get transaction_base_64
+        val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
+        //convert transaction_base_64 toByteArray
+        val bytesArray =
+            Base58DecodeUseCase.invoke(base64ToBase58(buildInitTrade?.buildInitializeTransaction?.transaction_base_64!!))
+//        val bytesArray = base64ToArrayBuffer(buildInitTrade?.buildInitializeTransaction?.transaction_base_64!!)
+        return bytesArray
+    }
 
 
+    fun base64ToBase58(base64String: String): String {
+        val BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
+        val binaryData = Base64.getDecoder().decode(base64String)
+        var number = 0.toBigInteger()
+        for (byte in binaryData) {
+            number = number.shl(8).or(byte.toInt().toBigInteger())
+        }
+        var base58String = ""
+        while (number > BigInteger.ZERO) {
+            val (quotient, remainder) = number.divideAndRemainder(BigInteger.valueOf(58))
+            base58String = BASE58_ALPHABET[remainder.toInt()] + base58String
+            number = quotient
+        }
+        for (byte in binaryData) {
+            if (byte != 0.toByte()) {
+                break
+            }
+            base58String = BASE58_ALPHABET[0] + base58String
+        }
+        return base58String
+    }
 
-    val solanaUri = Uri.parse("https://solana.com")
-    val iconUri = Uri.parse("favicon.ico")
-    val identityName = "Solana"
-
-    fun startInitiateTrade(sender : ActivityResultSender,offer: GetTradeByPkQuery.Data, action: (String) -> Unit) {
+    fun startInitiateTrade(
+        sender: ActivityResultSender,
+        offer: GetTradeByPkQuery.Data,
+        action: (String) -> Unit
+    ) {
         viewModelScope.launch {
+//            val blockHash =  SolanaRpcUseCase().getLatestBlockHash()
             val initPayload = InitializePayload(
                 recipient_token_address = offer.trades_by_pk?.recipient_token_address.toString(),
                 sending_token_address = offer.trades_by_pk?.sending_token_address.toString(),
                 ui_taker_amount = offer.trades_by_pk?.recipient_token_amount?.toInt() ?: 0,
                 ui_initializer_amount = offer.trades_by_pk?.sending_token_amount?.toInt() ?: 0
             )
-
+            //api get transaction_base_64
             val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
+            //convert transaction_base_64 toByteArray
+            val bytesArray = base64ToArrayBuffer(buildInitTrade?.buildInitializeTransaction?.transaction_base_64!!)
+//            val bytesArray =
+//                Base58DecodeUseCase.invoke(base64ToBase58(buildInitTrade?.buildInitializeTransaction?.transaction_base_64!!))
 
-            val tx = Transaction()
-            tx.add(MemoProgram.writeUtf8(PublicKey(sessionPref.address), buildInitTrade?.buildInitializeTransaction?.transaction_base_64.toString()))
-//            tx.setRecentBlockHash(blockHash!!)
-//            tx.feePayer = PublicKey(sessionPref.address)
+//            val solanaUri = Uri.parse("https://solana.com")
+//            val iconUri = Uri.parse("favicon.ico")
+//            val identityName = "Solana"
 
-            val bytes = tx.serialize(SerializeConfig(requireAllSignatures = false))
+//           val tx = Transaction.from(bytesArray2.first())
+//           tx.setRecentBlockHash(blockHash!!)
+//           tx.feePayer = PublicKey(Base58DecodeUseCase.invoke(sessionPref.address))
+//           val bytes = tx.serialize()
+            val bytesArray2 =  MobileWalletAdapterUseCase.Client(reauthorize).signTransactions(arrayOf(bytesArray))
 
-
-            val result = mobileWalletAdapter.transact(sender) {
-                reauthorize(solanaUri, iconUri, identityName, sessionPref.authToken)
-                signAndSendTransactions(arrayOf(bytes))
+            Log.d("abasdfasdfc", "bytesArray2== " + bytesArray2.toString())
+            Log.d("abasdfasdfc", "sender== " + sender.toString())
+            val result = walletAdapter.transact(sender) {
+                reauthorize(IDENTITY.uri!!, IDENTITY.iconRelativeUri!!, IDENTITY.name, sessionPref.authToken)
+                signAndSendTransactions(arrayOf(bytesArray))
             }
 
-            result.successPayload?.signatures?.firstOrNull()?.let { sig ->
-                val readableSig = Base58.encode(sig)
-
-//                _state.value.copy(
-//                    isLoading = false,
-//                    memoTx = readableSig
-//                ).updateViewState()
-
-                //Clear out the recent transaction
-//                delay(5000)
-//                _state.value.copy(memoTx = "").updateViewState()
-                action.invoke(readableSig)
-            }
-
+//            result.successPayload?.signatures?.firstOrNull()?.let { sig ->
+//                val readableSig = Base58.encode(sig)
+//                Log.d("abasdfasdfc", "readableSig== " +readableSig.toString())
+//                action.invoke(readableSig)
+////            }
+//            Log.d("abasdfasdfc", "result== " + result.successPayload.toString())
+//            Log.d("abasdfasdfc", "result== " + result.toString())
+            action.invoke("")
         }
     }
 
@@ -721,6 +798,7 @@ class TimelineViewModel @AssistedInject constructor(
                     )
                 )
             }
+
             is RoomDetailAction.DoNotShowPreviewUrlFor -> handleDoNotShowPreviewUrlFor(action)
             RoomDetailAction.RemoveAllFailedMessages -> handleRemoveAllFailedMessages()
             RoomDetailAction.ResendAll -> handleResendAll()
@@ -735,6 +813,7 @@ class TimelineViewModel @AssistedInject constructor(
                     )
                 )
             }
+
             is RoomDetailAction.EndPoll -> handleEndPoll(action.eventId)
             RoomDetailAction.StopLiveLocationSharing -> handleStopLiveLocationSharing()
             RoomDetailAction.OpenElementCallWidget -> handleOpenElementCallWidget()
@@ -769,6 +848,7 @@ class TimelineViewModel @AssistedInject constructor(
                         )
                     }
                 }
+
                 else -> Unit
             }
         }
@@ -871,20 +951,25 @@ class TimelineViewModel @AssistedInject constructor(
                         { _viewEvents.post(RoomDetailViewEvents.ActionFailure(action, it)) },
                     )
                 }
+
                 VoiceBroadcastAction.Recording.Pause -> voiceBroadcastHelper.pauseVoiceBroadcast(
                     room.roomId
                 )
+
                 VoiceBroadcastAction.Recording.Resume -> {
                     voiceBroadcastHelper.pausePlayback()
                     voiceBroadcastHelper.resumeVoiceBroadcast(room.roomId)
                 }
+
                 VoiceBroadcastAction.Recording.Stop -> _viewEvents.post(RoomDetailViewEvents.DisplayPromptToStopVoiceBroadcast)
                 VoiceBroadcastAction.Recording.StopConfirmed -> voiceBroadcastHelper.stopVoiceBroadcast(
                     room.roomId
                 )
+
                 is VoiceBroadcastAction.Listening.PlayOrResume -> voiceBroadcastHelper.playOrResumePlayback(
                     action.voiceBroadcast
                 )
+
                 VoiceBroadcastAction.Listening.Pause -> voiceBroadcastHelper.pausePlayback()
                 VoiceBroadcastAction.Listening.Stop -> voiceBroadcastHelper.stopPlayback()
                 is VoiceBroadcastAction.Listening.SeekTo -> voiceBroadcastHelper.seekTo(
@@ -951,6 +1036,7 @@ class TimelineViewModel @AssistedInject constructor(
                                 Success(
                                     activeRoomWidgets.invoke().filter { it.widgetId != widgetId })
                             }
+
                             else -> activeRoomWidgets
                         }
                     )
@@ -1088,9 +1174,11 @@ class TimelineViewModel @AssistedInject constructor(
                     R.id.menu_thread_timeline_view_in_room,
                     R.id.menu_thread_timeline_copy_link,
                     R.id.menu_thread_timeline_share -> true
+
                     else -> false
                 }
             }
+
             else -> {
                 when (itemId) {
                     R.id.timeline_setting -> true
@@ -1125,10 +1213,12 @@ class TimelineViewModel @AssistedInject constructor(
                     redactLiveLocationShareEventUseCase.execute(event.root, room, action.reason)
                 }
             }
+
             event.isVoiceBroadcast() -> {
                 room.sendService()
                     .redactEvent(event.root, action.reason, listOf(RelationType.REFERENCE))
             }
+
             else -> {
                 room.sendService().redactEvent(event.root, action.reason)
             }
@@ -1499,6 +1589,7 @@ class TimelineViewModel @AssistedInject constructor(
                 MXCryptoError.ErrorType.KEYS_WITHHELD -> {
                     WithHeldCode.fromCode(it.root.mCryptoErrorReason)
                 }
+
                 else -> null
             }
 
@@ -1589,9 +1680,11 @@ class TimelineViewModel @AssistedInject constructor(
                                     )
                                 )
                             )
+
                         LocalRoomCreationState.FAILURE -> {
                             _viewEvents.post(RoomDetailViewEvents.HideWaitingView)
                         }
+
                         LocalRoomCreationState.CREATED -> {
                             room.localRoomSummary()?.let {
                                 analyticsTracker.capture(CreatedRoom(isDM = it.roomSummary?.isDirect.orFalse()))
@@ -1625,6 +1718,7 @@ class TimelineViewModel @AssistedInject constructor(
                     previous is UnreadState.Unknown || previous is UnreadState.ReadMarkerNotLoaded -> false
                     previous is UnreadState.HasUnread && current is UnreadState.HasUnread &&
                             previous.readMarkerId == current.readMarkerId -> false
+
                     current is UnreadState.HasUnread || current is UnreadState.HasNoUnread -> true
                     else -> false
                 }
@@ -1876,9 +1970,9 @@ class TimelineViewModel @AssistedInject constructor(
 
     }
 
-    fun signAndSendTransactions(
+    fun signAndSendTransactions2(
         intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
-        numTransactions: Int
+        transactions: Array<ByteArray>
     ) = viewModelScope.launch {
         val latestBlockhash = viewModelScope.async(Dispatchers.IO) {
             GetLatestBlockhashUseCase(CLUSTER_RPC_URI)
@@ -1889,13 +1983,7 @@ class TimelineViewModel @AssistedInject constructor(
                 doReauthorize(client, IDENTITY, sessionPref.authToken).also {
                     Log.d(TAG, "Reauthorized: $it")
                 }
-                val (blockhash, slot) = latestBlockhash.await()
-                val transactions = Array(numTransactions) {
-                    transactionUseCase.create(
-                        Base58DecodeUseCase.invoke(sessionPref.address),
-                        blockhash
-                    )
-                }
+                val (_, slot) = latestBlockhash.await()
                 client.signAndSendTransactions(transactions, slot).also {
                     Log.d(TAG, "Transaction signature(s): $it")
                 }

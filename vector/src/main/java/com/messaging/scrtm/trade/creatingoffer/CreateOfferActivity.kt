@@ -287,11 +287,15 @@ class CreateOfferActivity : AppCompatActivity() {
     }
 
     private fun invalidData(createOfferPayloadModel: CreateOfferPayloadModel): Boolean {
-        if (createOfferPayloadModel.trade.sending_token_amount.isEmpty() || createOfferPayloadModel.trade.sending_token_amount.toInt() <= 0) {
+        if (createOfferPayloadModel.trade.sending_token_amount.isEmpty() || (createOfferPayloadModel.trade.sending_token_amount.toIntOrNull()
+                ?: 0) <= 0
+        ) {
             showToast(getString(R.string.invalid_token_amount))
             return false
         }
-        if (createOfferPayloadModel.trade.recipient_token_amount.isEmpty() || createOfferPayloadModel.trade.recipient_token_amount.toInt() <= 0) {
+        if (createOfferPayloadModel.trade.recipient_token_amount.isEmpty() || (createOfferPayloadModel.trade.recipient_token_amount.toIntOrNull()
+                ?: 0) <= 0
+        ) {
             showToast(getString(R.string.invalid_token_amount))
             return false
         }

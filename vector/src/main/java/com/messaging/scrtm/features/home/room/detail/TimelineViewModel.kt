@@ -18,7 +18,6 @@ package com.messaging.scrtm.features.home.room.detail
 
 import android.content.ContentValues.TAG
 import android.net.Uri
-import java.util.Base64
 import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.IdRes
@@ -93,9 +92,13 @@ import com.messaging.scrtm.features.session.coroutineScope
 import com.messaging.scrtm.features.settings.VectorDataStore
 import com.messaging.scrtm.features.settings.VectorPreferences
 import com.messaging.scrtm.features.voicebroadcast.VoiceBroadcastHelper
+import com.portto.solana.web3.PublicKey
+import com.portto.solana.web3.SerializeConfig
+import com.portto.solana.web3.Transaction
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
+import com.solana.mobilewalletadapter.clientlib.successPayload
 import com.solana.mobilewalletadapter.common.ProtocolContract
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
@@ -164,6 +167,8 @@ import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
 import timber.log.Timber
 import java.math.BigInteger
+import java.nio.charset.Charset
+import java.util.Base64
 import java.util.concurrent.atomic.AtomicBoolean
 
 
@@ -369,7 +374,7 @@ class TimelineViewModel @AssistedInject constructor(
         }
     }
 
-    fun base64ToArrayBuffer(base64: String): ByteArray {
+    private fun base64ToArrayBuffer(base64: String): ByteArray {
         val binaryString = android.util.Base64.decode(base64, android.util.Base64.DEFAULT)
         val bytes = ByteArray(binaryString.size)
         for (i in binaryString.indices) {
@@ -395,7 +400,7 @@ class TimelineViewModel @AssistedInject constructor(
     }
 
 
-    fun base64ToBase58(base64String: String): String {
+    private fun base64ToBase58(base64String: String): String {
         val BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
         val binaryData = Base64.getDecoder().decode(base64String)
         var number = 0.toBigInteger()
@@ -423,7 +428,6 @@ class TimelineViewModel @AssistedInject constructor(
         action: (String) -> Unit
     ) {
         viewModelScope.launch {
-//            val blockHash =  SolanaRpcUseCase().getLatestBlockHash()
             val initPayload = InitializePayload(
                 recipient_token_address = offer.trades_by_pk?.recipient_token_address.toString(),
                 sending_token_address = offer.trades_by_pk?.sending_token_address.toString(),
@@ -433,35 +437,40 @@ class TimelineViewModel @AssistedInject constructor(
             //api get transaction_base_64
             val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
             //convert transaction_base_64 toByteArray
-            val bytesArray = base64ToArrayBuffer(buildInitTrade?.buildInitializeTransaction?.transaction_base_64!!)
-//            val bytesArray =
-//                Base58DecodeUseCase.invoke(base64ToBase58(buildInitTrade?.buildInitializeTransaction?.transaction_base_64!!))
+            if (buildInitTrade?.buildInitializeTransaction?.transaction_base_64 == null){
+                action.invoke("Base64 -> null")
+                return@launch
+            }
+
+            val bytesArray = base64ToArrayBuffer(buildInitTrade.buildInitializeTransaction.transaction_base_64)
+            val bytesArray2 = buildInitTrade.buildInitializeTransaction.transaction_base_64.toByteArray()
+
+            Timber.tag("ABCABC").d("base 64== %s", buildInitTrade.buildInitializeTransaction.transaction_base_64)
+
+            Timber.tag("ABCABC").d("bytesArray == %s", bytesArray.joinToString())
+            Timber.tag("ABCABC").d("bytesArray2 == %s",bytesArray2.joinToString())
+
+            Timber.tag("ABCABC").d("address == %s", sessionPref.address)
+            Timber.tag("ABCABC").d("authToken == %s", sessionPref.authToken)
+            Timber.tag("ABCABC").d("accessToken == %s", sessionPref.accessToken)
 
 //            val solanaUri = Uri.parse("https://solana.com")
 //            val iconUri = Uri.parse("favicon.ico")
 //            val identityName = "Solana"
 
-//           val tx = Transaction.from(bytesArray2.first())
-//           tx.setRecentBlockHash(blockHash!!)
-//           tx.feePayer = PublicKey(Base58DecodeUseCase.invoke(sessionPref.address))
-//           val bytes = tx.serialize()
-            val bytesArray2 =  MobileWalletAdapterUseCase.Client(reauthorize).signTransactions(arrayOf(bytesArray))
+//            val blockHash = SolanaRpcUseCase().getLatestBlockHash()
+//            val tx = Transaction.from(bytesArray)
+//            tx.setRecentBlockHash(blockHash!!)
+//            tx.feePayer = PublicKey(Base58DecodeUseCase.invoke(sessionPref.address))
+//            val bytes = tx.serialize(SerializeConfig(requireAllSignatures = false))
 
-            Log.d("abasdfasdfc", "bytesArray2== " + bytesArray2.toString())
-            Log.d("abasdfasdfc", "sender== " + sender.toString())
             val result = walletAdapter.transact(sender) {
                 reauthorize(IDENTITY.uri!!, IDENTITY.iconRelativeUri!!, IDENTITY.name, sessionPref.authToken)
                 signAndSendTransactions(arrayOf(bytesArray))
             }
 
-//            result.successPayload?.signatures?.firstOrNull()?.let { sig ->
-//                val readableSig = Base58.encode(sig)
-//                Log.d("abasdfasdfc", "readableSig== " +readableSig.toString())
-//                action.invoke(readableSig)
-////            }
-//            Log.d("abasdfasdfc", "result== " + result.successPayload.toString())
-//            Log.d("abasdfasdfc", "result== " + result.toString())
-            action.invoke("")
+            Timber.tag("ABCABC").d("send ok -> signatures == "+ result.successPayload?.signatures?.joinToString())
+            action.invoke(result.toString())
         }
     }
 
@@ -1981,23 +1990,23 @@ class TimelineViewModel @AssistedInject constructor(
         try {
             doLocalAssociateAndExecute(intentLauncher, _uiState.value.walletUriBase) { client ->
                 doReauthorize(client, IDENTITY, sessionPref.authToken).also {
-                    Log.d(TAG, "Reauthorized: $it")
+                    Timber.tag(TAG).d("Reauthorized: %s", it)
                 }
                 val (_, slot) = latestBlockhash.await()
                 client.signAndSendTransactions(transactions, slot).also {
-                    Log.d(TAG, "Transaction signature(s): $it")
+                    Timber.tag(TAG).d("Transaction signature(s): %s", it)
                 }
             }.also { showMessage(R.string.msg_request_succeeded) }
         } catch (e: MobileWalletAdapterUseCase.LocalAssociationFailedException) {
-            Log.e(TAG, "Error associating", e)
+            Timber.tag(TAG).e(e, "Error associating")
             showMessage(R.string.msg_association_failed)
             return@launch
         } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
-            Log.e(TAG, "Failed invoking reauthorize + sign_and_send_transactions", e)
+            Timber.tag(TAG).e(e, "Failed invoking reauthorize + sign_and_send_transactions")
             showMessage(R.string.msg_request_failed)
             return@launch
         } catch (e: GetLatestBlockhashUseCase.GetLatestBlockhashFailedException) {
-            Log.e(TAG, "Failed retrieving latest blockhash", e)
+            Timber.tag(TAG).e(e, "Failed retrieving latest blockhash")
             showMessage(R.string.msg_request_failed)
             return@launch
         }

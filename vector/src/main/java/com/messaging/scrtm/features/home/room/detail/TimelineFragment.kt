@@ -28,6 +28,7 @@ import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
@@ -547,23 +548,17 @@ class TimelineFragment :
 
             TradeEventType.INITIATE -> {
                 showAlert(getString(R.string.confirm_initiate_offer)) {
-//                    timelineViewModel.initiateTrade(event.offer).observe(viewLifecycleOwner) {
-//                        when (it.status) {
-//                            Resource.Status.SUCCESS -> {
-//                                timelineViewModel.updateMessageEvent(event = event.event, event.offer)
-//                            }
-//                            else -> {}
-//                        }
-//                    }
                     event.offer?.let { offer ->
-                        viewLifecycleOwner.lifecycleScope.launch {
-                            val byteArray = timelineViewModel.getTransactionBase64(offer)
-                            timelineViewModel.signAndSendTransactions2(
-                                mwaLauncher,
-                                arrayOf(byteArray)
-                            )
-                        }
-//                        timelineViewModel.startInitiateTrade(sender!!,offer, action = {})
+//                        viewLifecycleOwner.lifecycleScope.launch {
+//                            val byteArray = timelineViewModel.getTransactionBase64(offer)
+//                            timelineViewModel.signAndSendTransactions2(
+//                                mwaLauncher,
+//                                arrayOf(byteArray)
+//                            )
+//                        }
+                        timelineViewModel.startInitiateTrade(sender!!, offer, action = {
+                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        })
                     }
                 }
             }

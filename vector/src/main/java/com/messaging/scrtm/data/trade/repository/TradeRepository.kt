@@ -2,6 +2,7 @@ package com.messaging.scrtm.data.trade.repository
 
 import com.auth.*
 import com.auth.type.CreateOfferPayload
+import com.auth.type.ExchangePayload
 import com.auth.type.InitializePayload
 import com.messaging.scrtm.data.trade.domain.ApolloTradeClient
 import kotlinx.coroutines.CoroutineScope
@@ -35,6 +36,10 @@ interface TradeRepository {
     suspend fun buildInitializeTransaction(
         initializePayload: InitializePayload
     ): BuildInitializeTransactionMutation.Data?
+
+    suspend fun buildExchangeTransaction(
+        exchange: ExchangePayload
+    ): BuildExchangeTradeTransactionMutation.Data?
 
 }
 
@@ -84,5 +89,10 @@ class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: Apol
         return apolloTradeClient.getRateByAddress(addresses)
     }
 
-    override suspend fun buildInitializeTransaction(initializePayload: InitializePayload): BuildInitializeTransactionMutation.Data? = apolloTradeClient.buildInitializeTransaction(initializePayload)
+    override suspend fun buildInitializeTransaction(initializePayload: InitializePayload): BuildInitializeTransactionMutation.Data? =
+        apolloTradeClient.buildInitializeTransaction(initializePayload)
+
+    override suspend fun buildExchangeTransaction(exchange: ExchangePayload): BuildExchangeTradeTransactionMutation.Data? =
+        apolloTradeClient.buildExchangeTransaction(exchange)
+
 }

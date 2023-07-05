@@ -11,6 +11,7 @@ import androidx.fragment.app.viewModels
 import com.auth.type.CreateOfferPayload
 import com.auth.type.Trade
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.messaging.lib.core.utils.compat.getSerializableCompat
 import com.messaging.lib.ui.styles.dialogs.MaterialProgressDialog
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.utils.Resource
@@ -31,11 +32,9 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
     val viewModel by viewModels<PreviewTradeViewModel>()
     private val recipientUserId by lazy { arguments?.getInt(USER_ID) ?: 0 }
     private val createOfferPayload by lazy {
-        arguments?.getSerializable(
-            OFFER_PAYLOAD,
-            CreateOfferPayloadModel::class.java
-        )
-
+            arguments?.getSerializableCompat<CreateOfferPayloadModel>(
+                OFFER_PAYLOAD
+            )
     }
 
     var action: ((Boolean,Int?) -> Unit)? = null

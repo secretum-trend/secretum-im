@@ -18,7 +18,7 @@ package com.messaging.scrtm.features.home.room.detail
 
 import android.content.ContentValues.TAG
 import android.net.Uri
-import android.util.Log
+import android.os.Build
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.IdRes
 import androidx.lifecycle.MutableLiveData
@@ -32,6 +32,7 @@ import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.withState
 import com.auth.GetTradeByPkQuery
+import com.auth.type.ExchangePayload
 import com.auth.type.InitializePayload
 import com.google.gson.Gson
 import com.messaging.lib.core.utils.flow.chunk
@@ -92,9 +93,7 @@ import com.messaging.scrtm.features.session.coroutineScope
 import com.messaging.scrtm.features.settings.VectorDataStore
 import com.messaging.scrtm.features.settings.VectorPreferences
 import com.messaging.scrtm.features.voicebroadcast.VoiceBroadcastHelper
-import com.portto.solana.web3.PublicKey
-import com.portto.solana.web3.SerializeConfig
-import com.portto.solana.web3.Transaction
+import com.messaging.scrtm.trade.eventBus.TradeEventBus
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
@@ -167,7 +166,6 @@ import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
 import timber.log.Timber
 import java.math.BigInteger
-import java.nio.charset.Charset
 import java.util.Base64
 import java.util.concurrent.atomic.AtomicBoolean
 
@@ -399,10 +397,13 @@ class TimelineViewModel @AssistedInject constructor(
         return bytesArray
     }
 
-
     private fun base64ToBase58(base64String: String): String {
         val BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-        val binaryData = Base64.getDecoder().decode(base64String)
+        val binaryData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Base64.getDecoder().decode(base64String)
+        } else {
+            android.util.Base64.decode(base64String, android.util.Base64.DEFAULT)
+        }
         var number = 0.toBigInteger()
         for (byte in binaryData) {
             number = number.shl(8).or(byte.toInt().toBigInteger())
@@ -423,6 +424,7 @@ class TimelineViewModel @AssistedInject constructor(
     }
 
     fun startInitiateTrade(
+        event: TradeEventBus,
         sender: ActivityResultSender,
         offer: GetTradeByPkQuery.Data,
         action: (String) -> Unit
@@ -437,84 +439,80 @@ class TimelineViewModel @AssistedInject constructor(
             //api get transaction_base_64
             val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
             //convert transaction_base_64 toByteArray
-            if (buildInitTrade?.buildInitializeTransaction?.transaction_base_64 == null){
-                action.invoke("Base64 -> null")
+            if (buildInitTrade?.buildInitializeTransaction?.transaction_base_64 == null) {
+                action.invoke("Base64 is null")
                 return@launch
             }
 
-            val bytesArray = base64ToArrayBuffer(buildInitTrade.buildInitializeTransaction.transaction_base_64)
-            val bytesArray2 = buildInitTrade.buildInitializeTransaction.transaction_base_64.toByteArray()
-
-            Timber.tag("ABCABC").d("base 64== %s", buildInitTrade.buildInitializeTransaction.transaction_base_64)
-
-            Timber.tag("ABCABC").d("bytesArray == %s", bytesArray.joinToString())
-            Timber.tag("ABCABC").d("bytesArray2 == %s",bytesArray2.joinToString())
-
-            Timber.tag("ABCABC").d("address == %s", sessionPref.address)
-            Timber.tag("ABCABC").d("authToken == %s", sessionPref.authToken)
-            Timber.tag("ABCABC").d("accessToken == %s", sessionPref.accessToken)
-
-//            val solanaUri = Uri.parse("https://solana.com")
-//            val iconUri = Uri.parse("favicon.ico")
-//            val identityName = "Solana"
-
-//            val blockHash = SolanaRpcUseCase().getLatestBlockHash()
-//            val tx = Transaction.from(bytesArray)
-//            tx.setRecentBlockHash(blockHash!!)
-//            tx.feePayer = PublicKey(Base58DecodeUseCase.invoke(sessionPref.address))
-//            val bytes = tx.serialize(SerializeConfig(requireAllSignatures = false))
-
+            val bytesArray =
+                base64ToArrayBuffer(buildInitTrade.buildInitializeTransaction.transaction_base_64)
             val result = walletAdapter.transact(sender) {
-                reauthorize(IDENTITY.uri!!, IDENTITY.iconRelativeUri!!, IDENTITY.name, sessionPref.authToken)
+                reauthorize(
+                    IDENTITY.uri!!,
+                    IDENTITY.iconRelativeUri!!,
+                    IDENTITY.name,
+                    sessionPref.authToken
+                )
                 signAndSendTransactions(arrayOf(bytesArray))
             }
 
-            Timber.tag("ABCABC").d("send ok -> signatures == "+ result.successPayload?.signatures?.joinToString())
+            if (result.successPayload?.signatures?.isEmpty() != true) {
+                tradeRepository.initializeTrade(offer.trades_by_pk?.id!!)
+                updateMessageEvent(
+                    event = event.event!!,
+                    event.offer
+                )
+            }
             action.invoke(result.toString())
         }
     }
 
-    suspend fun checkIsEnoughFee(
-        fee: Double,
-        sentAmount: Double,
-        sentTokenAccount: String,
-        feeTokenAccount: String
-    ): Boolean {
-        val checkingSERBalance = if (sentTokenAccount == feeTokenAccount) {
-            fee + sentAmount
-        } else {
-            fee
+    fun startExchangeTrade(
+        event: TradeEventBus,
+        sender: ActivityResultSender,
+        offer: GetTradeByPkQuery.Data,
+        action: (String) -> Unit
+    ) {
+
+        viewModelScope.launch {
+            val exchangePayload = ExchangePayload(
+                initializer = offer.trades_by_pk?.sending_token_address.toString(),
+                taker_token_mint = offer.trades_by_pk?.recipient_token_address.toString(),
+                initializer_token_mint = sessionPref.authToken
+            )
+            //api get transaction_base_64
+            val buildExchangeTrade = tradeRepository.buildExchangeTransaction(exchangePayload)
+            //convert transaction_base_64 toByteArray
+            if (buildExchangeTrade?.buildExchangeTransaction?.transaction_base_64 == null) {
+                action.invoke("Base64 is null")
+                return@launch
+            }
+
+            val bytesArray =
+                base64ToArrayBuffer(buildExchangeTrade.buildExchangeTransaction.transaction_base_64)
+
+            val result = walletAdapter.transact(sender) {
+                reauthorize(
+                    IDENTITY.uri!!,
+                    IDENTITY.iconRelativeUri!!,
+                    IDENTITY.name,
+                    sessionPref.authToken
+                )
+                signAndSendTransactions(arrayOf(bytesArray))
+            }
+
+            if (result.successPayload?.signatures?.isEmpty() != true) {
+                tradeRepository.exchangeTrade(offer.trades_by_pk?.id!!,
+                    result.successPayload?.signatures.toString()
+                )
+                updateMessageEvent(
+                    event = event.event!!,
+                    event.offer
+                )
+            }
+            action.invoke(result.toString())
         }
-        val serTokenBalance = solanaRepository.getTokenBalance(feeTokenAccount)
-        return serTokenBalance.result.value >= checkingSERBalance
-    }
 
-    fun calculateFee(
-        tokenRates: List<TokenRate>,
-        sendingTokenAddress: String,
-        initializerAmount: Double,
-        recipientTokenAddress: String,
-        takerAmount: Double
-    ): Pair<Int, Int> {
-        val initializerTokenRate =
-            tokenRates.find { it.token_address == sendingTokenAddress }?.rate ?: 0.0
-        val initializerFee = (initializerAmount * initializerTokenRate * 0.0002).toInt()
-
-        val takerTokenRate =
-            tokenRates.find { it.token_address == recipientTokenAddress }?.rate ?: 0.0
-        val takerFee = (takerAmount * takerTokenRate * 0.0002).toInt()
-
-        return Pair(initializerFee, takerFee)
-    }
-
-
-    fun initiateTrade(offer: GetTradeByPkQuery.Data?) = liveData {
-        try {
-            emit(Resource.loading())
-            val data = offer?.trades_by_pk?.id?.let { tradeRepository.initializeTrade(it) }
-            emit(Resource.success(data))
-        } catch (_: Throwable) {
-        }
     }
 
     fun exchangeTrade(offer: GetTradeByPkQuery.Data?, signature: String) = liveData {

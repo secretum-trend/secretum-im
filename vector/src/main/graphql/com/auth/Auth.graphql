@@ -71,6 +71,12 @@ mutation buildInitializeTransaction($payload: InitializePayload!) {
     }
 }
 
+mutation BuildExchangeTradeTransaction($payload: ExchangePayload!) {
+    buildExchangeTransaction(payload: $payload) {
+        transaction_base_64
+    }
+}
+
 query GetTradeByPk($tradeId: Int!) {
     trades_by_pk(id: $tradeId) {
         id

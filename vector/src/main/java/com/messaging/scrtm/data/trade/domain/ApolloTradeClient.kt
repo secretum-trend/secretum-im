@@ -3,6 +3,7 @@ package com.messaging.scrtm.data.trade.domain
 import com.apollographql.apollo3.ApolloClient
 import com.auth.*
 import com.auth.type.CreateOfferPayload
+import com.auth.type.ExchangePayload
 import com.auth.type.InitializePayload
 
 interface ApolloTradeClient {
@@ -21,6 +22,7 @@ interface ApolloTradeClient {
     suspend fun initializeTrade(id: Int): InitializeTradeMutation.Data?
 
     suspend fun exchangeTrade(id: Int, signature: String): ExchangeTradeMutation.Data?
+
     suspend fun getRateByAddress(
         addresses: List<String>
     ): GetRateByAddressesQuery.Data?
@@ -28,6 +30,10 @@ interface ApolloTradeClient {
     suspend fun buildInitializeTransaction(
         initializePayload: InitializePayload
     ): BuildInitializeTransactionMutation.Data?
+
+    suspend fun buildExchangeTransaction(
+        exchange: ExchangePayload
+    ) : BuildExchangeTradeTransactionMutation.Data?
 
 }
 
@@ -74,4 +80,6 @@ class ApolloTradeClientImp(private val apolloClient: ApolloClient) : ApolloTrade
 
     override suspend fun buildInitializeTransaction(initializePayload: InitializePayload): BuildInitializeTransactionMutation.Data? =
         apolloClient.mutation(BuildInitializeTransactionMutation(initializePayload)).execute().data
+
+    override suspend fun buildExchangeTransaction(exchange: ExchangePayload): BuildExchangeTradeTransactionMutation.Data? = apolloClient.mutation(BuildExchangeTradeTransactionMutation(exchange)).execute().data
 }

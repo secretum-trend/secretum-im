@@ -10,16 +10,18 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
+        android:paddingVertical="8dp"
         android:layout_height="wrap_content">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvTradedSuccessfullyWaitApproval"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
             android:fontFamily="@font/nunito_semi_bold"
             android:text="@string/you_have_an_offer_make_a_deal"
             android:textColor="#80FFFFFF"
+            android:gravity="center"
+            android:layout_marginHorizontal="16dp"
             android:textSize="12sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -131,13 +133,13 @@
             app:srcCompat="@drawable/img_offer" />
 
         <LinearLayout
+            android:id="@+id/layoutButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
             android:layout_marginBottom="16dp"
             android:orientation="horizontal"
             android:paddingHorizontal="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/imgOffer">
@@ -147,6 +149,8 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:background="@drawable/selector_radio_button_trade"
                 android:fontFamily="@font/manrope_bold"
                 android:gravity="center"
@@ -162,6 +166,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/bg_fill_coner_8"
                 android:backgroundTint="@color/white"
+                android:singleLine="true"
+                android:ellipsize="end"
                 android:fontFamily="@font/manrope_bold"
                 android:gravity="center"
                 android:minHeight="38dp"

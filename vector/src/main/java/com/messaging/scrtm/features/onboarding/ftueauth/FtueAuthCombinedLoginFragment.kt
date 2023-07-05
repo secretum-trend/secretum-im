@@ -169,7 +169,7 @@ class FtueAuthCombinedLoginFragment :
         views.tvDownload.debouncedClicks {
             try {
                 val packageName =
-                    "org.phantom.wallet" //  packageName phantom wallet
+                    "app.phantom" //  packageName phantom wallet
                 val intent =
                     Intent(Intent.ACTION_VIEW, Uri.parse("market://details?id=$packageName"))
                 intent.setPackage("com.android.vending")

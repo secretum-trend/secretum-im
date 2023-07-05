@@ -17,6 +17,7 @@
             android:id="@+id/tvTradedSuccessfully"
             android:layout_width="0dp"
             android:gravity="center"
+
             android:layout_marginHorizontal="16dp"            android:layout_height="wrap_content"
             android:fontFamily="@font/nunito_semi_bold"
             android:text="@string/you_have_an_offer"
@@ -124,8 +125,10 @@
         <androidx.cardview.widget.CardView
             android:id="@+id/include"
             android:layout_marginTop="8dp"
-            android:layout_marginHorizontal="16dp"    android:layout_width="match_parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:layout_constraintBottom_toTopOf="@+id/layoutButton"
             app:cardBackgroundColor="#1AFFFFFF"
             app:layout_constraintTop_toBottomOf="@+id/appCompatTextView6"
             app:cardCornerRadius="15dp"
@@ -237,7 +240,8 @@
                     android:text="@string/offered_trade"
                     android:textSize="12sp"
                     app:layout_constraintBottom_toBottomOf="@+id/cardView"
-                    app:layout_constraintStart_toEndOf="@+id/cardView" />
+                    app:layout_constraintStart_toEndOf="@+id/cardView"
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <androidx.cardview.widget.CardView
                     android:id="@+id/dotTime"
@@ -257,6 +261,8 @@
                     android:layout_marginHorizontal="8dp"
                     android:text="13.00 PM, by Alice"
                     android:textSize="10sp"
+                    android:singleLine="true"
+                    android:ellipsize="middle"
                     app:layout_constraintBottom_toBottomOf="@+id/dotTime"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@+id/dotTime"
@@ -290,6 +296,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="8dp"
                     android:text="13.00 PM, by Alice"
+                    android:singleLine="true"
+                    android:ellipsize="middle"
                     android:textSize="10sp"
                     app:layout_constraintBottom_toBottomOf="@+id/dotTime2"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -385,8 +393,8 @@
         </androidx.cardview.widget.CardView>
 
 
-
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/layoutButton"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
@@ -420,6 +428,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_weight="1"
+                android:ellipsize="end"
+                android:paddingHorizontal="4dp"
                 android:paddingVertical="5dp"
                 android:background="@drawable/bg_fill_coner_8"
                 android:backgroundTint="@color/white"

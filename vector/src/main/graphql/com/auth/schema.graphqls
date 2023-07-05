@@ -107,6 +107,16 @@ type TradeByPkOutput {
     userBySendingUserId:UserBySendingUserId!
 }
 
+input ExchangePayload {
+    initializer: String!
+    taker_token_mint: String!
+    initializer_token_mint: String!
+}
+
+type ExchangeResp {
+    transaction_base_64: String!
+}
+
 input WalletByUsernameInput {
     username: String!
 }
@@ -314,6 +324,8 @@ type mutation_root {
     initializeTrade(payload: InitializeTradePayload!): InitializeTradeOutput
 
     buildInitializeTransaction(payload: InitializePayload!): InitializeResp
+
+    buildExchangeTransaction(payload: ExchangePayload!): ExchangeResp
 }
 
 type Wallet {

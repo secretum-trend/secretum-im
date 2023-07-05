@@ -518,7 +518,7 @@ class TimelineFragment :
                         when (it.status) {
                             Resource.Status.SUCCESS -> {
                                 timelineViewModel.updateMessageEvent(
-                                    event = event.event,
+                                    event = event.event!!,
                                     event.offer
                                 )
                             }
@@ -535,7 +535,7 @@ class TimelineFragment :
                         when (it.status) {
                             Resource.Status.SUCCESS -> {
                                 timelineViewModel.updateMessageEvent(
-                                    event = event.event,
+                                    event = event.event!!,
                                     event.offer
                                 )
                             }
@@ -549,15 +549,8 @@ class TimelineFragment :
             TradeEventType.INITIATE -> {
                 showAlert(getString(R.string.confirm_initiate_offer)) {
                     event.offer?.let { offer ->
-//                        viewLifecycleOwner.lifecycleScope.launch {
-//                            val byteArray = timelineViewModel.getTransactionBase64(offer)
-//                            timelineViewModel.signAndSendTransactions2(
-//                                mwaLauncher,
-//                                arrayOf(byteArray)
-//                            )
-//                        }
-                        timelineViewModel.startInitiateTrade(sender!!, offer, action = {
-                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                        timelineViewModel.startInitiateTrade(event,sender!!, offer, action = {
+//                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                         })
                     }
                 }
@@ -566,9 +559,24 @@ class TimelineFragment :
             TradeEventType.CONFIRM -> {
                 showAlert(getString(R.string.confirm_confirm_offer)) {
                     event.offer?.let {
-//                        timelineViewModel.exchangeTrade(offer, "")
+                        timelineViewModel.startExchangeTrade(event,sender!!, it, action = {
+//                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+
+                        })
                     }
                 }
+            }
+
+            TradeEventType.CREATE_TRADE -> {
+                val intent = Intent(requireActivity(), CreateOfferActivity::class.java).apply {
+                    withState(timelineViewModel) { mainState ->
+                        putExtra(
+                            "userId",
+                            mainState.asyncRoomSummary()?.displayName?.getUserId()
+                        )
+                    }
+                }
+                createOfferResultContracts.launch(intent)
             }
         }
     }
@@ -1003,7 +1011,11 @@ class TimelineFragment :
     private val createOfferResultContracts =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK) {
-                val data = result.data?.getSerializableExtra("data", TradeInfo::class.java)
+                val data = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                    result.data?.getSerializableExtra("data", TradeInfo::class.java)
+                } else {
+                    @Suppress("DEPRECATION") result.data?.getSerializableExtra("data") as TradeInfo
+                }
                 if (data != null) {
                     timelineViewModel.sendOffer(data)
                 }

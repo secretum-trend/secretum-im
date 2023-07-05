@@ -16,11 +16,13 @@
 
 package com.messaging.scrtm.features.home.room.detail.timeline.item
 
+import android.content.Intent
 import android.content.res.ColorStateList
 import android.util.Log
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.content.ContextCompat.startActivities
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.auth.GetTradeByPkQuery
@@ -30,6 +32,7 @@ import com.messaging.lib.core.utils.view.show
 import com.messaging.scrtm.R
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.trade.entity.TradeStatus
+import com.messaging.scrtm.trade.creatingoffer.CreateOfferActivity
 import com.messaging.scrtm.trade.eventBus.TradeEventBus
 import com.messaging.scrtm.trade.eventBus.TradeEventType
 import org.greenrobot.eventbus.EventBus
@@ -130,6 +133,13 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
 
             tvOkSuccessful.setOnClickListener {
                //new offer
+                EventBus.getDefault().post(
+                    TradeEventBus(
+                        null,
+                        tradeEventType = TradeEventType.CREATE_TRADE,
+                        null
+                    )
+                )
             }
 
             //UI

@@ -560,8 +560,7 @@ class TimelineFragment :
                 showAlert(getString(R.string.confirm_confirm_offer)) {
                     event.offer?.let {
                         timelineViewModel.startExchangeTrade(event,sender!!, it, action = {
-//                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-
+                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                         })
                     }
                 }

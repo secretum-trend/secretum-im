@@ -113,7 +113,7 @@ class OnboardingViewModel @AssistedInject constructor(
 
     companion object :
         MavericksViewModelFactory<OnboardingViewModel, OnboardingViewState> by hiltMavericksViewModelFactory() {
-        private const val CLUSTER_NAME = ProtocolContract.CLUSTER_TESTNET
+        const val CLUSTER_NAME = ProtocolContract.CLUSTER_TESTNET
         val IDENTITY = MobileWalletAdapterUseCase.DappIdentity(
             uri = Uri.parse("https://solanamobile.com"),
             iconRelativeUri = Uri.parse("favicon.ico"),

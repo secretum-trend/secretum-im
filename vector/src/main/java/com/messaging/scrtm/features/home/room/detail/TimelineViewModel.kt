@@ -19,6 +19,8 @@ package com.messaging.scrtm.features.home.room.detail
 import android.content.ContentValues.TAG
 import android.net.Uri
 import android.os.Build
+import android.util.Base64
+import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.IdRes
 import androidx.lifecycle.MutableLiveData
@@ -77,6 +79,7 @@ import com.messaging.scrtm.features.location.live.StopLiveLocationShareUseCase
 import com.messaging.scrtm.features.location.live.tracking.LocationSharingServiceConnection
 import com.messaging.scrtm.features.notifications.NotificationDrawerManager
 import com.messaging.scrtm.features.onboarding.OnboardingViewModel
+import com.messaging.scrtm.features.onboarding.OnboardingViewModel.Companion.IDENTITY
 import com.messaging.scrtm.features.onboarding.usecase.Base58DecodeUseCase
 import com.messaging.scrtm.features.onboarding.usecase.Base58EncodeUseCase
 import com.messaging.scrtm.features.onboarding.usecase.GetLatestBlockhashUseCase
@@ -104,6 +107,7 @@ import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -166,7 +170,6 @@ import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
 import timber.log.Timber
 import java.math.BigInteger
-import java.util.Base64
 import java.util.concurrent.atomic.AtomicBoolean
 
 
@@ -248,12 +251,7 @@ class TimelineViewModel @AssistedInject constructor(
         MavericksViewModelFactory<TimelineViewModel, RoomDetailViewState> by hiltMavericksViewModelFactory() {
 
         private val CLUSTER_RPC_URI = Uri.parse("https://api.testnet.solana.com")
-        private const val CLUSTER_NAME = ProtocolContract.CLUSTER_TESTNET
-        private val IDENTITY = MobileWalletAdapterUseCase.DappIdentity(
-            uri = Uri.parse("https://solanamobile.com"),
-            iconRelativeUri = Uri.parse("favicon.ico"),
-            name = "Secretum"
-        )
+
         const val PAGINATION_COUNT = 50
 
         // The larger the number the faster the results, COUNT=200 for 500 thread messages its x4 faster than COUNT=50
@@ -381,26 +379,10 @@ class TimelineViewModel @AssistedInject constructor(
         return bytes
     }
 
-    suspend fun getTransactionBase64(offer: GetTradeByPkQuery.Data): ByteArray {
-        val initPayload = InitializePayload(
-            recipient_token_address = offer.trades_by_pk?.recipient_token_address.toString(),
-            sending_token_address = offer.trades_by_pk?.sending_token_address.toString(),
-            ui_taker_amount = offer.trades_by_pk?.recipient_token_amount?.toInt() ?: 0,
-            ui_initializer_amount = offer.trades_by_pk?.sending_token_amount?.toInt() ?: 0
-        )
-        //api get transaction_base_64
-        val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
-        //convert transaction_base_64 toByteArray
-        val bytesArray =
-            Base58DecodeUseCase.invoke(base64ToBase58(buildInitTrade?.buildInitializeTransaction?.transaction_base_64!!))
-//        val bytesArray = base64ToArrayBuffer(buildInitTrade?.buildInitializeTransaction?.transaction_base_64!!)
-        return bytesArray
-    }
-
     private fun base64ToBase58(base64String: String): String {
         val BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
         val binaryData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Base64.getDecoder().decode(base64String)
+            java.util.Base64.getDecoder().decode(base64String)
         } else {
             android.util.Base64.decode(base64String, android.util.Base64.DEFAULT)
         }
@@ -421,6 +403,58 @@ class TimelineViewModel @AssistedInject constructor(
             base58String = BASE58_ALPHABET[0] + base58String
         }
         return base58String
+    }
+
+    fun startInitiateTrade2(
+        intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
+        event: TradeEventBus,
+        offer: GetTradeByPkQuery.Data,
+        action: (String) -> Unit
+    ) {
+        viewModelScope.launch {
+            val initPayload = InitializePayload(
+                recipient_token_address = offer.trades_by_pk?.recipient_token_address.toString(),
+                sending_token_address = offer.trades_by_pk?.sending_token_address.toString(),
+                ui_taker_amount = offer.trades_by_pk?.recipient_token_amount?.toInt() ?: 0,
+                ui_initializer_amount = offer.trades_by_pk?.sending_token_amount?.toInt() ?: 0
+            )
+            //api get transaction_base_64
+            val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
+            //convert transaction_base_64 toByteArray
+            if (buildInitTrade?.buildInitializeTransaction?.transaction_base_64 == null) {
+                action.invoke("Base64 is null")
+                return@launch
+            }
+
+            val bytesArray =
+                base64ToArrayBuffer(buildInitTrade.buildInitializeTransaction.transaction_base_64)
+
+            try {
+                doLocalAssociateAndExecute(intentLauncher) { client ->
+                    doReauthorize(
+                        client,
+                        OnboardingViewModel.IDENTITY,
+                        OnboardingViewModel.CLUSTER_NAME
+                    )
+                    val signature = client.signAndSendTransactions(arrayOf(bytesArray))
+                    if (signature.isNotEmpty()) {
+                        tradeRepository.initializeTrade(offer.trades_by_pk?.id!!)
+                        updateMessageEvent(
+                            event = event.event!!,
+                            event.offer
+                        )
+                    }
+                }.also {
+                    showMessage(R.string.msg_request_succeeded)
+
+                }
+            } catch (e: MobileWalletAdapterUseCase.LocalAssociationFailedException) {
+                showMessage(R.string.msg_association_failed)
+            } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
+                showMessage(R.string.msg_request_failed)
+            }
+        }
+
     }
 
     fun startInitiateTrade(
@@ -446,6 +480,8 @@ class TimelineViewModel @AssistedInject constructor(
 
             val bytesArray =
                 base64ToArrayBuffer(buildInitTrade.buildInitializeTransaction.transaction_base_64)
+
+
             val result = walletAdapter.transact(sender) {
                 reauthorize(
                     IDENTITY.uri!!,
@@ -473,12 +509,11 @@ class TimelineViewModel @AssistedInject constructor(
         offer: GetTradeByPkQuery.Data,
         action: (String) -> Unit
     ) {
-
         viewModelScope.launch {
             val exchangePayload = ExchangePayload(
-                initializer = offer.trades_by_pk?.sending_token_address.toString(),
+                initializer = offer.trades_by_pk?.sending_address.toString(),
                 taker_token_mint = offer.trades_by_pk?.recipient_token_address.toString(),
-                initializer_token_mint = sessionPref.authToken
+                initializer_token_mint = offer.trades_by_pk?.sending_token_address.toString()
             )
             //api get transaction_base_64
             val buildExchangeTrade = tradeRepository.buildExchangeTransaction(exchangePayload)
@@ -491,26 +526,43 @@ class TimelineViewModel @AssistedInject constructor(
             val bytesArray =
                 base64ToArrayBuffer(buildExchangeTrade.buildExchangeTransaction.transaction_base_64)
 
-            val result = walletAdapter.transact(sender) {
-                reauthorize(
-                    IDENTITY.uri!!,
-                    IDENTITY.iconRelativeUri!!,
-                    IDENTITY.name,
-                    sessionPref.authToken
-                )
-                signAndSendTransactions(arrayOf(bytesArray))
-            }
+            val result =
+                walletAdapter.transact(sender) {
+                    reauthorize(
+                        IDENTITY.uri!!,
+                        IDENTITY.iconRelativeUri!!,
+                        IDENTITY.name,
+                        sessionPref.authToken
+                    )
+                    signAndSendTransactions(arrayOf(bytesArray))
+                }
+            Timber.tag("result").d(result.toString())
 
-            if (result.successPayload?.signatures?.isEmpty() != true) {
-                tradeRepository.exchangeTrade(offer.trades_by_pk?.id!!,
-                    result.successPayload?.signatures.toString()
+            if (result.successPayload?.signatures?.isNotEmpty() == true) {
+                val signatureBase64 = Base58EncodeUseCase.invoke(result.successPayload?.signatures?.first()!!)
+                Timber.tag("signature ádfasdfasd").d(sessionPref.address)
+                Timber.tag("signature ádfasdfasd").d(signatureBase64)
+                Timber.tag("signature ádfasdfasd").d(Gson().toJson(result.successPayload?.signatures))
+
+                val exchange = tradeRepository.exchangeTrade(
+                    offer.trades_by_pk?.id!!,
+                    signatureBase64
                 )
-                updateMessageEvent(
-                    event = event.event!!,
-                    event.offer
-                )
+                if (exchange?.exchangeTrade?.updated == true) {
+                    updateMessageEvent(
+                        event = event.event!!,
+                        event.offer
+                    )
+                    action.invoke("updated")
+                    return@launch
+                } else {
+                    action.invoke("update failed")
+                    return@launch
+                }
+
+//            }
+//            action.invoke("failed")
             }
-            action.invoke(result.toString())
         }
 
     }
@@ -522,6 +574,68 @@ class TimelineViewModel @AssistedInject constructor(
             emit(Resource.success(data))
         } catch (_: Throwable) {
         }
+    }
+
+    private suspend fun doReauthorize(
+        client: MobileWalletAdapterUseCase.Client,
+        identity: MobileWalletAdapterUseCase.DappIdentity,
+        currentAuthToken: String
+    ): MobileWalletAdapterClient.AuthorizationResult {
+        val result = try {
+            client.reauthorize(identity, currentAuthToken)
+        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
+            _uiState.update {
+                it.copy(
+                    authToken = null,
+                    publicKey = null,
+                    accountLabel = null,
+                    walletUriBase = null
+                )
+            }
+            throw e
+        }
+
+        _uiState.update {
+            it.copy(
+                authToken = result.authToken,
+                publicKey = result.publicKey,
+                accountLabel = result.accountLabel,
+                walletUriBase = result.walletUriBase
+            )
+        }
+
+        return result
+    }
+
+    private suspend fun doAuthorize(
+        client: MobileWalletAdapterUseCase.Client,
+        identity: MobileWalletAdapterUseCase.DappIdentity,
+        cluster: String?
+    ): MobileWalletAdapterClient.AuthorizationResult {
+        val result = try {
+            client.authorize(identity, cluster)
+        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
+            _uiState.update {
+                it.copy(
+                    authToken = null,
+                    publicKey = null,
+                    accountLabel = null,
+                    walletUriBase = null
+                )
+            }
+            throw e
+        }
+
+        _uiState.update {
+            it.copy(
+                authToken = result.authToken,
+                publicKey = result.publicKey,
+                accountLabel = result.accountLabel,
+                walletUriBase = result.walletUriBase
+            )
+        }
+
+        return result
     }
 
 
@@ -1914,38 +2028,6 @@ class TimelineViewModel @AssistedInject constructor(
         } catch (e: IllegalArgumentException) {
             showMessage(R.string.msg_request_failed)
         }
-    }
-
-    private suspend fun doReauthorize(
-        client: MobileWalletAdapterUseCase.Client,
-        identity: MobileWalletAdapterUseCase.DappIdentity,
-        currentAuthToken: String
-    ): MobileWalletAdapterClient.AuthorizationResult {
-        val result = try {
-            client.reauthorize(identity, currentAuthToken)
-        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
-            _uiState.update {
-                it.copy(
-                    authToken = null,
-                    publicKey = null,
-                    accountLabel = null,
-                    walletUriBase = null
-                )
-            }
-            throw e
-        }
-
-        _uiState.update {
-            it.copy(
-                authToken = result.authToken,
-                publicKey = result.publicKey,
-                accountLabel = result.accountLabel,
-                walletUriBase = result.walletUriBase
-            )
-
-        }
-        sessionPref.authToken = _uiState.value.authToken!!
-        return result
     }
 
     private suspend fun <T> doLocalAssociateAndExecute(

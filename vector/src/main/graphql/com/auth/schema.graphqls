@@ -201,6 +201,16 @@ type InitializeResp {
     transaction_base_64: String!
 }
 
+
+input CancelPayload {
+    taker_token_mint: String!
+    intializer_token_mint: String!
+}
+
+type CancelResp {
+    transaction_base_64: String!
+}
+
 """
 Boolean expression to compare columns of type "String". All fields are combined with logical 'AND'.
 """
@@ -326,6 +336,8 @@ type mutation_root {
     buildInitializeTransaction(payload: InitializePayload!): InitializeResp
 
     buildExchangeTransaction(payload: ExchangePayload!): ExchangeResp
+
+    buildCancelTransaction(payload: CancelPayload!): CancelResp
 }
 
 type Wallet {

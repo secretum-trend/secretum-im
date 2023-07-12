@@ -1273,7 +1273,8 @@ class OnboardingViewModel @AssistedInject constructor(
                 walletUriBase = result.walletUriBase
             )
         }
-
+        sessionPref.address = Base58EncodeUseCase.invoke(_uiState.value.publicKey!!)
+        sessionPref.authToken = _uiState.value.authToken!!
         return result
     }
 

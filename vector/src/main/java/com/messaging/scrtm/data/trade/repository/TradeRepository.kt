@@ -1,6 +1,7 @@
 package com.messaging.scrtm.data.trade.repository
 
 import com.auth.*
+import com.auth.type.CancelPayload
 import com.auth.type.CreateOfferPayload
 import com.auth.type.ExchangePayload
 import com.auth.type.InitializePayload
@@ -41,6 +42,9 @@ interface TradeRepository {
         exchange: ExchangePayload
     ): BuildExchangeTradeTransactionMutation.Data?
 
+    suspend fun buildCancelTransaction(
+        cancelPayload: CancelPayload
+    ): BuildCancelTradeTransactionMutation.Data?
 }
 
 class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: ApolloTradeClient) :
@@ -83,9 +87,7 @@ class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: Apol
         return apolloTradeClient.exchangeTrade(id, signature)
     }
 
-    override suspend fun getRateByAddress(
-        addresses: List<String>
-    ): GetRateByAddressesQuery.Data? {
+    override suspend fun getRateByAddress(addresses: List<String>): GetRateByAddressesQuery.Data? {
         return apolloTradeClient.getRateByAddress(addresses)
     }
 
@@ -94,5 +96,9 @@ class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: Apol
 
     override suspend fun buildExchangeTransaction(exchange: ExchangePayload): BuildExchangeTradeTransactionMutation.Data? =
         apolloTradeClient.buildExchangeTransaction(exchange)
+
+    override suspend fun buildCancelTransaction(cancelPayload: CancelPayload): BuildCancelTradeTransactionMutation.Data? =
+        apolloTradeClient.buildCancelTransaction(cancelPayload)
+
 
 }

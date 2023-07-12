@@ -7,6 +7,7 @@ class TradeEventBus (val offer : GetTradeByPkQuery.Data?, val tradeEventType: Tr
 
 enum class TradeEventType{
     CANCEL,
+    CANCEL_TRANSACTION,
     ACCEPT,
     INITIATE,
     CONFIRM,

@@ -67,7 +67,6 @@ class PreviewTradeViewModel @Inject constructor(
             return@launch
         } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
             showMessage(R.string.msg_request_failed)
-
             return@launch
         }
 
@@ -83,6 +82,38 @@ class PreviewTradeViewModel @Inject constructor(
         } catch (e: IllegalArgumentException) {
             showMessage(R.string.msg_request_failed)
         }
+    }
+
+    private suspend fun doAuthorize(
+        client: MobileWalletAdapterUseCase.Client,
+        identity: MobileWalletAdapterUseCase.DappIdentity,
+        cluster: String?
+    ): MobileWalletAdapterClient.AuthorizationResult {
+        val result = try {
+            client.authorize(identity, cluster)
+        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
+            _uiState.update {
+                it.copy(
+                    authToken = null,
+                    publicKey = null,
+                    accountLabel = null,
+                    walletUriBase = null
+                )
+            }
+            throw e
+        }
+
+        _uiState.update {
+            it.copy(
+                authToken = result.authToken,
+                publicKey = result.publicKey,
+                accountLabel = result.accountLabel,
+                walletUriBase = result.walletUriBase
+            )
+        }
+        sessionPref.address = Base58EncodeUseCase.invoke(_uiState.value.publicKey!!)
+        sessionPref.authToken = _uiState.value.authToken!!
+        return result
     }
 
     private suspend fun doReauthorize(

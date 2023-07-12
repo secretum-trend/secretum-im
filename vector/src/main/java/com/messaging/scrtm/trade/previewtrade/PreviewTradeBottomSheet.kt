@@ -92,10 +92,6 @@ class PreviewTradeBottomSheet : BottomSheetDialogFragment() {
             }
         }
 
-        binding.tvTo.setOnLongClickListener {
-            viewModel.signNonce(mwaLauncher, binding.tvTo.text.toString().toInt())
-            true
-        }
     }
 
     private fun observingValues() {

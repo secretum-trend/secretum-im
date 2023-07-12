@@ -23,7 +23,6 @@ import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.text.method.LinkMovementMethod
-import android.util.Log
 import android.view.*
 import android.widget.FrameLayout
 import android.widget.ImageView
@@ -40,7 +39,9 @@ import androidx.core.text.toSpannable
 import androidx.core.util.Pair
 import androidx.core.view.*
 import androidx.fragment.app.setFragmentResultListener
+import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -54,6 +55,8 @@ import com.airbnb.mvrx.args
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.animations.play
 import com.messaging.scrtm.core.dialogs.ConfirmationDialogBuilder
@@ -142,7 +145,6 @@ import com.messaging.scrtm.trade.eventBus.TradeEventBus
 import com.messaging.scrtm.trade.eventBus.TradeEventType
 import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -252,6 +254,7 @@ class TimelineFragment :
     lateinit var permalinkFactory: PermalinkFactory
 
     companion object {
+        @Suppress("unused")
         const val MAX_TYPING_MESSAGE_USERS_COUNT = 4
     }
 
@@ -328,10 +331,10 @@ class TimelineFragment :
         )
         super.onViewCreated(view, savedInstanceState)
         sharedActionViewModel =
-            activityViewModelProvider.get(MessageSharedActionViewModel::class.java)
+            activityViewModelProvider[MessageSharedActionViewModel::class.java]
         sharedActivityActionViewModel =
-            activityViewModelProvider.get(RoomDetailSharedActionViewModel::class.java)
-        knownCallsViewModel = activityViewModelProvider.get(SharedKnownCallsViewModel::class.java)
+            activityViewModelProvider[RoomDetailSharedActionViewModel::class.java]
+        knownCallsViewModel = activityViewModelProvider[SharedKnownCallsViewModel::class.java]
         callActionsHandler = StartCallActionsHandler(
             roomId = timelineArgs.roomId,
             fragment = this,
@@ -454,15 +457,44 @@ class TimelineFragment :
             views.voiceMessageRecorderContainer.updatePadding(bottom = imeInsets.bottom)
             insets
         }
+
+        observingValues()
     }
 
+    private fun observingValues() {
+        //handle ui state
+        lifecycleScope.launch {
+            repeatOnLifecycle(Lifecycle.State.CREATED) {
+                timelineViewModel.uiState.collect { uiState ->
+                    uiState.hasAuthToken.let {
+
+                    }
+
+                    if (uiState.messages.isNotEmpty()) {
+                        val message = uiState.messages.first()
+                        Toast.makeText(requireContext(),message, Toast.LENGTH_SHORT).show()
+//                        Snackbar.make(views.root, message, Snackbar.LENGTH_SHORT)
+//                            .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+//                                override fun onDismissed(
+//                                    transientBottomBar: Snackbar?,
+//                                    event: Int
+//                                ) {
+//                                    timelineViewModel.messageShown()
+//                                }
+//                            }).show()
+                    }
+                }
+            }
+        }
+    }
+
+    @Suppress("unused")
     private val mwaLauncher =
         registerForActivityResult(
             MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity(
                 lifecycle
             )
         ) {
-            Log.d("ccc", it.toString())
         }
 
     private fun setupBackPressHandling() {
@@ -549,16 +581,14 @@ class TimelineFragment :
             TradeEventType.INITIATE -> {
                 showAlert(getString(R.string.confirm_initiate_offer)) {
                     event.offer?.let { offer ->
-                        timelineViewModel.startInitiateTrade(event,sender!!, offer, action = {
-//                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
-                        })
+                        timelineViewModel.startInitiateTrade(event,sender!!, offer)
                     }
                 }
             }
 
             TradeEventType.CONFIRM -> {
                 showAlert(getString(R.string.confirm_confirm_offer)) {
-                    event.offer?.let {
+                    event.offer?.let { it ->
                         timelineViewModel.startExchangeTrade(event,sender!!, it, action = {
                             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                         })
@@ -576,6 +606,14 @@ class TimelineFragment :
                     }
                 }
                 createOfferResultContracts.launch(intent)
+            }
+
+            TradeEventType.CANCEL_TRANSACTION -> {
+                showAlert(getString(R.string.confirm_cancel_transaction)) {
+                    event.offer?.let {
+                        timelineViewModel.cancelTransactions(event,sender!!, it)
+                    }
+                }
             }
         }
     }

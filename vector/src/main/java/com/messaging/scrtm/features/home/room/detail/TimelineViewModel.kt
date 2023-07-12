@@ -16,13 +16,12 @@
 
 package com.messaging.scrtm.features.home.room.detail
 
-import android.content.ContentValues.TAG
+import android.content.Context
 import android.net.Uri
-import android.os.Build
 import android.util.Base64
-import android.util.Log
 import androidx.activity.result.ActivityResultLauncher
 import androidx.annotation.IdRes
+import androidx.annotation.StringRes
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.asFlow
 import androidx.lifecycle.liveData
@@ -34,6 +33,7 @@ import com.airbnb.mvrx.Success
 import com.airbnb.mvrx.Uninitialized
 import com.airbnb.mvrx.withState
 import com.auth.GetTradeByPkQuery
+import com.auth.type.CancelPayload
 import com.auth.type.ExchangePayload
 import com.auth.type.InitializePayload
 import com.google.gson.Gson
@@ -52,7 +52,6 @@ import com.messaging.scrtm.core.utils.BehaviorDataSource
 import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.solana.repository.SolanaRepository
-import com.messaging.scrtm.data.trade.entity.TokenRate
 import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.data.trade.repository.TradeRepository
 import com.messaging.scrtm.features.analytics.AnalyticsTracker
@@ -82,10 +81,6 @@ import com.messaging.scrtm.features.onboarding.OnboardingViewModel
 import com.messaging.scrtm.features.onboarding.OnboardingViewModel.Companion.IDENTITY
 import com.messaging.scrtm.features.onboarding.usecase.Base58DecodeUseCase
 import com.messaging.scrtm.features.onboarding.usecase.Base58EncodeUseCase
-import com.messaging.scrtm.features.onboarding.usecase.GetLatestBlockhashUseCase
-import com.messaging.scrtm.features.onboarding.usecase.MemoTransactionLegacyUseCase
-import com.messaging.scrtm.features.onboarding.usecase.MemoTransactionV0UseCase
-import com.messaging.scrtm.features.onboarding.usecase.MemoTransactionVersion
 import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
 import com.messaging.scrtm.features.onboarding.usecase.OffChainMessageSigningUseCase
 import com.messaging.scrtm.features.powerlevel.PowerLevelsFlowFactory
@@ -101,12 +96,10 @@ import com.solana.mobilewalletadapter.clientlib.ActivityResultSender
 import com.solana.mobilewalletadapter.clientlib.MobileWalletAdapter
 import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
 import com.solana.mobilewalletadapter.clientlib.successPayload
-import com.solana.mobilewalletadapter.common.ProtocolContract
 import dagger.assisted.Assisted
 import dagger.assisted.AssistedFactory
 import dagger.assisted.AssistedInject
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -169,12 +162,12 @@ import org.matrix.android.sdk.api.util.toOptional
 import org.matrix.android.sdk.flow.flow
 import org.matrix.android.sdk.flow.unwrap
 import timber.log.Timber
-import java.math.BigInteger
 import java.util.concurrent.atomic.AtomicBoolean
 
 
 class TimelineViewModel @AssistedInject constructor(
     @Assisted private val initialState: RoomDetailViewState,
+    private val applicationContext: Context,
     private val vectorPreferences: VectorPreferences,
     private val vectorDataStore: VectorDataStore,
     private val stringProvider: StringProvider,
@@ -185,6 +178,7 @@ class TimelineViewModel @AssistedInject constructor(
     private val typingHelper: TypingHelper,
     private val callManager: WebRtcCallManager,
     private val chatEffectManager: ChatEffectManager,
+    @Suppress("unused")
     private val directRoomHelper: DirectRoomHelper,
     private val jitsiService: JitsiService,
     private val analyticsTracker: AnalyticsTracker,
@@ -202,6 +196,7 @@ class TimelineViewModel @AssistedInject constructor(
     private val tradeRepository: TradeRepository,
     val sessionPref: SessionPref,
     private val loginRepository: LoginRepository,
+    @Suppress("unused")
     private val solanaRepository: SolanaRepository,
 
     ) : VectorViewModel<RoomDetailViewState, RoomDetailAction, RoomDetailViewEvents>(initialState),
@@ -239,9 +234,6 @@ class TimelineViewModel @AssistedInject constructor(
     private val _signature = MutableLiveData<String?>()
     val signature = _signature
 
-    private val _message = MutableLiveData<Int>()
-    val message = _message
-
     @AssistedFactory
     interface Factory : MavericksAssistedViewModelFactory<TimelineViewModel, RoomDetailViewState> {
         override fun create(initialState: RoomDetailViewState): TimelineViewModel
@@ -249,9 +241,6 @@ class TimelineViewModel @AssistedInject constructor(
 
     companion object :
         MavericksViewModelFactory<TimelineViewModel, RoomDetailViewState> by hiltMavericksViewModelFactory() {
-
-        private val CLUSTER_RPC_URI = Uri.parse("https://api.testnet.solana.com")
-
         const val PAGINATION_COUNT = 50
 
         // The larger the number the faster the results, COUNT=200 for 500 thread messages its x4 faster than COUNT=50
@@ -371,40 +360,28 @@ class TimelineViewModel @AssistedInject constructor(
     }
 
     private fun base64ToArrayBuffer(base64: String): ByteArray {
-        val binaryString = android.util.Base64.decode(base64, android.util.Base64.DEFAULT)
+        val binaryString = Base64.decode(base64, Base64.DEFAULT)
         val bytes = ByteArray(binaryString.size)
         for (i in binaryString.indices) {
-            bytes[i] = binaryString[i].toByte()
+            bytes[i] = binaryString[i]
         }
         return bytes
     }
 
-    private fun base64ToBase58(base64String: String): String {
-        val BASE58_ALPHABET = "123456789ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz"
-        val binaryData = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            java.util.Base64.getDecoder().decode(base64String)
-        } else {
-            android.util.Base64.decode(base64String, android.util.Base64.DEFAULT)
+    private fun showMessage(@StringRes resId: Int) {
+        val str = applicationContext.getString(resId)
+        _uiState.update {
+            it.copy(messages = it.messages.plus(str))
         }
-        var number = 0.toBigInteger()
-        for (byte in binaryData) {
-            number = number.shl(8).or(byte.toInt().toBigInteger())
-        }
-        var base58String = ""
-        while (number > BigInteger.ZERO) {
-            val (quotient, remainder) = number.divideAndRemainder(BigInteger.valueOf(58))
-            base58String = BASE58_ALPHABET[remainder.toInt()] + base58String
-            number = quotient
-        }
-        for (byte in binaryData) {
-            if (byte != 0.toByte()) {
-                break
-            }
-            base58String = BASE58_ALPHABET[0] + base58String
-        }
-        return base58String
     }
 
+    fun messageShown() {
+        _uiState.update {
+            it.copy(messages = it.messages.drop(1))
+        }
+    }
+
+    @Suppress("unused")
     fun startInitiateTrade2(
         intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
         event: TradeEventBus,
@@ -433,7 +410,7 @@ class TimelineViewModel @AssistedInject constructor(
                 doLocalAssociateAndExecute(intentLauncher) { client ->
                     doReauthorize(
                         client,
-                        OnboardingViewModel.IDENTITY,
+                        IDENTITY,
                         OnboardingViewModel.CLUSTER_NAME
                     )
                     val signature = client.signAndSendTransactions(arrayOf(bytesArray))
@@ -460,8 +437,7 @@ class TimelineViewModel @AssistedInject constructor(
     fun startInitiateTrade(
         event: TradeEventBus,
         sender: ActivityResultSender,
-        offer: GetTradeByPkQuery.Data,
-        action: (String) -> Unit
+        offer: GetTradeByPkQuery.Data
     ) {
         viewModelScope.launch {
             val initPayload = InitializePayload(
@@ -474,7 +450,7 @@ class TimelineViewModel @AssistedInject constructor(
             val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
             //convert transaction_base_64 toByteArray
             if (buildInitTrade?.buildInitializeTransaction?.transaction_base_64 == null) {
-                action.invoke("Base64 is null")
+                showMessage(R.string.event_status_a11y_failed)
                 return@launch
             }
 
@@ -493,15 +469,73 @@ class TimelineViewModel @AssistedInject constructor(
             }
 
             if (result.successPayload?.signatures?.isEmpty() != true) {
+                delay(2000)
                 tradeRepository.initializeTrade(offer.trades_by_pk?.id!!)
+                delay(2000)
                 updateMessageEvent(
                     event = event.event!!,
                     event.offer
                 )
+                showMessage(R.string.successfully)
+            }else{
+                showMessage(R.string.event_status_a11y_failed)
             }
-            action.invoke(result.toString())
         }
     }
+
+    fun cancelTransactions(
+        event: TradeEventBus,
+        sender: ActivityResultSender,
+        offer: GetTradeByPkQuery.Data
+        ) {
+        viewModelScope.launch {
+            val payload = CancelPayload(
+                taker_token_mint = offer.trades_by_pk?.recipient_token_address.toString(),
+                intializer_token_mint = offer.trades_by_pk?.sending_token_address.toString()
+            )
+            val cancelOfferRes = tradeRepository.buildCancelTransaction(payload)
+            if (cancelOfferRes?.buildCancelTransaction?.transaction_base_64 == null) {
+                showMessage(R.string.cannot_get_base64)
+                return@launch
+            }
+            val bytesArray = base64ToArrayBuffer(cancelOfferRes.buildCancelTransaction.transaction_base_64)
+
+            val result =
+                walletAdapter.transact(sender) {
+                    reauthorize(
+                        IDENTITY.uri!!,
+                        IDENTITY.iconRelativeUri!!,
+                        IDENTITY.name,
+                        sessionPref.authToken
+                    )
+                    signAndSendTransactions(arrayOf(bytesArray))
+                }
+            if (result.successPayload?.signatures?.isNotEmpty() == true) {
+                val signatureBase64 = Base58EncodeUseCase.invoke(result.successPayload?.signatures?.first()!!)
+                delay(2000)
+                val exchange = tradeRepository.exchangeTrade(
+                    offer.trades_by_pk?.id!!,
+                    signatureBase64
+                )
+                if (exchange?.exchangeTrade?.updated == true) {
+                    delay(2000)
+                    updateMessageEvent(
+                        event = event.event!!,
+                        event.offer
+                    )
+                    showMessage(R.string.successfully)
+                    return@launch
+                } else {
+                    showMessage(R.string.event_status_a11y_failed)
+                    return@launch
+                }
+            }else {
+                showMessage(R.string.event_status_a11y_failed)
+            }
+
+        }
+    }
+
 
     fun startExchangeTrade(
         event: TradeEventBus,
@@ -536,19 +570,18 @@ class TimelineViewModel @AssistedInject constructor(
                     )
                     signAndSendTransactions(arrayOf(bytesArray))
                 }
-            Timber.tag("result").d(result.toString())
 
             if (result.successPayload?.signatures?.isNotEmpty() == true) {
-                val signatureBase64 = Base58EncodeUseCase.invoke(result.successPayload?.signatures?.first()!!)
-                Timber.tag("signature ádfasdfasd").d(sessionPref.address)
-                Timber.tag("signature ádfasdfasd").d(signatureBase64)
-                Timber.tag("signature ádfasdfasd").d(Gson().toJson(result.successPayload?.signatures))
+                val signatureBase64 =
+                    Base58EncodeUseCase.invoke(result.successPayload?.signatures?.first()!!)
 
+                delay(2000)
                 val exchange = tradeRepository.exchangeTrade(
                     offer.trades_by_pk?.id!!,
                     signatureBase64
                 )
                 if (exchange?.exchangeTrade?.updated == true) {
+                    delay(2000)
                     updateMessageEvent(
                         event = event.event!!,
                         event.offer
@@ -559,14 +592,12 @@ class TimelineViewModel @AssistedInject constructor(
                     action.invoke("update failed")
                     return@launch
                 }
-
-//            }
-//            action.invoke("failed")
             }
         }
 
     }
 
+    @Suppress("unused")
     fun exchangeTrade(offer: GetTradeByPkQuery.Data?, signature: String) = liveData {
         try {
             emit(Resource.loading())
@@ -583,37 +614,6 @@ class TimelineViewModel @AssistedInject constructor(
     ): MobileWalletAdapterClient.AuthorizationResult {
         val result = try {
             client.reauthorize(identity, currentAuthToken)
-        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
-            _uiState.update {
-                it.copy(
-                    authToken = null,
-                    publicKey = null,
-                    accountLabel = null,
-                    walletUriBase = null
-                )
-            }
-            throw e
-        }
-
-        _uiState.update {
-            it.copy(
-                authToken = result.authToken,
-                publicKey = result.publicKey,
-                accountLabel = result.accountLabel,
-                walletUriBase = result.walletUriBase
-            )
-        }
-
-        return result
-    }
-
-    private suspend fun doAuthorize(
-        client: MobileWalletAdapterUseCase.Client,
-        identity: MobileWalletAdapterUseCase.DappIdentity,
-        cluster: String?
-    ): MobileWalletAdapterClient.AuthorizationResult {
-        val result = try {
-            client.authorize(identity, cluster)
         } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
             _uiState.update {
                 it.copy(
@@ -1994,42 +1994,6 @@ class TimelineViewModel @AssistedInject constructor(
         super.onCleared()
     }
 
-    fun signNonce(
-        intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
-        nonce: Int
-    ) = viewModelScope.launch {
-        val message = nonce.toString().toByteArray(Charsets.UTF_8)
-        val arrayMessage = arrayOf(message.copyOfRange(0, message.size))
-        val signedMessages = try {
-            doLocalAssociateAndExecute(intentLauncher, _uiState.value.walletUriBase) { client ->
-                doReauthorize(client, OnboardingViewModel.IDENTITY, sessionPref.authToken)
-                client.signMessagesDetached(
-                    arrayMessage,
-                    arrayOf(Base58DecodeUseCase.invoke(sessionPref.address))
-                )
-            }
-        } catch (e: MobileWalletAdapterUseCase.LocalAssociationFailedException) {
-            showMessage(R.string.msg_association_failed)
-            return@launch
-        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
-            showMessage(R.string.msg_request_failed)
-            return@launch
-        }
-
-        try {
-            OffChainMessageSigningUseCase.verify(
-                signedMessages[0].message,
-                signedMessages[0].signatures[0],
-                Base58DecodeUseCase.invoke(sessionPref.address),
-                nonce.toString().toByteArray(Charsets.UTF_8)
-            )
-            _signature.value = Base58EncodeUseCase.invoke(signedMessages[0].signatures[0])
-//            showMessage(R.string.msg_request_succeeded)
-        } catch (e: IllegalArgumentException) {
-            showMessage(R.string.msg_request_failed)
-        }
-    }
-
     private suspend fun <T> doLocalAssociateAndExecute(
         intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
         uriPrefix: Uri? = null,
@@ -2043,11 +2007,6 @@ class TimelineViewModel @AssistedInject constructor(
         }
     }
 
-
-    private fun showMessage(resId: Int) {
-        _message.value = resId
-    }
-
     fun getNonce() = liveData {
         emit(Resource.loading())
         try {
@@ -2056,47 +2015,6 @@ class TimelineViewModel @AssistedInject constructor(
         } catch (t: Throwable) {
             emit(Resource.error("error"))
         }
-
     }
-
-    fun signAndSendTransactions2(
-        intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
-        transactions: Array<ByteArray>
-    ) = viewModelScope.launch {
-        val latestBlockhash = viewModelScope.async(Dispatchers.IO) {
-            GetLatestBlockhashUseCase(CLUSTER_RPC_URI)
-        }
-
-        try {
-            doLocalAssociateAndExecute(intentLauncher, _uiState.value.walletUriBase) { client ->
-                doReauthorize(client, IDENTITY, sessionPref.authToken).also {
-                    Timber.tag(TAG).d("Reauthorized: %s", it)
-                }
-                val (_, slot) = latestBlockhash.await()
-                client.signAndSendTransactions(transactions, slot).also {
-                    Timber.tag(TAG).d("Transaction signature(s): %s", it)
-                }
-            }.also { showMessage(R.string.msg_request_succeeded) }
-        } catch (e: MobileWalletAdapterUseCase.LocalAssociationFailedException) {
-            Timber.tag(TAG).e(e, "Error associating")
-            showMessage(R.string.msg_association_failed)
-            return@launch
-        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
-            Timber.tag(TAG).e(e, "Failed invoking reauthorize + sign_and_send_transactions")
-            showMessage(R.string.msg_request_failed)
-            return@launch
-        } catch (e: GetLatestBlockhashUseCase.GetLatestBlockhashFailedException) {
-            Timber.tag(TAG).e(e, "Failed retrieving latest blockhash")
-            showMessage(R.string.msg_request_failed)
-            return@launch
-        }
-    }
-
-    private val transactionUseCase
-        get() = when (_uiState.value.txnVersion) {
-            MemoTransactionVersion.Legacy -> MemoTransactionLegacyUseCase
-            MemoTransactionVersion.V0 -> MemoTransactionV0UseCase
-        }
-
 
 }

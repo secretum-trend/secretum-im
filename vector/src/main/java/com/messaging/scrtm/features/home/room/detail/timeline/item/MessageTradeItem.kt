@@ -16,13 +16,11 @@
 
 package com.messaging.scrtm.features.home.room.detail.timeline.item
 
-import android.content.Intent
 import android.content.res.ColorStateList
-import android.util.Log
+import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.content.ContextCompat.getColor
-import androidx.core.content.ContextCompat.startActivities
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.auth.GetTradeByPkQuery
@@ -32,7 +30,6 @@ import com.messaging.lib.core.utils.view.show
 import com.messaging.scrtm.R
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.trade.entity.TradeStatus
-import com.messaging.scrtm.trade.creatingoffer.CreateOfferActivity
 import com.messaging.scrtm.trade.eventBus.TradeEventBus
 import com.messaging.scrtm.trade.eventBus.TradeEventType
 import org.greenrobot.eventbus.EventBus
@@ -65,7 +62,6 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
 //        val isEmitter = currentUserId != null && currentUserId == locationUserId
 //        val messageLayout = attributes.informationData.messageLayout
 //        val viewState = buildViewState(holder, messageLayout, isEmitter)
-
 
         with(holder) {
             //WaitApproval
@@ -113,7 +109,7 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
                 EventBus.getDefault().post(
                     TradeEventBus(
                         offer = tradeByPkOutput,
-                        tradeEventType = TradeEventType.CANCEL,
+                        tradeEventType = TradeEventType.CANCEL_TRANSACTION,
                         event!!
                     )
                 )
@@ -148,7 +144,6 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             layoutAccepted.hide()
             layoutInitialized.hide()
             layoutSuccessful.hide()
-            Log.d("Trade Status", TradeStatus.valueOf(tradeByPkOutput?.trades_by_pk?.status.toString()).name)
             when (TradeStatus.valueOf(tradeByPkOutput?.trades_by_pk?.status.toString())) {
                 TradeStatus.WAIT_FOR_APPROVAL -> {
                     layoutWaitApproval.show()
@@ -208,7 +203,18 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
                             )
                         )
                     } else {
+                        tvConfirmInitialized.isEnabled = true
                         tvConfirmInitialized.text = view.context.getString(R.string.confirm_escrow)
+                        tvCancelInitial.visibility = View.INVISIBLE
+
+                        tvConfirmInitialized.backgroundTintList =
+                            ColorStateList.valueOf(getColor(view.context, R.color.white))
+                        tvConfirmInitialized.setTextColor(
+                            getColor(
+                                holder.view.context,
+                                R.color.text_color
+                            )
+                        )
                     }
                 }
 

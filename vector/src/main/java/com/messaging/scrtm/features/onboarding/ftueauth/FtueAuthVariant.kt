@@ -52,6 +52,7 @@ import com.messaging.scrtm.features.onboarding.ftueauth.terms.FtueAuthLegacyStyl
 import com.messaging.scrtm.features.onboarding.ftueauth.terms.FtueAuthTermsFragment
 import com.messaging.scrtm.features.onboarding.ftueauth.terms.FtueAuthTermsLegacyStyleFragmentArgument
 import com.messaging.lib.core.utils.compat.getParcelableExtraCompat
+import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
 import org.matrix.android.sdk.api.auth.registration.Stage
 import org.matrix.android.sdk.api.auth.toLocalizedLoginTerms
 import org.matrix.android.sdk.api.extensions.tryOrNull

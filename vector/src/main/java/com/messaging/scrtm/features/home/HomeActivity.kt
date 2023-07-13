@@ -84,6 +84,7 @@ import com.messaging.scrtm.features.themes.ThemeUtils
 import com.messaging.scrtm.features.usercode.UserCodeActivity
 import com.messaging.scrtm.features.workers.signout.ServerBackupStatusViewModel
 import com.messaging.lib.core.utils.compat.getParcelableExtraCompat
+import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -111,6 +112,11 @@ class HomeActivity :
         SpaceInviteBottomSheet.InteractionListener,
         MatrixToBottomSheet.InteractionListener,
         VectorMenuProvider {
+
+    private val mwaLauncher = registerForActivityResult(
+        MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity(lifecycle)
+    ) {
+    }
 
     private lateinit var sharedActionViewModel: HomeSharedActionViewModel
     private lateinit var roomListSharedActionViewModel: RoomListSharedActionViewModel
@@ -202,6 +208,9 @@ class HomeActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        if (isFirstCreation()){
+            homeActivityViewModel.authorize(mwaLauncher)
+        }
         isNewAppLayoutEnabled = vectorPreferences.isNewAppLayoutEnabled()
         analyticsScreenName = MobileScreen.ScreenName.Home
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, false)

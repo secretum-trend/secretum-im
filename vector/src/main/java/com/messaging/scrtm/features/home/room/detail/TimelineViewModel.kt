@@ -437,7 +437,7 @@ class TimelineViewModel @AssistedInject constructor(
     fun startInitiateTrade(
         event: TradeEventBus,
         sender: ActivityResultSender,
-        offer: GetTradeByPkQuery.Data
+        offer: GetTradeByPkQuery.Data,
     ) {
         viewModelScope.launch {
             val initPayload = InitializePayload(
@@ -456,7 +456,6 @@ class TimelineViewModel @AssistedInject constructor(
 
             val bytesArray =
                 base64ToArrayBuffer(buildInitTrade.buildInitializeTransaction.transaction_base_64)
-
 
             val result = walletAdapter.transact(sender) {
                 reauthorize(
@@ -477,7 +476,7 @@ class TimelineViewModel @AssistedInject constructor(
                     event.offer
                 )
                 showMessage(R.string.successfully)
-            }else{
+            } else {
                 showMessage(R.string.event_status_a11y_failed)
             }
         }
@@ -487,7 +486,7 @@ class TimelineViewModel @AssistedInject constructor(
         event: TradeEventBus,
         sender: ActivityResultSender,
         offer: GetTradeByPkQuery.Data
-        ) {
+    ) {
         viewModelScope.launch {
             val payload = CancelPayload(
                 taker_token_mint = offer.trades_by_pk?.recipient_token_address.toString(),
@@ -498,7 +497,8 @@ class TimelineViewModel @AssistedInject constructor(
                 showMessage(R.string.cannot_get_base64)
                 return@launch
             }
-            val bytesArray = base64ToArrayBuffer(cancelOfferRes.buildCancelTransaction.transaction_base_64)
+            val bytesArray =
+                base64ToArrayBuffer(cancelOfferRes.buildCancelTransaction.transaction_base_64)
 
             val result =
                 walletAdapter.transact(sender) {
@@ -511,13 +511,14 @@ class TimelineViewModel @AssistedInject constructor(
                     signAndSendTransactions(arrayOf(bytesArray))
                 }
             if (result.successPayload?.signatures?.isNotEmpty() == true) {
-                val signatureBase64 = Base58EncodeUseCase.invoke(result.successPayload?.signatures?.first()!!)
+                val signatureBase64 =
+                    Base58EncodeUseCase.invoke(result.successPayload?.signatures?.first()!!)
                 delay(2000)
-                val exchange = tradeRepository.exchangeTrade(
+                val exchange = tradeRepository.cancelTransaction(
                     offer.trades_by_pk?.id!!,
                     signatureBase64
                 )
-                if (exchange?.exchangeTrade?.updated == true) {
+                if (exchange?.cancelOffer?.updated == true) {
                     delay(2000)
                     updateMessageEvent(
                         event = event.event!!,
@@ -529,7 +530,7 @@ class TimelineViewModel @AssistedInject constructor(
                     showMessage(R.string.event_status_a11y_failed)
                     return@launch
                 }
-            }else {
+            } else {
                 showMessage(R.string.event_status_a11y_failed)
             }
 

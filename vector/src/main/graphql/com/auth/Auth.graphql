@@ -11,6 +11,13 @@ query getNonceByUserId($userId: Int!){
 }
 
 
+mutation CancelTransaction($tradeId: Int!, $signature: String!) {
+    cancelOffer(payload: {tradeId: $tradeId, signature: $signature}){
+        updated
+        __typename
+    }
+}
+
 mutation joinPublicKeyToWhitelist($publicKey: String!) {
     joinWhitelistFree(address: $publicKey) {
         joined

@@ -3554,6 +3554,7 @@
     <string name="trade">Trade</string>
     <string name="from">From</string>
     <string name="to">To</string>
+    <string name="to2">to</string>
     <string name="price">Price</string>
     <string name="enable_accept_partialy">Enable accept partialy</string>
     <string name="unknown_token">%s Unknown Token</string>
@@ -3583,6 +3584,8 @@
     <string name="confirm_escrow">Confirm escrow</string>
     <string name="you_have_an_offer">You have an offer. Make a deal!</string>
     <string name="cannot_get_base64">can\'t get base64!</string>
-
+    <string name="sent">sent</string>
+    <string name="to_escrow">to escrow</string>
+    <string name="received">received</string>
 
 </resources>

@@ -1246,7 +1246,7 @@ class OnboardingViewModel @AssistedInject constructor(
     }
 
 
-    private suspend fun doAuthorize(
+    suspend fun doAuthorize(
         client: MobileWalletAdapterUseCase.Client,
         identity: MobileWalletAdapterUseCase.DappIdentity,
         cluster: String?

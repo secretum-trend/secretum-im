@@ -16,6 +16,13 @@
 
 package com.messaging.scrtm.features.home
 
+import android.content.ContentValues.TAG
+import android.content.Context
+import android.net.Uri
+import android.util.Log
+import androidx.activity.result.ActivityResultLauncher
+import androidx.annotation.StringRes
+import androidx.lifecycle.viewModelScope
 import com.airbnb.mvrx.Mavericks
 import com.airbnb.mvrx.MavericksViewModelFactory
 import com.airbnb.mvrx.ViewModelContext
@@ -47,13 +54,24 @@ import com.messaging.scrtm.features.session.coroutineScope
 import com.messaging.scrtm.features.settings.VectorPreferences
 import com.messaging.scrtm.features.voicebroadcast.recording.usecase.StopOngoingVoiceBroadcastUseCase
 import com.messaging.lib.core.utils.compat.getParcelableExtraCompat
+import com.messaging.scrtm.R
+import com.messaging.scrtm.data.SessionPref
+import com.messaging.scrtm.features.onboarding.OnboardingViewModel
+import com.messaging.scrtm.features.onboarding.OnboardingViewModel.Companion.CLUSTER_NAME
+import com.messaging.scrtm.features.onboarding.OnboardingViewModel.Companion.IDENTITY
+import com.messaging.scrtm.features.onboarding.usecase.Base58EncodeUseCase
+import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
+import com.solana.mobilewalletadapter.clientlib.protocol.MobileWalletAdapterClient
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.flow.takeWhile
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import org.matrix.android.sdk.api.auth.UIABaseAuth
 import org.matrix.android.sdk.api.auth.UserInteractiveAuthInterceptor
@@ -81,22 +99,24 @@ import kotlin.coroutines.resume
 import kotlin.coroutines.resumeWithException
 
 class HomeActivityViewModel @AssistedInject constructor(
-        @Assisted private val initialState: HomeActivityViewState,
-        private val activeSessionHolder: ActiveSessionHolder,
-        private val rawService: RawService,
-        private val reAuthHelper: ReAuthHelper,
-        private val analyticsStore: AnalyticsStore,
-        private val lightweightSettingsStorage: LightweightSettingsStorage,
-        private val vectorPreferences: VectorPreferences,
-        private val analyticsTracker: AnalyticsTracker,
-        private val analyticsConfig: AnalyticsConfig,
-        private val releaseNotesPreferencesStore: ReleaseNotesPreferencesStore,
-        private val stopOngoingVoiceBroadcastUseCase: StopOngoingVoiceBroadcastUseCase,
-        private val pushersManager: PushersManager,
-        private val registerUnifiedPushUseCase: RegisterUnifiedPushUseCase,
-        private val unregisterUnifiedPushUseCase: UnregisterUnifiedPushUseCase,
-        private val ensureFcmTokenIsRetrievedUseCase: EnsureFcmTokenIsRetrievedUseCase,
-        private val ensureSessionSyncingUseCase: EnsureSessionSyncingUseCase,
+    @Assisted private val initialState: HomeActivityViewState,
+    private val activeSessionHolder: ActiveSessionHolder,
+    private val applicationContext: Context,
+    private val rawService: RawService,
+    private val reAuthHelper: ReAuthHelper,
+    private val analyticsStore: AnalyticsStore,
+    private val lightweightSettingsStorage: LightweightSettingsStorage,
+    private val vectorPreferences: VectorPreferences,
+    private val analyticsTracker: AnalyticsTracker,
+    private val analyticsConfig: AnalyticsConfig,
+    private val releaseNotesPreferencesStore: ReleaseNotesPreferencesStore,
+    private val stopOngoingVoiceBroadcastUseCase: StopOngoingVoiceBroadcastUseCase,
+    private val pushersManager: PushersManager,
+    private val registerUnifiedPushUseCase: RegisterUnifiedPushUseCase,
+    private val unregisterUnifiedPushUseCase: UnregisterUnifiedPushUseCase,
+    private val ensureFcmTokenIsRetrievedUseCase: EnsureFcmTokenIsRetrievedUseCase,
+    private val ensureSessionSyncingUseCase: EnsureSessionSyncingUseCase,
+    private val sessionPref: SessionPref,
 ) : VectorViewModel<HomeActivityViewState, HomeActivityViewActions, HomeActivityViewEvents>(initialState) {
 
     @AssistedFactory
@@ -152,6 +172,85 @@ class HomeActivityViewModel @AssistedInject constructor(
                 }
             }
         }
+    }
+
+    private val _uiState = MutableStateFlow(OnboardingViewModel.UiState())
+    val uiState = _uiState.asStateFlow()
+
+    fun authorize(
+        intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>
+    ) = viewModelScope.launch {
+        try {
+            doLocalAssociateAndExecute(intentLauncher) { client ->
+                doAuthorize(client, IDENTITY, CLUSTER_NAME)
+            }.also {
+                Log.d(TAG, "Authorized: $it")
+                showMessage(R.string.msg_request_succeeded)
+            }
+        } catch (e: MobileWalletAdapterUseCase.LocalAssociationFailedException) {
+            Log.e(TAG, "Error associating", e)
+            showMessage(R.string.msg_association_failed)
+        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
+            Log.e(TAG, "Failed invoking authorize", e)
+            showMessage(R.string.msg_request_failed)
+        }
+    }
+
+    private suspend fun <T> doLocalAssociateAndExecute(
+        intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
+        uriPrefix: Uri? = null,
+        action: suspend (MobileWalletAdapterUseCase.Client) -> T
+    ): T {
+        return try {
+            MobileWalletAdapterUseCase.localAssociateAndExecute(intentLauncher, uriPrefix, action)
+        } catch (e: MobileWalletAdapterUseCase.NoWalletAvailableException) {
+            showMessage(R.string.msg_no_wallet_found)
+            throw e
+        }
+    }
+
+    private fun showMessage(@StringRes resId: Int) {
+        val str = applicationContext.getString(resId)
+        _uiState.update {
+            it.copy(messages = it.messages.plus(str))
+        }
+    }
+
+    fun messageShown() {
+        _uiState.update {
+            it.copy(messages = it.messages.drop(1))
+        }
+    }
+    private suspend fun doAuthorize(
+        client: MobileWalletAdapterUseCase.Client,
+        identity: MobileWalletAdapterUseCase.DappIdentity,
+        cluster: String?
+    ): MobileWalletAdapterClient.AuthorizationResult {
+        val result = try {
+            client.authorize(identity, cluster)
+        } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
+            _uiState.update {
+                it.copy(
+                    authToken = null,
+                    publicKey = null,
+                    accountLabel = null,
+                    walletUriBase = null
+                )
+            }
+            throw e
+        }
+
+        _uiState.update {
+            it.copy(
+                authToken = result.authToken,
+                publicKey = result.publicKey,
+                accountLabel = result.accountLabel,
+                walletUriBase = result.walletUriBase
+            )
+        }
+        sessionPref.address = Base58EncodeUseCase.invoke(_uiState.value.publicKey!!)
+        sessionPref.authToken = _uiState.value.authToken!!
+        return result
     }
 
     private fun unregisterUnifiedPush() {

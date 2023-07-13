@@ -189,7 +189,7 @@
                     android:layout_width="4dp"
                     android:layout_height="0dp"
                     android:layout_marginTop="-6dp"
-                    android:background="@color/gray"
+                    android:background="#5267E3"
                     app:layout_constraintBottom_toTopOf="@+id/dot3"
                     app:layout_constraintEnd_toEndOf="@+id/cardView"
                     app:layout_constraintStart_toStartOf="@+id/cardView"
@@ -201,7 +201,7 @@
                     android:layout_height="12dp"
                     android:layout_marginStart="8dp"
                     android:elevation="4dp"
-                    app:cardBackgroundColor="@color/gray"
+                    app:cardBackgroundColor="#5267E3"
                     app:cardCornerRadius="6dp"
                     app:layout_constraintStart_toEndOf="@+id/tvDate"
                     app:layout_constraintTop_toTopOf="@+id/escrow" />
@@ -315,7 +315,7 @@
                     android:id="@+id/dotTime3"
                     android:layout_width="8dp"
                     android:layout_height="8dp"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginTop="8dp"
                     android:elevation="4dp"
                     app:cardBackgroundColor="#ffff"
@@ -335,10 +335,10 @@
                     app:layout_constraintTop_toTopOf="@+id/dotTime3" />
 
                 <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvEscrow2"
+                    android:id="@+id/tvEscrow2Initialized"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:visibility="gone"
+                    android:visibility="visible"
                     android:layout_marginHorizontal="8dp"
                     android:text="13.00 PM, by Alice"
                     android:textSize="10sp"
@@ -370,7 +370,7 @@
                     android:layout_marginTop="8dp"
                     android:text="13.00 PM, by Alice"
                     android:textSize="10sp"
-                    app:layout_constraintTop_toBottomOf="@+id/tvEscrow2"
+                    app:layout_constraintTop_toBottomOf="@+id/tvEscrow2Initialized"
                     />
 
                 <androidx.appcompat.widget.AppCompatTextView

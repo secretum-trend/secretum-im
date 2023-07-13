@@ -3,7 +3,6 @@ package com.messaging.scrtm.data.trade.domain
 import com.apollographql.apollo3.ApolloClient
 import com.auth.*
 import com.auth.type.CancelPayload
-import com.auth.type.CancelResp
 import com.auth.type.CreateOfferPayload
 import com.auth.type.ExchangePayload
 import com.auth.type.InitializePayload
@@ -18,6 +17,8 @@ interface ApolloTradeClient {
     suspend fun tradeByPK(id: Int): GetTradeByPkQuery.Data?
 
     suspend fun cancelOffer(id: Int): CancelOfferMutation.Data?
+
+    suspend fun cancelTransaction(id: Int, signature: String): CancelTransactionMutation.Data?
 
     suspend fun acceptTrade(id: Int): AcceptTradeMutation.Data?
 
@@ -64,6 +65,11 @@ class ApolloTradeClientImp(private val apolloClient: ApolloClient) : ApolloTrade
     override suspend fun cancelOffer(id: Int): CancelOfferMutation.Data? {
         return apolloClient.mutation(CancelOfferMutation(id)).execute().data
     }
+
+    override suspend fun cancelTransaction(
+        id: Int,
+        signature: String
+    ): CancelTransactionMutation.Data? = apolloClient.mutation(CancelTransactionMutation(id, signature)).execute().data
 
     override suspend fun acceptTrade(id: Int): AcceptTradeMutation.Data? {
         return apolloClient.mutation(AcceptTradeMutation(id)).execute().data

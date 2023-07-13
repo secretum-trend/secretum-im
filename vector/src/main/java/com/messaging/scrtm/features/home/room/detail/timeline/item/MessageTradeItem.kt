@@ -16,11 +16,15 @@
 
 package com.messaging.scrtm.features.home.room.detail.timeline.item
 
+import android.annotation.SuppressLint
 import android.content.res.ColorStateList
 import android.view.View
 import android.widget.FrameLayout
 import androidx.appcompat.widget.AppCompatTextView
+import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.getColor
+import androidx.core.text.buildSpannedString
+import androidx.core.text.color
 import com.airbnb.epoxy.EpoxyAttribute
 import com.airbnb.epoxy.EpoxyModelClass
 import com.auth.GetTradeByPkQuery
@@ -33,6 +37,7 @@ import com.messaging.scrtm.data.trade.entity.TradeStatus
 import com.messaging.scrtm.trade.eventBus.TradeEventBus
 import com.messaging.scrtm.trade.eventBus.TradeEventType
 import org.greenrobot.eventbus.EventBus
+import org.matrix.android.sdk.api.extensions.truncate
 import org.matrix.android.sdk.api.session.events.model.Event
 
 @EpoxyModelClass
@@ -57,12 +62,13 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
         bindLiveLocationBanner(holder)
     }
 
+    @SuppressLint("SetTextI18n")
     private fun bindLiveLocationBanner(holder: Holder) {
         // TODO in a future PR add check on device id to confirm that is the one that sent the beacon
 //        val isEmitter = currentUserId != null && currentUserId == locationUserId
 //        val messageLayout = attributes.informationData.messageLayout
 //        val viewState = buildViewState(holder, messageLayout, isEmitter)
-
+        //setCLick
         with(holder) {
             //WaitApproval
             tvDismissWaitApproval.setOnClickListener {
@@ -128,7 +134,7 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             //Successful
 
             tvOkSuccessful.setOnClickListener {
-               //new offer
+                //new offer
                 EventBus.getDefault().post(
                     TradeEventBus(
                         null,
@@ -138,6 +144,10 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
                 )
             }
 
+        }
+
+        //set UI
+        with(holder) {
             //UI
             layoutWaitApproval.hide()
             layoutCanceled.hide()
@@ -158,6 +168,7 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
                     }
 
                 }
+
                 TradeStatus.CANCELLED -> {
                     layoutCanceled.show()
                     if (isSender()) {
@@ -247,8 +258,8 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             )
             tvFromAddressCanceled.text = attributes.tradeInfo?.sending_address
 
-            nameOfferTradeCanceled.text = attributes.tradeInfo?.sending_address
-            tvAcceptbyCanceled.text = attributes.tradeInfo?.recipient_address
+            nameOfferTradeCanceled.text = attributes.tradeInfo?.sending_address?.truncate(6, 4)
+            tvAcceptbyCanceled.text = attributes.tradeInfo?.recipient_address?.truncate(6, 4)
 
             //Accepted
             tvSendingTokenAccepted.text = String.format(
@@ -277,6 +288,19 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
 
             nameOfferTradeInitialized.text = attributes.tradeInfo?.sending_address
             tvAcceptbyInitialized.text = attributes.tradeInfo?.recipient_address
+            tvEscrow2Initialized.text = buildSpannedString {
+                append(attributes.tradeInfo?.sending_token_address?.truncate(3,2))
+                append(" ")
+                color(getColor(view.context,R.color.shield_color_gray )) {
+                    append(view.context.getString(R.string.sent))
+                }
+                append(" ")
+                append(attributes.tradeInfo?.recipient_token_address?.truncate(3,2)  )
+                append(" ")
+                color(getColor(view.context,R.color.shield_color_gray )) {
+                    append(view.context.getString(R.string.to_escrow))
+                }
+            }
 
             //Successful
             tvSendingTokenSuccessful.text = String.format(
@@ -289,6 +313,56 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
             )
             tvFromAddressSuccessful.text = attributes.tradeInfo?.sending_address
 
+            nameOfferTrade.text = attributes.tradeInfo?.sending_address?.truncate(6, 4)
+            tvAcceptby.text = attributes.tradeInfo?.recipient_address?.truncate(6, 4)
+
+            tvEscrow2Successful.text = buildSpannedString {
+                append(attributes.tradeInfo?.sending_token_address?.truncate(3,2))
+                append(" ")
+                color(getColor(view.context,R.color.shield_color_gray )) {
+                    append(view.context.getString(R.string.sent))
+                }
+                append(" ")
+                append(attributes.tradeInfo?.recipient_token_address?.truncate(3,2)  )
+                append(" ")
+                color(getColor(view.context,R.color.shield_color_gray )) {
+                    append(view.context.getString(R.string.to_escrow))
+                }
+            }
+
+            tvEscrow3Successful.text = buildSpannedString {
+                append(attributes.tradeInfo?.sending_token_address?.truncate(3,2))
+                append(" ")
+                color(getColor(view.context,R.color.shield_color_gray )) {
+                    append(view.context.getString(R.string.sent))
+                }
+                append(" ")
+                append(attributes.tradeInfo?.recipient_token_address?.truncate(3,2))
+                append(" ")
+                color(getColor(view.context,R.color.shield_color_gray )) {
+                    append(view.context.getString(R.string.to2))
+                }
+                append(" ")
+                append(attributes.tradeInfo?.sending_token_address?.truncate(3,2))
+            }
+            tvComplete2Successful.text = buildSpannedString {
+                append(attributes.tradeInfo?.sending_token_address?.truncate(3,2))
+                append(" ")
+                color(getColor(view.context,R.color.shield_color_gray )) {
+                    append(view.context.getString(R.string.received))
+                }
+                append(" ")
+                append(attributes.tradeInfo?.recipient_token_address?.truncate(3,2))
+            }
+            tvComplete3Successful.text = buildSpannedString {
+                append(attributes.tradeInfo?.recipient_token_address?.truncate(3,2))
+                append(" ")
+                color(getColor(view.context,R.color.shield_color_gray )) {
+                    append(view.context.getString(R.string.received))
+                }
+                append(" ")
+                append(attributes.tradeInfo?.sending_token_address?.truncate(3,2))
+            }
 
         }
 
@@ -342,6 +416,7 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
         val tvSendingTokenInitialized by bind<AppCompatTextView>(R.id.tvSendingTokenInitialized)
         val tvRecipientTokenInitialized by bind<AppCompatTextView>(R.id.tvRecipientTokenInitialized)
         val tvFromAddressInitialized by bind<AppCompatTextView>(R.id.tvFromAddressInitialized)
+        val tvEscrow2Initialized by bind<AppCompatTextView>(R.id.tvEscrow2Initialized)
 
         val nameOfferTradeInitialized by bind<AppCompatTextView>(R.id.nameOfferTradeInitialized)
         val tvAcceptbyInitialized by bind<AppCompatTextView>(R.id.tvAcceptbyInitialized)
@@ -352,6 +427,14 @@ abstract class MessageTradeItem : AbsMessageLocationItem<MessageTradeItem.Holder
 
         val tvCancelSuccessful by bind<AppCompatTextView>(R.id.tvCancelSuccessful)
         val tvOkSuccessful by bind<AppCompatTextView>(R.id.tvOkSuccessful)
+        val nameOfferTrade by bind<AppCompatTextView>(R.id.nameOfferTrade)
+        val tvAcceptby by bind<AppCompatTextView>(R.id.tvAcceptby)
+        val tvDate by bind<AppCompatTextView>(R.id.tvDate)
+        val tvEscrow2Successful by bind<AppCompatTextView>(R.id.tvEscrow2Successful)
+        val tvEscrow3Successful by bind<AppCompatTextView>(R.id.tvEscrow3Successful)
+
+        val tvComplete2Successful by bind<AppCompatTextView>(R.id.tvComplete2Successful)
+        val tvComplete3Successful by bind<AppCompatTextView>(R.id.tvComplete3Successful)
 
         val tvSendingTokenSuccessful by bind<AppCompatTextView>(R.id.tvSendingTokenSuccessful)
         val tvRecipientTokenSuccessful by bind<AppCompatTextView>(R.id.tvRecipientTokenSuccessful)

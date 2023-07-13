@@ -24,6 +24,8 @@ interface TradeRepository {
 
     suspend fun cancelOffer(id: Int): CancelOfferMutation.Data?
 
+    suspend fun cancelTransaction(id: Int, signature: String): CancelTransactionMutation.Data?
+
     suspend fun acceptTrade(id: Int): AcceptTradeMutation.Data?
 
     suspend fun initializeTrade(id: Int): InitializeTradeMutation.Data?
@@ -74,6 +76,11 @@ class TradeRepositoryImp @Inject constructor(private val apolloTradeClient: Apol
     override suspend fun cancelOffer(id: Int): CancelOfferMutation.Data? {
         return apolloTradeClient.cancelOffer(id)
     }
+
+    override suspend fun cancelTransaction(
+        id: Int,
+        signature: String
+    ): CancelTransactionMutation.Data? = apolloTradeClient.cancelTransaction(id, signature)
 
     override suspend fun acceptTrade(id: Int): AcceptTradeMutation.Data? {
         return apolloTradeClient.acceptTrade(id)

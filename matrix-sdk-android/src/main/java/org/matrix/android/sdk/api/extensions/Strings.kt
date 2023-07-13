@@ -32,3 +32,14 @@ fun StringBuilder.appendNl(str: String) = append("\n").append(str)
  * Returns null if the string is empty.
  */
 fun String.ensureNotEmpty() = ifEmpty { null }
+
+fun String.truncate(numberFirst: Int = 6, numberLast : Int = 3): String {
+    return if (length > numberFirst + numberLast) {
+        val firstThreeChars = take(numberFirst)
+        val lastThreeChars = takeLast(numberLast)
+        val middleDots = "..."
+        "$firstThreeChars$middleDots$lastThreeChars"
+    } else {
+        this
+    }
+}

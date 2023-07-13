@@ -10,8 +10,6 @@ type FailTradeOutput {
 
 input FailTradePayload {
     message: String
-
-
     tradeId: Int!
 }
 

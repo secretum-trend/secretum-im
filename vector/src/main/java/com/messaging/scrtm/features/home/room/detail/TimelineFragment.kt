@@ -55,8 +55,6 @@ import com.airbnb.mvrx.args
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.animations.play
 import com.messaging.scrtm.core.dialogs.ConfirmationDialogBuilder
@@ -472,7 +470,7 @@ class TimelineFragment :
 
                     if (uiState.messages.isNotEmpty()) {
                         val message = uiState.messages.first()
-                        Toast.makeText(requireContext(),message, Toast.LENGTH_SHORT).show()
+                        Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
 //                        Snackbar.make(views.root, message, Snackbar.LENGTH_SHORT)
 //                            .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
 //                                override fun onDismissed(
@@ -571,7 +569,6 @@ class TimelineFragment :
                                     event.offer
                                 )
                             }
-
                             else -> {}
                         }
                     }
@@ -581,7 +578,7 @@ class TimelineFragment :
             TradeEventType.INITIATE -> {
                 showAlert(getString(R.string.confirm_initiate_offer)) {
                     event.offer?.let { offer ->
-                        timelineViewModel.startInitiateTrade(event,sender!!, offer)
+                        timelineViewModel.startInitiateTrade(event, sender!!, offer)
                     }
                 }
             }
@@ -589,10 +586,11 @@ class TimelineFragment :
             TradeEventType.CONFIRM -> {
                 showAlert(getString(R.string.confirm_confirm_offer)) {
                     event.offer?.let { it ->
-                        timelineViewModel.startExchangeTrade(event,sender!!, it, action = {
+                        timelineViewModel.startExchangeTrade(event, sender!!, it, action = {
                             Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                         })
                     }
+
                 }
             }
 
@@ -611,7 +609,7 @@ class TimelineFragment :
             TradeEventType.CANCEL_TRANSACTION -> {
                 showAlert(getString(R.string.confirm_cancel_transaction)) {
                     event.offer?.let {
-                        timelineViewModel.cancelTransactions(event,sender!!, it)
+                        timelineViewModel.cancelTransactions(event, sender!!, it)
                     }
                 }
             }

@@ -31,6 +31,7 @@ import android.widget.Toast
 import androidx.activity.addCallback
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.annotation.StringRes
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.view.menu.MenuBuilder
 import androidx.core.content.ContextCompat
 import androidx.core.graphics.drawable.DrawableCompat
@@ -55,6 +56,7 @@ import com.airbnb.mvrx.args
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.messaging.lib.ui.styles.dialogs.MaterialProgressDialog
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.animations.play
 import com.messaging.scrtm.core.dialogs.ConfirmationDialogBuilder
@@ -292,6 +294,15 @@ class TimelineFragment :
     private val lazyLoadedViews = RoomDetailLazyLoadedViews()
     private var sender: ActivityResultSender? = null
 
+    private var progress: AlertDialog? = null
+    private fun showOrHideLoadding(boolean: Boolean,message: CharSequence? = null) {
+        progress?.dismiss()
+        if (boolean){
+            progress = MaterialProgressDialog(requireContext())
+                .show(message ?: getString(R.string.please_wait))
+        }
+    }
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -471,16 +482,15 @@ class TimelineFragment :
                     if (uiState.messages.isNotEmpty()) {
                         val message = uiState.messages.first()
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
-//                        Snackbar.make(views.root, message, Snackbar.LENGTH_SHORT)
-//                            .addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-//                                override fun onDismissed(
-//                                    transientBottomBar: Snackbar?,
-//                                    event: Int
-//                                ) {
-//                                    timelineViewModel.messageShown()
-//                                }
-//                            }).show()
                     }
+                }
+            }
+        }
+
+        timelineViewModel.apply {
+            message.observe(viewLifecycleOwner) {
+                if (it.isNotEmpty()) {
+                    Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
                 }
             }
         }
@@ -569,6 +579,7 @@ class TimelineFragment :
                                     event.offer
                                 )
                             }
+
                             else -> {}
                         }
                     }
@@ -578,7 +589,9 @@ class TimelineFragment :
             TradeEventType.INITIATE -> {
                 showAlert(getString(R.string.confirm_initiate_offer)) {
                     event.offer?.let { offer ->
-                        timelineViewModel.startInitiateTrade(event, sender!!, offer)
+                        timelineViewModel.startInitiateTrade(event, sender!!, offer){
+                            showOrHideLoadding(it)
+                        }
                     }
                 }
             }
@@ -587,7 +600,7 @@ class TimelineFragment :
                 showAlert(getString(R.string.confirm_confirm_offer)) {
                     event.offer?.let { it ->
                         timelineViewModel.startExchangeTrade(event, sender!!, it, action = {
-                            Toast.makeText(requireContext(), it, Toast.LENGTH_SHORT).show()
+                            showOrHideLoadding(it)
                         })
                     }
 
@@ -609,7 +622,9 @@ class TimelineFragment :
             TradeEventType.CANCEL_TRANSACTION -> {
                 showAlert(getString(R.string.confirm_cancel_transaction)) {
                     event.offer?.let {
-                        timelineViewModel.cancelTransactions(event, sender!!, it)
+                        timelineViewModel.cancelTransactions(event, sender!!, it){
+                            showOrHideLoadding(it)
+                        }
                     }
                 }
             }

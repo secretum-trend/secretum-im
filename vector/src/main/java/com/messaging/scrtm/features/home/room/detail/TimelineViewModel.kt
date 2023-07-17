@@ -79,10 +79,8 @@ import com.messaging.scrtm.features.location.live.tracking.LocationSharingServic
 import com.messaging.scrtm.features.notifications.NotificationDrawerManager
 import com.messaging.scrtm.features.onboarding.OnboardingViewModel
 import com.messaging.scrtm.features.onboarding.OnboardingViewModel.Companion.IDENTITY
-import com.messaging.scrtm.features.onboarding.usecase.Base58DecodeUseCase
 import com.messaging.scrtm.features.onboarding.usecase.Base58EncodeUseCase
 import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
-import com.messaging.scrtm.features.onboarding.usecase.OffChainMessageSigningUseCase
 import com.messaging.scrtm.features.powerlevel.PowerLevelsFlowFactory
 import com.messaging.scrtm.features.raw.wellknown.CryptoConfig
 import com.messaging.scrtm.features.raw.wellknown.getOutboundSessionKeySharingStrategyOrDefault
@@ -231,6 +229,9 @@ class TimelineViewModel @AssistedInject constructor(
     private val _uiState = MutableStateFlow(OnboardingViewModel.UiState())
     val uiState = _uiState.asStateFlow()
 
+    private val _message = MutableLiveData<String>()
+    val message : MutableLiveData<String> = _message
+
     private val _signature = MutableLiveData<String?>()
     val signature = _signature
 
@@ -370,9 +371,11 @@ class TimelineViewModel @AssistedInject constructor(
 
     private fun showMessage(@StringRes resId: Int) {
         val str = applicationContext.getString(resId)
-        _uiState.update {
-            it.copy(messages = it.messages.plus(str))
-        }
+        _message.value= str
+    }
+
+    private fun showMessage(string : String) {
+        _message.value= string
     }
 
     fun messageShown() {
@@ -381,65 +384,14 @@ class TimelineViewModel @AssistedInject constructor(
         }
     }
 
-    @Suppress("unused")
-    fun startInitiateTrade2(
-        intentLauncher: ActivityResultLauncher<MobileWalletAdapterUseCase.StartMobileWalletAdapterActivity.CreateParams>,
-        event: TradeEventBus,
-        offer: GetTradeByPkQuery.Data,
-        action: (String) -> Unit
-    ) {
-        viewModelScope.launch {
-            val initPayload = InitializePayload(
-                recipient_token_address = offer.trades_by_pk?.recipient_token_address.toString(),
-                sending_token_address = offer.trades_by_pk?.sending_token_address.toString(),
-                ui_taker_amount = offer.trades_by_pk?.recipient_token_amount?.toInt() ?: 0,
-                ui_initializer_amount = offer.trades_by_pk?.sending_token_amount?.toInt() ?: 0
-            )
-            //api get transaction_base_64
-            val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
-            //convert transaction_base_64 toByteArray
-            if (buildInitTrade?.buildInitializeTransaction?.transaction_base_64 == null) {
-                action.invoke("Base64 is null")
-                return@launch
-            }
-
-            val bytesArray =
-                base64ToArrayBuffer(buildInitTrade.buildInitializeTransaction.transaction_base_64)
-
-            try {
-                doLocalAssociateAndExecute(intentLauncher) { client ->
-                    doReauthorize(
-                        client,
-                        IDENTITY,
-                        OnboardingViewModel.CLUSTER_NAME
-                    )
-                    val signature = client.signAndSendTransactions(arrayOf(bytesArray))
-                    if (signature.isNotEmpty()) {
-                        tradeRepository.initializeTrade(offer.trades_by_pk?.id!!)
-                        updateMessageEvent(
-                            event = event.event!!,
-                            event.offer
-                        )
-                    }
-                }.also {
-                    showMessage(R.string.msg_request_succeeded)
-
-                }
-            } catch (e: MobileWalletAdapterUseCase.LocalAssociationFailedException) {
-                showMessage(R.string.msg_association_failed)
-            } catch (e: MobileWalletAdapterUseCase.MobileWalletAdapterOperationFailedException) {
-                showMessage(R.string.msg_request_failed)
-            }
-        }
-
-    }
-
     fun startInitiateTrade(
         event: TradeEventBus,
         sender: ActivityResultSender,
         offer: GetTradeByPkQuery.Data,
+        action : (Boolean) -> Unit
     ) {
         viewModelScope.launch {
+            action.invoke(true)
             val initPayload = InitializePayload(
                 recipient_token_address = offer.trades_by_pk?.recipient_token_address.toString(),
                 sending_token_address = offer.trades_by_pk?.sending_token_address.toString(),
@@ -449,13 +401,13 @@ class TimelineViewModel @AssistedInject constructor(
             //api get transaction_base_64
             val buildInitTrade = tradeRepository.buildInitializeTransaction(initPayload)
             //convert transaction_base_64 toByteArray
-            if (buildInitTrade?.buildInitializeTransaction?.transaction_base_64 == null) {
-                showMessage(R.string.event_status_a11y_failed)
+            if (buildInitTrade.first?.buildInitializeTransaction?.transaction_base_64 == null) {
+                showMessage(buildInitTrade.second.toString())
+                action.invoke(false)
                 return@launch
             }
 
-            val bytesArray =
-                base64ToArrayBuffer(buildInitTrade.buildInitializeTransaction.transaction_base_64)
+            val bytesArray = base64ToArrayBuffer(buildInitTrade.first?.buildInitializeTransaction?.transaction_base_64.toString())
 
             val result = walletAdapter.transact(sender) {
                 reauthorize(
@@ -479,26 +431,31 @@ class TimelineViewModel @AssistedInject constructor(
             } else {
                 showMessage(R.string.event_status_a11y_failed)
             }
+            action.invoke(false)
         }
     }
 
     fun cancelTransactions(
         event: TradeEventBus,
         sender: ActivityResultSender,
-        offer: GetTradeByPkQuery.Data
+        offer: GetTradeByPkQuery.Data,
+        action : (Boolean) -> Unit
+
     ) {
         viewModelScope.launch {
+            action.invoke(true)
             val payload = CancelPayload(
                 taker_token_mint = offer.trades_by_pk?.recipient_token_address.toString(),
                 intializer_token_mint = offer.trades_by_pk?.sending_token_address.toString()
             )
             val cancelOfferRes = tradeRepository.buildCancelTransaction(payload)
-            if (cancelOfferRes?.buildCancelTransaction?.transaction_base_64 == null) {
-                showMessage(R.string.cannot_get_base64)
+            if (cancelOfferRes.first?.buildCancelTransaction?.transaction_base_64 == null) {
+                showMessage(cancelOfferRes.second.toString())
+                action.invoke(false)
                 return@launch
             }
             val bytesArray =
-                base64ToArrayBuffer(cancelOfferRes.buildCancelTransaction.transaction_base_64)
+                base64ToArrayBuffer(cancelOfferRes.first?.buildCancelTransaction?.transaction_base_64.toString())
 
             val result =
                 walletAdapter.transact(sender) {
@@ -518,7 +475,7 @@ class TimelineViewModel @AssistedInject constructor(
                     offer.trades_by_pk?.id!!,
                     signatureBase64
                 )
-                if (exchange?.cancelOffer?.updated == true) {
+                if (exchange.first?.cancelOffer?.updated == true) {
                     delay(2000)
                     updateMessageEvent(
                         event = event.event!!,
@@ -533,7 +490,7 @@ class TimelineViewModel @AssistedInject constructor(
             } else {
                 showMessage(R.string.event_status_a11y_failed)
             }
-
+            action.invoke(false)
         }
     }
 
@@ -542,9 +499,10 @@ class TimelineViewModel @AssistedInject constructor(
         event: TradeEventBus,
         sender: ActivityResultSender,
         offer: GetTradeByPkQuery.Data,
-        action: (String) -> Unit
+        action: (Boolean) -> Unit
     ) {
         viewModelScope.launch {
+            action.invoke(true)
             val exchangePayload = ExchangePayload(
                 initializer = offer.trades_by_pk?.sending_address.toString(),
                 taker_token_mint = offer.trades_by_pk?.recipient_token_address.toString(),
@@ -553,13 +511,14 @@ class TimelineViewModel @AssistedInject constructor(
             //api get transaction_base_64
             val buildExchangeTrade = tradeRepository.buildExchangeTransaction(exchangePayload)
             //convert transaction_base_64 toByteArray
-            if (buildExchangeTrade?.buildExchangeTransaction?.transaction_base_64 == null) {
-                action.invoke("Base64 is null")
+            if (buildExchangeTrade.first?.buildExchangeTransaction?.transaction_base_64 == null) {
+                showMessage("huhu")
+                action.invoke(false)
                 return@launch
             }
 
             val bytesArray =
-                base64ToArrayBuffer(buildExchangeTrade.buildExchangeTransaction.transaction_base_64)
+                base64ToArrayBuffer(buildExchangeTrade.first?.buildExchangeTransaction?.transaction_base_64.toString())
 
             val result =
                 walletAdapter.transact(sender) {
@@ -587,13 +546,9 @@ class TimelineViewModel @AssistedInject constructor(
                         event = event.event!!,
                         event.offer
                     )
-                    action.invoke("updated")
-                    return@launch
-                } else {
-                    action.invoke("update failed")
-                    return@launch
                 }
             }
+            action.invoke(false)
         }
 
     }

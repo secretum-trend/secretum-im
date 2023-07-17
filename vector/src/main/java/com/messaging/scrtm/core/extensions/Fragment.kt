@@ -19,6 +19,7 @@ package com.messaging.scrtm.core.extensions
 import android.app.Activity
 import android.content.Intent
 import android.os.Parcelable
+import android.widget.Toast
 import androidx.activity.result.ActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -190,4 +191,8 @@ fun Activity.queryExportKeys(userId: String, activityResultLauncher: ActivityRes
             defaultFileName = "$appName-megolm-export-$userId-${timestamp}.txt",
             chooserHint = getString(R.string.keys_backup_setup_step1_manual_export)
     )
+}
+
+fun Fragment.showToast(string : String){
+    Toast.makeText(requireContext(), string, Toast.LENGTH_SHORT).show()
 }

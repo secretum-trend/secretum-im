@@ -1,15 +1,21 @@
 import com.android.build.OutputFile
 
-apply plugin: 'com.android.application'
-apply plugin: 'com.google.firebase.appdistribution'
-apply plugin: 'com.google.android.gms.oss-licenses-plugin'
-apply plugin: 'kotlin-android'
-apply plugin: 'kotlin-parcelize'
-apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.devtools.ksp'
-apply plugin: 'dagger.hilt.android.plugin'
-apply plugin: 'kotlinx-knit'
-apply plugin: 'com.likethesalad.stem'
+plugins {
+    id 'com.android.application'
+    id 'com.google.firebase.appdistribution'
+    id 'com.google.android.gms.oss-licenses-plugin'
+    id 'kotlin-android'
+    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
+    id 'com.google.devtools.ksp'
+    id 'dagger.hilt.android.plugin'
+    id 'kotlinx-knit'
+    id 'com.likethesalad.stem'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
+
+}
+
 
 if (project.hasProperty("coverage")) {
     apply plugin: 'jacoco'
@@ -412,6 +418,14 @@ dependencies {
     androidTestImplementation "org.jetbrains.kotlin:kotlin-reflect:1.8.0"
     debugImplementation libs.androidx.fragmentTestingManifest
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:2.10'
+
+    // Import the BoM for the Firebase platform
+    implementation(platform("com.google.firebase:firebase-bom:32.2.0"))
+
+    // Add the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation("com.google.firebase:firebase-crashlytics-ktx")
+
 
 }
 

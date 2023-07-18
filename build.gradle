@@ -5,6 +5,9 @@ buildscript {
     apply from: 'dependencies_groups.gradle'
 
     repositories {
+        google()
+        mavenCentral()
+
         // Do not use `google()`, it prevents Dependabot from working properly
         maven {
             url 'https://maven.google.com'
@@ -18,8 +21,6 @@ buildscript {
         }
 
         maven { url 'https://dl.bintray.com/android/android-tools/' }
-        google()
-        mavenCentral()
     }
 
     dependencies {
@@ -40,6 +41,8 @@ buildscript {
         classpath libs.squareup.paparazziPlugin
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
+        // Add the Crashlytics Gradle plugin.
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.7'
     }
 }
 
@@ -57,6 +60,7 @@ plugins {
     id "com.osacky.doctor" version "0.8.1"
 
     id 'com.apollographql.apollo3' version '3.7.4' apply false
+
 }
 
 // https://github.com/jeremylong/DependencyCheck

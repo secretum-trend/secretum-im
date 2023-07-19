@@ -114,6 +114,7 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import org.matrix.android.sdk.api.MatrixPatterns
+import org.matrix.android.sdk.api.MatrixPatterns.getUserId
 import org.matrix.android.sdk.api.extensions.orFalse
 import org.matrix.android.sdk.api.extensions.tryOrNull
 import org.matrix.android.sdk.api.query.QueryStringValue
@@ -1265,7 +1266,7 @@ class TimelineViewModel @AssistedInject constructor(
                     R.id.video_call -> state.isCallOptionAvailable() || state.jitsiState.confId == null || state.jitsiState.hasJoined
                     // Show Join conference button only if there is an active conf id not joined. Otherwise fallback to default video disabled. ^
                     R.id.join_conference -> !state.isCallOptionAvailable() && state.jitsiState.confId != null && !state.jitsiState.hasJoined
-                    R.id.trade -> state.isCallOptionAvailable() || state.hasActiveElementCallWidget()
+                    R.id.trade -> (state.isCallOptionAvailable() || state.hasActiveElementCallWidget()) && state.asyncRoomSummary()?.directUserId?.getUserId() != -1
                     R.id.search -> state.isSearchAvailable()
                     R.id.menu_timeline_thread_list -> vectorPreferences.areThreadMessagesEnabled()
                     R.id.dev_tools -> vectorPreferences.developerMode()

@@ -30,7 +30,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class CreateOfferActivity : AppCompatActivity() {
     val binding by lazy { ActivityCreateOfferBinding.inflate(layoutInflater) }
-    private val recipientUserId by lazy { intent.getStringExtra("userId") }
+    private val recipientUserId by lazy { intent.getIntExtra("userId", -1) }
     val viewModel by viewModels<CreateOfferViewModel>()
     private val chooseNftResultContracts =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
@@ -51,7 +51,7 @@ class CreateOfferActivity : AppCompatActivity() {
     private fun initViews() {
         binding.tvYourAddress.text = sessionPref.address
         viewModel.getTokensList(sessionPref.address)
-        recipientUserId?.toInt()?.let { viewModel.getPartnerAddress(it) }
+        recipientUserId.let { viewModel.getPartnerAddress(it) }
     }
 
     private fun observingValue() {
@@ -247,7 +247,7 @@ class CreateOfferActivity : AppCompatActivity() {
                     recipient_address = viewModel.partner.value?.data?.wallets?.first()?.address.toString(),
                     recipient_token_address = viewModel.tokenRecipient?.account?.data?.parsed?.info?.mint.toString(),
                     recipient_token_amount = binding.tokenOrNft2.tvNumber.text.toString(),
-                    recipient_user_id = recipientUserId!!.toInt(),
+                    recipient_user_id = recipientUserId,
                     sending_token_address = viewModel.tokenSending?.account?.data?.parsed?.info?.mint.toString(),
                     sending_token_amount = binding.tokenOrNft.tvNumber.text.toString(),
                 ),
@@ -257,7 +257,7 @@ class CreateOfferActivity : AppCompatActivity() {
             if (invalidData(createOfferPayloadModel)) {
                 val bottomSheet = PreviewTradeBottomSheet.newInstance(
                     createOfferPayloadModel,
-                    recipientUserId!!.toInt()
+                    recipientUserId
                 )
                 bottomSheet.action = { status, tradeId ->
                     if (status) {
@@ -269,7 +269,7 @@ class CreateOfferActivity : AppCompatActivity() {
                             recipient_address = viewModel.partner.value?.data?.wallets?.first()?.address.toString(),
                             recipient_token_address = viewModel.tokenRecipient?.account?.data?.parsed?.info?.mint.toString(),
                             recipient_token_amount = binding.tokenOrNft2.tvNumber.text.toString(),
-                            recipient_user_id = recipientUserId!!.toInt()
+                            recipient_user_id = recipientUserId
                         )
                         val intent = Intent().apply {
                             putExtra("data", tradeInfo)

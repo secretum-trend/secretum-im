@@ -219,8 +219,11 @@ object MatrixPatterns {
         return substringAfter(":")
     }
 
-    fun String.getUserId(): String {
-        return this.replace("scrtm_", "")
+
+    fun String.getUserId(): Int {
+        val regex = """\d+""".toRegex()
+        val match = regex.find(this)
+        return match?.value?.toInt() ?: -1
     }
 
     fun String.toFormattedDate(): String {

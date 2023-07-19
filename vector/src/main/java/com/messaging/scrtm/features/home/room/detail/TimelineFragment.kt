@@ -612,7 +612,7 @@ class TimelineFragment :
                     withState(timelineViewModel) { mainState ->
                         putExtra(
                             "userId",
-                            mainState.asyncRoomSummary()?.displayName?.getUserId()
+                            mainState.asyncRoomSummary()?.directUserId?.getUserId()
                         )
                     }
                 }
@@ -1104,7 +1104,7 @@ class TimelineFragment :
                     withState(timelineViewModel) { mainState ->
                         putExtra(
                             "userId",
-                            mainState.asyncRoomSummary()?.displayName?.getUserId()
+                            mainState.asyncRoomSummary()?.directUserId?.getUserId()
                         )
                     }
                 }

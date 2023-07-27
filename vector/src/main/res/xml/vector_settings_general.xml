@@ -25,7 +25,7 @@
             android:key="SETTINGS_EMAILS_AND_PHONE_NUMBERS_PREFERENCE_KEY"
             android:summary="@string/settings_emails_and_phone_numbers_summary"
             android:title="@string/settings_emails_and_phone_numbers_title"
-            app:fragment="im.vector.app.features.settings.threepids.ThreePidsSettingsFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.threepids.ThreePidsSettingsFragment" />
 
         <com.messaging.scrtm.core.preference.VectorPreference
             android:key="SETTINGS_DISCOVERY_PREFERENCE_KEY"
@@ -81,7 +81,7 @@
         <com.messaging.scrtm.core.preference.VectorPreference
             android:key="SETTINGS_HOME_SERVER_PREFERENCE_KEY"
             android:title="@string/settings_home_server"
-            app:fragment="im.vector.app.features.settings.homeserver.HomeserverSettingsFragment"
+            app:fragment="com.messaging.scrtm.features.settings.homeserver.HomeserverSettingsFragment"
             tools:summary="https://homeserver.org" />
 
         <com.messaging.scrtm.core.preference.VectorPreference
@@ -113,7 +113,7 @@
             android:key="SETTINGS_DEACTIVATE_ACCOUNT_KEY"
             android:persistent="false"
             android:title="@string/settings_deactivate_my_account"
-            app:fragment="im.vector.app.features.settings.account.deactivation.DeactivateAccountFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.account.deactivation.DeactivateAccountFragment" />
 
     </com.messaging.scrtm.core.preference.VectorPreferenceCategory>
 

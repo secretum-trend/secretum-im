@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package im.vector.app.di
+package com.messaging.scrtm.di
 
 import android.content.Context
 import dagger.Binds
@@ -22,17 +22,17 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import im.vector.app.core.pushers.FcmHelper
-import im.vector.app.core.resources.AppNameProvider
-import im.vector.app.core.resources.DefaultAppNameProvider
-import im.vector.app.core.resources.DefaultLocaleProvider
-import im.vector.app.core.resources.LocaleProvider
-import im.vector.app.core.services.GuardServiceStarter
-import im.vector.app.fdroid.service.FDroidGuardServiceStarter
-import im.vector.app.features.home.NightlyProxy
-import im.vector.app.features.settings.VectorPreferences
-import im.vector.app.features.settings.legals.FlavorLegals
-import im.vector.app.push.fcm.FdroidFcmHelper
+import com.messaging.scrtm.core.pushers.FcmHelper
+import com.messaging.scrtm.core.resources.AppNameProvider
+import com.messaging.scrtm.core.resources.DefaultAppNameProvider
+import com.messaging.scrtm.core.resources.DefaultLocaleProvider
+import com.messaging.scrtm.core.resources.LocaleProvider
+import com.messaging.scrtm.core.services.GuardServiceStarter
+import com.messaging.scrtm.fdroid.service.FDroidGuardServiceStarter
+import com.messaging.scrtm.features.home.NightlyProxy
+import com.messaging.scrtm.features.settings.VectorPreferences
+import com.messaging.scrtm.features.settings.legals.FlavorLegals
+import com.messaging.scrtm.push.fcm.FdroidFcmHelper
 
 @InstallIn(SingletonComponent::class)
 @Module

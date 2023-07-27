@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package im.vector.app.di
+package com.messaging.scrtm.di
 
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.android.components.ActivityComponent
-import im.vector.app.features.push.NotificationTroubleshootTestManagerFactory
-import im.vector.app.push.fcm.FdroidNotificationTroubleshootTestManagerFactory
+import com.messaging.scrtm.features.push.NotificationTroubleshootTestManagerFactory
+import com.messaging.scrtm.push.fcm.FdroidNotificationTroubleshootTestManagerFactory
 
 @InstallIn(ActivityComponent::class)
 @Module

@@ -11,7 +11,7 @@
             android:key="SETTINGS_INTERFACE_LANGUAGE_PREFERENCE_KEY"
             android:persistent="false"
             android:title="@string/settings_interface_language"
-            app:fragment="im.vector.app.features.settings.locale.LocalePickerFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.locale.LocalePickerFragment" />
 
         <com.messaging.scrtm.core.preference.VectorListPreference
             android:defaultValue="system"

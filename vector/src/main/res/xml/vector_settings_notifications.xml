@@ -15,7 +15,7 @@
             android:key="SETTINGS_ENABLE_THIS_DEVICE_PREFERENCE_KEY"
             android:title="@string/settings_enable_this_device" />
 
-        <!--<im.vector.app.core.preference.VectorSwitchPreference-->
+        <!--<com.messaging.scrtm.core.preference.VectorSwitchPreference-->
         <!--android:dependency="SETTINGS_ENABLE_ALL_NOTIF_PREFERENCE_KEY"-->
         <!--android:key="SETTINGS_TURN_SCREEN_ON_PREFERENCE_KEY"-->
         <!--android:title="@string/settings_turn_screen_on" />-->
@@ -25,21 +25,21 @@
             android:key="SETTINGS_NOTIFICATION_DEFAULT_PREFERENCE_KEY"
             android:persistent="false"
             android:title="@string/settings_notification_default"
-            app:fragment="im.vector.app.features.settings.notifications.VectorSettingsDefaultNotificationPreferenceFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.notifications.VectorSettingsDefaultNotificationPreferenceFragment" />
 
         <com.messaging.scrtm.core.preference.VectorPreference
             android:dependency="SETTINGS_ENABLE_THIS_DEVICE_PREFERENCE_KEY"
             android:key="SETTINGS_NOTIFICATION_KEYWORD_AND_MENTIONS_PREFERENCE_KEY"
             android:persistent="false"
             android:title="@string/settings_notification_mentions_and_keywords"
-            app:fragment="im.vector.app.features.settings.notifications.VectorSettingsKeywordAndMentionsNotificationPreferenceFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.notifications.VectorSettingsKeywordAndMentionsNotificationPreferenceFragment" />
 
         <com.messaging.scrtm.core.preference.VectorPreference
             android:dependency="SETTINGS_ENABLE_THIS_DEVICE_PREFERENCE_KEY"
             android:key="SETTINGS_NOTIFICATION_OTHER_PREFERENCE_KEY"
             android:persistent="false"
             android:title="@string/settings_notification_other"
-            app:fragment="im.vector.app.features.settings.notifications.VectorSettingsOtherNotificationPreferenceFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.notifications.VectorSettingsOtherNotificationPreferenceFragment" />
 
     </com.messaging.scrtm.core.preference.VectorPreferenceCategory>
 
@@ -119,11 +119,11 @@
         <com.messaging.scrtm.core.preference.VectorPreference
             android:key="SETTINGS_NOTIFICATION_TROUBLESHOOT_PREFERENCE_KEY"
             android:title="@string/settings_notification_troubleshoot"
-            app:fragment="im.vector.app.features.settings.notifications.VectorSettingsNotificationsTroubleshootFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.notifications.VectorSettingsNotificationsTroubleshootFragment" />
 
     </com.messaging.scrtm.core.preference.VectorPreferenceCategory>
 
-    <!--im.vector.app.core.preference.VectorPreferenceCategory
+    <!--com.messaging.scrtm.core.preference.VectorPreferenceCategory
         android:key="SETTINGS_NOTIFICATIONS_TARGETS_PREFERENCE_KEY"
         android:title="@string/settings_notifications_targets" /-->
 

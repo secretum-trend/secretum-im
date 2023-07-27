@@ -22,7 +22,7 @@
             android:key="SETTINGS_ENCRYPTION_CROSS_SIGNING_PREFERENCE_KEY"
             android:persistent="false"
             android:title="@string/encryption_information_cross_signing_state"
-            app:fragment="im.vector.app.features.settings.crosssigning.CrossSigningSettingsFragment"
+            app:fragment="com.messaging.scrtm.features.settings.crosssigning.CrossSigningSettingsFragment"
             tools:icon="@drawable/ic_shield_trusted"
             tools:summary="@string/encryption_information_dg_xsigning_complete" />
 
@@ -60,12 +60,12 @@
         <com.messaging.scrtm.core.preference.VectorPreference
             android:key="SETTINGS_SHOW_DEVICES_LIST_PREFERENCE_KEY"
             android:title="@string/settings_active_sessions_show_all"
-            app:fragment="im.vector.app.features.settings.devices.VectorSettingsDevicesFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.devices.VectorSettingsDevicesFragment" />
 
         <com.messaging.scrtm.core.preference.VectorPreference
             android:key="SETTINGS_SHOW_DEVICES_LIST_V2_PREFERENCE_KEY"
             android:title="@string/settings_active_sessions_show_all"
-            app:fragment="im.vector.app.features.settings.devices.v2.VectorSettingsDevicesFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.devices.v2.VectorSettingsDevicesFragment" />
 
     </com.messaging.scrtm.core.preference.VectorPreferenceCategory>
 
@@ -115,7 +115,7 @@
             android:icon="@drawable/ic_settings_root_ignored_users"
             android:key="SETTINGS_IGNORED_USERS_PREFERENCE_KEY"
             android:title="@string/settings_ignored_users"
-            app:fragment="im.vector.app.features.settings.ignored.VectorSettingsIgnoredUsersFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.ignored.VectorSettingsIgnoredUsersFragment" />
 
     </com.messaging.scrtm.core.preference.VectorPreferenceCategory>
 

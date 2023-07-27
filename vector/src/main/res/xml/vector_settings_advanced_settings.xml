@@ -71,12 +71,12 @@
         <com.messaging.scrtm.core.preference.VectorPreference
             android:persistent="false"
             android:title="@string/settings_notifications_targets"
-            app:fragment="im.vector.app.features.settings.push.PushGatewaysFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.push.PushGatewaysFragment" />
 
         <com.messaging.scrtm.core.preference.VectorPreference
             android:persistent="false"
             android:title="@string/settings_push_rules"
-            app:fragment="im.vector.app.features.settings.push.PushRulesFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.push.PushRulesFragment" />
     </com.messaging.scrtm.core.preference.VectorPreferenceCategory>
 
     <com.messaging.scrtm.core.preference.VectorPreferenceCategory
@@ -86,12 +86,12 @@
         <com.messaging.scrtm.core.preference.VectorPreference
             android:persistent="false"
             android:title="@string/settings_account_data"
-            app:fragment="im.vector.app.features.settings.devtools.AccountDataFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.devtools.AccountDataFragment" />
 
         <com.messaging.scrtm.core.preference.VectorPreference
             android:persistent="false"
             android:title="@string/settings_key_requests"
-            app:fragment="im.vector.app.features.settings.devtools.KeyRequestsFragment" />
+            app:fragment="com.messaging.scrtm.features.settings.devtools.KeyRequestsFragment" />
 
         <com.messaging.scrtm.core.preference.VectorPreference
             android:key="SETTINGS_ACCESS_TOKEN"

@@ -87,9 +87,10 @@
                             android:layout_width="25dp"
                             android:layout_height="27dp"
                             android:layout_toStartOf="@id/more_button"
+                            android:layout_alignParentEnd="true"
                             android:importantForAccessibility="no"
                             android:scaleType="center"
-                            android:layout_marginRight="20dp"
+                            android:layout_marginEnd="20dp"
                             android:src="@drawable/ic_search"
                             app:tint="@color/element_system_light"
                             tools:ignore="MissingPrefix" />
@@ -101,8 +102,9 @@
                             android:importantForAccessibility="no"
                             android:scaleType="center"
                             android:layout_toStartOf="@id/debug_button"
-                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_marginEnd="12dp"
+                            android:visibility="gone"
                             android:src="@drawable/ic_more_vertical"
                             app:tint="@color/element_system_light"
                             tools:ignore="MissingPrefix" />
@@ -112,7 +114,7 @@
                             style="@style/VectorDebug"
                             android:layout_width="48dp"
                             android:layout_height="48dp"
-                            android:layout_alignParentRight="true"
+                            android:layout_alignParentEnd="true"
                             android:layout_marginEnd="12dp"
                             android:importantForAccessibility="no"
                             android:scaleType="center"
@@ -165,7 +167,6 @@
         app:layout_constraintEnd_toEndOf="@id/newLayoutCreateChatButton"
         app:layout_constraintStart_toStartOf="@id/newLayoutCreateChatButton"
         app:tint="@color/palette_blue"
-        tools:targetApi="lollipop_mr1"
         tools:visibility="visible" />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -181,7 +182,6 @@
         android:backgroundTint="@color/palette_blue"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        tools:targetApi="lollipop_mr1"
         tools:visibility="visible" />
 
 

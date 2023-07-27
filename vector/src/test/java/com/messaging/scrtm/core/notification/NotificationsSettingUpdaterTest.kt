@@ -40,7 +40,7 @@ class NotificationsSettingUpdaterTest {
 
     @Before
     fun setup() {
-        mockkStatic("im.vector.app.features.session.SessionCoroutineScopesKt")
+        mockkStatic("com.messaging.scrtm.features.session.SessionCoroutineScopesKt")
     }
 
     @After

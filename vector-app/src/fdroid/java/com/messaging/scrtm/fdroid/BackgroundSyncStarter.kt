@@ -14,14 +14,14 @@
  * limitations under the License.
  */
 
-package im.vector.app.fdroid
+package com.messaging.scrtm.fdroid
 
 import android.content.Context
-import im.vector.app.core.di.ActiveSessionHolder
-import im.vector.app.core.time.Clock
-import im.vector.app.fdroid.receiver.AlarmSyncBroadcastReceiver
-import im.vector.app.features.settings.BackgroundSyncMode
-import im.vector.app.features.settings.VectorPreferences
+import com.messaging.scrtm.core.di.ActiveSessionHolder
+import com.messaging.scrtm.core.time.Clock
+import com.messaging.scrtm.fdroid.receiver.AlarmSyncBroadcastReceiver
+import com.messaging.scrtm.features.settings.BackgroundSyncMode
+import com.messaging.scrtm.features.settings.VectorPreferences
 import timber.log.Timber
 import javax.inject.Inject
 

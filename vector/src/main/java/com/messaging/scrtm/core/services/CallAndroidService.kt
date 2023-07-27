@@ -314,10 +314,10 @@ class CallAndroidService : VectorAndroidService() {
         private const val DEFAULT_NOTIFICATION_ID = 6480
         private const val MISSED_CALL_TAG = "MISSED_CALL_TAG"
 
-        private const val ACTION_INCOMING_RINGING_CALL = "im.vector.app.core.services.CallService.ACTION_INCOMING_RINGING_CALL"
-        private const val ACTION_OUTGOING_RINGING_CALL = "im.vector.app.core.services.CallService.ACTION_OUTGOING_RINGING_CALL"
-        private const val ACTION_ONGOING_CALL = "im.vector.app.core.services.CallService.ACTION_ONGOING_CALL"
-        private const val ACTION_CALL_TERMINATED = "im.vector.app.core.services.CallService.ACTION_CALL_TERMINATED"
+        private const val ACTION_INCOMING_RINGING_CALL = "com.messaging.scrtm.core.services.CallService.ACTION_INCOMING_RINGING_CALL"
+        private const val ACTION_OUTGOING_RINGING_CALL = "com.messaging.scrtm.core.services.CallService.ACTION_OUTGOING_RINGING_CALL"
+        private const val ACTION_ONGOING_CALL = "com.messaging.scrtm.core.services.CallService.ACTION_ONGOING_CALL"
+        private const val ACTION_CALL_TERMINATED = "com.messaging.scrtm.core.services.CallService.ACTION_CALL_TERMINATED"
 
         private const val EXTRA_CALL_ID = "EXTRA_CALL_ID"
         private const val EXTRA_IS_IN_BG = "EXTRA_IS_IN_BG"

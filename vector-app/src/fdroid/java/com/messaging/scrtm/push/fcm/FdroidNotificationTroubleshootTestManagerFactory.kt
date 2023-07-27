@@ -13,27 +13,27 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package im.vector.app.push.fcm
+package com.messaging.scrtm.push.fcm
 
 import androidx.fragment.app.Fragment
-import im.vector.app.core.pushers.UnifiedPushHelper
-import im.vector.app.fdroid.features.settings.troubleshoot.TestAutoStartBoot
-import im.vector.app.fdroid.features.settings.troubleshoot.TestBackgroundRestrictions
-import im.vector.app.fdroid.features.settings.troubleshoot.TestBatteryOptimization
-import im.vector.app.features.VectorFeatures
-import im.vector.app.features.push.NotificationTroubleshootTestManagerFactory
-import im.vector.app.features.settings.troubleshoot.NotificationTroubleshootTestManager
-import im.vector.app.features.settings.troubleshoot.TestAccountSettings
-import im.vector.app.features.settings.troubleshoot.TestAvailableUnifiedPushDistributors
-import im.vector.app.features.settings.troubleshoot.TestCurrentUnifiedPushDistributor
-import im.vector.app.features.settings.troubleshoot.TestDeviceSettings
-import im.vector.app.features.settings.troubleshoot.TestEndpointAsTokenRegistration
-import im.vector.app.features.settings.troubleshoot.TestNotification
-import im.vector.app.features.settings.troubleshoot.TestPushFromPushGateway
-import im.vector.app.features.settings.troubleshoot.TestPushRulesSettings
-import im.vector.app.features.settings.troubleshoot.TestSystemSettings
-import im.vector.app.features.settings.troubleshoot.TestUnifiedPushEndpoint
-import im.vector.app.features.settings.troubleshoot.TestUnifiedPushGateway
+import com.messaging.scrtm.core.pushers.UnifiedPushHelper
+import com.messaging.scrtm.fdroid.features.settings.troubleshoot.TestAutoStartBoot
+import com.messaging.scrtm.fdroid.features.settings.troubleshoot.TestBackgroundRestrictions
+import com.messaging.scrtm.fdroid.features.settings.troubleshoot.TestBatteryOptimization
+import com.messaging.scrtm.features.VectorFeatures
+import com.messaging.scrtm.features.push.NotificationTroubleshootTestManagerFactory
+import com.messaging.scrtm.features.settings.troubleshoot.NotificationTroubleshootTestManager
+import com.messaging.scrtm.features.settings.troubleshoot.TestAccountSettings
+import com.messaging.scrtm.features.settings.troubleshoot.TestAvailableUnifiedPushDistributors
+import com.messaging.scrtm.features.settings.troubleshoot.TestCurrentUnifiedPushDistributor
+import com.messaging.scrtm.features.settings.troubleshoot.TestDeviceSettings
+import com.messaging.scrtm.features.settings.troubleshoot.TestEndpointAsTokenRegistration
+import com.messaging.scrtm.features.settings.troubleshoot.TestNotification
+import com.messaging.scrtm.features.settings.troubleshoot.TestPushFromPushGateway
+import com.messaging.scrtm.features.settings.troubleshoot.TestPushRulesSettings
+import com.messaging.scrtm.features.settings.troubleshoot.TestSystemSettings
+import com.messaging.scrtm.features.settings.troubleshoot.TestUnifiedPushEndpoint
+import com.messaging.scrtm.features.settings.troubleshoot.TestUnifiedPushGateway
 import javax.inject.Inject
 
 class FdroidNotificationTroubleshootTestManagerFactory @Inject constructor(

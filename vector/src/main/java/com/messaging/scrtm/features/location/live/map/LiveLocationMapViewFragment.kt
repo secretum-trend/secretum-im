@@ -337,7 +337,7 @@ class LiveLocationMapViewFragment :
     }
 
     companion object {
-        private const val MAP_FRAGMENT_TAG = "im.vector.app.features.location.live.map"
+        private const val MAP_FRAGMENT_TAG = "com.messaging.scrtm.features.location.live.map"
         private const val COPYRIGHT_MARGIN_DP = 8
         private const val COPYRIGHT_ATTRIBUTION_MARGIN_DP = 96
     }

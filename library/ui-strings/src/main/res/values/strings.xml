@@ -1453,6 +1453,7 @@
 
     <string name="rooms">Channels</string>
     <string name="invited">Invited</string>
+    <string name="invited_this_chanel">Invite to this channel</string>
 
     <string name="has_been_removed">You have been removed from %1$s by %2$s</string>
     <string name="has_been_banned">You have been banned from %1$s by %2$s</string>

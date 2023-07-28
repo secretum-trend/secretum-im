@@ -28,6 +28,7 @@ import com.airbnb.mvrx.args
 import com.airbnb.mvrx.fragmentViewModel
 import com.airbnb.mvrx.withState
 import com.google.android.material.dialog.MaterialAlertDialogBuilder
+import com.messaging.lib.core.utils.view.hide
 import dagger.hilt.android.AndroidEntryPoint
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.extensions.cleanup
@@ -46,16 +47,21 @@ import javax.inject.Inject
 
 @AndroidEntryPoint
 class RoomMemberListFragment :
-        VectorBaseFragment<FragmentRoomMemberListBinding>(),
-        RoomMemberListController.Callback {
+    VectorBaseFragment<FragmentRoomMemberListBinding>(),
+    RoomMemberListController.Callback {
 
-    @Inject lateinit var roomMemberListController: RoomMemberListController
-    @Inject lateinit var avatarRenderer: AvatarRenderer
+    @Inject
+    lateinit var roomMemberListController: RoomMemberListController
+    @Inject
+    lateinit var avatarRenderer: AvatarRenderer
 
     private val viewModel: RoomMemberListViewModel by fragmentViewModel()
     private val roomProfileArgs: RoomProfileArgs by args()
 
-    override fun getBinding(inflater: LayoutInflater, container: ViewGroup?): FragmentRoomMemberListBinding {
+    override fun getBinding(
+        inflater: LayoutInflater,
+        container: ViewGroup?
+    ): FragmentRoomMemberListBinding {
         return FragmentRoomMemberListBinding.inflate(inflater, container, false)
     }
 
@@ -68,39 +74,47 @@ class RoomMemberListFragment :
         super.onViewCreated(view, savedInstanceState)
         roomMemberListController.callback = this
         setupToolbar(views.roomSettingGeneric.roomSettingsToolbar)
-                .allowBack()
+            .allowBack()
         setupSearchView()
         setupInviteUsersButton()
-        views.roomSettingGeneric.roomSettingsRecyclerView.configureWith(roomMemberListController, hasFixedSize = true)
+        views.roomSettingGeneric.roomSettingsRecyclerView.configureWith(
+            roomMemberListController,
+            hasFixedSize = true
+        )
     }
 
     private fun setupInviteUsersButton() {
-        views.inviteUsersButton.debouncedClicks {
+//        views.inviteUsersButton.debouncedClicks {
+//            navigator.openInviteUsersToRoom(requireActivity(), roomProfileArgs.roomId)
+//        }
+//        // Hide FAB when list is scrolling
+//        views.roomSettingGeneric.roomSettingsRecyclerView.addOnScrollListener(
+//                object : RecyclerView.OnScrollListener() {
+//                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+//                        when (newState) {
+//                            RecyclerView.SCROLL_STATE_IDLE -> {
+//                                if (withState(viewModel) { it.actionsPermissions.canInvite }) {
+//                                    views.inviteUsersButton.show()
+//                                }
+//                            }
+//                            RecyclerView.SCROLL_STATE_DRAGGING,
+//                            RecyclerView.SCROLL_STATE_SETTLING -> {
+//                                views.inviteUsersButton.hide()
+//                            }
+//                        }
+//                    }
+//                }
+//        )
+
+        views.roomSettingGeneric.invite.debouncedClicks {
             navigator.openInviteUsersToRoom(requireActivity(), roomProfileArgs.roomId)
         }
-        // Hide FAB when list is scrolling
-        views.roomSettingGeneric.roomSettingsRecyclerView.addOnScrollListener(
-                object : RecyclerView.OnScrollListener() {
-                    override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
-                        when (newState) {
-                            RecyclerView.SCROLL_STATE_IDLE -> {
-                                if (withState(viewModel) { it.actionsPermissions.canInvite }) {
-                                    views.inviteUsersButton.show()
-                                }
-                            }
-                            RecyclerView.SCROLL_STATE_DRAGGING,
-                            RecyclerView.SCROLL_STATE_SETTLING -> {
-                                views.inviteUsersButton.hide()
-                            }
-                        }
-                    }
-                }
-        )
     }
 
     private fun setupSearchView() {
         views.roomSettingGeneric.searchView.queryHint = getString(R.string.search_members_hint)
-        views.roomSettingGeneric.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        views.roomSettingGeneric.searchView.setOnQueryTextListener(object :
+            SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 return true
             }
@@ -121,13 +135,19 @@ class RoomMemberListFragment :
         views.roomSettingGeneric.progressBar.isGone = viewState.areAllMembersLoaded
         roomMemberListController.setData(viewState)
         renderRoomSummary(viewState)
-        views.inviteUsersButton.isVisible = viewState.actionsPermissions.canInvite
+//        views.inviteUsersButton.isVisible = viewState.actionsPermissions.canInvite
+        views.roomSettingGeneric.invite.isVisible = viewState.actionsPermissions.canInvite
         // Display filter only if there are more than 2 members in this room
-        views.roomSettingGeneric.searchViewAppBarLayout.isVisible = viewState.roomSummary()?.otherMemberIds.orEmpty().size > 1
+        views.roomSettingGeneric.searchViewAppBarLayout.isVisible =
+            viewState.roomSummary()?.otherMemberIds.orEmpty().size > 1
     }
 
     override fun onRoomMemberClicked(roomMember: RoomMemberSummary) {
-        navigator.openRoomMemberProfile(roomMember.userId, roomId = roomProfileArgs.roomId, context = requireActivity())
+        navigator.openRoomMemberProfile(
+            roomMember.userId,
+            roomId = roomProfileArgs.roomId,
+            context = requireActivity()
+        )
     }
 
     override fun onThreePidInviteClicked(event: Event) {
@@ -136,21 +156,34 @@ class RoomMemberListFragment :
         val stateKey = event.stateKey ?: return
         if (withState(viewModel) { it.actionsPermissions.canRevokeThreePidInvite }) {
             MaterialAlertDialogBuilder(requireActivity())
-                    .setTitle(R.string.three_pid_revoke_invite_dialog_title)
-                    .setMessage(getString(R.string.three_pid_revoke_invite_dialog_content, content.displayName))
-                    .setNegativeButton(R.string.action_cancel, null)
-                    .setPositiveButton(R.string.action_revoke) { _, _ ->
-                        viewModel.handle(RoomMemberListAction.RevokeThreePidInvite(stateKey))
-                    }
-                    .show()
+                .setTitle(R.string.three_pid_revoke_invite_dialog_title)
+                .setMessage(
+                    getString(
+                        R.string.three_pid_revoke_invite_dialog_content,
+                        content.displayName
+                    )
+                )
+                .setNegativeButton(R.string.action_cancel, null)
+                .setPositiveButton(R.string.action_revoke) { _, _ ->
+                    viewModel.handle(RoomMemberListAction.RevokeThreePidInvite(stateKey))
+                }
+                .show()
         }
     }
 
     private fun renderRoomSummary(state: RoomMemberListViewState) {
         state.roomSummary()?.let {
-            views.roomSettingGeneric.roomSettingsToolbarTitleView.text = it.displayName
-            avatarRenderer.render(it.toMatrixItem(), views.roomSettingGeneric.roomSettingsToolbarAvatarImageView)
-            views.roomSettingGeneric.roomSettingsDecorationToolbarAvatarImageView.render(it.roomEncryptionTrustLevel)
+//            views.roomSettingGeneric.roomSettingsToolbarTitleView.text = it.displayName
+//            avatarRenderer.render(
+//                it.toMatrixItem(),
+//                views.roomSettingGeneric.roomSettingsToolbarAvatarImageView
+//            )
+//            views.roomSettingGeneric.roomSettingsDecorationToolbarAvatarImageView.render(it.roomEncryptionTrustLevel)
+
+            ///kevin hide
+            views.roomSettingGeneric.roomSettingsDecorationToolbarAvatarImageView.hide()
+            views.roomSettingGeneric.roomSettingsToolbarAvatarImageView.hide()
+
         }
     }
 }

@@ -31,6 +31,7 @@
                     android:layout_height="40dp"
                     android:layout_marginTop="8dp"
                     android:layout_marginBottom="8dp"
+                    android:visibility="visible"
                     android:importantForAccessibility="no"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
@@ -41,6 +42,7 @@
                     android:id="@+id/roomSettingsDecorationToolbarAvatarImageView"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
+                    android:visibility="gone"
                     app:layout_constraintCircle="@id/roomSettingsToolbarAvatarImageView"
                     app:layout_constraintCircleAngle="135"
                     app:layout_constraintCircleRadius="20dp"
@@ -54,13 +56,13 @@
                     android:layout_marginEnd="8dp"
                     android:ellipsize="end"
                     android:maxLines="1"
+                    android:text="@string/list_members"
                     android:textAppearance="@style/TextAppearance.Vector.Widget.ActionBarTitle"
                     android:textColor="?vctr_content_primary"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toEndOf="@id/roomSettingsToolbarAvatarImageView"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="@sample/rooms.json/data/name" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -72,10 +74,11 @@
         android:id="@+id/coordinatorLayout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/frameLayout2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/appBarLayout">
+
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/roomSettingsRecyclerView"
@@ -94,22 +97,39 @@
             tools:visibility="visible">
 
             <!-- Use an extra container for the margin to be taken into account by the layout_scrollFlags -->
-            <FrameLayout
+
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/invite"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                android:background="@drawable/bg_fill_coner_8"
+                android:backgroundTint="@color/palette_blue"
+                android:gravity="center"
+                android:orientation="horizontal"
                 app:layout_scrollFlags="scroll|enterAlways|snap">
 
-                <androidx.appcompat.widget.SearchView
-                    android:id="@+id/searchView"
-                    android:layout_width="match_parent"
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:background="@null"
-                    android:minHeight="0dp"
-                    tools:queryHint="@string/search_hint" />
+                    android:layout_gravity="center"
+                    android:gravity="center"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    app:srcCompat="@drawable/ic_invite_people" />
 
-            </FrameLayout>
+                <TextView
+                    style="@style/Widget.Vector.TextView.Subtitle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="8dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:text="@string/invited_this_chanel"
+                    android:textColor="@color/white" />
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
 
         </com.google.android.material.appbar.AppBarLayout>
 
@@ -134,8 +154,30 @@
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
+    <FrameLayout
+        android:id="@+id/frameLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent">
+
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/alerter_padding_default"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:background="@drawable/bg_fill_coner_8"
+            android:minHeight="0dp"
+            android:theme="@style/Widget.Vector.SearchView"
+            tools:queryHint="@string/search_hint" />
+
+    </FrameLayout>
+
+
     <include
         android:id="@+id/waiting_view"
-        layout="@layout/merge_overlay_waiting_view" />
+        layout="@layout/merge_overlay_waiting_view"
+        android:visibility="gone" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

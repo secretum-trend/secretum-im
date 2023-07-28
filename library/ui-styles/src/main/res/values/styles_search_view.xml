@@ -5,6 +5,8 @@
         <item name="searchIcon">@drawable/ic_search</item>
         <item name="closeIcon">@drawable/ic_x_gray</item>
         <item name="iconifiedByDefault">false</item>
+        <item name="android:textColorHint">@color/gray</item>
+        <item name="android:textColorPrimary">@color/white</item>
     </style>
 
 </resources>

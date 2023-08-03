@@ -92,8 +92,10 @@
                     <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/icArrow"
                         android:layout_width="wrap_content"
+                        android:paddingVertical="6dp"
+                        android:paddingHorizontal="6dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginEnd="@dimen/alerter_padding_default"
+                        android:layout_marginEnd="10dp"
                         app:layout_constraintBottom_toBottomOf="@+id/appCompatTextView"
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintTop_toTopOf="@+id/appCompatTextView"
@@ -128,7 +130,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="27dp"
                         android:fontFamily="@font/manrope_semi_bold"
-                        android:text="5.12345 SOL"
+                        tools:text="5.12345 SOL"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
@@ -137,7 +139,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="27dp"
                         android:fontFamily="@font/manrope_semi_bold"
-                        android:text="Solana"
+                        tools:text="Solana"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@+id/textView2" />
 

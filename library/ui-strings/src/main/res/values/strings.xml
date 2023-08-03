@@ -3588,5 +3588,7 @@
     <string name="sent">sent</string>
     <string name="to_escrow">to escrow</string>
     <string name="received">received</string>
+    <string name="confirm">Confirm</string>
+    <string name="hint_search_nft">Search a name or place address</string>
 
 </resources>

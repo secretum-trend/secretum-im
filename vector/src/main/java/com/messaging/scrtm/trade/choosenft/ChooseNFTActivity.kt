@@ -12,8 +12,17 @@ class ChooseNFTActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(binding.root)
-
         initViews()
+        initActions()
+    }
+
+    private fun initActions() {
+        binding.toolbar.setNavigationOnClickListener { onBackPressedDispatcher.onBackPressed() }
+
+
+        binding.btnClose.setOnClickListener {
+            finish()
+        }
     }
 
     private fun initViews() {

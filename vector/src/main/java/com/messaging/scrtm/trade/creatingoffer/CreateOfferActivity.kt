@@ -168,6 +168,10 @@ class CreateOfferActivity : AppCompatActivity() {
             viewModel.attentionExpands.value = !viewModel.attentionExpands.value!!
         }
 
+        binding.msgAttention.setOnClickListener {
+            viewModel.attentionExpands.value = !viewModel.attentionExpands.value!!
+        }
+
         binding.selectSending.onClickListener = {
             viewModel.sendingType.value = it
         }

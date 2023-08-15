@@ -12,6 +12,8 @@
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/bugReportToolbar"
+            tools:title="Title"
+            app:titleTextColor="@color/palette_white"
             android:layout_width="match_parent"
             android:layout_height="wrap_content" />
 
@@ -119,6 +121,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:checked="true"
+                    android:textColor="@color/white"
                     android:text="@string/send_bug_report_include_logs" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -128,6 +131,7 @@
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
                     android:checked="true"
+                    android:textColor="?vctr_content_primary"
                     android:text="@string/send_bug_report_include_crash_logs" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
@@ -135,6 +139,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
+                    android:textColor="@color/white"
                     android:layout_marginEnd="10dp"
                     android:checked="false"
                     android:text="@string/send_bug_report_include_key_share_history" />
@@ -145,11 +150,13 @@
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"
                     android:layout_marginEnd="10dp"
+                    android:textColor="?vctr_content_primary"
                     android:checked="false"
                     android:text="@string/you_may_contact_me" />
 
                 <com.google.android.material.switchmaterial.SwitchMaterial
                     android:id="@+id/bug_report_button_include_screenshot"
+                    android:textColor="@color/white"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginStart="10dp"

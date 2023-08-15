@@ -183,6 +183,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/alerter_padding_default"
+                    android:fontFamily="@font/manrope_bold"
                     android:layout_marginTop="12dp"
                     android:text="@string/what_are_u_sending" />
 

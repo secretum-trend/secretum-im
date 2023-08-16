@@ -25,4 +25,9 @@
         <item name="lineHeight">20sp</item>
     </style>
 
+    <!--text color input -->
+    <style name="InputLayoutStyle" parent="Widget.Design.TextInputLayout" >
+        <item name="android:textColor">?vctr_message_text_color</item>
+    </style>
+
 </resources>

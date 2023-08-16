@@ -97,6 +97,10 @@
         <!-- Default theme -->
         <item name="bottomSheetDialogTheme">@style/Theme.Vector.BottomSheetDialog.Light</item>
         <item name="materialAlertDialogTheme">@style/ThemeOverlay.Vector.MaterialAlertDialog</item>
+        <item name="alertDialogTheme">@style/AlertDialogTheme</item>
+
+        <!-- textInput color -->
+        <item name="editTextColor">@style/InputLayoutStyle</item>
 
         <item name="android:textColorLink">@color/element_link_light</item>
 

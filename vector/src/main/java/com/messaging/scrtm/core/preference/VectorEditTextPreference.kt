@@ -20,6 +20,7 @@ import android.content.Context
 import android.content.res.ColorStateList
 import android.util.AttributeSet
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.preference.EditTextPreference
 import androidx.preference.PreferenceViewHolder
 import com.messaging.scrtm.R
@@ -49,8 +50,15 @@ class VectorEditTextPreference : EditTextPreference {
         try {
             (holder.findViewById(android.R.id.title) as? TextView)?.isSingleLine = false
             val color = ThemeUtils.getColor(context, R.attr.vctr_content_secondary)
-            (holder.findViewById(android.R.id.title) as? TextView)?.setTextColor(ColorStateList.valueOf(color))
-            (holder.findViewById(android.R.id.summary) as? TextView)?.setTextColor(ColorStateList.valueOf(color))
+            (holder.findViewById(android.R.id.title) as? TextView)?.apply {
+                setTextColor(ColorStateList.valueOf(color))
+                typeface = ResourcesCompat.getFont(context, R.font.nunito_regular)
+            }
+            (holder.findViewById(android.R.id.summary) as? TextView)?.apply {
+                setTextColor(ColorStateList.valueOf(color))
+                typeface = ResourcesCompat.getFont(context, R.font.nunito_regular)
+            }
+
         } catch (e: Exception) {
             Timber.e(e, "onBindView")
         }

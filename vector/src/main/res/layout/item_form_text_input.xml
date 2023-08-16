@@ -27,6 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:imeOptions="actionDone"
+            android:textColor="@color/white"
             tools:hint="@string/create_room_name_hint" />
 
     </com.google.android.material.textfield.TextInputLayout>

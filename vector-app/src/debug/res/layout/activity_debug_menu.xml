@@ -43,12 +43,6 @@
                 android:text="Analytics" />
 
             <Button
-                android:id="@+id/debug_memory_leaks"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Memory leaks" />
-
-            <Button
                 android:id="@+id/debug_test_text_view_link"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

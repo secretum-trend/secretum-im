@@ -22,6 +22,7 @@ import android.util.AttributeSet
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import androidx.core.content.res.ResourcesCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
 import com.messaging.scrtm.R
@@ -58,7 +59,10 @@ class UserAvatarPreference : Preference {
         mLoadingProgressBar = holder.itemView.findViewById(R.id.avatar_update_progress_bar)
 
         val color = ThemeUtils.getColor(context, R.attr.vctr_content_secondary)
-        (holder.findViewById(android.R.id.title) as? TextView)?.setTextColor(ColorStateList.valueOf(color))
+        (holder.findViewById(android.R.id.title) as? TextView)?.apply {
+            setTextColor(ColorStateList.valueOf(color))
+            typeface = ResourcesCompat.getFont(context, R.font.nunito_regular)
+        }
         (holder.findViewById(android.R.id.summary) as? TextView)?.setTextColor(ColorStateList.valueOf(color))
         refreshUi()
     }

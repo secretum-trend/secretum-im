@@ -46,7 +46,6 @@ import com.vanniktech.emoji.google.GoogleEmojiProvider
 import dagger.hilt.android.HiltAndroidApp
 import com.messaging.scrtm.config.Config
 import com.messaging.scrtm.core.debug.FlipperProxy
-import com.messaging.scrtm.core.debug.LeakDetector
 import com.messaging.scrtm.core.di.ActiveSessionHolder
 import com.messaging.scrtm.core.pushers.FcmHelper
 import com.messaging.scrtm.core.resources.BuildMeta
@@ -108,7 +107,6 @@ class VectorApplication :
     @Inject lateinit var matrix: Matrix
     @Inject lateinit var fcmHelper: FcmHelper
     @Inject lateinit var buildMeta: BuildMeta
-    @Inject lateinit var leakDetector: LeakDetector
     @Inject lateinit var vectorLocale: VectorLocale
     @Inject lateinit var disclaimerDialog: DisclaimerDialog
 
@@ -207,7 +205,6 @@ class VectorApplication :
         // Initialize Mapbox before inflating mapViews
         Mapbox.getInstance(this)
 
-        initMemoryLeakAnalysis()
     }
 
     private fun configureEpoxy() {
@@ -272,9 +269,5 @@ class VectorApplication :
         val handlerThread = HandlerThread("Vector-fonts")
         handlerThread.start()
         return Handler(handlerThread.looper)
-    }
-
-    private fun initMemoryLeakAnalysis() {
-        leakDetector.enable(vectorPreferences.isMemoryLeakAnalysisEnabled())
     }
 }

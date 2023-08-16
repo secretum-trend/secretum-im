@@ -36,7 +36,6 @@ import com.messaging.scrtm.core.utils.toast
 import com.messaging.scrtm.features.debug.analytics.DebugAnalyticsActivity
 import com.messaging.scrtm.features.debug.features.DebugFeaturesSettingsActivity
 import com.messaging.scrtm.features.debug.jitsi.DebugJitsiActivity
-import com.messaging.scrtm.features.debug.leak.DebugMemoryLeaksActivity
 import com.messaging.scrtm.features.debug.sas.DebugSasEmojiActivity
 import com.messaging.scrtm.features.debug.settings.DebugPrivateSettingsActivity
 import com.messaging.scrtm.features.qrcode.QrCodeScannerActivity
@@ -83,7 +82,6 @@ class DebugMenuActivity : VectorBaseActivity<ActivityDebugMenuBinding>() {
         views.debugAnalytics.setOnClickListener {
             startActivity(Intent(this, DebugAnalyticsActivity::class.java))
         }
-        views.debugMemoryLeaks.setOnClickListener { openMemoryLeaksSettings() }
         views.debugTestTextViewLink.setOnClickListener { testTextViewLink() }
         views.debugOpenButtonStylesLight.setOnClickListener {
             startActivity(Intent(this, DebugVectorButtonStylesLightActivity::class.java))
@@ -129,10 +127,6 @@ class DebugMenuActivity : VectorBaseActivity<ActivityDebugMenuBinding>() {
 
     private fun openPrivateSettings() {
         startActivity(Intent(this, DebugPrivateSettingsActivity::class.java))
-    }
-
-    private fun openMemoryLeaksSettings() {
-        startActivity(Intent(this, DebugMemoryLeaksActivity::class.java))
     }
 
     private fun renderQrCode(text: String) {

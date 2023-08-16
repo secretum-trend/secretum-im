@@ -28,6 +28,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.animation.doOnEnd
+import androidx.core.content.res.ResourcesCompat
 import androidx.core.widget.ImageViewCompat
 import androidx.preference.Preference
 import androidx.preference.PreferenceViewHolder
@@ -100,11 +101,11 @@ open class VectorPreference : Preference {
 
             if (title != null) {
                 title.isSingleLine = false
-                title.setTypeface(null, mTypeface)
+                title.typeface = ResourcesCompat.getFont(context, R.font.nunito_regular)
                 title.setTextColor(ColorStateList.valueOf(color))
             }
 
-            summary?.setTypeface(null, mTypeface)
+            summary?.typeface = ResourcesCompat.getFont(context, R.font.nunito_regular)
             summary?.setTextColor(ColorStateList.valueOf(color))
 
             if (tintIcon) {

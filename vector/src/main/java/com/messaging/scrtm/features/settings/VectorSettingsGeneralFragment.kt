@@ -95,9 +95,9 @@ class VectorSettingsGeneralFragment :
     private val mDisplayNamePreference by lazy {
         findPreference<EditTextPreference>("SETTINGS_DISPLAY_NAME_PREFERENCE_KEY")!!
     }
-    private val mPasswordPreference by lazy {
-        findPreference<VectorPreference>(VectorPreferences.SETTINGS_CHANGE_PASSWORD_PREFERENCE_KEY)!!
-    }
+//    private val mPasswordPreference by lazy {
+//        findPreference<VectorPreference>(VectorPreferences.SETTINGS_CHANGE_PASSWORD_PREFERENCE_KEY)!!
+//    }
     private val mIdentityServerPreference by lazy {
         findPreference<VectorPreference>(VectorPreferences.SETTINGS_IDENTITY_SERVER_PREFERENCE_KEY)!!
     }
@@ -182,14 +182,14 @@ class VectorSettingsGeneralFragment :
         val homeServerCapabilities = session.homeServerCapabilitiesService().getHomeServerCapabilities()
         // Password
         // Hide the preference if password can not be updated
-        if (homeServerCapabilities.canChangePassword) {
-            mPasswordPreference.onPreferenceClickListener = Preference.OnPreferenceClickListener {
-                onPasswordUpdateClick()
-                false
-            }
-        } else {
-            mPasswordPreference.isVisible = false
-        }
+//        if (homeServerCapabilities.canChangePassword) {
+//            mPasswordPreference.onPreferenceClickListener = Preference.OnPreferenceClickListener {
+//                onPasswordUpdateClick()
+//                false
+//            }
+//        } else {
+//            mPasswordPreference.isVisible = false
+//        }
 
         val openDiscoveryScreenPreferenceClickListener = Preference.OnPreferenceClickListener {
             (requireActivity() as VectorSettingsActivity).navigateTo(

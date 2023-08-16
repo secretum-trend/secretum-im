@@ -24,6 +24,7 @@
                 android:layout_height="wrap_content"
                 app:layout_constraintTop_toTopOf="parent"
                 app:subtitle="Toolbar Subtitle"
+                app:titleTextColor="@color/white"
                 app:title="Toolbar Title" />
 
         </com.google.android.material.appbar.AppBarLayout>

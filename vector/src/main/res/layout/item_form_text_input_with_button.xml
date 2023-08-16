@@ -22,6 +22,7 @@
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/formTextInputTextInputEditText"
             android:layout_width="match_parent"
+            android:textColor="@color/white"
             android:layout_height="wrap_content"
             tools:hint="@string/create_room_name_hint" />
 

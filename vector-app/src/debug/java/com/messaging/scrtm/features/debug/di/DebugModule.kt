@@ -26,10 +26,8 @@ import dagger.hilt.components.SingletonComponent
 import com.messaging.scrtm.core.debug.DebugNavigator
 import com.messaging.scrtm.core.debug.DebugReceiver
 import com.messaging.scrtm.core.debug.FlipperProxy
-import com.messaging.scrtm.core.debug.LeakDetector
 import com.messaging.scrtm.features.debug.DebugMenuActivity
 import com.messaging.scrtm.flipper.VectorFlipperProxy
-import com.messaging.scrtm.leakcanary.LeakCanaryLeakDetector
 import com.messaging.scrtm.receivers.VectorDebugReceiver
 
 @InstallIn(SingletonComponent::class)
@@ -52,6 +50,5 @@ abstract class DebugModule {
     @Binds
     abstract fun bindsFlipperProxy(flipperProxy: VectorFlipperProxy): FlipperProxy
 
-    @Binds
-    abstract fun bindsLeakDetector(leakDetector: LeakCanaryLeakDetector): LeakDetector
+
 }

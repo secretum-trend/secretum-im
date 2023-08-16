@@ -90,6 +90,8 @@
             android:paddingHorizontal="@dimen/alerter_padding_default"
             app:layout_constraintTop_toBottomOf="@id/tvTitle">
 
+
+
             <Spinner
                 android:id="@id/spinerToken"
                 android:layout_width="0dp"
@@ -101,6 +103,17 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.5"
                 tools:listitem="@layout/item_spinner_token" />
+
+            <TextView
+                android:id="@+id/noToken"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/no_token"
+                app:layout_constraintWidth_percent="0.3"
+                android:singleLine="true"
+                app:layout_constraintBottom_toBottomOf="@+id/spinerToken"
+                app:layout_constraintStart_toStartOf="@+id/spinerToken"
+                app:layout_constraintTop_toTopOf="@+id/spinerToken" />
 
             <TextView
                 android:id="@+id/tvBalances"

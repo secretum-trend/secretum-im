@@ -28,6 +28,7 @@
             android:gravity="top|start"
             android:imeOptions="actionDone"
             android:inputType="textMultiLine"
+            android:textColor="@color/white"
             android:minLines="4"
             tools:hint="@string/create_room_name_hint" />
 

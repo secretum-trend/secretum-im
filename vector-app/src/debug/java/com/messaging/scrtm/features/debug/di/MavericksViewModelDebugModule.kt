@@ -16,16 +16,15 @@
 
 package com.messaging.scrtm.features.debug.di
 
-import dagger.Binds
-import dagger.Module
-import dagger.hilt.InstallIn
-import dagger.multibindings.IntoMap
 import com.messaging.scrtm.core.di.MavericksAssistedViewModelFactory
 import com.messaging.scrtm.core.di.MavericksViewModelComponent
 import com.messaging.scrtm.core.di.MavericksViewModelKey
 import com.messaging.scrtm.features.debug.analytics.DebugAnalyticsViewModel
-import com.messaging.scrtm.features.debug.leak.DebugMemoryLeaksViewModel
 import com.messaging.scrtm.features.debug.settings.DebugPrivateSettingsViewModel
+import dagger.Binds
+import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.multibindings.IntoMap
 
 @InstallIn(MavericksViewModelComponent::class)
 @Module
@@ -41,8 +40,4 @@ interface MavericksViewModelDebugModule {
     @MavericksViewModelKey(DebugPrivateSettingsViewModel::class)
     fun debugPrivateSettingsViewModelFactory(factory: DebugPrivateSettingsViewModel.Factory): MavericksAssistedViewModelFactory<*, *>
 
-    @Binds
-    @IntoMap
-    @MavericksViewModelKey(DebugMemoryLeaksViewModel::class)
-    fun debugMemoryLeaksViewModelFactory(factory: DebugMemoryLeaksViewModel.Factory): MavericksAssistedViewModelFactory<*, *>
 }

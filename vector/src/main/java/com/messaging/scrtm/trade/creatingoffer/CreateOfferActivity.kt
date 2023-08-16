@@ -114,12 +114,19 @@ class CreateOfferActivity : AppCompatActivity() {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
                         binding.loading.hide()
-                        binding.tokenOrNft.spinerToken.adapter =
                             it.data?.result?.value?.let { value ->
-                                SpinnerTokens(
-                                    this@CreateOfferActivity,
-                                    value
-                                )
+                                if (value.isNotEmpty()){
+                                    binding.tokenOrNft.spinerToken.adapter = SpinnerTokens(
+                                        this@CreateOfferActivity,
+                                        value
+                                    )
+                                    binding.tokenOrNft.noToken.hide()
+                                }else{
+                                    binding.tokenOrNft.noToken.show()
+                                }
+
+                            }?: kotlin.run {
+                                binding.tokenOrNft.noToken.show()
                             }
                     }
                     Resource.Status.ERROR -> {}
@@ -132,12 +139,18 @@ class CreateOfferActivity : AppCompatActivity() {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
                         binding.loading.hide()
-                        binding.tokenOrNft2.spinerToken.adapter =
                             it.data?.result?.value?.let { value ->
-                                SpinnerTokens(
-                                    this@CreateOfferActivity,
-                                    value
-                                )
+                                if (value.isNotEmpty()){
+                                    binding.tokenOrNft2.spinerToken.adapter = SpinnerTokens(
+                                        this@CreateOfferActivity,
+                                        value
+                                    )
+                                    binding.tokenOrNft2.noToken.hide()
+                                }else {
+                                    binding.tokenOrNft2.noToken.show()
+                                }
+                            }?: kotlin.run {
+                                binding.tokenOrNft2.noToken.show()
                             }
                     }
                     Resource.Status.ERROR -> {

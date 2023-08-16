@@ -19,6 +19,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/createRoomToolbar"
                 android:layout_width="match_parent"
+                app:titleTextColor="@color/white"
                 android:layout_height="?actionBarSize"
                 app:title="@string/direct_chats_header" />
 

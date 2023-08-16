@@ -16,16 +16,16 @@
             android:persistent="false"
             android:title="@string/settings_display_name" />
 
-        <com.messaging.scrtm.core.preference.VectorPreference
-            android:key="SETTINGS_CHANGE_PASSWORD_PREFERENCE_KEY"
-            android:summary="@string/change_password_summary"
-            android:title="@string/settings_password" />
+<!--        <com.messaging.scrtm.core.preference.VectorPreference-->
+<!--            android:key="SETTINGS_CHANGE_PASSWORD_PREFERENCE_KEY"-->
+<!--            android:summary="@string/change_password_summary"-->
+<!--            android:title="@string/settings_password" />-->
 
-        <com.messaging.scrtm.core.preference.VectorPreference
-            android:key="SETTINGS_EMAILS_AND_PHONE_NUMBERS_PREFERENCE_KEY"
-            android:summary="@string/settings_emails_and_phone_numbers_summary"
-            android:title="@string/settings_emails_and_phone_numbers_title"
-            app:fragment="com.messaging.scrtm.features.settings.threepids.ThreePidsSettingsFragment" />
+<!--        <com.messaging.scrtm.core.preference.VectorPreference-->
+<!--            android:key="SETTINGS_EMAILS_AND_PHONE_NUMBERS_PREFERENCE_KEY"-->
+<!--            android:summary="@string/settings_emails_and_phone_numbers_summary"-->
+<!--            android:title="@string/settings_emails_and_phone_numbers_title"-->
+<!--            app:fragment="com.messaging.scrtm.features.settings.threepids.ThreePidsSettingsFragment" />-->
 
         <com.messaging.scrtm.core.preference.VectorPreference
             android:key="SETTINGS_DISCOVERY_PREFERENCE_KEY"
@@ -51,7 +51,8 @@
 
     </com.messaging.scrtm.core.preference.VectorPreferenceCategory>
 
-    <com.messaging.scrtm.core.preference.VectorPreferenceCategory android:title="@string/settings_integrations">
+    <com.messaging.scrtm.core.preference.VectorPreferenceCategory
+        android:title="@string/settings_integrations">
 
         <com.messaging.scrtm.core.preference.VectorPreference
             android:focusable="false"

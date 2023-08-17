@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@drawable/rounded_rect_shape_8"
+    android:backgroundTint="@color/palette_blue"
     android:padding="8dp">
 
     <ImageView
@@ -15,7 +16,7 @@
         android:layout_margin="8dp"
         android:importantForAccessibility="no"
         android:minHeight="56dp"
-        app:iconTint="?vctr_content_secondary"
+        app:iconTint="?vctr_content_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -46,7 +47,7 @@
         android:layout_marginStart="8dp"
         android:layout_marginEnd="4dp"
         android:gravity="start"
-        android:textColor="?vctr_content_secondary"
+        android:textColor="?vctr_content_primary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/rightChevron"
         app:layout_constraintStart_toEndOf="@id/buttonImageView"

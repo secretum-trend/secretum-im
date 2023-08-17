@@ -24,10 +24,12 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:minHeight="0dp"
+            android:theme="@style/Widget.Vector.SearchView"
             app:layout_scrollFlags="scroll|exitUntilCollapsed|snap|enterAlways">
 
             <androidx.appcompat.widget.SearchView
                 android:id="@+id/publicRoomsFilter"
+                style="@style/Widget.Vector.SearchView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:queryHint="@string/room_directory_search_hint" />

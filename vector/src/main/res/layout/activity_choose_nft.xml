@@ -23,7 +23,7 @@
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/editText2"
+        android:id="@+id/edtSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:minHeight="40dp"
@@ -52,7 +52,7 @@
         android:paddingHorizontal="@dimen/alerter_padding_default"
         app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/view"
-        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintTop_toBottomOf="@+id/edtSearch"
         app:layout_constraintVertical_bias="0"
         app:spanCount="2" />
 
@@ -87,6 +87,7 @@
             android:text="@string/action_close" />
 
         <TextView
+            android:id="@+id/btnConfirm"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"

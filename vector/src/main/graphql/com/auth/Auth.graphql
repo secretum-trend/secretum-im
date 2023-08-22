@@ -132,5 +132,11 @@ query GetWalletByUsername($username: String!) {
     }
 }
 
+query GetSpaceWhiteList {
+    space_creation_whitelist {
+        address
+    }
+}
+
 
 

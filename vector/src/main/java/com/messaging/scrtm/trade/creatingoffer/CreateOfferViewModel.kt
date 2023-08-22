@@ -32,6 +32,9 @@ class CreateOfferViewModel @Inject constructor(
     var tokenSending  : Value? = null
     var tokenRecipient  : Value? = null
 
+    var nftSending  : Value? = null
+    var nftRecipient  : Value? = null
+
     private val _partner = MutableLiveData<Resource<GetPartnerAddressByQuery.Data?>>()
     val partner: MutableLiveData<Resource<GetPartnerAddressByQuery.Data?>> = _partner
 

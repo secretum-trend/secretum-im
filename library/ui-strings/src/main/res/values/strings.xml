@@ -3590,5 +3590,9 @@
     <string name="received">received</string>
     <string name="confirm">Confirm</string>
     <string name="hint_search_nft">Search a name or place address</string>
+    <string name="cant_creat_space">Can not create your space</string>
+    <string name="cant_creat_space_des">This feature is only available for selected users, you request access in our community managers
+
+</string>
 
 </resources>

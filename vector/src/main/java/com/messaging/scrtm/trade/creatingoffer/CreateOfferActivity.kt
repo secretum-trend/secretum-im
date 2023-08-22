@@ -8,18 +8,23 @@ import androidx.activity.result.contract.ActivityResultContracts
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doAfterTextChanged
+import com.messaging.lib.core.utils.compat.getParcelableExtraCompat
 import com.messaging.lib.core.utils.view.hide
 import com.messaging.lib.core.utils.view.show
 import com.messaging.scrtm.R
 import com.messaging.scrtm.core.utils.Resource
+import com.messaging.scrtm.core.utils.SolanaUtils.isNFT
 import com.messaging.scrtm.core.utils.showToast
 import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.data.solana.entity.Value
 import com.messaging.scrtm.data.trade.entity.CreateOfferPayloadModel
 import com.messaging.scrtm.data.trade.entity.TradeInfo
 import com.messaging.scrtm.data.trade.entity.TradeModel
+import com.messaging.scrtm.data.utils.TypeChooseToken
 import com.messaging.scrtm.databinding.ActivityCreateOfferBinding
 import com.messaging.scrtm.trade.choosenft.ChooseNFTActivity
+import com.messaging.scrtm.trade.choosenft.ChooseNFTActivity.Companion.NFT_SELECTED_CODE
+import com.messaging.scrtm.trade.choosenft.ChooseNFTActivity.Companion.NFT_SELECTED_KEY
 import com.messaging.scrtm.trade.creatingoffer.adapter.SpinnerTokens
 import com.messaging.scrtm.trade.custom.ViewSelectSending
 import com.messaging.scrtm.trade.previewtrade.PreviewTradeBottomSheet
@@ -34,7 +39,24 @@ class CreateOfferActivity : AppCompatActivity() {
     val viewModel by viewModels<CreateOfferViewModel>()
     private val chooseNftResultContracts =
         registerForActivityResult(ActivityResultContracts.StartActivityForResult()) {
+            if (it.resultCode == NFT_SELECTED_CODE) {
+                val value = it.data?.getParcelableExtraCompat<Value>(NFT_SELECTED_KEY)
+                val typeToken = it.data?.getStringExtra(TYPE_TOKEN)
+                typeToken?.let {
+                    when (TypeChooseToken.valueOf(it)) {
+                        TypeChooseToken.sender_token -> {
+                            viewModel.nftSending = value
+                            binding.tokenOrNft.tvNft.text = value?.account?.data?.parsed?.info?.mint
+                        }
 
+                        TypeChooseToken.recipient_token -> {
+                            viewModel.nftRecipient = value
+                            binding.tokenOrNft2.tvNft.text =
+                                value?.account?.data?.parsed?.info?.mint
+                        }
+                    }
+                }
+            }
         }
 
     @Inject
@@ -67,28 +89,35 @@ class CreateOfferActivity : AppCompatActivity() {
             }
 
             sendingType.observe(this@CreateOfferActivity) {
+                viewModel.nftSending = null
                 when (it) {
                     ViewSelectSending.TypeSending.Token -> {
                         binding.tokenOrNft.layoutToken.show()
                         binding.tokenOrNft.layoutNft.hide()
                     }
+
                     ViewSelectSending.TypeSending.Nft -> {
                         binding.tokenOrNft.layoutToken.hide()
                         binding.tokenOrNft.layoutNft.show()
+
                     }
+
                     else -> {}
                 }
             }
             receiveType.observe(this@CreateOfferActivity) {
+                viewModel.nftRecipient = null
                 when (it) {
                     ViewSelectSending.TypeSending.Token -> {
                         binding.tokenOrNft2.layoutToken.show()
                         binding.tokenOrNft2.layoutNft.hide()
                     }
+
                     ViewSelectSending.TypeSending.Nft -> {
                         binding.tokenOrNft2.layoutToken.hide()
                         binding.tokenOrNft2.layoutNft.show()
                     }
+
                     else -> {}
                 }
             }
@@ -103,9 +132,11 @@ class CreateOfferActivity : AppCompatActivity() {
                         } catch (_: Throwable) {
                         }
                     }
+
                     Resource.Status.ERROR -> {
                         binding.loading.hide()
                     }
+
                     Resource.Status.LOADING -> binding.loading.show()
                 }
             }
@@ -114,21 +145,24 @@ class CreateOfferActivity : AppCompatActivity() {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
                         binding.loading.hide()
-                            it.data?.result?.value?.let { value ->
-                                if (value.isNotEmpty()){
-                                    binding.tokenOrNft.spinerToken.adapter = SpinnerTokens(
-                                        this@CreateOfferActivity,
-                                        value
-                                    )
-                                    binding.tokenOrNft.noToken.hide()
-                                }else{
-                                    binding.tokenOrNft.noToken.show()
-                                }
-
-                            }?: kotlin.run {
+                        it.data?.result?.value?.let { value ->
+                            if (value.isNotEmpty()) {
+                                binding.tokenOrNft.spinerToken.adapter = SpinnerTokens(
+                                    this@CreateOfferActivity,
+                                    value.filter {
+                                        !it.isNFT()
+                                    }
+                                )
+                                binding.tokenOrNft.noToken.hide()
+                            } else {
                                 binding.tokenOrNft.noToken.show()
                             }
+
+                        } ?: kotlin.run {
+                            binding.tokenOrNft.noToken.show()
+                        }
                     }
+
                     Resource.Status.ERROR -> {}
                     Resource.Status.LOADING -> binding.loading.show()
                 }
@@ -139,23 +173,25 @@ class CreateOfferActivity : AppCompatActivity() {
                 when (it.status) {
                     Resource.Status.SUCCESS -> {
                         binding.loading.hide()
-                            it.data?.result?.value?.let { value ->
-                                if (value.isNotEmpty()){
-                                    binding.tokenOrNft2.spinerToken.adapter = SpinnerTokens(
-                                        this@CreateOfferActivity,
-                                        value
-                                    )
-                                    binding.tokenOrNft2.noToken.hide()
-                                }else {
-                                    binding.tokenOrNft2.noToken.show()
-                                }
-                            }?: kotlin.run {
+                        it.data?.result?.value?.let { value ->
+                            if (value.isNotEmpty()) {
+                                binding.tokenOrNft2.spinerToken.adapter = SpinnerTokens(
+                                    this@CreateOfferActivity,
+                                    value.filter { !it.isNFT() }
+                                )
+                                binding.tokenOrNft2.noToken.hide()
+                            } else {
                                 binding.tokenOrNft2.noToken.show()
                             }
+                        } ?: kotlin.run {
+                            binding.tokenOrNft2.noToken.show()
+                        }
                     }
+
                     Resource.Status.ERROR -> {
                         binding.loading.hide()
                     }
+
                     Resource.Status.LOADING -> binding.loading.show()
                 }
 
@@ -169,6 +205,17 @@ class CreateOfferActivity : AppCompatActivity() {
 
         binding.tokenOrNft.layoutNft.setOnClickListener {
             val intent = Intent(this, ChooseNFTActivity::class.java).apply {
+                val result = viewModel.yourToken.value?.data?.result
+                putExtra(KEY_NFT, result)
+                putExtra(TYPE_TOKEN, TypeChooseToken.sender_token.toString())
+            }
+            chooseNftResultContracts.launch(intent)
+        }
+        binding.tokenOrNft2.layoutNft.setOnClickListener {
+            val intent = Intent(this, ChooseNFTActivity::class.java).apply {
+                val result = viewModel.recipientToken.value?.data?.result
+                putExtra(KEY_NFT, result)
+                putExtra(TYPE_TOKEN, TypeChooseToken.recipient_token.toString())
             }
             chooseNftResultContracts.launch(intent)
         }
@@ -187,6 +234,10 @@ class CreateOfferActivity : AppCompatActivity() {
 
         binding.selectSending.onClickListener = {
             viewModel.sendingType.value = it
+        }
+
+        binding.selectSending2.onClickListener = {
+            viewModel.receiveType.value = it
         }
 
         binding.tokenOrNft.spinerToken.onItemSelectedListener =
@@ -262,11 +313,19 @@ class CreateOfferActivity : AppCompatActivity() {
             val createOfferPayloadModel = CreateOfferPayloadModel(
                 TradeModel(
                     recipient_address = viewModel.partner.value?.data?.wallets?.first()?.address.toString(),
-                    recipient_token_address = viewModel.tokenRecipient?.account?.data?.parsed?.info?.mint.toString(),
-                    recipient_token_amount = binding.tokenOrNft2.tvNumber.text.toString(),
+                    recipient_token_address = viewModel.tokenRecipient?.account?.data?.parsed?.info?.mint.toString()
+                        .takeIf { viewModel.receiveType.value == ViewSelectSending.TypeSending.Token }
+                        ?: viewModel.nftRecipient?.account?.data?.parsed?.info?.mint.toString(),
+                    recipient_token_amount = binding.tokenOrNft2.tvNumber.text.toString()
+                        .takeIf { viewModel.sendingType.value == ViewSelectSending.TypeSending.Token }
+                        ?: "1",
                     recipient_user_id = recipientUserId,
-                    sending_token_address = viewModel.tokenSending?.account?.data?.parsed?.info?.mint.toString(),
-                    sending_token_amount = binding.tokenOrNft.tvNumber.text.toString(),
+                    sending_token_address = viewModel.tokenSending?.account?.data?.parsed?.info?.mint.toString()
+                        .takeIf { viewModel.sendingType.value == ViewSelectSending.TypeSending.Token }
+                        ?: viewModel.nftSending?.account?.data?.parsed?.info?.mint.toString(),
+                    sending_token_amount = binding.tokenOrNft.tvNumber.text.toString()
+                        .takeIf { viewModel.sendingType.value == ViewSelectSending.TypeSending.Token }
+                        ?: "1",
                 ),
                 publicKey = sessionPref.address,
                 signature = ""
@@ -281,11 +340,11 @@ class CreateOfferActivity : AppCompatActivity() {
                         val tradeInfo = TradeInfo(
                             trade_id = tradeId.toString(),
                             sending_address = sessionPref.address,
-                            sending_token_address = viewModel.tokenSending?.account?.data?.parsed?.info?.mint.toString(),
-                            sending_token_amount = binding.tokenOrNft.tvNumber.text.toString(),
-                            recipient_address = viewModel.partner.value?.data?.wallets?.first()?.address.toString(),
-                            recipient_token_address = viewModel.tokenRecipient?.account?.data?.parsed?.info?.mint.toString(),
-                            recipient_token_amount = binding.tokenOrNft2.tvNumber.text.toString(),
+                            sending_token_address = createOfferPayloadModel.trade.sending_token_address,
+                            sending_token_amount = createOfferPayloadModel.trade.sending_token_amount,
+                            recipient_address = createOfferPayloadModel.trade.recipient_address,
+                            recipient_token_address = createOfferPayloadModel.trade.recipient_token_address,
+                            recipient_token_amount = createOfferPayloadModel.trade.recipient_token_amount,
                             recipient_user_id = recipientUserId
                         )
                         val intent = Intent().apply {
@@ -304,20 +363,38 @@ class CreateOfferActivity : AppCompatActivity() {
     }
 
     private fun invalidData(createOfferPayloadModel: CreateOfferPayloadModel): Boolean {
-        if (createOfferPayloadModel.trade.sending_token_amount.isEmpty() || (createOfferPayloadModel.trade.sending_token_amount.toIntOrNull()
-                ?: 0) <= 0
-        ) {
-            showToast(getString(R.string.invalid_token_amount))
-            return false
+
+        if (viewModel.sendingType.value == ViewSelectSending.TypeSending.Token) {
+            if (createOfferPayloadModel.trade.sending_token_amount.isEmpty() || (createOfferPayloadModel.trade.sending_token_amount.toIntOrNull()
+                    ?: 0) <= 0
+            ) {
+                showToast(getString(R.string.invalid_token_amount))
+                return false
+            }
+        } else {
+            if (viewModel.tokenSending == null) {
+                return false
+            }
         }
-        if (createOfferPayloadModel.trade.recipient_token_amount.isEmpty() || (createOfferPayloadModel.trade.recipient_token_amount.toIntOrNull()
-                ?: 0) <= 0
-        ) {
-            showToast(getString(R.string.invalid_token_amount))
-            return false
+
+        if (viewModel.receiveType.value == ViewSelectSending.TypeSending.Token) {
+            if (createOfferPayloadModel.trade.recipient_token_amount.isEmpty() || (createOfferPayloadModel.trade.recipient_token_amount.toIntOrNull()
+                    ?: 0) <= 0
+            ) {
+                showToast(getString(R.string.invalid_token_amount))
+                return false
+            }
+        } else {
+            if (viewModel.tokenRecipient == null) {
+                return false
+            }
         }
 
         return true
     }
 
+    companion object {
+        const val KEY_NFT = "KEY_NFT"
+        const val TYPE_TOKEN = "TYPE_TOKEN"
+    }
 }

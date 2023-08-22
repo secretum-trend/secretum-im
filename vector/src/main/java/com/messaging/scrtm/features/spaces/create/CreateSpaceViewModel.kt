@@ -32,6 +32,8 @@ import com.messaging.scrtm.core.error.ErrorFormatter
 import com.messaging.scrtm.core.extensions.isEmail
 import com.messaging.scrtm.core.platform.VectorViewModel
 import com.messaging.scrtm.core.resources.StringProvider
+import com.messaging.scrtm.data.space.domain.ApolloSpaceClient
+import com.messaging.scrtm.data.space.repository.SpaceRepository
 import com.messaging.scrtm.features.analytics.AnalyticsTracker
 import com.messaging.scrtm.features.analytics.plan.Interaction
 import kotlinx.coroutines.Dispatchers
@@ -50,6 +52,7 @@ class CreateSpaceViewModel @AssistedInject constructor(
         private val createSpaceViewModelTask: CreateSpaceViewModelTask,
         private val errorFormatter: ErrorFormatter,
         private val analyticsTracker: AnalyticsTracker,
+        val apolloSpaceClient: ApolloSpaceClient
 ) : VectorViewModel<CreateSpaceState, CreateSpaceAction, CreateSpaceEvents>(initialState) {
 
     private val identityService = session.identityService()

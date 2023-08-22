@@ -21,31 +21,42 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.lifecycleScope
 import com.airbnb.mvrx.activityViewModel
-import dagger.hilt.android.AndroidEntryPoint
+import com.messaging.scrtm.R
 import com.messaging.scrtm.core.dialogs.GalleryOrCameraDialogHelper
 import com.messaging.scrtm.core.dialogs.GalleryOrCameraDialogHelperFactory
 import com.messaging.scrtm.core.extensions.configureWith
 import com.messaging.scrtm.core.extensions.hideKeyboard
 import com.messaging.scrtm.core.platform.OnBackPressed
 import com.messaging.scrtm.core.platform.VectorBaseFragment
+import com.messaging.scrtm.data.SessionPref
 import com.messaging.scrtm.databinding.FragmentSpaceCreateGenericEpoxyFormBinding
+import com.messaging.scrtm.features.spaces.popup.MessagePopup
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 
 @AndroidEntryPoint
 class CreateSpaceDetailsFragment :
-        VectorBaseFragment<FragmentSpaceCreateGenericEpoxyFormBinding>(),
-        SpaceDetailEpoxyController.Listener,
-        GalleryOrCameraDialogHelper.Listener,
-        OnBackPressed {
+    VectorBaseFragment<FragmentSpaceCreateGenericEpoxyFormBinding>(),
+    SpaceDetailEpoxyController.Listener,
+    GalleryOrCameraDialogHelper.Listener,
+    OnBackPressed {
 
-    @Inject lateinit var epoxyController: SpaceDetailEpoxyController
-    @Inject lateinit var galleryOrCameraDialogHelperFactory: GalleryOrCameraDialogHelperFactory
+    @Inject
+    lateinit var epoxyController: SpaceDetailEpoxyController
+    @Inject
+    lateinit var galleryOrCameraDialogHelperFactory: GalleryOrCameraDialogHelperFactory
+    @Inject
+    lateinit var sessionPref: SessionPref
 
     private val sharedViewModel: CreateSpaceViewModel by activityViewModel()
 
     override fun getBinding(inflater: LayoutInflater, container: ViewGroup?) =
-            FragmentSpaceCreateGenericEpoxyFormBinding.inflate(layoutInflater, container, false)
+        FragmentSpaceCreateGenericEpoxyFormBinding.inflate(layoutInflater, container, false)
 
     private lateinit var galleryOrCameraDialogHelper: GalleryOrCameraDialogHelper
 
@@ -65,8 +76,26 @@ class CreateSpaceDetailsFragment :
         }
 
         views.nextButton.debouncedClicks {
-            view.hideKeyboard()
-            sharedViewModel.handle(CreateSpaceAction.NextFromDetails)
+            viewLifecycleOwner.lifecycleScope.launch(Dispatchers.IO) {
+                withContext(Dispatchers.Main) {
+                    showLoading(getString(R.string.loading))
+                }
+                view.hideKeyboard()
+                val value = sharedViewModel.apolloSpaceClient.getSpaceWhiteList()
+                val address = value?.space_creation_whitelist?.find { it.address == sessionPref.address }
+                withContext(Dispatchers.Main) {
+                    dismissLoadingDialog()
+                }
+                if (address != null){
+                    withContext(Dispatchers.Main){
+                        sharedViewModel.handle(CreateSpaceAction.NextFromDetails)
+                    }
+                }else{
+                    withContext(Dispatchers.Main){
+                        MessagePopup(getString(R.string.cant_creat_space), getString(R.string.cant_creat_space_des)).show(childFragmentManager, null)
+                    }
+                }
+            }
         }
     }
 

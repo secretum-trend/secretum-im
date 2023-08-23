@@ -1,20 +1,19 @@
 package com.messaging.scrtm.data.solana.repository
 
-import com.messaging.scrtm.data.solana.entity.ApiResponse
 import com.messaging.scrtm.data.solana.entity.ResponseGetBalance
 import com.messaging.scrtm.data.solana.entity.ResponseSolana
-import com.messaging.scrtm.data.solana.entity.TokenAccount
 import com.messaging.scrtm.data.solana.remote.SolanaRemoteDataSource
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
-import okhttp3.RequestBody
+import okhttp3.OkHttpClient
+import okhttp3.Request
 import okhttp3.RequestBody.Companion.toRequestBody
-import retrofit2.Response
-import java.util.*
+import org.json.JSONObject
+import java.util.UUID
 
 interface SolanaRepository {
     suspend fun getTokenAccountsByOwner(address : String) : ResponseSolana
     suspend fun getTokenBalance(address : String) : ResponseGetBalance
-
+    suspend fun getTokenInfo(tokenAddress: String): String
 }
 
 class SolanaRepositoryImp(private val solanaRemoteDataSource: SolanaRemoteDataSource) : SolanaRepository {
@@ -48,5 +47,20 @@ class SolanaRepositoryImp(private val solanaRemoteDataSource: SolanaRemoteDataSo
                 "  }"
         val requestBody = json.toRequestBody("application/json".toMediaTypeOrNull())
         return solanaRemoteDataSource.getBalance(requestBody)
+    }
+
+    override suspend fun getTokenInfo(tokenAddress: String): String {
+        val metadataUrl = "https://metadata-api.metaplex.com"
+
+        val httpClient = OkHttpClient()
+
+        val metadataRequest = Request.Builder()
+            .url("$metadataUrl/metadata/$tokenAddress")
+            .build()
+            val metadataResponse = httpClient.newCall(metadataRequest).execute()
+            val metadataResponseBody = metadataResponse.body?.string()
+            val metadataJson = JSONObject(metadataResponseBody.toString())
+            return metadataJson.toString()
+
     }
 }

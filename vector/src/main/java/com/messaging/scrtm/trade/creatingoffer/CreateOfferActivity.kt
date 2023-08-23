@@ -47,12 +47,15 @@ class CreateOfferActivity : AppCompatActivity() {
                         TypeChooseToken.sender_token -> {
                             viewModel.nftSending = value
                             binding.tokenOrNft.tvNft.text = value?.account?.data?.parsed?.info?.mint
+                            binding.tokenOrNft.imvNFt.show()
+
                         }
 
                         TypeChooseToken.recipient_token -> {
                             viewModel.nftRecipient = value
                             binding.tokenOrNft2.tvNft.text =
                                 value?.account?.data?.parsed?.info?.mint
+                            binding.tokenOrNft2.imvNFt.show()
                         }
                     }
                 }
@@ -90,6 +93,9 @@ class CreateOfferActivity : AppCompatActivity() {
 
             sendingType.observe(this@CreateOfferActivity) {
                 viewModel.nftSending = null
+                binding.tokenOrNft.tvNft.text = ""
+                binding.tokenOrNft.imvNFt.hide()
+
                 when (it) {
                     ViewSelectSending.TypeSending.Token -> {
                         binding.tokenOrNft.layoutToken.show()
@@ -107,6 +113,9 @@ class CreateOfferActivity : AppCompatActivity() {
             }
             receiveType.observe(this@CreateOfferActivity) {
                 viewModel.nftRecipient = null
+                binding.tokenOrNft2.tvNft.text = ""
+                binding.tokenOrNft2.imvNFt.hide()
+
                 when (it) {
                     ViewSelectSending.TypeSending.Token -> {
                         binding.tokenOrNft2.layoutToken.show()
@@ -373,6 +382,7 @@ class CreateOfferActivity : AppCompatActivity() {
             }
         } else {
             if (viewModel.tokenSending == null) {
+                showToast(getString(R.string.invalid_choose_nft))
                 return false
             }
         }
@@ -386,6 +396,7 @@ class CreateOfferActivity : AppCompatActivity() {
             }
         } else {
             if (viewModel.tokenRecipient == null) {
+                showToast(getString(R.string.invalid_choose_nft))
                 return false
             }
         }

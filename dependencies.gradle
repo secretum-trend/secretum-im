@@ -4,6 +4,8 @@ ext.versions = [
         'targetSdk'         : 33,
         'sourceCompat'      : JavaVersion.VERSION_11,
         'targetCompat'      : JavaVersion.VERSION_11,
+        'versionName'      : "1.5.25",
+        'versionCode'      : 10
 ]
 
 def gradle = "7.4.1"

@@ -2,20 +2,32 @@ package com.messaging.scrtm.trade.choosenft
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.viewModelScope
 import com.messaging.lib.core.utils.compat.getParcelableExtraCompat
 import com.messaging.scrtm.core.utils.SolanaUtils.isNFT
 import com.messaging.scrtm.data.solana.entity.Result
 import com.messaging.scrtm.databinding.ActivityChooseNftBinding
 import com.messaging.scrtm.trade.creatingoffer.CreateOfferActivity
 import com.messaging.scrtm.trade.creatingoffer.CreateOfferActivity.Companion.TYPE_TOKEN
+import com.messaging.scrtm.trade.creatingoffer.CreateOfferViewModel
 import com.messaging.scrtm.trade.custom.GridSpacingItemDecoration
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import okhttp3.Dispatcher
 
+@AndroidEntryPoint
 class ChooseNFTActivity : AppCompatActivity() {
     val binding by lazy { ActivityChooseNftBinding.inflate(layoutInflater) }
     private val listToken by lazy { intent.getParcelableExtraCompat<Result>(CreateOfferActivity.KEY_NFT)?.value?.filter { it.isNFT() } ?: emptyList() }
     private val typeToken by lazy { intent.getStringExtra(TYPE_TOKEN) }
+
+    val viewModel by viewModels<ChooseNftViewModel>()
+
     private val chooseNFTAdapter by lazy {
         ChooseNFTAdapter().apply {
             data = listToken

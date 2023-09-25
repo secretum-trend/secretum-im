@@ -41,10 +41,14 @@ android {
 
     compileSdk versions.compileSdk
 
+
     defaultConfig {
         // Set to API 21: see #405
         minSdk versions.minSdk
         targetSdk versions.targetSdk
+
+        versionCode versions.versionCode
+        versionName versions.versionName
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
 

@@ -45,6 +45,12 @@ class VectorFirebaseMessagingService : FirebaseMessagingService() {
 
     override fun onNewToken(token: String) {
         Timber.tag(loggerTag.value).d("New Firebase token")
+        Timber.tag("bakdkafjlsdkjfa").d("New Firebase token = $token")
+
+        Timber.tag("bakdkafjlsdkjfa").d("vectorPreferences.areNotificationEnabledForDevice() = ${vectorPreferences.areNotificationEnabledForDevice()}")
+        Timber.tag("bakdkafjlsdkjfa").d("activeSessionHolder.hasActiveSession() ${activeSessionHolder.hasActiveSession()}")
+        Timber.tag("bakdkafjlsdkjfa").d("unifiedPushHelper.isEmbeddedDistributor() ${unifiedPushHelper.isEmbeddedDistributor()}")
+
         fcmHelper.storeFcmToken(token)
         if (
                 vectorPreferences.areNotificationEnabledForDevice() &&

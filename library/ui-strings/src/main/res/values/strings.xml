@@ -3560,8 +3560,10 @@
     <string name="enable_accept_partialy">Enable accept partialy</string>
     <string name="unknown_token">%s Unknown Token</string>
     <string name="publish_trade">Publish Trade</string>
-    <string name="invalid_token_amount">Invalid token amount</string>
-    <string name="invalid_choose_nft">Please choose NFT</string>
+    <string name="invalid_receive_token_amount">Invalid receive token amount</string>
+    <string name="invalid_sending_token_amount">Invalid sending token amount</string>
+    <string name="invalid_choose_sending_nft">Please choose sending NFT</string>
+    <string name="invalid_choose_receive_nft">Please choose receive NFT</string>
     <string name="accept_trade">Accept trade</string>
     <string name="how_it_works">How it works</string>
     <string name="you_have_an_offer_make_a_deal">You have an offer. Make a deal!</string>

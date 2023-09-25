@@ -326,7 +326,7 @@ class CreateOfferActivity : AppCompatActivity() {
                         .takeIf { viewModel.receiveType.value == ViewSelectSending.TypeSending.Token }
                         ?: viewModel.nftRecipient?.account?.data?.parsed?.info?.mint.toString(),
                     recipient_token_amount = binding.tokenOrNft2.tvNumber.text.toString()
-                        .takeIf { viewModel.sendingType.value == ViewSelectSending.TypeSending.Token }
+                        .takeIf { viewModel.receiveType.value == ViewSelectSending.TypeSending.Token }
                         ?: "1",
                     recipient_user_id = recipientUserId,
                     sending_token_address = viewModel.tokenSending?.account?.data?.parsed?.info?.mint.toString()
@@ -372,31 +372,30 @@ class CreateOfferActivity : AppCompatActivity() {
     }
 
     private fun invalidData(createOfferPayloadModel: CreateOfferPayloadModel): Boolean {
-
         if (viewModel.sendingType.value == ViewSelectSending.TypeSending.Token) {
-            if (createOfferPayloadModel.trade.sending_token_amount.isEmpty() || (createOfferPayloadModel.trade.sending_token_amount.toIntOrNull()
-                    ?: 0) <= 0
-            ) {
-                showToast(getString(R.string.invalid_token_amount))
+            if (createOfferPayloadModel.trade.sending_token_amount.isEmpty() || (createOfferPayloadModel.trade.sending_token_amount.toIntOrNull() ?: 0) <= 0) {
+                showToast(getString(R.string.invalid_sending_token_amount))
                 return false
             }
-        } else {
-            if (viewModel.tokenSending == null) {
-                showToast(getString(R.string.invalid_choose_nft))
+        }
+
+        if (viewModel.sendingType.value == ViewSelectSending.TypeSending.Nft) {
+            if (viewModel.nftSending == null) {
+                showToast(getString(R.string.invalid_choose_sending_nft))
                 return false
             }
         }
 
         if (viewModel.receiveType.value == ViewSelectSending.TypeSending.Token) {
-            if (createOfferPayloadModel.trade.recipient_token_amount.isEmpty() || (createOfferPayloadModel.trade.recipient_token_amount.toIntOrNull()
-                    ?: 0) <= 0
-            ) {
-                showToast(getString(R.string.invalid_token_amount))
+            if (createOfferPayloadModel.trade.recipient_token_amount.isEmpty() || (createOfferPayloadModel.trade.recipient_token_amount.toIntOrNull() ?: 0) <= 0) {
+                showToast(getString(R.string.invalid_receive_token_amount))
                 return false
             }
-        } else {
-            if (viewModel.tokenRecipient == null) {
-                showToast(getString(R.string.invalid_choose_nft))
+        }
+
+        if (viewModel.receiveType.value == ViewSelectSending.TypeSending.Nft) {
+            if (viewModel.nftRecipient == null) {
+                showToast(getString(R.string.invalid_choose_receive_nft))
                 return false
             }
         }

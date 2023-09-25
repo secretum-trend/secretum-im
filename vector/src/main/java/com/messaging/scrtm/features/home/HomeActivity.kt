@@ -22,6 +22,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.os.Parcelable
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -84,6 +85,8 @@ import com.messaging.scrtm.features.themes.ThemeUtils
 import com.messaging.scrtm.features.usercode.UserCodeActivity
 import com.messaging.scrtm.features.workers.signout.ServerBackupStatusViewModel
 import com.messaging.lib.core.utils.compat.getParcelableExtraCompat
+import com.messaging.scrtm.core.pushers.FcmHelper
+import com.messaging.scrtm.core.pushers.PushersManager
 import com.messaging.scrtm.features.onboarding.usecase.MobileWalletAdapterUseCase
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
@@ -143,6 +146,9 @@ class HomeActivity :
     @Inject lateinit var nightlyProxy: NightlyProxy
     @Inject lateinit var disclaimerDialog: DisclaimerDialog
     @Inject lateinit var notificationPermissionManager: NotificationPermissionManager
+    @Inject lateinit var pushersManager: PushersManager
+    @Inject lateinit var fcmHelper: FcmHelper
+
 
     private var isNewAppLayoutEnabled: Boolean = false // delete once old app layout is removed
 
@@ -174,6 +180,7 @@ class HomeActivity :
 
     private val postPermissionLauncher = registerForPermissionsResult { _, _ ->
         // Nothing to do with the result.
+
     }
 
     private val fragmentLifecycleCallbacks = object : FragmentManager.FragmentLifecycleCallbacks() {
@@ -208,9 +215,14 @@ class HomeActivity :
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        if (isFirstCreation()){
-            homeActivityViewModel.authorize(mwaLauncher)
-        }
+        ///set notification
+        notificationPermissionManager.eventuallyRequestPermission(
+            this,
+            postPermissionLauncher,
+            showRationale = false,
+            ignorePreference = true
+        )
+
         isNewAppLayoutEnabled = vectorPreferences.isNewAppLayoutEnabled()
         analyticsScreenName = MobileScreen.ScreenName.Home
         supportFragmentManager.registerFragmentLifecycleCallbacks(fragmentLifecycleCallbacks, false)

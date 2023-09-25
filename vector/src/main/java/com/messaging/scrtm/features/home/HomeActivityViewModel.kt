@@ -283,6 +283,8 @@ class HomeActivityViewModel @AssistedInject constructor(
                     .onEach { didAskUser ->
                         if (!didAskUser) {
                             _viewEvents.post(HomeActivityViewEvents.ShowAnalyticsOptIn)
+                            _viewEvents.post(HomeActivityViewEvents.ShowNotificationDialog)
+
                         } else {
                             _viewEvents.post(HomeActivityViewEvents.ShowNotificationDialog)
                         }

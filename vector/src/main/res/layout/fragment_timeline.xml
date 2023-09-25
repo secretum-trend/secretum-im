@@ -19,13 +19,13 @@
             android:background="@color/secondary_color"
             android:minHeight="48dp"
             android:visibility="gone"
-
             tools:visibility="visible" />
 
         <com.google.android.material.appbar.MaterialToolbar
             android:id="@+id/roomToolbar"
             android:layout_width="match_parent"
             android:layout_height="?actionBarSize"
+            app:titleTextColor="@color/palette_white"
             android:transitionName="toolbar">
 
             <include

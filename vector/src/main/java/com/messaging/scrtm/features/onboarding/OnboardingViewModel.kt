@@ -34,6 +34,7 @@ import com.messaging.scrtm.core.extensions.*
 import com.messaging.scrtm.core.platform.VectorViewModel
 import com.messaging.scrtm.core.resources.StringProvider
 import com.messaging.scrtm.core.session.ConfigureAndStartSessionUseCase
+import com.messaging.scrtm.core.utils.Constants
 import com.messaging.scrtm.core.utils.Resource
 import com.messaging.scrtm.core.utils.ensureProtocol
 import com.messaging.scrtm.core.utils.ensureTrailingSlash
@@ -113,9 +114,10 @@ class OnboardingViewModel @AssistedInject constructor(
 
     companion object :
         MavericksViewModelFactory<OnboardingViewModel, OnboardingViewState> by hiltMavericksViewModelFactory() {
-        const val CLUSTER_NAME = ProtocolContract.CLUSTER_TESTNET
+        const val CLUSTER_NAME = ProtocolContract.CLUSTER_MAINNET_BETA
         val IDENTITY = MobileWalletAdapterUseCase.DappIdentity(
-            uri = Uri.parse("https://solanamobile.com"),
+            //uri
+            uri = Uri.parse(Constants.SOLANA_URL),
             iconRelativeUri = Uri.parse("favicon.ico"),
             name = "Secretum"
         )

@@ -243,7 +243,6 @@ android {
             if (project.hasProperty("coverage")) {
                 testCoverageEnabled = coverage == "true"
             }
-            buildConfigField "String", "API_URL", "\"https://api.scrtm.cloud/v1/graphql\""
         }
 
         release {
@@ -258,7 +257,7 @@ android {
                 proguardFiles 'proguard-rules.pro'
             }
             // signingConfig signingConfigs.release
-            buildConfigField "String", "API_URL", "\"https://api.scrtm.cloud/v1/graphql\""
+
 
         }
 

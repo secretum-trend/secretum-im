@@ -3,6 +3,7 @@ package com.messaging.scrtm.data.solana.di
 import com.messaging.scrtm.BuildConfig
 import com.messaging.scrtm.core.di.login.di.AuthorizationInterceptor
 import com.messaging.scrtm.core.di.login.di.InterceptorSolana
+import com.messaging.scrtm.core.utils.Constants
 import com.messaging.scrtm.data.ApiClient
 import com.messaging.scrtm.data.solana.remote.SolanaRemoteDataSource
 import com.messaging.scrtm.data.solana.remote.SolanaRemoteDataSourceImp
@@ -32,7 +33,8 @@ class SolanaModule {
 
             }
         return Retrofit.Builder()
-            .baseUrl("https://api.testnet.solana.com/")
+            //url
+            .baseUrl(Constants.API_SOLANA)
             .client(
                 OkHttpClient.Builder()
                     // A zero value means no timeout at all.

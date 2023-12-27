@@ -364,6 +364,7 @@ dependencies {
 
     //bouncycastle
 //    implementation 'org.bouncycastle:bcprov-jdk18on:1.72'
+    implementation 'org.jetbrains:annotations:23.0.0'
 
     //retrofit
     implementation 'com.squareup.retrofit2:retrofit:2.9.0'

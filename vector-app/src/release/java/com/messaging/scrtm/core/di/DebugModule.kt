@@ -14,17 +14,17 @@
  * limitations under the License.
  */
 
-package im.vector.app.core.di
+package com.messaging.scrtm.core.di
 
 import android.content.Context
+import com.messaging.scrtm.core.debug.DebugNavigator
+import com.messaging.scrtm.core.debug.DebugReceiver
+import com.messaging.scrtm.core.debug.FlipperProxy
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import im.vector.app.core.debug.DebugNavigator
-import im.vector.app.core.debug.DebugReceiver
-import im.vector.app.core.debug.FlipperProxy
-import im.vector.app.core.debug.LeakDetector
+
 import okhttp3.Interceptor
 import org.matrix.android.sdk.api.Matrix
 
@@ -59,10 +59,10 @@ object DebugModule {
         override fun networkInterceptor(): Interceptor? = null
     }
 
-    @Provides
-    fun providesLeakDetector() = object : LeakDetector {
-        override fun enable(enable: Boolean) {
-            // no op
-        }
-    }
+//    @Provides
+//    fun providesLeakDetector() = object : LeakDetector {
+//        override fun enable(enable: Boolean) {
+//            // no op
+//        }
+//    }
 }

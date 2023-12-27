@@ -16,14 +16,15 @@
 
 package com.messaging.scrtm.core.di
 
+import com.messaging.scrtm.features.DefaultVectorFeatures
+import com.messaging.scrtm.features.DefaultVectorOverrides
+import com.messaging.scrtm.features.VectorFeatures
+import com.messaging.scrtm.features.VectorOverrides
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import im.vector.app.features.DefaultVectorFeatures
-import im.vector.app.core.DefaultVectorOverrides
-import im.vector.app.core.VectorFeatures
-import im.vector.app.core.features.VectorOverrides
+
 
 @InstallIn(SingletonComponent::class)
 @Module

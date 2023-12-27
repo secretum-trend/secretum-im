@@ -226,10 +226,14 @@ android {
             storePassword System.env.ELEMENT_ANDROID_NIGHTLY_STOREPASSWORD ?: project.property("signing.element.nightly.storePassword")
         }
         release {
-            keyAlias project.property("signing.element.keyId")
-            keyPassword project.property("signing.element.keyPassword")
-            storeFile file(project.property("signing.element.storePath"))
-            storePassword project.property("signing.element.storePassword")
+            keyAlias 'secretum_keystore'
+            keyPassword '12345678'
+            storeFile file('./signature/secretum_keystore.keystore')
+            storePassword '12345678'
+//            keyAlias project.property("signing.element.keyId")
+//            keyPassword project.property("signing.element.keyPassword")
+//            storeFile file(project.property("signing.element.storePath"))
+//            storePassword project.property("signing.element.storePassword")
         }
     }
 
@@ -248,6 +252,7 @@ android {
         release {
             resValue "string", "app_name", "Secretum"
             resValue "color", "launcher_background", "#0DBD8B"
+
             postprocessing {
                 removeUnusedCode true
                 removeUnusedResources true

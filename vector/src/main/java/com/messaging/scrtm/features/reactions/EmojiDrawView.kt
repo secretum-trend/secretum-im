@@ -43,7 +43,7 @@ class EmojiDrawView @JvmOverloads constructor(
 
     var emoji: String? = null
 
-    override fun onDraw(canvas: Canvas?) {
+    override fun onDraw(canvas: Canvas) {
         Trace.beginSection("EmojiDrawView.onDraw")
         super.onDraw(canvas)
         canvas?.save()
